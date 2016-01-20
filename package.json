@@ -1,28 +1,25 @@
 {
-  "name": "node-js-getting-started",
-  "version": "0.1.5",
-  "description": "A sample Node.js app using Express 4",
-  "main": "index.js",
-  "scripts": {
-    "start": "node index.js"
-  },
-  "dependencies": {
-    "pg": "4.x",
-    "ejs": "2.3.3",
-    "express": "4.13.3",
-    "cool-ascii-faces": "~1.3.x"
-  },
-  "engines": {
-    "node": "0.12.7"
-  },
+  "name": "measuring-britain",
+  "version": "0.1.0",
+  "description": "Visualising population statistics",
+  "author": "Ammar Haider",
   "repository": {
     "type": "git",
-    "url": "https://github.com/heroku/node-js-getting-started"
+    "url": "https://github.com/ammarhaider7/measuring-britain.git"
   },
-  "keywords": [
-    "node",
-    "heroku",
-    "express"
-  ],
-  "license": "MIT"
+  "bugs": {
+    "url": "https://github.com/ammarhaider7/measuring-britain.git/issues"
+  },
+  "dependencies": {
+    "express": "4.2.x"
+  },
+  "private": true,
+  "license": "MIT",
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-minify-css": "^1.2.3",
+    "gulp-rename": "^1.2.2",
+    "gulp-ruby-sass": "^2.0.6",
+    "gulp-sass": "^2.1.1"
+  }
 }
