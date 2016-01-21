@@ -1,2 +1,2 @@
 npm install
-gulp
+node index.js
