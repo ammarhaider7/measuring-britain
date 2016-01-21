@@ -1,0 +1,24 @@
+{
+  "name": "measuring-britain",
+  "version": "1.0.0",
+  "description": "Visualing population statistics",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ammarhaider7/measuring-britain.git"
+  },
+  "author": "Ammar Haider",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ammarhaider7/measuring-britain/issues"
+  },
+  "homepage": "https://github.com/ammarhaider7/measuring-britain#readme",
+  "devDependencies": {
+    "express": "^4.13.3",
+    "gulp": "^3.9.0"
+  }
+}
