@@ -1,28 +1,22 @@
 {
-  "name": "node-js-getting-started",
-  "version": "0.1.5",
-  "description": "A sample Node.js app using Express 4",
+  "name": "measuring-britain",
+  "version": "1.0.0",
+  "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
-  },
-  "dependencies": {
-    "pg": "4.x",
-    "ejs": "2.3.3",
-    "express": "4.13.3",
-    "cool-ascii-faces": "~1.3.x"
-  },
-  "engines": {
-    "node": "0.12.7"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/heroku/node-js-getting-started"
+    "url": "git+https://github.com/ammarhaider7/measuring-britain.git"
   },
-  "keywords": [
-    "node",
-    "heroku",
-    "express"
-  ],
-  "license": "MIT"
+  "author": "Ammar Haider",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ammarhaider7/measuring-britain/issues"
+  },
+  "homepage": "https://github.com/ammarhaider7/measuring-britain#readme",
+  "devDependencies": {
+    "express": "^4.13.3"
+  }
 }
