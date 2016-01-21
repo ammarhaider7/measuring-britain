@@ -1,28 +1,28 @@
 {
   "name": "measuring-britain",
   "version": "1.0.0",
-  "description": "",
+  "description": "measuring-britain develop branch",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
   },
   "dependencies": {
-    "express": "4.13.3"
+    "express": "^4.13.3"
   },
   "engines": {
-    "node": "0.12.7"
+    "node": "4.2.3"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ammarhaider7/measuring-britain.git"
   },
   "author": "Ammar Haider",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/ammarhaider7/measuring-britain/issues"
   },
   "homepage": "https://github.com/ammarhaider7/measuring-britain#readme",
   "devDependencies": {
-    "express": "4.13.3"
+    "express": "^4.13.3"
   }
 }
