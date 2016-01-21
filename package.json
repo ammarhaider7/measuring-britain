@@ -9,6 +9,9 @@
   "dependencies": {
     "express": "^4.13.3"
   },
+  "engines": {
+    "node": "4.2.3"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ammarhaider7/measuring-britain.git"
