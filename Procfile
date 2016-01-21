@@ -1,2 +1,2 @@
-npm install
-node index.js
+web npm install
+web node index.js
