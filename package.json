@@ -7,7 +7,7 @@
     "start": "node index.js"
   },
   "dependencies": {
-    "express": "^4.13.3"
+    "express": "4.13.3"
   },
   "engines": {
     "node": "0.12.7"
@@ -23,6 +23,6 @@
   },
   "homepage": "https://github.com/ammarhaider7/measuring-britain#readme",
   "devDependencies": {
-    "express": "^4.13.3"
+    "express": "4.13.3"
   }
 }
