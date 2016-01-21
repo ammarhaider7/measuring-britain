@@ -21,8 +21,5 @@
   "bugs": {
     "url": "https://github.com/ammarhaider7/measuring-britain/issues"
   },
-  "homepage": "https://github.com/ammarhaider7/measuring-britain#readme",
-  "devDependencies": {
-    "express": "^4.13.3"
-  }
+  "homepage": "https://github.com/ammarhaider7/measuring-britain#readme"
 }
