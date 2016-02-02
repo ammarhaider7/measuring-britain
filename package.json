@@ -12,6 +12,9 @@
     "build-css": "npm run compile-css && npm run concat-clean-css",
     "api-doc": "apidoc -i browser/ -o apidoc/"
   },
+  "engines": {
+    "node": "4.2.3"
+  },
   "dependencies": {
     "body-parser": "~1.13.2",
     "compression": "^1.6.1",
