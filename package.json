@@ -23,14 +23,13 @@
     "jquery": "^2.2.0",
     "morgan": "~1.6.1",
     "serve-favicon": "~2.3.0",
-    "underscore": "^1.8.3"
-  },
-  "devDependencies": {
+    "underscore": "^1.8.3",
     "browserify": "^13.0.0",
     "node-sass": "^3.4.2",    
     "clean-css": "^3.4.9",
     "jshint": "^2.9.1",
     "uglify-js": "^2.6.1",
     "watchify": "^3.7.0"
-  }
+  },
+  "devDependencies": {}
 }
