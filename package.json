@@ -1,26 +1,36 @@
 {
-  "name": "measuring-britain",
-  "version": "1.0.0",
-  "description": "measuring-britain develop branch",
-  "main": "index.js",
+  "name": "myapp",
+  "version": "0.0.0",
+  "private": true,
   "scripts": {
-    "start": "node index.js"
+    "start": "npm run build-css && npm run js-hint && npm run build-js && node ./bin/www",
+    "js-hint": "jshint ./browser/js",
+    "build-js": "browserify ./browser/js/main.js | uglifyjs -mc > ./public/js/bundle.js",
+    "watch-js": "watchify ./browser/js/main.js -o ./public/js/bundle.js -dv",
+    "compile-css": "node-sass ./browser/scss -o ./browser/css",
+    "concat-clean-css": "cat ./browser/css/*.css | cleancss -o ./public/css/styles.css",
+    "build-css": "npm run compile-css && npm run concat-clean-css",
+    "api-doc": "apidoc -i browser/ -o apidoc/"
   },
   "dependencies": {
-    "express": "^4.13.3"
+    "body-parser": "~1.13.2",
+    "compression": "^1.6.1",
+    "cookie-parser": "~1.3.5",
+    "d3": "^3.5.14",
+    "debug": "~2.2.0",
+    "express": "~4.13.1",
+    "express-handlebars": "^3.0.0",
+    "jquery": "^2.2.0",
+    "morgan": "~1.6.1",
+    "serve-favicon": "~2.3.0",
+    "underscore": "^1.8.3"
   },
-  "engines": {
-    "node": "4.2.3",
-    "npm": "2.14.7"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ammarhaider7/measuring-britain.git"
-  },
-  "author": "Ammar Haider",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/ammarhaider7/measuring-britain/issues"
-  },
-  "homepage": "https://github.com/ammarhaider7/measuring-britain#readme"
+  "devDependencies": {
+    "browserify": "^13.0.0",
+    "node-sass": "^3.4.2",    
+    "clean-css": "^3.4.9",
+    "jshint": "^2.9.1",
+    "uglify-js": "^2.6.1",
+    "watchify": "^3.7.0"
+  }
 }
