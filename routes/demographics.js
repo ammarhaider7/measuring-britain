@@ -1,9 +1,9 @@
 var express = require('express');
 var router = express.Router();
 
-/* GET home page. */
+/* GET users listing. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'MB App: Home' });
+  res.render('demographics', { title: 'MB App: Demographics' });
 });
 
 module.exports = router;

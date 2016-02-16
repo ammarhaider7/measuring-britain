@@ -8,13 +8,22 @@ var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var demographics = require('./routes/demographics');
 
 var app = express();
 
-var handlebars = require('express-handlebars');
+var exphbs = require('express-handlebars');
+
+// Create `ExpressHandlebars` instance with a default layout.
+var hbs = exphbs.create({
+    defaultLayout: 'main',
+    partialsDir: [
+      'views/partials/'
+    ]
+});
 
 // view engine setup
-app.engine('handlebars', handlebars({defaultLayout: 'main'}));
+app.engine('handlebars', hbs.engine);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'handlebars');
 
@@ -29,6 +38,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/users', users);
+app.use('/demographics', demographics);
+
 
 // catch 404 and forward to error handler
 // Ammar's note: Acts as a catch-all for 'unrouted' pages because the above routes will execute first

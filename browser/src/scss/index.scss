@@ -1,18 +1,8 @@
 // importing bootstrap sass
 @import '../../../bootstrap-sass/stylesheets/_bootstrap.scss';
-
-// page variables
-
-$bg-body: #FFFFFF;
-$text-colour: #2D2D2D;
-
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  background-color: $bg-body;
-  color: $text-colour;
-}
-
-a {
-  color: #00B7FF;
-}
+@import './_colour_variables.scss';
+@import './_colour_classes.scss';
+@import './_spacing_variables.scss';
+@import './_spacing_classes.scss';
+@import './_alignment_classes.scss';
+@import './_voronoi.scss';

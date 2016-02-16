@@ -5,7 +5,7 @@
   "scripts": {
     "start": "npm run build-css && npm run js-hint && npm run build-js && node ./bin/www",
     "js-hint": "jshint ./browser/js",
-    "live-reload": "browser-sync start --files \"./public/css/styles.css, ./public/js/bundle.js, ./views/.*\"",
+    "live-reload": "browser-sync start --files \"./public/css/styles.css, ./public/js/bundle.js, ./views/*.handlebars\"",
     "compile-js": "coffee --compile --output ./browser/js/ ./browser/src/coffee",
     "build-js": "npm run compile-js && npm run bundle-js",
     "bundle-js": "browserify ./browser/js/main.js | uglifyjs -mc > ./public/js/bundle.js",
@@ -21,7 +21,7 @@
     "node": "4.2.3"
   },
   "dependencies": {
-    "body-parser": "~1.13.2",
+    "body-parser": "~1.13.2", 
     "browserify": "^13.0.0",
     "clean-css": "^3.4.9",
     "coffee-script": "^1.10.0",
@@ -42,7 +42,6 @@
   "devDependencies": {
     "browser-sync": "^2.11.1",
     "concurrently": "^1.0.0",
-    "nodemon": "^1.8.1",
-    "watchify": "^3.7.0"
+    "nodemon": "^1.8.1"
   }
 }

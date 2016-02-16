@@ -1,0 +1,13 @@
+//Colour classes
+.btn-dark-red {
+    background-color: $dark-red;
+    border-color: $dark-red;
+}
+.btn-dark-red:hover {
+	color: $white-text-colour;
+    background-color: $hover-dark-red;
+    border-color: $hover-dark-red;
+}
+.white-text {
+	color: $white-text-colour;
+}
