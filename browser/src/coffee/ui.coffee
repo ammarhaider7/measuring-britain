@@ -1,0 +1,1 @@
+bootstrap = require '../../bootstrap-sass/javascripts/bootstrap.js'

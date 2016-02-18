@@ -3,7 +3,10 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'MB App: Home' });
+  res.render('index', { 
+  	layout: 'main',
+  	title: 'MB App | Home' 
+  });
 });
 
 module.exports = router;

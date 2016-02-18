@@ -16,7 +16,7 @@ var exphbs = require('express-handlebars');
 
 // Create `ExpressHandlebars` instance with a default layout.
 var hbs = exphbs.create({
-    defaultLayout: 'main',
+    // defaultLayout: 'main',
     partialsDir: [
       'views/partials/'
     ]

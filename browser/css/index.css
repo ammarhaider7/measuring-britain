@@ -3553,8 +3553,9 @@ tbody.collapse.in {
       display: block;
       padding: 10px 15px; }
       .nav > li > a:hover, .nav > li > a:focus {
+        color: #296298;
         text-decoration: none;
-        background-color: #eeeeee; }
+        background-color: #EEE; }
     .nav > li.disabled > a {
       color: #777777; }
       .nav > li.disabled > a:hover, .nav > li.disabled > a:focus {
@@ -3595,12 +3596,13 @@ tbody.collapse.in {
 .nav-pills > li {
   float: left; }
   .nav-pills > li > a {
-    border-radius: 4px; }
+    border-radius: 4px;
+    color: #FFF; }
   .nav-pills > li + li {
     margin-left: 2px; }
   .nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
     color: #fff;
-    background-color: #337ab7; }
+    background-color: #DA4A70; }
 
 .nav-stacked > li {
   float: none; }
@@ -3936,23 +3938,23 @@ tbody.collapse.in {
       margin-right: 0; } }
 
 .navbar-default {
-  background-color: #f8f8f8;
+  background-color: #296298;
   border-color: #e7e7e7; }
   .navbar-default .navbar-brand {
-    color: #777; }
+    color: #FFF; }
     .navbar-default .navbar-brand:hover, .navbar-default .navbar-brand:focus {
-      color: #5e5e5e;
+      color: #FFF;
       background-color: transparent; }
   .navbar-default .navbar-text {
     color: #777; }
   .navbar-default .navbar-nav > li > a {
-    color: #777; }
+    color: #FFF; }
     .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
-      color: #333;
-      background-color: transparent; }
+      color: #296298;
+      background-color: #EEE; }
   .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
-    color: #555;
-    background-color: #e7e7e7; }
+    color: #FFF;
+    background-color: #DA4A70; }
   .navbar-default .navbar-nav > .disabled > a, .navbar-default .navbar-nav > .disabled > a:hover, .navbar-default .navbar-nav > .disabled > a:focus {
     color: #ccc;
     background-color: transparent; }
@@ -4287,8 +4289,7 @@ a.badge:hover, a.badge:focus {
   padding-top: 30px;
   padding-bottom: 30px;
   margin-bottom: 30px;
-  color: inherit;
-  background-color: #eeeeee; }
+  color: inherit; }
   .jumbotron h1,
   .jumbotron .h1 {
     color: inherit; }
@@ -5817,42 +5818,73 @@ button.close {
   .hidden-print {
     display: none !important; } }
 
-.btn-dark-red {
-  background-color: #C31D17;
-  border-color: #C31D17; }
+.mb-btn-dark-red {
+  background-color: #ED1951;
+  border-color: #ED1951; }
 
-.btn-dark-red:hover {
+.mb-btn-dark-red:hover {
   color: #FFF;
-  background-color: #C9302C;
-  border-color: #C9302C; }
+  background-color: #C1103F;
+  border-color: #C1103F; }
 
-.white-text {
+.mb-white-text {
   color: #FFF; }
 
+.mb-ui-body {
+  background-color: #FCFCFA; }
+
 .mt-large {
-  margin-top: 12%; }
+  margin-top: 30px; }
+
+.mt-xlarge {
+  margin-top: 50px; }
 
 .pt-large {
   padding-top: 30px; }
 
-.vertical-center {
+.pb-large {
+  padding-bottom: 30px; }
+
+.pt-medium {
+  padding-top: 15px; }
+
+.pb-medium {
+  padding-bottom: 15px; }
+
+.pt-small {
+  padding-top: 5px; }
+
+.pb-small {
+  padding-bottom: 5px; }
+
+.pl-large {
+  padding-left: 30px; }
+
+.pr-large {
+  padding-right: 30px; }
+
+.pl-medium {
+  padding-left: 15px; }
+
+.pr-medium {
+  padding-right: 15px; }
+
+.pl-small {
+  padding-left: 5px; }
+
+.pr-small {
+  padding-right: 5px; }
+
+.mb-nomargin {
+  margin: 0; }
+
+.mb-vertical-center {
   min-height: 100%;
   /* Fallback for browsers do NOT support vh unit */
   min-height: 100vh;
   /* These two lines are counted as one :-)       */
   display: flex;
   align-items: center; }
-
-.absolute-center {
-  width: 100%;
-  height: 75%;
-  overflow: auto;
-  margin: auto;
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0; }
 
 path {
   stroke: #245584;
@@ -5877,3 +5909,28 @@ path:first-child {
   width: 100%;
   height: 700px;
   z-index: 0; }
+
+.mb-roboto {
+  font-family: 'Roboto', sans-serif; }
+
+.mb-roboto-strong, .mb-nav-brand-font {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700; }
+
+.mb-oxygen {
+  font-family: 'Oxygen', sans-serif; }
+
+.mb-quicksand {
+  font-family: 'Quicksand', sans-serif; }
+
+.mb-nav-brand-font {
+  font-size: 36px; }
+
+.mb-section-header {
+  font-weight: bold; }
+
+.mb-section-text p {
+  font-size: 14px; }
+
+.mb-hide {
+  display: none; }

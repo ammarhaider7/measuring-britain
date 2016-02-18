@@ -12,15 +12,23 @@
         <link rel="apple-touch-icon" href="apple-touch-icon.png">
         <link rel="stylesheet" href="css/styles.css">
         <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Quicksand' rel='stylesheet' type='text/css'>
     </head>
 	<body>
 	    <!--[if lt IE 9]>
 	        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 	    <![endif]--> 	
+        {{> nav/desktop-tablet}}
+        {{> nav/mobile}}
+        <div class="_body mb-ui-body">
+            <div class="container mb-quicksand">
 
-	    {{{body}}}
+	           {{{body}}}
 
-		<script src="js/bundle.js"></script>
+            </div>
+        </div>
+		<script src="js/ui-bundle.js"></script>
 <!--		<script type='text/javascript' id="__bs_script__">//<![CDATA[
     document.write("<script async src='//HOST:3001/browser-sync/browser-sync-client.2.11.1.js'><\/script>".replace("HOST", location.hostname));
 //]]></script> -->

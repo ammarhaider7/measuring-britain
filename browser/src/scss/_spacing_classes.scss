@@ -2,6 +2,45 @@
 .mt-large {
 	margin-top: $margin-large;
 }
+.mt-xlarge {
+	margin-top: $margin-x-large;
+}
 .pt-large {
     padding-top: $padding-large;
+}
+.pb-large {
+	padding-bottom: $padding-large;
+}
+.pt-medium {
+    padding-top: $padding-medium;
+}
+.pb-medium {
+	padding-bottom: $padding-medium;
+}
+.pt-small {
+    padding-top: $padding-small;
+}
+.pb-small {
+	padding-bottom: $padding-small;
+}
+.pl-large {
+    padding-left: $padding-large;
+}
+.pr-large {
+	padding-right: $padding-large;
+}
+.pl-medium {
+    padding-left: $padding-medium;
+}
+.pr-medium {
+	padding-right: $padding-medium;
+}
+.pl-small {
+    padding-left: $padding-small;
+}
+.pr-small {
+	padding-right: $padding-small;
+}
+.mb-nomargin {
+	margin: 0;
 }

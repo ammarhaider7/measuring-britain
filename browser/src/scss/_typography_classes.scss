@@ -1,0 +1,12 @@
+.mb-nav-brand-font {
+	@extend .mb-roboto-strong;
+	font-size: $nav-brand-font-size;
+}
+.mb-section-header {
+	font-weight: bold;
+}
+.mb-section-text {
+	p {
+		font-size: $section-text;		
+	}
+}
