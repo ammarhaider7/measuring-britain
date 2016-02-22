@@ -10,3 +10,7 @@
 		font-size: $section-text;		
 	}
 }
+.mb-chart-text {
+	@extend .mb-oxygen;
+	font-size: $chart-text;
+}

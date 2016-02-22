@@ -1,5 +1,7 @@
 module.exports = {
 	sections: [{
+		layout: "col-sm-4",
+		containerId: 'pyramid-container',
 		title: 'Population Pyramid',
 		paragraphs: [
 			'The Population Pyramid chart shows the distribution of the population by age group and gender.',
@@ -8,6 +10,7 @@ module.exports = {
 			'Click \'compare to national outline\' to generate a comparison to the total population.'
 		]
 	}, {
+		layout: "col-sm-12",
 		title: 'Ethnic Diversity',
 		paragraphs: [
 			'The Ethnic Diversity chart shows the distribution of the population by age group and gender.',

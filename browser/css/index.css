@@ -3938,7 +3938,7 @@ tbody.collapse.in {
       margin-right: 0; } }
 
 .navbar-default {
-  background-color: #296298;
+  background-color: #4285C3;
   border-color: #e7e7e7; }
   .navbar-default .navbar-brand {
     color: #FFF; }
@@ -5839,6 +5839,12 @@ button.close {
 .mt-xlarge {
   margin-top: 50px; }
 
+.mt-medium {
+  margin-top: 20px; }
+
+.mb-medium {
+  margin-top: 20px; }
+
 .pt-large {
   padding-top: 30px; }
 
@@ -5917,7 +5923,7 @@ path:first-child {
   font-family: 'Roboto', sans-serif;
   font-weight: 700; }
 
-.mb-oxygen {
+.mb-oxygen, .mb-chart-text {
   font-family: 'Oxygen', sans-serif; }
 
 .mb-quicksand {
@@ -5931,6 +5937,9 @@ path:first-child {
 
 .mb-section-text p {
   font-size: 14px; }
+
+.mb-chart-text {
+  font-size: 12px; }
 
 .mb-hide {
   display: none; }

@@ -6,10 +6,10 @@
     "start": "npm run build-css && npm run js-hint && npm run build-js && node ./bin/www",
     "js-hint": "jshint ./browser/js",
     "live-reload": "browser-sync start --files \"./public/css/styles.css, ./public/js/bundle.js, ./views/*.handlebars\"",
-    "compile-js": "coffee --compile --output ./browser/js/ ./browser/src/coffee",
+    "compile-js": "coffee -cb -o ./browser/js/ ./browser/src/coffee && cjsx -cb -o ./browser/js/ ./browser/src/coffee",
     "build-js": "npm run compile-js && npm run bundle-js && npm run bundle-js-ui",
     "bundle-js": "browserify ./browser/js/main.js | uglifyjs -mc > ./public/js/bundle.js",
-    "bundle-js-ui": "browserify ./browser/js/ui.js | uglifyjs -mc > ./public/js/ui-bundle.js",    
+    "bundle-js-ui": "browserify ./browser/js/ui.js | uglifyjs -mc > ./public/js/ui-bundle.js",
     "watch": "concurrent \"npm run watch-js\" \"npm run watch-sass\" \"npm start\"",
     "watch-js": "nodemon -e coffee -x \"npm run build-js\"",
     "watch-sass": "nodemon -e scss -x \"npm run build-css\"",
@@ -22,7 +22,7 @@
     "node": "4.2.3"
   },
   "dependencies": {
-    "body-parser": "~1.13.2", 
+    "body-parser": "~1.13.2",
     "browserify": "^13.0.0",
     "clean-css": "^3.4.9",
     "coffee-script": "^1.10.0",
@@ -36,12 +36,15 @@
     "jshint": "^2.9.1",
     "morgan": "~1.6.1",
     "node-sass": "^3.4.2",
+    "react": "^0.14.7",
+    "react-dom": "^0.14.7",
     "serve-favicon": "~2.3.0",
     "uglify-js": "^2.6.1",
     "underscore": "^1.8.3"
   },
   "devDependencies": {
     "browser-sync": "^2.11.1",
+    "coffee-react": "^4.1.0",
     "concurrently": "^1.0.0",
     "nodemon": "^1.8.1"
   }
