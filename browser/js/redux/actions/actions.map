@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "file": "actions.js",
+  "sourceRoot": "..\\..\\..\\..",
+  "sources": [
+    "browser\\src\\coffee\\redux\\actions\\actions.coffee"
+  ],
+  "names": [],
+  "mappings": ";AAAA,IAAA;;AAAA,aAAA,GAAgB;;AAChB,eAAA,GAAkB;;AAClB,UAAA,GAAa;;AAMb,YAAA,GAAe,SAAC,aAAD;SACd;IACC,IAAA,EAAM,aADP;IAEC,eAAA,aAFD;;AADc;;AAMf,cAAA,GAAkB,SAAC,QAAD;SACjB;IACC,IAAA,EAAM,eADP;IAEC,UAAA,QAFD;;AADiB;;AAUlB,SAAA,GAAY,SAAC,gBAAD;SACX;IACC,IAAA,EAAM,UADP;IAEC,kBAAA,gBAFD;;AADW;;AAeZ,MAAM,CAAC,OAAP,GAAiB;EAChB,eAAA,aADgB;EAEhB,iBAAA,eAFgB;EAGhB,YAAA,UAHgB;EAIhB,cAAA,YAJgB;EAKhB,gBAAA,cALgB;EAMhB,WAAA,SANgB"
+}

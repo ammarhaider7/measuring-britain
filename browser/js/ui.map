@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "file": "ui.js",
+  "sourceRoot": "..\\..",
+  "sources": [
+    "browser\\src\\coffee\\ui.cjsx"
+  ],
+  "names": [],
+  "mappings": ";AAAA,IAAA;;AAAA,SAAA,GAAY,OAAA,CAAQ,+CAAR;;AAEZ,MAAA,GAAS,OAAA,CAAQ,kBAAR;;AACT,MAAA,CAAA"
+}
