@@ -2357,24 +2357,27 @@ input[type="search"] {
     line-height: 34px; }
   input[type="date"].input-sm, .input-group-sm > input[type="date"].form-control,
   .input-group-sm > input[type="date"].input-group-addon,
-  .input-group-sm > .input-group-btn > input[type="date"].btn,
+  .input-group-sm > .input-group-btn > input[type="date"].btn, .mb-form input[type="date"].mb-input-sm,
   .input-group-sm input[type="date"],
   input[type="time"].input-sm,
   .input-group-sm > input[type="time"].form-control,
   .input-group-sm > input[type="time"].input-group-addon,
   .input-group-sm > .input-group-btn > input[type="time"].btn,
+  .mb-form input[type="time"].mb-input-sm,
   .input-group-sm
   input[type="time"],
   input[type="datetime-local"].input-sm,
   .input-group-sm > input[type="datetime-local"].form-control,
   .input-group-sm > input[type="datetime-local"].input-group-addon,
   .input-group-sm > .input-group-btn > input[type="datetime-local"].btn,
+  .mb-form input[type="datetime-local"].mb-input-sm,
   .input-group-sm
   input[type="datetime-local"],
   input[type="month"].input-sm,
   .input-group-sm > input[type="month"].form-control,
   .input-group-sm > input[type="month"].input-group-addon,
   .input-group-sm > .input-group-btn > input[type="month"].btn,
+  .mb-form input[type="month"].mb-input-sm,
   .input-group-sm
   input[type="month"] {
     line-height: 30px; }
@@ -2477,13 +2480,13 @@ fieldset[disabled]
   .input-group-lg > .form-control-static.input-group-addon,
   .input-group-lg > .input-group-btn > .form-control-static.btn, .form-control-static.input-sm, .input-group-sm > .form-control-static.form-control,
   .input-group-sm > .form-control-static.input-group-addon,
-  .input-group-sm > .input-group-btn > .form-control-static.btn {
+  .input-group-sm > .input-group-btn > .form-control-static.btn, .mb-form .form-control-static.mb-input-sm {
     padding-left: 0;
     padding-right: 0; }
 
 .input-sm, .input-group-sm > .form-control,
 .input-group-sm > .input-group-addon,
-.input-group-sm > .input-group-btn > .btn {
+.input-group-sm > .input-group-btn > .btn, .mb-form .mb-input-sm {
   height: 30px;
   padding: 5px 10px;
   font-size: 12px;
@@ -2492,17 +2495,18 @@ fieldset[disabled]
 
 select.input-sm, .input-group-sm > select.form-control,
 .input-group-sm > select.input-group-addon,
-.input-group-sm > .input-group-btn > select.btn {
+.input-group-sm > .input-group-btn > select.btn, .mb-form .mb-input-sm {
   height: 30px;
   line-height: 30px; }
 
 textarea.input-sm, .input-group-sm > textarea.form-control,
 .input-group-sm > textarea.input-group-addon,
-.input-group-sm > .input-group-btn > textarea.btn,
+.input-group-sm > .input-group-btn > textarea.btn, .mb-form textarea.mb-input-sm,
 select[multiple].input-sm,
 .input-group-sm > select[multiple].form-control,
 .input-group-sm > select[multiple].input-group-addon,
-.input-group-sm > .input-group-btn > select[multiple].btn {
+.input-group-sm > .input-group-btn > select[multiple].btn,
+.mb-form [multiple].mb-input-sm {
   height: auto; }
 
 .form-group-sm .form-control {
@@ -2601,7 +2605,7 @@ select[multiple].input-lg,
 
 .input-sm + .form-control-feedback, .input-group-sm > .form-control + .form-control-feedback,
 .input-group-sm > .input-group-addon + .form-control-feedback,
-.input-group-sm > .input-group-btn > .btn + .form-control-feedback,
+.input-group-sm > .input-group-btn > .btn + .form-control-feedback, .mb-form .mb-input-sm + .form-control-feedback,
 .input-group-sm + .form-control-feedback,
 .form-group-sm .form-control + .form-control-feedback {
   width: 30px;
@@ -3478,7 +3482,7 @@ tbody.collapse.in {
   border-radius: 4px; }
   .input-group-addon.input-sm,
   .input-group-sm > .input-group-addon,
-  .input-group-sm > .input-group-btn > .input-group-addon.btn {
+  .input-group-sm > .input-group-btn > .input-group-addon.btn, .mb-form .input-group-addon.mb-input-sm {
     padding: 5px 10px;
     font-size: 12px;
     border-radius: 3px; }
@@ -3950,8 +3954,7 @@ tbody.collapse.in {
   .navbar-default .navbar-nav > li > a {
     color: #FFF; }
     .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
-      color: #296298;
-      background-color: #EEE; }
+      background-color: #5CA0DE; }
   .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
     color: #FFF;
     background-color: #DA4A70; }
@@ -3959,11 +3962,9 @@ tbody.collapse.in {
     color: #ccc;
     background-color: transparent; }
   .navbar-default .navbar-toggle {
-    border-color: #ddd; }
-    .navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
-      background-color: #ddd; }
+    background-color: #DA4A70; }
     .navbar-default .navbar-toggle .icon-bar {
-      background-color: #888; }
+      background-color: #FDFDFD; }
   .navbar-default .navbar-collapse,
   .navbar-default .navbar-form {
     border-color: #e7e7e7; }
@@ -5884,6 +5885,13 @@ button.close {
 .mb-nomargin {
   margin: 0; }
 
+.mb-no-padding {
+  padding: 0; }
+
+.mb-no-hpadding {
+  padding-left: 0;
+  padding-right: 0; }
+
 .mb-vertical-center {
   min-height: 100%;
   /* Fallback for browsers do NOT support vh unit */
@@ -5930,7 +5938,7 @@ path:first-child {
   font-family: 'Quicksand', sans-serif; }
 
 .mb-nav-brand-font {
-  font-size: 36px; }
+  font-size: 24px; }
 
 .mb-section-header {
   font-weight: bold; }
@@ -5943,3 +5951,49 @@ path:first-child {
 
 .mb-hide {
   display: none; }
+
+.mb-form {
+  background-color: #f3f3f3;
+  background-image: -webkit-linear-gradient(top, #FCFCFA, #F1F1F1);
+  background-image: -moz-linear-gradient(top, #FCFCFA, #F1F1F1);
+  border: 1px solid #E0E0E0;
+  border-radius: 6px;
+  padding-bottom: 10px;
+  padding-top: 10px; }
+  .mb-form .mb-input-sm {
+    padding: 0 !important; }
+  .mb-form option.mb-default-select-value {
+    color: #AAA; }
+  .mb-form .mb-form-group.category-group {
+    padding-left: 0;
+    padding-right: 15px; }
+  .mb-form label {
+    padding-left: 0;
+    padding-top: 4px;
+    padding-right: 0;
+    text-align: end;
+    float: left; }
+  .mb-form button {
+    background-color: #4285C3;
+    color: #FFF; }
+  .mb-form button:focus, .mb-form button:active, .mb-form button:active:focus {
+    color: #FFF;
+    background-color: #3373AF; }
+  .mb-form button:hover {
+    color: #FFF;
+    background-color: #3070AB; }
+  .mb-form .Select-control {
+    height: 30px !important;
+    display: block !important; }
+    .mb-form .Select-control .Select-arrow-zone {
+      float: right !important; }
+      .mb-form .Select-control .Select-arrow-zone .Select-arrow {
+        border-color: #000 transparent transparent !important;
+        border-width: 6px 3px 2.5px !important; }
+    .mb-form .Select-control .Select-clear-zone {
+      display: none; }
+    .mb-form .Select-control .Select-placeholder {
+      top: -3px !important;
+      color: #555; }
+    .mb-form .Select-control input {
+      height: 30px !important; }

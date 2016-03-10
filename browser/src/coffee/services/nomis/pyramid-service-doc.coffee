@@ -1,14 +1,19 @@
 # Below is the URL endpoint for getting all data for Eng & Wales, 
 # all ages, all ethnicities and no religion specified.
 # https://www.nomisweb.co.uk/api/v01/dataset/
-# NM_659_1.data.json
+# NM_657_1.data.json
 # ?date=latest
 # &c_relpuk11=0
+# &c_age=1...21
+# &c_sex=1,2
 # &geography=K04000001
-# &c_ethpuk11=1,6,11,17,21,22,23
+
 
 # Data set - NM_***_*.data.json
 # NM_657_1 - DC2107EW - Religion by sex by age
+
+# Age - c_age
+# c_age=1...21 - All ages
 
 # Religion codes - c_relpuk11
 # Christians - 1

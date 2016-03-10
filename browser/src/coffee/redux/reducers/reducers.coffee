@@ -2,21 +2,9 @@
 
 objectAssign = require 'object-assign'
 
-{ TOGGLE_FILTER, TOGGLE_CATEGORY, MOUSE_OVER } = require '../actions/actions.js'
+{ TOGGLE_CATEGORY, MOUSE_OVER } = require '../actions/actions.js'
 
-initialOptions = {
-	options: {
-		category: 'default'
-		value: 'default'
-	}
-}
-
-filterOptions = (state = initialOptions, action) ->
-	switch action.type
-		when TOGGLE_FILTER then objectAssign {}, state, {
-			options: action.filterOptions
-		}
-		else state
+pyramidChart = require './demographics-reducers.js'
 
 mouseOverOptions = (state = {}, action) ->
 	switch action.type
@@ -25,15 +13,9 @@ mouseOverOptions = (state = {}, action) ->
 		}
 		else state
 
-category = (state = 'default', action) ->
-	switch action.type
-		when TOGGLE_CATEGORY then action.category
-		else state
-
 mbReducer = combineReducers {
-	filterOptions
 	mouseOverOptions
-	category
+	pyramidChart
 }
 
 module.exports = mbReducer

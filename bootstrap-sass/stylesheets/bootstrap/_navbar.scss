@@ -418,8 +418,8 @@
       color: #FFF;
       &:hover,
       &:focus {
-        color: #296298;
-        background-color: #EEE;
+        // color: #FFF;
+        background-color: #5CA0DE;
       }
     }
     > .active > a {
@@ -441,13 +441,15 @@
   }
 
   .navbar-toggle {
-    border-color: $navbar-default-toggle-border-color;
+    // border-color: $navbar-default-toggle-border-color;
+    background-color: #DA4A70; //mb
     &:hover,
     &:focus {
-      background-color: $navbar-default-toggle-hover-bg;
+      // background-color: $navbar-default-toggle-hover-bg;
     }
     .icon-bar {
-      background-color: $navbar-default-toggle-icon-bar-bg;
+      // background-color: $navbar-default-toggle-icon-bar-bg;
+      background-color: #FDFDFD;
     }
   }
 

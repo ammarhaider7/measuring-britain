@@ -1,22 +1,42 @@
 React = require 'react'
-ReactDOM = require 'react-dom'
+FancySelect = require 'react-select'
 
 Controls = React.createClass
   render: ->
-    <form className="form-inline">
-      <div className="form-group">
-        <label className="control-label">Filter by</label>
-        <select className="form-control pyramid-controls-category input-sm">
-        </select>
+    <div className="mb-form hidden-xs clearfix">
+      <div className="mb-form-container col-sm-11 col-sm-offset-1">
+        <label>Filter by</label>
+        <div className="mb-form-group col-sm-4 mb-oxygen">
+          <select className="Select form-control input-sm" onChange={ @props.onCategoryChange }>
+            <option className="mb-default-select-value" selected disabled>Select a Category..</option>
+            { @props.categories.map (category) ->
+              <option value={ category.value } key={ category.value }>{ category.label }</option> 
+            }
+          </select>
+        </div>
+        <div className="mb-form-group category-group col-sm-5 mb-oxygen">
+          <FancySelect
+            className="mb-input-sm"
+            placeholder={ do =>
+              switch @props.category
+                when 'districts' then 'Search districts..'
+                when 'regions' then 'Select a region..'
+                when 'ethnicity' then 'Select an ethnic group..'
+                when 'religion' then 'Select a religion..'   
+                else 'Select a category first..'           
+            }
+            options={ do =>
+              switch @props.category
+                when 'districts' then @props.values.districts
+                when 'regions' then @props.values.regions
+                when 'ethnicity' then @props.values.ethnic_groups
+                when 'religion' then @props.values.religions 
+                else []          
+            }
+          />
+        </div>
+        <button className="btn btn-sm btn-default">Go</button>
       </div>
-      <div className="form-group">
-        <select className="form-control pyramid-controls-value col-sm-10 chosen-select input-sm">
-        </select>
-      </div>
-      <div className="form-group">
-        <button id="pyramid-build" type="button" className="btn btn-primary btn-sm">Go</button>
-        <span className="glyphicon glyphicon-ok ajax-success invisible" aria-hidden="true"></span>
-      </div>
-    </form>
+    </div>
 
 module.exports = Controls

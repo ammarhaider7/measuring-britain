@@ -1,15 +1,17 @@
 { connect } = require 'react-redux'
-{ toggleFilter } = require '../actions/actions.js'
+{ toggleCategory } = require '../actions/actions.js'
 PyramidComponent = require '../../ui/demographics/pyramid-component.js'
 TableComponent = require '../../ui/demographics/pyramid-table.js'
 
 mapStateToProps = (state) ->
-	category: state.filterOptions.options.category
-	value: state.filterOptions.options.value
+	category: state.pyramidChart.category
+	value: state.pyramidChart.value
+	data: state.pyramidChart.data
+	showSpinner: state.pyramidChart.isFetching
 
 mapDispatchToProps = (dispatch) ->
-	onTableClick: (options) ->
-		dispatch toggleFilter options
+	onCategoryChange: (event) ->
+		dispatch toggleCategory event.target.value
 
 Pyramid = connect(
 	mapStateToProps, 

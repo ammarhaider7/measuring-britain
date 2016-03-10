@@ -1,16 +1,21 @@
-{ createStore } = require 'redux'
-# { boundToggleFilter, boundToggleCategory, boundMouseOver, toggleFilter, toggleCategory, mouseOver } = require './actions/actions.js'
+{ createStore, applyMiddleware } = require 'redux'
+# { toggleFilter, toggleCategory, mouseOver } = require './actions/actions.js'
+{ requestPyramidData, fetchPyramidData } = require './actions/demographics-actions.js'
 { Provider } = require 'react-redux'
+ReduxThunk = require('redux-thunk').default
 { Pyramid, Table } = require './containers/containers.js'
 mbReducer = require './reducers/reducers.js'
 ReactDOM = require 'react-dom'
 React = require 'react'
 
-store = createStore mbReducer
+store = createStore mbReducer, applyMiddleware ReduxThunk
 
 # log state
 console.log 'getState 1'
 console.log store.getState()
+
+store.dispatch requestPyramidData store.getState().filterOptions
+store.dispatch fetchPyramidData null
 
 # Every time the state changes, log it
 # Note that subscribe() returns a function for unregistering the listener

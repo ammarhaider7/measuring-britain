@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "file": "pyramid-service.js",
+  "sourceRoot": "..\\..\\..\\..",
+  "sources": [
+    "browser\\src\\coffee\\services\\nomis\\pyramid-service.coffee"
+  ],
+  "names": [],
+  "mappings": ";AAAA,IAAA;;AAAA,CAAA,GAAI,OAAA,CAAQ,QAAR;;AACJ,aAAA,GAAgB;;AAChB,OAAA,GAAU;;AACV,cAAA,GAAiB;EAChB,IAAA,EAAM,aADU;EAEhB,SAAA,EAAW,qBAFK;EAGhB,GAAA,EAAK,cAHW;EAIhB,GAAA,EAAK,WAJW;EAKhB,QAAA,EAAU,cALM;;;AAQjB,kBAAA,GAAqB,SAAC,OAAD;AAEpB,MAAA;;IAFqB,UAAU;;EAE/B,cAAA,GAAiB;EACjB,WAAA,GAAiB,CAAA,SAAA;AAChB,QAAA;AAAA,SAAA,cAAA;;MACC,cAAc,CAAC,IAAf,CAAoB,KAApB;AADD;WAEA,GAAA,GAAM,cAAc,CAAC,IAAf,CAAoB,GAApB;EAHU,CAAA,CAAH,CAAA;SAMd,CAAC,CAAC,OAAF,CAAU,aAAA,GAAgB,OAAhB,GAA0B,WAApC;AAToB;;AAWrB,MAAM,CAAC,OAAP,GAAiB"
+}
