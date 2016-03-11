@@ -2,9 +2,10 @@ React = require 'react'
 Controls = require '../chart-controls.js'
 Table = require './pyramid-table.js'
 data = require './data/pyramid-chart-controls.js'
+FancySelect = require 'react-select'
 value_options = {
 	districts: data.districts
-	ethnic_groups: data.ethnic_groups
+	ethnicities: data.ethnic_groups
 	religions: data.religions
 	regions: data.regions
 }

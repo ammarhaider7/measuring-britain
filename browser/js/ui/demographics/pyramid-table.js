@@ -21,3 +21,5 @@ TableComponent = React.createClass({displayName: "TableComponent",
 });
 
 module.exports = TableComponent;
+
+//# sourceMappingURL=pyramid-table.map

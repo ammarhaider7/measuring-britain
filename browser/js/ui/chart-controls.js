@@ -13,51 +13,51 @@ Controls = React.createClass({displayName: "Controls",
       "className": "mb-form-container col-sm-11 col-sm-offset-1"
     }, React.createElement("label", null, "Filter by"), React.createElement("div", {
       "className": "mb-form-group col-sm-4 mb-oxygen"
-    }, React.createElement("select", {
-      "className": "Select form-control input-sm",
+    }, React.createElement(FancySelect, {
+      "className": "mb-input-sm",
+      "placeholder": "1. Choose a category",
+      "options": this.props.categories,
+      "value": (function(_this) {
+        return function() {
+          var category, i, len, ref;
+          ref = _this.props.categories;
+          for (i = 0, len = ref.length; i < len; i++) {
+            category = ref[i];
+            if (category.value === _this.props.category) {
+              return category.label;
+            }
+          }
+        };
+      })(this)(),
       "onChange": this.props.onCategoryChange
-    }, React.createElement("option", {
-      "className": "mb-default-select-value",
-      "selected": true,
-      "disabled": true
-    }, "Select a Category.."), this.props.categories.map(function(category) {
-      return React.createElement("option", {
-        "value": category.value,
-        "key": category.value
-      }, category.label);
-    }))), React.createElement("div", {
+    })), React.createElement("div", {
       "className": "mb-form-group category-group col-sm-5 mb-oxygen"
     }, React.createElement(FancySelect, {
       "className": "mb-input-sm",
       "placeholder": (function(_this) {
         return function() {
-          switch (_this.props.category) {
-            case 'districts':
-              return 'Search districts..';
-            case 'regions':
-              return 'Select a region..';
-            case 'ethnicity':
-              return 'Select an ethnic group..';
-            case 'religion':
-              return 'Select a religion..';
-            default:
-              return 'Select a category first..';
+          var category, i, len, ref;
+          ref = _this.props.categories;
+          for (i = 0, len = ref.length; i < len; i++) {
+            category = ref[i];
+            if (category.value === _this.props.category) {
+              return 'Search ' + category.value + '..';
+            } else if (category.value !== _this.props.category) {
+              continue;
+            }
           }
+          return '2. Choose a value';
         };
       })(this)(),
       "options": (function(_this) {
         return function() {
-          switch (_this.props.category) {
-            case 'districts':
-              return _this.props.values.districts;
-            case 'regions':
-              return _this.props.values.regions;
-            case 'ethnicity':
-              return _this.props.values.ethnic_groups;
-            case 'religion':
-              return _this.props.values.religions;
-            default:
-              return [];
+          var category, i, len, ref;
+          ref = _this.props.categories;
+          for (i = 0, len = ref.length; i < len; i++) {
+            category = ref[i];
+            if (category.value === _this.props.category) {
+              return _this.props.values[category.value];
+            }
           }
         };
       })(this)()
@@ -68,3 +68,5 @@ Controls = React.createClass({displayName: "Controls",
 });
 
 module.exports = Controls;
+
+//# sourceMappingURL=chart-controls.map

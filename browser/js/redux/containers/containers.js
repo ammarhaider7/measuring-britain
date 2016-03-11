@@ -21,7 +21,11 @@ mapStateToProps = function(state) {
 mapDispatchToProps = function(dispatch) {
   return {
     onCategoryChange: function(event) {
-      return dispatch(toggleCategory(event.target.value));
+      if (typeof event !== "string") {
+        return dispatch(toggleCategory(event.target.value));
+      } else {
+        return dispatch(toggleCategory(event));
+      }
     }
   };
 };
@@ -34,3 +38,5 @@ module.exports = {
   Pyramid: Pyramid,
   Table: Table
 };
+
+//# sourceMappingURL=containers.map

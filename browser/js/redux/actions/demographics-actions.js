@@ -40,3 +40,5 @@ module.exports = {
   requestPyramidData: requestPyramidData,
   fetchPyramidData: fetchPyramidData
 };
+
+//# sourceMappingURL=demographics-actions.map

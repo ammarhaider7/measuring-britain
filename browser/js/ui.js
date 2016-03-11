@@ -6,3 +6,5 @@ bootstrap = require('../../bootstrap-sass/javascripts/bootstrap.js');
 render = require('./redux/index.js');
 
 render();
+
+//# sourceMappingURL=ui.map

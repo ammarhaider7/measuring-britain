@@ -12,10 +12,10 @@ module.exports = {
       value: 'regions',
       label: 'Geography (Regions)'
     }, {
-      value: 'ethnicity',
+      value: 'ethnicities',
       label: 'Ethnic Group'
     }, {
-      value: 'religion',
+      value: 'religions',
       label: 'Religion'
     }
   ],
@@ -66,3 +66,5 @@ module.exports = {
     }
   ]
 };
+
+//# sourceMappingURL=pyramid-chart-controls.map

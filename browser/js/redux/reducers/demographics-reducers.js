@@ -39,3 +39,5 @@ pyramidChart = function(state, action) {
 };
 
 module.exports = pyramidChart;
+
+//# sourceMappingURL=demographics-reducers.map

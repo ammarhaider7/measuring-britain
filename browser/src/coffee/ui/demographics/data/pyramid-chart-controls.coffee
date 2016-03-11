@@ -11,11 +11,11 @@ module.exports =
 			label: 'Geography (Regions)'
 		},
 		{
-			value: 'ethnicity'
+			value: 'ethnicities'
 			label: 'Ethnic Group'
 		},
 		{
-			value: 'religion'
+			value: 'religions'
 			label: 'Religion'
 		}
 	],

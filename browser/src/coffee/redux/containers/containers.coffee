@@ -11,7 +11,10 @@ mapStateToProps = (state) ->
 
 mapDispatchToProps = (dispatch) ->
 	onCategoryChange: (event) ->
-		dispatch toggleCategory event.target.value
+		if typeof event isnt "string"
+			dispatch toggleCategory event.target.value
+		else
+			dispatch toggleCategory event
 
 Pyramid = connect(
 	mapStateToProps, 
