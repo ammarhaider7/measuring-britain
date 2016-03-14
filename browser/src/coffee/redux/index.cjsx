@@ -1,6 +1,5 @@
 { createStore, applyMiddleware } = require 'redux'
-# { toggleFilter, toggleCategory, mouseOver } = require './actions/actions.js'
-{ requestPyramidData, fetchPyramidData } = require './actions/demographics-actions.js'
+{ requestPyramidData, fetchPyramidData, mouseOver } = require './actions/demographics-actions.js'
 { Provider } = require 'react-redux'
 ReduxThunk = require('redux-thunk').default
 { Pyramid, Table } = require './containers/containers.js'
@@ -11,10 +10,9 @@ React = require 'react'
 store = createStore mbReducer, applyMiddleware ReduxThunk
 
 # log state
-console.log 'getState 1'
-console.log store.getState()
+# console.log 'getState 1'
+# console.log store.getState()
 
-store.dispatch requestPyramidData store.getState().filterOptions
 store.dispatch fetchPyramidData null
 
 # Every time the state changes, log it

@@ -5843,8 +5843,23 @@ button.close {
 .mt-medium {
   margin-top: 20px; }
 
+.mt-small {
+  margin-top: 10px; }
+
 .mb-medium {
   margin-top: 20px; }
+
+.ml-large {
+  margin-left: 30px; }
+
+.ml-xlarge {
+  margin-left: 50px; }
+
+.ml-medium {
+  margin-left: 20px; }
+
+.ml-small {
+  margin-left: 10px; }
 
 .pt-large {
   padding-top: 30px; }
@@ -5974,13 +5989,13 @@ path:first-child {
     padding-right: 0;
     text-align: end;
     float: left; }
-  .mb-form button {
+  .mb-form button.btn-primary {
     background-color: #4285C3;
     color: #FFF; }
-  .mb-form button:focus, .mb-form button:active, .mb-form button:active:focus {
+  .mb-form button.btn-primary:focus, .mb-form button.btn-primary:active, .mb-form button.btn-primary:active:focus {
     color: #FFF;
     background-color: #3373AF; }
-  .mb-form button:hover {
+  .mb-form button.btn-primary:hover {
     color: #FFF;
     background-color: #3070AB; }
   .mb-form .Select-control {
@@ -5998,3 +6013,9 @@ path:first-child {
       color: #555; }
     .mb-form .Select-control input {
       height: 30px !important; }
+
+.mb-small-btn-gradient {
+  background-color: #f3f3f3;
+  background-image: -webkit-linear-gradient(top, #FFFFFF, #D8D5D5);
+  background-image: -moz-linear-gradient(top, #FFFFFF, #D8D5D5);
+  border: 1px solid #E0E0E0; }

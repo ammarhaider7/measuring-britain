@@ -6,5 +6,5 @@
     "browser\\src\\coffee\\redux\\actions\\actions.coffee"
   ],
   "names": [],
-  "mappings": ";AAAA,IAAA;;AAAA,eAAA,GAAkB;;AAClB,UAAA,GAAa;;AAQb,cAAA,GAAkB,SAAC,QAAD;SACjB;IACC,IAAA,EAAM,eADP;IAEC,UAAA,QAFD;;AADiB;;AAUlB,SAAA,GAAY,SAAC,gBAAD;SACX;IACC,IAAA,EAAM,UADP;IAEC,kBAAA,gBAFD;;AADW;;AAMZ,MAAM,CAAC,OAAP,GAAiB;EAChB,iBAAA,eADgB;EAEhB,YAAA,UAFgB;EAGhB,gBAAA,cAHgB;EAIhB,WAAA,SAJgB"
+  "mappings": ""
 }

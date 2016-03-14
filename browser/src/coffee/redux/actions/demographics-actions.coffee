@@ -2,6 +2,52 @@ pyramidService = require '../../services/nomis/pyramid-service.js'
 
 REQUEST_PYRAMID_DATA = "REQUEST_PYRAMID_DATA"
 RECEIVE_PYRAMID_DATA = "RECEIVE_PYRAMID_DATA"
+TOGGLE_CATEGORY = "TOGGLE_CATEGORY"
+MOUSE_OVER = "MOUSE_OVER"
+ADD_FILTER = "ADD_FILTER"
+REMOVE_FILTER = "REMOVE_FILTER"
+TOGGLE_OUTLINE_CATEGORY = "TOGGLE_OUTLINE_CATEGORY"
+TOGGLE_VALUE = "TOGGLE_VALUE"
+
+
+toggleValue = (value) ->
+	{
+		type: TOGGLE_VALUE
+		value
+	}
+
+toggleOutlineCategory = (category) ->
+	{
+		type: TOGGLE_OUTLINE_CATEGORY
+		category
+	}	
+
+addFilter = () ->
+	{
+		type: ADD_FILTER
+	}
+
+removeFilter = () ->
+	{
+		type: REMOVE_FILTER
+	}
+
+toggleCategory = (category) ->
+	{
+		type: TOGGLE_CATEGORY
+		category
+	}
+# mouseOver options should take the form of:-
+# {
+# 	chart= [chart],
+# 	segment= [segment]
+# }
+mouseOver = (mouseOverOptions) ->
+	{
+		type: MOUSE_OVER
+		mouseOverOptions
+	}
+
 
 requestPyramidData = (filterOptions) ->
 	{
@@ -45,7 +91,19 @@ fetchPyramidData = (filterOptions) ->
 module.exports = {
 	RECEIVE_PYRAMID_DATA
 	REQUEST_PYRAMID_DATA
+	TOGGLE_CATEGORY
+	MOUSE_OVER
+	ADD_FILTER
+	REMOVE_FILTER
+	TOGGLE_OUTLINE_CATEGORY
+	TOGGLE_VALUE
 	receivePyramidData
 	requestPyramidData
 	fetchPyramidData
+	toggleCategory
+	mouseOver
+	addFilter
+	removeFilter
+	toggleOutlineCategory
+	toggleValue
 }

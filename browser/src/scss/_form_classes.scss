@@ -28,16 +28,16 @@
 		text-align: end;
 		float: left;
 	}
-	button {
+	button.btn-primary {
 		background-color: #4285C3;
 		color: #FFF;
 		// height: 36px;
 	}
-	button:focus, button:active, button:active:focus {
+	button.btn-primary:focus, button.btn-primary:active, button.btn-primary:active:focus {
 		color: #FFF;
     	background-color: #3373AF;
 	}
-	button:hover {
+	button.btn-primary:hover {
 		color: #FFF;
 		background-color: #3070AB;
 	}

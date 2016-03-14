@@ -8,8 +8,23 @@
 .mt-medium {
 	margin-top: $margin-medium;
 }
+.mt-small {
+	margin-top: $margin-small * 2;
+}
 .mb-medium {
 	margin-top: $margin-medium;
+}
+.ml-large {
+	margin-left: $margin-large;
+}
+.ml-xlarge {
+	margin-left: $margin-x-large;
+}
+.ml-medium {
+	margin-left: $margin-medium;
+}
+.ml-small {
+	margin-left: $margin-small * 2;
 }
 .pt-large {
     padding-top: $padding-large;
