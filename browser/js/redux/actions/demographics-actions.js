@@ -104,5 +104,3 @@ module.exports = {
   toggleOutlineCategory: toggleOutlineCategory,
   toggleValue: toggleValue
 };
-
-//# sourceMappingURL=demographics-actions.map

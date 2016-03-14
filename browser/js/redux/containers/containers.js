@@ -49,5 +49,3 @@ module.exports = {
   Pyramid: Pyramid,
   Table: Table
 };
-
-//# sourceMappingURL=containers.map

@@ -36,5 +36,3 @@ renderPyramid = function() {
 };
 
 module.exports = renderPyramid;
-
-//# sourceMappingURL=index.map

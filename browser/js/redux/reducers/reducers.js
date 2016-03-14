@@ -12,5 +12,3 @@ mbReducer = combineReducers({
 });
 
 module.exports = mbReducer;
-
-//# sourceMappingURL=reducers.map

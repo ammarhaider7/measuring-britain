@@ -66,5 +66,3 @@ module.exports = {
     }
   ]
 };
-
-//# sourceMappingURL=pyramid-chart-controls.map
