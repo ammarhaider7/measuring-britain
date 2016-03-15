@@ -13,7 +13,7 @@ Filter = React.createClass
 		            options={ @props.categories }
 		            value={ do =>
 		              for category in @props.categories
-		                if category.value is @props.outlineCategory then return category.label
+		                if category.value is @props._outlineCategory.value then return category.label
 		            }
 		            onChange={ @props.onOutlineCategoryChange }
 		          />
@@ -23,19 +23,33 @@ Filter = React.createClass
 		            className="mb-input-sm"
 		            placeholder={ do =>
 		              for category in @props.categories
-		                if category.value is @props.outlineCategory
+		                if category.value is @props._outlineCategory.value
 		                  return 'Search ' + category.value + '..'
-		                else if category.value isnt @props.outlineCategory
+		                else if category.value isnt @props._outlineCategory.value
 		                  continue
 		              return '2. Choose a value'  
 		            }
+              		value={ if @props._outlineValue.value isnt 'default' then @props._outlineValue.label }
 		            options={ do =>
 		              for category in @props.categories
-		                if category.value is @props.outlineCategory then return @props.values[category.value]
+		                if category.value is @props._outlineCategory.value then return @props.values[category.value]
 		            }
+              		onChange={ @props.onOutlineValueChange }
 		          />
 		        </div>
 		    </div>
+	        <div className="col-sm-2 col-md-3 mb-no-padding">
+	          { do =>
+	            if @props.chartName is 'pyramid'
+	              <button 
+	                className="btn btn-sm btn-default mb-oxygen mb-small-btn-gradient" 
+	                type="button" 
+	                onClick={ @props.onRemoveFilter }
+	              >
+	                <span className={ "glyphicon glyphicon-minus" }/>
+	              </button>
+	          }
+	        </div>
 		</div>
 
 module.exports = Filter

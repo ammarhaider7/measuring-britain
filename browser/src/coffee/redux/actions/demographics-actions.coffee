@@ -7,19 +7,29 @@ MOUSE_OVER = "MOUSE_OVER"
 ADD_FILTER = "ADD_FILTER"
 REMOVE_FILTER = "REMOVE_FILTER"
 TOGGLE_OUTLINE_CATEGORY = "TOGGLE_OUTLINE_CATEGORY"
+TOGGLE_OUTLINE_VALUE = "TOGGLE_OUTLINE_VALUE"
 TOGGLE_VALUE = "TOGGLE_VALUE"
 
 
-toggleValue = (value) ->
+toggleValue = (value, selectionOption) ->
 	{
 		type: TOGGLE_VALUE
 		value
+		selectionOption
 	}
 
-toggleOutlineCategory = (category) ->
+toggleOutlineCategory = (category, selectionOption) ->
 	{
 		type: TOGGLE_OUTLINE_CATEGORY
 		category
+		selectionOption
+	}
+
+toggleOutlineValue = (value, selectionOption) ->
+	{
+		type: TOGGLE_OUTLINE_VALUE
+		value
+		selectionOption
 	}	
 
 addFilter = () ->
@@ -32,10 +42,13 @@ removeFilter = () ->
 		type: REMOVE_FILTER
 	}
 
-toggleCategory = (category) ->
+toggleCategory = (category, selectionOption) ->
+	console.log 'toggleCategory selectionOption'
+	console.log selectionOption
 	{
 		type: TOGGLE_CATEGORY
 		category
+		selectionOption
 	}
 # mouseOver options should take the form of:-
 # {
@@ -96,6 +109,7 @@ module.exports = {
 	ADD_FILTER
 	REMOVE_FILTER
 	TOGGLE_OUTLINE_CATEGORY
+	TOGGLE_OUTLINE_VALUE
 	TOGGLE_VALUE
 	receivePyramidData
 	requestPyramidData
@@ -106,4 +120,5 @@ module.exports = {
 	removeFilter
 	toggleOutlineCategory
 	toggleValue
+	toggleOutlineValue
 }

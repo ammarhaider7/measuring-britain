@@ -19,6 +19,12 @@ value_options = {
 };
 
 PyramidComponent = React.createClass({displayName: "PyramidComponent",
+  componentWillMount: function() {
+    return console.log("componentWillMount");
+  },
+  componentDidMount: function() {
+    return console.log('componentDidMount');
+  },
   render: function() {
     return React.createElement("div", {
       "className": "col-xs-12 col-sm-8 mt-medium"

@@ -25,7 +25,7 @@ Filter = React.createClass({displayName: "Filter",
           ref = _this.props.categories;
           for (i = 0, len = ref.length; i < len; i++) {
             category = ref[i];
-            if (category.value === _this.props.outlineCategory) {
+            if (category.value === _this.props._outlineCategory.value) {
               return category.label;
             }
           }
@@ -42,28 +42,44 @@ Filter = React.createClass({displayName: "Filter",
           ref = _this.props.categories;
           for (i = 0, len = ref.length; i < len; i++) {
             category = ref[i];
-            if (category.value === _this.props.outlineCategory) {
+            if (category.value === _this.props._outlineCategory.value) {
               return 'Search ' + category.value + '..';
-            } else if (category.value !== _this.props.outlineCategory) {
+            } else if (category.value !== _this.props._outlineCategory.value) {
               continue;
             }
           }
           return '2. Choose a value';
         };
       })(this)(),
+      "value": (this.props._outlineValue.value !== 'default' ? this.props._outlineValue.label : void 0),
       "options": (function(_this) {
         return function() {
           var category, i, len, ref;
           ref = _this.props.categories;
           for (i = 0, len = ref.length; i < len; i++) {
             category = ref[i];
-            if (category.value === _this.props.outlineCategory) {
+            if (category.value === _this.props._outlineCategory.value) {
               return _this.props.values[category.value];
             }
           }
         };
-      })(this)()
-    }))));
+      })(this)(),
+      "onChange": this.props.onOutlineValueChange
+    }))), React.createElement("div", {
+      "className": "col-sm-2 col-md-3 mb-no-padding"
+    }, (function(_this) {
+      return function() {
+        if (_this.props.chartName === 'pyramid') {
+          return React.createElement("button", {
+            "className": "btn btn-sm btn-default mb-oxygen mb-small-btn-gradient",
+            "type": "button",
+            "onClick": _this.props.onRemoveFilter
+          }, React.createElement("span", {
+            "className": "glyphicon glyphicon-minus"
+          }));
+        }
+      };
+    })(this)()));
   }
 });
 

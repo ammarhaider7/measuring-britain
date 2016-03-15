@@ -1,24 +1,43 @@
 objectAssign = require 'object-assign'
 
-{ RECEIVE_PYRAMID_DATA, REQUEST_PYRAMID_DATA, TOGGLE_CATEGORY, TOGGLE_VALUE, MOUSE_OVER, ADD_FILTER, REMOVE_FILTER, TOGGLE_OUTLINE_CATEGORY } = require '../actions/demographics-actions.js'
+{ RECEIVE_PYRAMID_DATA, REQUEST_PYRAMID_DATA, TOGGLE_CATEGORY, TOGGLE_VALUE, MOUSE_OVER, ADD_FILTER, REMOVE_FILTER, TOGGLE_OUTLINE_CATEGORY, TOGGLE_OUTLINE_VALUE } = require '../actions/demographics-actions.js'
 
 pyramid = {
 	chartName: 'pyramid'
 	isFetching: false
-	category: 'default'
-	value: 'default'
+	_barsCategory: {
+		value: 'default'
+		label: 'default'
+	}
+	barsCategory: 'default'
+	barsValue: 'default'
+	_barsValue: {
+		value: 'default'
+		label: 'default'		
+	}
 	data: []
 	outlineFilter: false
+	_outlineCategory: {
+		value: 'default'
+		label: 'default'
+	}
 	outlineCategory: 'default'
+	_outlineValue: {
+		value: 'default'
+		label: 'default'		
+	}
+	outlineValue: 'default'
 }
 
 pyramidChart = (state = pyramid, action) ->
 	switch action.type
 		when TOGGLE_CATEGORY then objectAssign {}, state, {
-			category: action.category
+			barsCategory: action.category
+			_barsCategory: action.selectionOption
 		}
 		when TOGGLE_VALUE then objectAssign {}, state, {
-			value: action.value
+			barsValue: action.value
+			_barsValue: action.selectionOption
 		}
 		when REQUEST_PYRAMID_DATA then objectAssign {}, state, {
 			isFetching: true
@@ -39,6 +58,11 @@ pyramidChart = (state = pyramid, action) ->
 		}
 		when TOGGLE_OUTLINE_CATEGORY then objectAssign {}, state, {
 			outlineCategory: action.category
+			_outlineCategory: action.selectionOption
+		}
+		when TOGGLE_OUTLINE_VALUE then objectAssign {}, state, {
+			outlineValue: action.value
+			_outlineValue: action.selectionOption
 		}
 		else state
 

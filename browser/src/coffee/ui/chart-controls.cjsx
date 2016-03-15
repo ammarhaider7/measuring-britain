@@ -2,8 +2,10 @@ React = require 'react'
 FancySelect = require 'react-select'
 Filter = require './chart-controls-filter.js'
 
-Controls = React.createClass
+Controls = React.createClass 
   render: ->
+    console.log 'Controls props'
+    console.log @props
     <div className="mb-form hidden-xs clearfix pl-medium">
       <div className="mb-form-container col-sm-12 row">
         <div className="col-sm-9 mb-no-padding">
@@ -15,7 +17,7 @@ Controls = React.createClass
               options={ @props.categories }
               value={ do =>
                 for category in @props.categories
-                  if category.value is @props.category then return category.label
+                  if category.value is @props._barsCategory.value then return category.label
               }
               onChange={ @props.onCategoryChange }
             />
@@ -25,16 +27,18 @@ Controls = React.createClass
               className="mb-input-sm"
               placeholder={ do =>
                 for category in @props.categories
-                  if category.value is @props.category
+                  if category.value is @props._barsCategory.value
                     return 'Search ' + category.value + '..'
-                  else if category.value isnt @props.category
+                  else if category.value isnt @props._barsCategory.value
                     continue
-                return '2. Choose a value'  
+                return '2. Choose a value'
               }
+              value={ if @props._barsValue.value isnt 'default' then @props._barsValue.label }
               options={ do =>
                 for category in @props.categories
-                  if category.value is @props.category then return @props.values[category.value]
+                  if category.value is @props._barsCategory.value then return @props.values[category.value]
               }
+              onChange={ @props.onValueChange }
             />
           </div>
         </div>
@@ -43,11 +47,11 @@ Controls = React.createClass
           { do =>
             if @props.chartName is 'pyramid'
               <button 
-                className="btn btn-sm btn-default mb-oxygen ml-small mb-small-btn-gradient" 
+                className={ if @props.outlineFilter is true then "hide" else "btn btn-sm btn-default mb-oxygen ml-small mb-small-btn-gradient" }
                 type="button" 
-                onClick={ if @props.outlineFilter is false then @props.onAddOutline else @props.onRemoveFilter }
+                onClick={ @props.onAddOutline }
               >
-                <span className={ if @props.outlineFilter is false then "glyphicon glyphicon-plus" else "glyphicon glyphicon-minus" }/>
+                <span className={ "glyphicon glyphicon-plus" }/>
                 { if @props.outlineFilter is false then " " + "Add outline" else '' }
               </button>
           }

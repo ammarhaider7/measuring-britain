@@ -11,6 +11,10 @@ value_options = {
 }
 
 PyramidComponent = React.createClass
+  componentWillMount: ->
+    console.log "componentWillMount"
+  componentDidMount: ->
+    console.log 'componentDidMount'
   render: ->
   	<div className="col-xs-12 col-sm-8 mt-medium">
 	  	<Controls {...@props} categories=data.category_options values=value_options />
