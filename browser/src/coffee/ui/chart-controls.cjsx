@@ -1,11 +1,10 @@
 React = require 'react'
 FancySelect = require 'react-select'
 Filter = require './chart-controls-filter.js'
+$ = require 'jQuery'
 
 Controls = React.createClass 
-  render: ->
-    console.log 'Controls props'
-    console.log @props
+  render: ->  
     <div className="mb-form hidden-xs clearfix pl-medium">
       <div className="mb-form-container col-sm-12 row">
         <div className="col-sm-9 mb-no-padding">
@@ -43,21 +42,53 @@ Controls = React.createClass
           </div>
         </div>
         <div className="col-sm-2 col-md-3 mb-no-padding">
-          <button className="btn btn-sm btn-primary mb-oxygen">Go</button>
+          <button 
+            className="btn btn-sm btn-primary mb-oxygen"
+            onClick={ =>
+              @props.fetchPyramidData {
+                outlineRequested: if @props.outlineFilter is on then yes else no
+                bars: {
+                  isDefault: no
+                  category: {
+                    label: @props._barsCategory.label
+                    value: @props._barsCategory.value
+                  }
+                  value: {
+                    label: @props._barsValue.label
+                    value: @props._barsValue.value
+                  }
+                }
+                outline: {
+                  isDefault: no
+                  category: {
+                    label: @props._outlineCategory.label
+                    value: @props._outlineCategory.value
+                  }
+                  value: {
+                    label: @props._outlineValue.label
+                    value: @props._outlineValue.value
+                  }
+                }
+              } 
+            }
+          >Go
+          </button>
           { do =>
             if @props.chartName is 'pyramid'
               <button 
-                className={ if @props.outlineFilter is true then "hide" else "btn btn-sm btn-default mb-oxygen ml-small mb-small-btn-gradient" }
+                className={ if @props.outlineFilter is yes then "hide" else "btn btn-sm btn-default mb-oxygen ml-small mb-small-btn-gradient" }
                 type="button" 
                 onClick={ @props.onAddOutline }
               >
                 <span className={ "glyphicon glyphicon-plus" }/>
-                { if @props.outlineFilter is false then " " + "Add outline" else '' }
+                { if @props.outlineFilter is no then " " + "Outline" else '' }
               </button>
           }
+        <img src="./images/mb_ajax_loader.gif" className={ if @props.isFetching is yes then 'mb-spinner' else 'hide' }/>     
+        { if @props.error is yes then <span className={ "glyphicon glyphicon-remove pl-small mb-error-icon" }/> }
         </div>
       </div>
-      { if @props.outlineFilter is true
+      { if @props.outlineFilter is yes
         <Filter {...@props}/>
       }
     </div>

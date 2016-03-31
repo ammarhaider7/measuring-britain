@@ -5916,6 +5916,12 @@ button.close {
   align-items: center;
   margin: 0; }
 
+.mb-right {
+  float: right; }
+
+.mb-left {
+  float: left; }
+
 path {
   stroke: #245584;
   stroke-width: 1px; }
@@ -5958,6 +5964,12 @@ path:first-child {
 
 .mb-section-header {
   font-weight: bold; }
+
+.mb-responsive-text-size {
+  font-size: 11px; }
+  @media (min-width: 992px) {
+    .mb-responsive-text-size {
+      font-size: 14px; } }
 
 .mb-section-text p {
   font-size: 14px; }
@@ -6019,3 +6031,13 @@ path:first-child {
   background-image: -webkit-linear-gradient(top, #FFFFFF, #D8D5D5);
   background-image: -moz-linear-gradient(top, #FFFFFF, #D8D5D5);
   border: 1px solid #E0E0E0; }
+
+.mb-spinner {
+  height: 30px; }
+
+.mb-ajax-success {
+  color: #5cb85c;
+  opacity: 1; }
+
+.mb-error-icon {
+  color: #D9534F; }

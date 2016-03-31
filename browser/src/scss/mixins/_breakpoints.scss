@@ -1,0 +1,19 @@
+// @media(max-width:767px){}
+// @media(min-width:767px){}
+// @media(min-width:992px){}
+// @media(min-width:1200px){}
+
+ @mixin bp($size) {
+   @if $size == xs {
+     @media (max-width: 767px) { @content ; }
+  }
+   @else if $size == sm {
+     @media (min-width: 767px) { @content ; }
+  }
+    @else if $size == md {
+     @media (min-width: 992px) { @content ; }
+  }
+   @else if $size == lg {
+     @media (min-width: 1200px)  { @content ; }
+  }
+}

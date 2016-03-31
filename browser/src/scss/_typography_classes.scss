@@ -5,6 +5,12 @@
 .mb-section-header {
 	font-weight: bold;
 }
+.mb-responsive-text-size {
+	font-size: 11px;
+	@include bp(md) {
+		font-size: 14px;
+	}
+}
 .mb-section-text {
 	p {
 		font-size: $section-text;		

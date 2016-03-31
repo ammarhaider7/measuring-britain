@@ -19,8 +19,6 @@ React = require('react');
 
 store = createStore(mbReducer, applyMiddleware(ReduxThunk));
 
-store.dispatch(fetchPyramidData(null));
-
 unsubscribe = store.subscribe(function() {
   console.log('getState 2');
   return console.log(store.getState());

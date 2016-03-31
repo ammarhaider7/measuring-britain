@@ -7,14 +7,15 @@ mbReducer = require './reducers/reducers.js'
 ReactDOM = require 'react-dom'
 React = require 'react'
 
+# creating the store, associating the root reducer and thunk middleware
 store = createStore mbReducer, applyMiddleware ReduxThunk
 
 # log state
 # console.log 'getState 1'
 # console.log store.getState()
 
-store.dispatch fetchPyramidData null
-
+# store.dispatch fetchPyramidData null
+	
 # Every time the state changes, log it
 # Note that subscribe() returns a function for unregistering the listener
 unsubscribe = store.subscribe ->

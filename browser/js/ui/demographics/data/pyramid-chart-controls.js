@@ -25,13 +25,19 @@ module.exports = {
       value: '1',
       label: 'White'
     }, {
-      value: '2',
+      value: '17',
       label: 'Black'
     }, {
-      value: '3',
+      value: '11',
       label: 'Asian'
     }, {
-      value: '4',
+      value: '6',
+      label: 'Mixed'
+    }, {
+      value: '22',
+      label: 'Arab'
+    }, {
+      value: '21',
       label: 'Other'
     }
   ],
@@ -40,29 +46,62 @@ module.exports = {
       value: '1',
       label: 'Christian'
     }, {
-      value: '2',
+      value: '5',
       label: 'Muslim'
     }, {
       value: '3',
       label: 'Hindu'
     }, {
-      value: '4',
+      value: '2',
       label: 'Buddhist'
+    }, {
+      value: '4',
+      label: 'Jewish'
+    }, {
+      value: '6',
+      label: 'Sikh'
+    }, {
+      value: '7',
+      label: 'Other religion'
+    }, {
+      value: '8',
+      label: 'No religion'
+    }, {
+      value: '9',
+      label: 'Religion not stated'
     }
   ],
   regions: [
     {
-      value: '1',
-      label: 'NW'
+      value: '2013265921',
+      label: 'North East'
     }, {
-      value: '2',
-      label: 'SE'
+      value: '2013265922',
+      label: 'North West'
     }, {
-      value: '3',
-      label: 'NE'
+      value: '2013265923',
+      label: 'Yorkshire and The Humber'
     }, {
-      value: '4',
-      label: 'MID'
+      value: '2013265924',
+      label: 'East Midlands'
+    }, {
+      value: '2013265925',
+      label: 'West Midlands'
+    }, {
+      value: '2013265926',
+      label: 'East'
+    }, {
+      value: '2013265927',
+      label: 'London'
+    }, {
+      value: '2013265928',
+      label: 'South East'
+    }, {
+      value: '2013265929',
+      label: 'South West'
+    }, {
+      value: '2013265930',
+      label: 'Wales'
     }
   ]
 };
