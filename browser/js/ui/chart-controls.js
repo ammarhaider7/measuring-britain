@@ -118,7 +118,7 @@ Controls = React.createClass({displayName: "Controls",
       };
     })(this)(), React.createElement("img", {
       "src": "./images/mb_ajax_loader.gif",
-      "className": (this.props.isFetching === true ? 'mb-spinner' : 'hide')
+      "className": (this.props.isFetching === true && this.props.isDefault === false ? 'mb-spinner' : 'hide')
     }), (this.props.error === true ? React.createElement("span", {
       "className": "glyphicon glyphicon-remove pl-small mb-error-icon"
     }) : void 0))), (this.props.outlineFilter === true ? React.createElement(Filter, React.__spread({}, this.props)) : void 0));

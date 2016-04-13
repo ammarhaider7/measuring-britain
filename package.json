@@ -15,7 +15,7 @@
     "bundle-js-ui": "browserify ./browser/js/ui.js -t loose-envify | uglifyjs -mc -t loose-envify > ./public/js/ui-bundle.js",
     "bundle-js-ui-dev": "browserify ./browser/js/ui.js > ./public/js/ui-bundle.js",
     "watch": "concurrent \"npm run watch-js\" \"npm run watch-sass\" \"node ./bin/www\"",
-    "watch-js": "nodemon -e coffee -x \"npm run build-js-dev\" && nodemon -e cjsx -x \"npm run build-js-dev\"",
+    "watch-js": "nodemon -e coffee,cjsx -x \"npm run build-js-dev\"",
     "watch-sass": "nodemon -e scss -x \"npm run build-css\"",
     "compile-css": "node-sass ./browser/src/scss -o ./browser/css",
     "concat-clean-css": "cat ./browser/css/*.css | cleancss -o ./public/css/styles.css",

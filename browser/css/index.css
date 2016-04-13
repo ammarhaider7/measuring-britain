@@ -5963,7 +5963,8 @@ path:first-child {
   font-size: 24px; }
 
 .mb-section-header {
-  font-weight: bold; }
+  font-weight: bold;
+  margin-bottom: 30px; }
 
 .mb-responsive-text-size {
   font-size: 11px; }
@@ -6041,3 +6042,56 @@ path:first-child {
 
 .mb-error-icon {
   color: #D9534F; }
+
+.pyramid-svg .males-outline {
+  fill: none;
+  stroke: #214f76;
+  stroke-width: 1.5px; }
+
+.pyramid-svg .females-outline {
+  fill: none;
+  stroke: #ff504d;
+  stroke-width: 1.5px; }
+
+.pyramid-svg .line {
+  fill: none;
+  stroke: #e50000;
+  stroke-width: 1.5px; }
+
+.pyramid-svg .axis path,
+.pyramid-svg .axis line {
+  fill: none;
+  stroke: black;
+  shape-rendering: crispEdges; }
+
+.pyramid-svg .x.axis path {
+  display: none; }
+
+.pyramid-svg .axis {
+  font-size: 12px; }
+
+.pyramid-svg .overlay-rect:hover {
+  fill: rgba(0, 0, 0, 0.15); }
+
+.mb-grey-box {
+  background-color: #F3F3F3;
+  border-radius: 5px; }
+
+.pyramid-bars-svg .bar.female {
+  fill: #ff9896; }
+
+.pyramid-bars-svg .bar.male {
+  fill: #1f77b4; }
+
+.pyramid-bars-svg .tick line, .pyramid-bars-svg path.domain {
+  display: none; }
+
+.pyramid-bars-svg .mb-icon-man {
+  fill: #1F77B4; }
+  .pyramid-bars-svg .mb-icon-man path {
+    stroke: none; }
+
+.pyramid .mb-spinner, #pyramid-bars .mb-spinner {
+  margin: 0 auto;
+  margin-top: 150px;
+  display: block; }

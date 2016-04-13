@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "file": "pyramid-bars.js",
+  "sourceRoot": "..\\..\\..\\..\\..",
+  "sources": [
+    "browser\\src\\coffee\\ui\\demographics\\d3\\pyramid-bars.cjsx"
+  ],
+  "names": [],
+  "mappings": ";AAAA,IAAA;;AAAA,KAAA,GAAQ,OAAA,CAAQ,OAAR;;AAER,eAAA,GAAkB,KAAK,CAAC,WAAN,CAChB;EAAA,MAAA,EAAQ,SAAA;WACN,KAAK,CAAC,aAAN,CAAoB,KAApB,EAA2B,IAA3B,EACE,KAAK,CAAC,aAAN,CAAoB,KAApB,EAA2B;MACzB,WAAA,EAAa,kBADY;MAEzB,OAAA,EAAU;QAAE,KAAA,EAAO,MAAT;QAAiB,MAAA,EAAQ,OAAzB;OAFe;MAGzB,KAAA,EAAO,gBAHkB;KAA3B,CADF;EADM,CAAR;CADgB;;AAWlB,MAAM,CAAC,OAAP,GAAiB"
+}

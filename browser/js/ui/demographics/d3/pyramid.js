@@ -4,59 +4,102 @@ var drawPyramid;
 window.d3 = require('d3');
 
 drawPyramid = function(options) {
-  var ages, bar_females, bar_females_perc, bar_males, bar_males_perc, container, height, my, outline_females, outline_males, ref, ref1, width;
-  container = options.container, ages = options.ages, bar_males = options.bar_males, bar_males_perc = options.bar_males_perc, bar_females = options.bar_females, bar_females_perc = options.bar_females_perc, outline_males = options.outline_males, outline_females = options.outline_females;
+  var ages, bar_females, bar_females_perc, bar_females_perc_format, bar_females_sum, bar_males, bar_males_perc, bar_males_perc_format, bar_males_sum, container, height, init, isDefault, margin, my, onMouseOver, outline_females, outline_males, overlay_data, ref, ref1, update, width, x, xAxis, xAxisLeft, xLeft, y;
+  container = options.container, ages = options.ages, bar_males = options.bar_males, bar_males_perc = options.bar_males_perc, bar_males_perc_format = options.bar_males_perc_format, bar_males_sum = options.bar_males_sum, bar_females = options.bar_females, bar_females_perc = options.bar_females_perc, bar_females_perc_format = options.bar_females_perc_format, bar_females_sum = options.bar_females_sum, outline_males = options.outline_males, outline_females = options.outline_females, overlay_data = options.overlay_data, onMouseOver = options.onMouseOver, isDefault = options.isDefault;
   width = (ref = container.offsetWidth) != null ? ref : 750;
   height = (ref1 = container.offsetHeight) != null ? ref1 : 500;
+  margin = {
+    top: 25,
+    right: 50,
+    bottom: 75,
+    left: 50,
+    middle: 25
+  };
+  x = function(data) {
+    return d3.scale.linear().domain([
+      0, d3.max(data, function(d) {
+        return d;
+      })
+    ]).range([0, (width / 2) - margin.middle]);
+  };
+  xLeft = function(data) {
+    return d3.scale.linear().domain([
+      d3.max(data, function(d) {
+        return d;
+      }), 0
+    ]).range([0, (width / 2) - margin.middle]);
+  };
+  y = function(data) {
+    return d3.scale.ordinal().domain(d3.range(data.length)).rangeRoundBands([0, height - margin.bottom]);
+  };
+  xAxis = function(data) {
+    return d3.svg.axis().scale(x(data)).orient('bottom').ticks(5).tickFormat(d3.format(',.1%'));
+  };
+  xAxisLeft = function(data) {
+    return d3.svg.axis().scale(xLeft(data)).orient('bottom').ticks(5).tickFormat(d3.format(',.1%'));
+  };
   my = function() {
-    var format, g, leftGroup, margin, overlayGroup, percFormat, rightGroup, svg, ticksGroup, x, xAxis, xAxisLeft, xLeft, y;
-    margin = {
-      top: 25,
-      right: 50,
-      bottom: 75,
-      left: 50,
-      middle: 25
-    };
+    if (isDefault === true) {
+      return init();
+    } else if (isDefault === false) {
+      return update();
+    }
+  };
+  init = function() {
+    var agesTitle, femaleKeyGroup, format, g, keyGroup, leftGroup, maleKeyGroup, maxFemalePerc, overlayGroup, percFormat, rightGroup, svg, ticksGroup, titleGroup, xAxisGroupLeft, xAxisGroupRight;
     format = d3.format(',');
     percFormat = d3.format('.0f');
-    x = function(data) {
-      return d3.scale.linear().domain([
-        0, d3.max(data, function(d) {
-          return d;
-        })
-      ]).range([0, (width / 2) - margin.middle]);
-    };
-    xLeft = function(data) {
-      return d3.scale.linear().domain([
-        d3.max(data, function(d) {
-          return d;
-        }), 0
-      ]).range([0, (width / 2) - margin.middle]);
-    };
-    y = function(data) {
-      return d3.scale.ordinal().domain(d3.range(data.length)).rangeRoundBands([0, height - margin.bottom]);
-    };
-    xAxis = function(data) {
-      return d3.svg.axis().scale(x(data)).orient('bottom').ticks(5).tickFormat(d3.format(',.1%'));
-    };
-    xAxisLeft = function(data) {
-      return d3.svg.axis().scale(xLeft(data)).orient('bottom').ticks(5).tickFormat(d3.format(',.1%'));
-    };
+    maxFemalePerc = d3.max(bar_females_perc);
     svg = d3.select('.pyramid-svg');
-    g = d3.select('.main-group');
-    rightGroup = d3.select('.right-group');
-    leftGroup = d3.select('.left-group');
-    overlayGroup = d3.select('.overlay-group');
-    ticksGroup = d3.select('.ticks-group');
+    g = svg.select('.main-group');
+    rightGroup = svg.select('.right-group');
+    leftGroup = svg.select('.left-group');
+    overlayGroup = svg.select('.overlay-group');
+    ticksGroup = svg.select('.ticks-group');
+    xAxisGroupLeft = svg.select('.x.axis.left');
+    xAxisGroupRight = svg.select('.x.axis.right');
+    titleGroup = svg.select('.title-group');
+    keyGroup = svg.select('.key-group');
+    maleKeyGroup = keyGroup.select('.male-key-group');
+    femaleKeyGroup = keyGroup.select('.female-key-group');
     g.attr("transform", "translate(0, " + margin.top + ")");
-    overlayGroup.attr("transform", "translate(" + margin.left + ", " + margin.top + ")");
+    overlayGroup.attr("transform", "translate(0, " + margin.top + ")");
     leftGroup.attr("transform", "translate(0, " + margin.top + ")");
     rightGroup.attr("transform", "translate(" + ((width / 2) + margin.middle) + ", " + margin.top + ")");
-    ticksGroup.attr("transform", "translate(" + (width / 2) + ", " + (margin.top / 2.5) + ")");
+    ticksGroup.attr("transform", "translate(" + (width / 2) + ", " + (margin.bottom - 5) + ")");
+    xAxisGroupLeft.attr("transform", "translate(" + (-(width / 2)) + ", " + (height - (margin.bottom + 15)) + ")");
+    xAxisGroupRight.attr("transform", "translate(" + margin.middle + ", " + (height - (margin.bottom + 15)) + ")");
+    titleGroup.attr("transform", "translate(" + (0.25 * width) + ", " + (margin.top - 10) + ")");
+    keyGroup.attr("transform", "translate(" + (width - margin.right * 3) + ", " + margin.top + ")");
+    maleKeyGroup.attr("transform", "translate(70, 0)");
+    titleGroup.append('text').text('Males \& Females, by 5 year age bands, as % of the population').attr('class', 'mb-oxygen').style('font-size', '12px');
+    maleKeyGroup.append('rect').attr({
+      width: 15,
+      height: 15,
+      fill: 'rgb(31, 119, 180)',
+      x: 0,
+      y: 0
+    });
+    maleKeyGroup.append('text').text('Males').style('text-anchor', 'middle').style('font-size', 12).attr({
+      x: 35,
+      y: 12,
+      "class": 'mb-oxygen'
+    });
+    femaleKeyGroup.append('rect').attr({
+      width: 15,
+      height: 15,
+      fill: 'rgb(255, 152, 150)',
+      x: 0,
+      y: 0
+    });
+    femaleKeyGroup.append('text').text('Females').style('text-anchor', 'middle').style('font-size', 12).attr({
+      x: 40,
+      y: 12,
+      "class": 'mb-oxygen'
+    });
     rightGroup.selectAll('rect').data(bar_males_perc).enter().append('rect').attr({
-      width: function(d) {
-        return x(bar_males_perc)(d);
-      },
+      opacity: 0,
+      width: 0,
       height: function() {
         return y(bar_males_perc).rangeBand();
       },
@@ -70,20 +113,22 @@ drawPyramid = function(options) {
       ry: function(d, i) {
         return y(bar_males_perc)(i) + 1;
       },
-      "class": 'pyramid-bar'
-    });
-    return leftGroup.selectAll('rect').data(bar_females_perc).enter().append('rect').attr({
+      "class": 'pyramid-bar right'
+    }).transition().duration(1000).attr({
+      opacity: 1,
       width: function(d) {
-        return x(bar_females_perc)(d);
-      },
+        return x(bar_males_perc)(d);
+      }
+    });
+    leftGroup.selectAll('rect').data(bar_females_perc).enter().append('rect').attr({
+      opacity: 0,
+      width: 0,
       height: function() {
         return y(bar_females_perc).rangeBand();
       },
       fill: 'rgb(255, 152, 150)',
       stroke: 'rgb(250, 133, 131)',
-      x: function(d) {
-        return xLeft(bar_females_perc)(d);
-      },
+      x: x(bar_females_perc)(maxFemalePerc),
       y: function(d, i) {
         return y(bar_females_perc)(i);
       },
@@ -91,7 +136,81 @@ drawPyramid = function(options) {
       ry: function(d, i) {
         return y(bar_females_perc)(i) + 1;
       },
-      "class": 'pyramid-bar'
+      "class": 'pyramid-bar left'
+    }).transition().duration(1000).attr({
+      opacity: 1,
+      width: function(d) {
+        return x(bar_females_perc)(d);
+      },
+      x: function(d) {
+        return xLeft(bar_females_perc)(d);
+      }
+    });
+    ticksGroup.selectAll('text').data(ages).enter().append('text').attr('opacity', 0).attr('y', function(d, i) {
+      return y(bar_males_perc)(i);
+    }).style('text-anchor', 'middle').style('font-size', '12px').transition().duration(1000).text(function(d) {
+      return d;
+    }).attr('opacity', 1);
+    agesTitle = d3.select('.ages')[0][0];
+    if (agesTitle == null) {
+      ticksGroup.append('text').style('text-anchor', 'middle').style('font-size', '12px').style('font-weight', 'bold').attr({
+        y: -margin.top,
+        "class": 'ages',
+        opacity: 0
+      }).transition().duration(1000).text('Ages').attr('opacity', 1);
+    }
+    xAxisGroupLeft.call(xAxisLeft(bar_females_perc_format));
+    xAxisGroupRight.call(xAxis(bar_males_perc_format));
+    overlayGroup.selectAll('rect').data(overlay_data).enter().append('rect').attr({
+      width: width,
+      height: function(d) {
+        return y(bar_males).rangeBand();
+      },
+      fill: 'rgba(0,0,0,0)',
+      y: function(d, i) {
+        return y(bar_males)(i) + margin.top;
+      },
+      "class": 'overlay-rect'
+    });
+    d3.selectAll('.overlay-rect').on('mouseover', function(d) {
+      return onMouseOver(d);
+    });
+    return onMouseOver({
+      age: 'All Ages',
+      females: bar_females_sum,
+      males: bar_males_sum,
+      initial: true
+    });
+  };
+  update = function() {
+    var leftBars, overlayBars, rightBars, svg, xAxisGroupLeft, xAxisGroupRight;
+    svg = d3.select('.pyramid-svg');
+    leftBars = svg.selectAll('.pyramid-bar.left');
+    rightBars = svg.selectAll('.pyramid-bar.right');
+    overlayBars = svg.selectAll('.overlay-rect');
+    xAxisGroupLeft = svg.select('.x.axis.left');
+    xAxisGroupRight = svg.select('.x.axis.right');
+    leftBars.data(bar_females_perc).transition().duration(1000).attr({
+      width: function(d) {
+        return x(bar_females_perc)(d);
+      },
+      x: function(d) {
+        return xLeft(bar_females_perc)(d);
+      }
+    });
+    rightBars.data(bar_males_perc).transition().duration(1000).attr({
+      width: function(d) {
+        return x(bar_males_perc)(d);
+      }
+    });
+    overlayBars.data(overlay_data);
+    xAxisGroupLeft.transition().duration(1000).call(xAxisLeft(bar_females_perc_format));
+    xAxisGroupRight.transition().duration(1000).call(xAxis(bar_males_perc_format));
+    return onMouseOver({
+      age: 'All Ages',
+      females: bar_females_sum,
+      males: bar_males_sum,
+      initial: null
     });
   };
   my.width = function(value) {

@@ -1,4 +1,4 @@
-window._ = require 'underscore'
+_ = require 'underscore'
 
 parse = (dataArray) ->
 
@@ -44,7 +44,17 @@ parse = (dataArray) ->
 				num / sum * 100
 		percArrayFormat: (array, sum) ->
 			array.map (num) ->
-				num / sum	
+				num / sum
+		combine: (m, f, a) ->
+			arr = []
+			i = 0
+			while i < a.length
+				arr.push
+				  age: a[i]
+				  males: m[i]
+				  females: f[i]
+				i++
+			return arr
 
 	maleObs = _(dataArray).first(21)
 	femaleObs = _(dataArray).last(21)
@@ -63,26 +73,33 @@ parse = (dataArray) ->
 
 	ages.splice 1, 2, '5 to 9'
 	ages.splice 3, 3, '15 to 19'
+	ages.reverse()
 
 	males.reverse()
 	females.reverse()
 
 	# Additional values for d3
 	sum = utils.sum totalArr
+	malesSum = utils.sum males
+	femalesSum = utils.sum females
 	malesPerc = utils.percArray males, sum
 	femalesPerc = utils.percArray females, sum
 	malesPercFormat = utils.percArrayFormat males, sum
 	femalesPercFormat = utils.percArrayFormat females, sum
+	overlayData = utils.combine males, females, ages
 
 	d3ReadyData = {
 		males
 		females
+		malesSum
+		femalesSum
 		ages
 		sum		
 		malesPerc
 		femalesPerc
 		malesPercFormat
 		femalesPercFormat
+		overlayData
 	}
 
 	return d3ReadyData

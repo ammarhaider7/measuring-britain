@@ -84,7 +84,9 @@ Controls = React.createClass
                 { if @props.outlineFilter is no then " " + "Outline" else '' }
               </button>
           }
-        <img src="./images/mb_ajax_loader.gif" className={ if @props.isFetching is yes then 'mb-spinner' else 'hide' }/>     
+        <img src="./images/mb_ajax_loader.gif" 
+          className={ if @props.isFetching is yes and @props.isDefault is no then 'mb-spinner' else 'hide' }
+        />     
         { if @props.error is yes then <span className={ "glyphicon glyphicon-remove pl-small mb-error-icon" }/> }
         </div>
       </div>

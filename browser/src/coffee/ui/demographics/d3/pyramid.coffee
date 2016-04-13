@@ -1,90 +1,166 @@
 window.d3 = require 'd3'
 
 drawPyramid = (options) ->
-	
+	# console.log 'draw Pyramid options'
+	# console.log options
+
 	{ container, 
 	  ages, 
 	  bar_males,
 	  bar_males_perc,
+	  bar_males_perc_format,
+	  bar_males_sum,
 	  bar_females,
 	  bar_females_perc,
+	  bar_females_perc_format,
+	  bar_females_sum,
 	  outline_males,
-	  outline_females 
+	  outline_females,
+	  overlay_data,
+	  onMouseOver
+	  isDefault
 	 } = options
 
 	width = container.offsetWidth ? 750
 	height = container.offsetHeight ? 500
 
-	my = ->
+	# Set margins
+	margin = 
+		top: 25
+		right: 50
+		bottom: 75
+		left: 50
+		middle: 25
 
+	#SCALES AND AXES
+	x = (data) ->
+	  d3.scale.linear()
+	  .domain [0, d3.max data, (d) ->
+	      return d 
+	  ]
+	  .range [0, (width / 2) - margin.middle]
+
+	xLeft = (data) ->
+	  d3.scale.linear().domain([
+	    d3.max(data, (d) ->
+	      return d
+	    ), 0])
+	  .range [0, (width / 2) - margin.middle]
+
+	y = (data) ->
+	  d3.scale.ordinal()
+	  .domain d3.range(data.length)
+	  .rangeRoundBands [0, height - margin.bottom]
+
+	xAxis = (data) ->
+	  d3.svg.axis()
+	  .scale(x(data))
+	  .orient('bottom')
+	  .ticks(5)
+	  .tickFormat d3.format(',.1%')
+
+	xAxisLeft = (data) ->
+	  d3.svg.axis()
+	  .scale(xLeft(data))
+	  .orient('bottom')
+	  .ticks(5)
+	  .tickFormat d3.format(',.1%')
+
+	my = ->
+	  
 		# generate chart here, using the options
-		margin = 
-			top: 25
-			right: 50
-			bottom: 75
-			left: 50
-			middle: 25
+		if isDefault is yes
+
+			init()
+
+		else if isDefault is no
+
+			update()
+
+	init = ->
 
 		format = d3.format ','
 		percFormat = d3.format '.0f'
+		maxFemalePerc = d3.max bar_females_perc
 
-		#SCALES AND AXES
-		x = (data) ->
-		  d3.scale.linear()
-		  .domain [0, d3.max data, (d) ->
-		      return d 
-		  ]
-		  .range [0, (width / 2) - margin.middle]
-
-		xLeft = (data) ->
-		  d3.scale.linear().domain([
-		    d3.max(data, (d) ->
-		      return d
-		    ), 0])
-		  .range [0, (width / 2) - margin.middle]
-
-		y = (data) ->
-		  d3.scale.ordinal()
-		  .domain d3.range(data.length)
-		  .rangeRoundBands [0, height - margin.bottom]
-
-		xAxis = (data) ->
-		  d3.svg.axis()
-		  .scale(x(data))
-		  .orient('bottom')
-		  .ticks(5)
-		  .tickFormat d3.format(',.1%')
-
-		xAxisLeft = (data) ->
-		  d3.svg.axis()
-		  .scale(xLeft(data))
-		  .orient('bottom')
-		  .ticks(5)
-		  .tickFormat d3.format(',.1%')
-
-		# Create svg and g elements
+		# Create svg and g vars
 		svg = d3.select '.pyramid-svg'
-		g = d3.select '.main-group'
-		rightGroup = d3.select '.right-group'
-		leftGroup = d3.select '.left-group'
-		overlayGroup = d3.select '.overlay-group'
-		ticksGroup = d3.select '.ticks-group'
+		g = svg.select '.main-group'
+		rightGroup = svg.select '.right-group'
+		leftGroup = svg.select '.left-group'
+		overlayGroup = svg.select '.overlay-group'
+		ticksGroup = svg.select '.ticks-group'
+		xAxisGroupLeft = svg.select '.x.axis.left'
+		xAxisGroupRight = svg.select '.x.axis.right'
+		titleGroup = svg.select '.title-group'
+		keyGroup = svg.select '.key-group'
+		maleKeyGroup = keyGroup.select '.male-key-group'
+		femaleKeyGroup = keyGroup.select '.female-key-group'
 
 		# Perform transforms on g elements
 		g.attr "transform", "translate(0, #{ margin.top })"
-		overlayGroup.attr "transform", "translate(#{ margin.left }, #{ margin.top })"
+		overlayGroup.attr "transform", "translate(0, #{ margin.top })"
 		leftGroup.attr "transform", "translate(0, #{ margin.top })"
 		rightGroup.attr "transform", "translate(#{ (width / 2) + margin.middle }, #{ margin.top })"
-		ticksGroup.attr "transform", "translate(#{ (width / 2) }, #{ margin.top / 2.5 })"
+		ticksGroup.attr "transform", "translate(#{ (width / 2) }, #{ margin.bottom - 5 })"
+		xAxisGroupLeft.attr "transform", "translate(#{ -(width / 2) }, #{ height - (margin.bottom + 15) })"
+		xAxisGroupRight.attr "transform", "translate(#{ margin.middle }, #{ height - (margin.bottom + 15) })"
+		titleGroup.attr "transform", "translate(#{ 0.25 * width }, #{ margin.top - 10 })"
+		keyGroup.attr "transform", "translate(#{ width - margin.right * 3 }, #{  margin.top })"
+		maleKeyGroup.attr "transform", "translate(70, 0)"
+
+		# Create title for pyramid
+		titleGroup.append('text')
+			.text 'Males \& Females, by 5 year age bands, as % of the population'
+			.attr 'class', 'mb-oxygen'
+			.style 'font-size', '12px'
+
+		# Create keys
+		maleKeyGroup.append 'rect'
+			.attr {
+				width: 15
+				height: 15
+				fill: 'rgb(31, 119, 180)'
+				x: 0
+				y: 0
+			}
+
+		maleKeyGroup.append 'text'
+			.text 'Males'
+			.style 'text-anchor', 'middle'
+			.style 'font-size', 12
+			.attr {
+				x: 35
+				y: 12
+				class: 'mb-oxygen'
+			}
+
+		femaleKeyGroup.append 'rect'
+			.attr {
+				width: 15
+				height: 15
+				fill: 'rgb(255, 152, 150)'
+				x: 0
+				y: 0
+			}
+
+		femaleKeyGroup.append 'text'
+			.text 'Females'
+			.style 'text-anchor', 'middle'
+			.style 'font-size', 12
+			.attr {
+				x: 40
+				y: 12
+				class: 'mb-oxygen'
+			}
 
 		# Build right-side bars
 		rightGroup.selectAll 'rect'
 			.data bar_males_perc
-			.enter()
-			.append 'rect'
+		  .enter().append 'rect'
 			.attr {
-				width: (d) ->
-					return x(bar_males_perc)(d)
+				opacity: 0
+				width: 0
 				height: () ->
 					return y(bar_males_perc).rangeBand()
 				fill: 'rgb(31, 119, 180)'
@@ -95,31 +171,158 @@ drawPyramid = (options) ->
 				rx: 1
 				ry: (d, i) ->
 					return y(bar_males_perc)(i) + 1
-				class: 'pyramid-bar'
+				class: 'pyramid-bar right'
 			}
+			.transition()
+			.duration 1000
+			.attr {
+				opacity: 1
+				width: (d) ->
+					return x(bar_males_perc)(d)
+			}
+
 
 		# Build left-side bars
 		leftGroup.selectAll 'rect'
 			.data bar_females_perc
-			.enter()
-			.append 'rect'
+		  .enter().append 'rect'
 			.attr {
-				width: (d) ->
-					return x(bar_females_perc)(d)
+				opacity: 0
+				width: 0
 				height: () ->
 					return y(bar_females_perc).rangeBand()
 				fill: 'rgb(255, 152, 150)'
 				stroke: 'rgb(250, 133, 131)'
-				x: (d) ->
-					return xLeft(bar_females_perc)(d)
+				x: x(bar_females_perc)(maxFemalePerc)
 				y: (d, i) ->
 					return y(bar_females_perc)(i)
 				rx: 1
 				ry: (d, i) ->
 					return y(bar_females_perc)(i) + 1
-				class: 'pyramid-bar'
+				class: 'pyramid-bar left'
+			}
+			.transition()
+			.duration 1000
+			.attr {
+				opacity: 1
+				width: (d) ->
+					return x(bar_females_perc)(d)
+				x: (d) ->
+					return xLeft(bar_females_perc)(d)
 			}
 
+		# Create ages ticks
+		ticksGroup.selectAll 'text'
+			.data ages
+		  .enter().append 'text'
+		  	.attr 'opacity', 0
+			.attr 'y', (d, i) ->
+				return y(bar_males_perc)(i)
+			.style 'text-anchor', 'middle'
+			.style 'font-size', '12px'
+		  	.transition()
+		  	.duration 1000
+			.text (d) ->
+				return d
+			.attr 'opacity', 1
+
+		agesTitle = d3.select('.ages')[0][0]
+
+		unless agesTitle?
+			ticksGroup
+				.append 'text'
+				.style 'text-anchor', 'middle'
+				.style 'font-size', '12px'
+				.style 'font-weight', 'bold'
+				.attr {
+					y: -margin.top
+					class: 'ages'
+					opacity: 0
+				}
+			  	.transition()
+			  	.duration 1000
+				.text 'Ages'
+				.attr 'opacity', 1
+
+		# Add x axes
+		xAxisGroupLeft.call xAxisLeft(bar_females_perc_format)
+		xAxisGroupRight.call xAxis(bar_males_perc_format)
+
+		# Create overlay rects for interactivity
+		overlayGroup.selectAll 'rect'
+			.data overlay_data
+			.enter()
+			.append 'rect'
+			.attr {
+				width: width
+				height: (d) ->
+					y(bar_males).rangeBand()
+				fill: 'rgba(0,0,0,0)'
+				y: (d, i) ->
+					y(bar_males)(i) + margin.top
+				class: 'overlay-rect'
+			}
+
+		# Dispatch mouseover action and pass along data
+		d3.selectAll '.overlay-rect'
+			.on 'mouseover', (d) ->
+				onMouseOver d
+
+		# Dispatch the initial values for the bars
+		onMouseOver {
+			age: 'All Ages'
+			females: bar_females_sum
+			males: bar_males_sum
+			initial: yes
+		}
+
+	update = ->
+
+		svg = d3.select '.pyramid-svg'
+		leftBars = svg.selectAll '.pyramid-bar.left'
+		rightBars = svg.selectAll '.pyramid-bar.right'
+		overlayBars = svg.selectAll '.overlay-rect'
+		xAxisGroupLeft = svg.select '.x.axis.left'
+		xAxisGroupRight = svg.select '.x.axis.right'
+
+		# Update bars
+		leftBars.data bar_females_perc
+			.transition()
+			.duration(1000)
+		  	.attr {
+				width: (d) ->
+					return x(bar_females_perc)(d)
+				x: (d) ->
+					return xLeft(bar_females_perc)(d)
+		  	}
+
+		rightBars.data bar_males_perc
+			.transition()
+			.duration(1000)
+			.attr {
+				width: (d) ->
+					return x(bar_males_perc)(d)
+			}
+
+		# Update data associated with overlay rects
+		overlayBars.data overlay_data
+
+		# Update the axes
+		xAxisGroupLeft.transition()
+			.duration 1000
+			.call xAxisLeft bar_females_perc_format
+
+		xAxisGroupRight.transition()
+			.duration 1000
+			.call xAxis(bar_males_perc_format)			
+
+		# Dispatch the initial values for the bars
+		onMouseOver {
+			age: 'All Ages'
+			females: bar_females_sum
+			males: bar_males_sum
+			initial: null
+		}
 
 	my.width = (value) ->
 		unless arguments.length then return width

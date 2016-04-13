@@ -2,7 +2,7 @@
 { requestPyramidData, fetchPyramidData, mouseOver } = require './actions/demographics-actions.js'
 { Provider } = require 'react-redux'
 ReduxThunk = require('redux-thunk').default
-{ Pyramid, Table } = require './containers/containers.js'
+{ Pyramid, Table, Bars } = require './containers/containers.js'
 mbReducer = require './reducers/reducers.js'
 ReactDOM = require 'react-dom'
 React = require 'react'
@@ -31,5 +31,6 @@ unsubscribe = store.subscribe ->
 renderPyramid = ->
 	ReactDOM.render <Provider store={store}><Pyramid/></Provider>, document.getElementById 'pyramid-container'
 	ReactDOM.render <Provider store={store}><Table/></Provider>, document.getElementById 'pyramid-table'
+	ReactDOM.render <Provider store={store}><Bars/></Provider>, document.getElementById 'pyramid-bars'
 
 module.exports = renderPyramid

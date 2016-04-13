@@ -13,6 +13,7 @@ TOGGLE_OUTLINE_VALUE = "TOGGLE_OUTLINE_VALUE"
 TOGGLE_VALUE = "TOGGLE_VALUE"
 ERROR_RECEIVE_PYRAMID_DATA_BARS = "ERROR_RECEIVE_PYRAMID_DATA_BARS"
 ERROR_RECEIVE_PYRAMID_DATA_OUTLINE = "ERROR_RECEIVE_PYRAMID_DATA_OUTLINE"
+FILTER_USED = "FILTER_USED"
 
 toggleValue = (value, selectionOption) ->
 	{
@@ -51,21 +52,22 @@ toggleCategory = (category, selectionOption) ->
 		category
 		selectionOption
 	}
-# mouseOver options should take the form of:-
-# {
-# 	chart= [chart],
-# 	segment= [segment]
-# }
-mouseOver = (mouseOverOptions) ->
+	
+mouseOver = (mouseOverData) ->
 	{
 		type: MOUSE_OVER
-		mouseOverOptions
+		mouseOverData: mouseOverData 
 	}
 
 requestPyramidData = (filterOptions) ->
 	{
 		type: REQUEST_PYRAMID_DATA
 		filterOptions
+	}
+
+filterUsed = () ->
+	{
+		type: FILTER_USED
 	}
 
 receivePyramidDataBars = (data) ->
@@ -107,6 +109,8 @@ fetchPyramidData = (filterOptions) ->
 	# It passes the dispatch method as an argument to the function,
 	# thus making it able to dispatch actions itself.
 	(dispatch) ->
+
+		dispatch filterUsed() if filterOptions?
 		dispatch requestPyramidData barOptions
 		# The function called by the thunk middleware can return a value,
 		# that is passed on as the return value of the dispatch method.
@@ -168,6 +172,8 @@ module.exports = {
 	TOGGLE_OUTLINE_CATEGORY
 	TOGGLE_OUTLINE_VALUE
 	TOGGLE_VALUE
+	FILTER_USED
+	filterUsed
 	receivePyramidDataBars
 	receivePyramidDataOutline
 	requestPyramidData

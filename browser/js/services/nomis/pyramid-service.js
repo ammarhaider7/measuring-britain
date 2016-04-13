@@ -110,7 +110,7 @@ makePyramidRequest = function(options) {
         queryStringArr.push(value);
       }
     }
-    return '?' + queryStringArr.join('&');
+    return '?' + queryStringArr.join('\&');
   };
   return $.getJSON(nomisEndPoint + getOptions().dataSet + generateQueryString(getOptions, queryStringArr));
 };

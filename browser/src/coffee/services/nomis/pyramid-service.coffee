@@ -91,7 +91,7 @@ makePyramidRequest = (options) ->
 		for own key, value of getOptions().queryStringOps
 			unless value is ""
 				queryStringArr.push value
-		'?' + queryStringArr.join '&'
+		'?' + queryStringArr.join '\&'
 
 	# make call using jQuery and return the promise object
 	$.getJSON nomisEndPoint + getOptions().dataSet + generateQueryString getOptions, queryStringArr

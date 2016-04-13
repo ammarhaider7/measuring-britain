@@ -1,9 +1,11 @@
 { connect } = require 'react-redux'
-{ toggleCategory, addFilter, toggleOutlineCategory, toggleValue, removeFilter, toggleOutlineValue, requestPyramidData, fetchPyramidData } = require '../actions/demographics-actions.js'
+{ mouseOver, toggleCategory, addFilter, toggleOutlineCategory, toggleValue, removeFilter, toggleOutlineValue, requestPyramidData, fetchPyramidData } = require '../actions/demographics-actions.js'
 PyramidComponent = require '../../ui/demographics/pyramid-component.js'
 TableComponent = require '../../ui/demographics/pyramid-table.js'
+pyBarsComponent = require '../../ui/demographics/pyramid-bars.js'
 
 mapStateToProps = (state) ->
+
 	chartName: state.pyramidChart.chartName
 	_barsCategory: state.pyramidChart._barsCategory
 	_barsValue: state.pyramidChart._barsValue	
@@ -13,8 +15,28 @@ mapStateToProps = (state) ->
 	_outlineCategory: state.pyramidChart._outlineCategory	
 	_outlineValue: state.pyramidChart._outlineValue
 	error: state.pyramidChart.error
+	updatePyramid: state.pyramidChart.updatePyramid
+	isDefault: state.pyramidChart.isDefault
+
+mapStateToPropsPyrTable = (state) ->
+
+	data: state.pyramidChart.data
+	activeBarsCategory: state.pyramidChart.activeBarsCategory
+	activeBarsValue: state.pyramidChart.activeBarsValue	
+	isFetching: state.pyramidChart.isFetching
+	isDefault: state.pyramidChart.isDefault
+
+mapStateToPropsPyrBars = (state) ->
+
+	_mouseOverData: state.pyramidChart._mouseOverData
+	updateBars: state.pyramidChart.updateBars
+	isFetching: state.pyramidChart.isFetching
+	isDefault: state.pyramidChart.isDefault
+	activeBarsCategory: state.pyramidChart.activeBarsCategory
+	activeBarsValue: state.pyramidChart.activeBarsValue
 
 mapDispatchToProps = (dispatch) ->
+
 	onCategoryChange: (category, selectedOption) ->
 		dispatch toggleCategory category, selectedOption[0]
 	onValueChange: (value, selectedOption) ->
@@ -29,6 +51,8 @@ mapDispatchToProps = (dispatch) ->
 		dispatch toggleOutlineValue value, selectedOption[0]
 	fetchPyramidData: (filterOptions) ->
 		dispatch fetchPyramidData filterOptions
+	onMouseOver: (mouseOverData) ->
+		dispatch mouseOver mouseOverData
 
 Pyramid = connect(
 	mapStateToProps, 
@@ -36,11 +60,15 @@ Pyramid = connect(
 )(PyramidComponent)
 
 Table = connect(
-	mapStateToProps, 
-	mapDispatchToProps
+	mapStateToPropsPyrTable
 )(TableComponent)
+
+Bars = connect(
+	mapStateToPropsPyrBars
+)(pyBarsComponent)
 
 module.exports = {
 	Pyramid
 	Table
+	Bars
 }
