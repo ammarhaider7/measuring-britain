@@ -5,10 +5,12 @@ combineReducers = require('redux').combineReducers;
 
 objectAssign = require('object-assign');
 
-pyramidChart = require('./demographics-reducers.js');
+pyramidChart = require('./demographics/pyramid-reducers.js');
 
 mbReducer = combineReducers({
   pyramidChart: pyramidChart
 });
 
 module.exports = mbReducer;
+
+//# sourceMappingURL=reducers.map

@@ -8,12 +8,12 @@ FancySelect = require('react-select');
 Filter = React.createClass({displayName: "Filter",
   render: function() {
     return React.createElement("div", {
-      "className": "col-sm-12 row mt-small"
+      "className": "mb-form-row col-sm-12 row mt-small"
     }, React.createElement("div", {
       "className": "col-sm-9 mb-no-padding"
     }, React.createElement("label", {
       "className": "col-sm-1"
-    }, "Outline"), React.createElement("div", {
+    }, "Line"), React.createElement("div", {
       "className": "mb-form-group col-sm-5 mb-oxygen"
     }, React.createElement(FancySelect, {
       "className": "mb-input-sm",
@@ -66,7 +66,7 @@ Filter = React.createClass({displayName: "Filter",
       })(this)(),
       "onChange": this.props.onOutlineValueChange
     }))), React.createElement("div", {
-      "className": "col-sm-2 col-md-3 mb-no-padding"
+      "className": "col-sm-3 mb-no-padding"
     }, (function(_this) {
       return function() {
         if (_this.props.chartName === 'pyramid') {
@@ -84,3 +84,5 @@ Filter = React.createClass({displayName: "Filter",
 });
 
 module.exports = Filter;
+
+//# sourceMappingURL=chart-controls-filter.map

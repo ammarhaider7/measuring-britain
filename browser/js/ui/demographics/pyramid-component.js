@@ -25,25 +25,34 @@ PyramidComponent = React.createClass({displayName: "PyramidComponent",
     return this.props.fetchPyramidData(null);
   },
   componentDidUpdate: function() {
-    var pyramid, ref, ref1;
-    pyramid = drawPyramid({
-      container: this.refs.pyramidSvg,
-      ages: this.props.data.bars.ages,
-      bar_males: this.props.data.bars.males,
-      bar_females: this.props.data.bars.females,
-      bar_males_perc: this.props.data.bars.malesPerc,
-      bar_males_perc_format: this.props.data.bars.malesPercFormat,
-      bar_males_sum: this.props.data.bars.malesSum,
-      bar_females_perc: this.props.data.bars.femalesPerc,
-      bar_females_perc_format: this.props.data.bars.femalesPercFormat,
-      bar_females_sum: this.props.data.bars.femalesSum,
-      outline_males: (ref = this.props.data.outline.males) != null ? ref : null,
-      outline_females: (ref1 = this.props.data.outline.females) != null ? ref1 : null,
-      overlay_data: this.props.data.bars.overlayData,
-      onMouseOver: this.props.onMouseOver,
-      isDefault: this.props.isDefault
-    });
+    var pyramid, ref, ref1, ref2, ref3, ref4, ref5, ref6, ref7;
     if (this.props.updatePyramid === true) {
+      pyramid = drawPyramid({
+        container: this.refs.pyramidSvg,
+        ages: this.props.data.bars.ages,
+        bar_males: this.props.data.bars.males,
+        bar_females: this.props.data.bars.females,
+        bar_males_perc: this.props.data.bars.malesPerc,
+        bar_males_perc_format: this.props.data.bars.malesPercFormat,
+        bar_males_sum: this.props.data.bars.malesSum,
+        bar_females_perc: this.props.data.bars.femalesPerc,
+        bar_females_perc_format: this.props.data.bars.femalesPercFormat,
+        bar_females_sum: this.props.data.bars.femalesSum,
+        outline_males: (ref = this.props.data.outline.males) != null ? ref : null,
+        outline_females: (ref1 = this.props.data.outline.females) != null ? ref1 : null,
+        outline_males_perc: (ref2 = this.props.data.outline.malesPerc) != null ? ref2 : null,
+        outline_males_perc_format: (ref3 = this.props.data.outline.malesPercFormat) != null ? ref3 : null,
+        outline_males_sum: (ref4 = this.props.data.outline.malesSum) != null ? ref4 : null,
+        outline_females_perc: (ref5 = this.props.data.outline.femalesPerc) != null ? ref5 : null,
+        outline_females_perc_format: (ref6 = this.props.data.outline.femalesPercFormat) != null ? ref6 : null,
+        outline_females_sum: (ref7 = this.props.data.outline.femalesSum) != null ? ref7 : null,
+        overlay_data: this.props.data.bars.overlayData,
+        onMouseOver: this.props.onMouseOver,
+        isDefault: this.props.isDefault,
+        outlineFilter: this.props.outlineFilter,
+        updatePyramid: this.props.updatePyramid,
+        updateOutline: this.props.updateOutline
+      });
       return pyramid();
     }
   },
@@ -94,3 +103,5 @@ PyramidComponent = React.createClass({displayName: "PyramidComponent",
 });
 
 module.exports = PyramidComponent;
+
+//# sourceMappingURL=pyramid-component.map

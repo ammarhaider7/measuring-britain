@@ -12,7 +12,7 @@ objectAssign = require 'object-assign'
   ADD_FILTER, 
   REMOVE_FILTER, 
   TOGGLE_OUTLINE_CATEGORY, 
-  TOGGLE_OUTLINE_VALUE } = require '../actions/demographics-actions.js'
+  TOGGLE_OUTLINE_VALUE } = require '../../actions/demographics/pyramid-actions.js'
 
 pyramidInitialState = {
 	chartName: 'pyramid'
@@ -40,6 +40,7 @@ pyramidInitialState = {
 	error: no
 	updateBars: no
 	updatePyramid: no
+	updateOutline: no
 }
 
 pyramidChart = (state = pyramidInitialState, action) ->
@@ -48,21 +49,25 @@ pyramidChart = (state = pyramidInitialState, action) ->
 			_barsCategory: action.selectionOption
 			updatePyramid: no
 			updateBars: no
+			updateOutline: no
 		}
 		when TOGGLE_VALUE then objectAssign {}, state, {
 			_barsValue: action.selectionOption
 			updatePyramid: no
 			updateBars: no
+			updateOutline: no
 		}
 		when FILTER_USED then objectAssign {}, state, {
 			isDefault: no
 			updatePyramid: no
 			updateBars: no
+			updateOutline: no
 		}
 		when REQUEST_PYRAMID_DATA then objectAssign {}, state, {
 			isFetching: yes
 			updatePyramid: no
 			updateBars: no
+			updateOutline: no
 		}
 		when RECEIVE_PYRAMID_DATA_BARS then objectAssign {}, state, {
 			isFetching: no
@@ -72,6 +77,7 @@ pyramidChart = (state = pyramidInitialState, action) ->
 			lastUpdated: action.receivedAt
 			updatePyramid: yes
 			updateBars: yes
+			updateOutline: no
 			activeBarsValue: state._barsValue.label
 			activeBarsCategory: state._barsCategory.label
 		}
@@ -81,7 +87,7 @@ pyramidChart = (state = pyramidInitialState, action) ->
 				outline: action.data
 				bars: state.data.bars
 			lastUpdated: action.receivedAt
-			updatePyramid: yes
+			updateOutline: yes
 		}
 		when ERROR_RECEIVE_PYRAMID_DATA_BARS then objectAssign {}, state, {
 			isFetching: no
@@ -89,6 +95,7 @@ pyramidChart = (state = pyramidInitialState, action) ->
 			errorMessage: action.barsError
 			updatePyramid: no
 			updateBars: no
+			updateOutline: no
 		}
 		when ERROR_RECEIVE_PYRAMID_DATA_OUTLINE then objectAssign {}, state, {
 			isFetching: no
@@ -96,30 +103,36 @@ pyramidChart = (state = pyramidInitialState, action) ->
 			errorMessage: action.outlineError
 			updatePyramid: no
 			updateBars: no
+			updateOutline: no
 		}		
 		when MOUSE_OVER then objectAssign {}, state, {
 			_mouseOverData: action.mouseOverData
 			updateBars: yes
+			updateOutline: no
 		}
 		when ADD_FILTER then objectAssign {}, state, {
 			outlineFilter: yes
 			updatePyramid: no
 			updateBars: no
+			updateOutline: no
 		}
 		when REMOVE_FILTER then objectAssign {}, state, {
 			outlineFilter: no
 			updatePyramid: no
 			updateBars: no
+			updateOutline: no
 		}
 		when TOGGLE_OUTLINE_CATEGORY then objectAssign {}, state, {
 			_outlineCategory: action.selectionOption
 			updatePyramid: no
 			updateBars: no
+			updateOutline: no
 		}
 		when TOGGLE_OUTLINE_VALUE then objectAssign {}, state, {
 			_outlineValue: action.selectionOption
 			updatePyramid: no
 			updateBars: no
+			updateOutline: no
 		}
 		else state
 

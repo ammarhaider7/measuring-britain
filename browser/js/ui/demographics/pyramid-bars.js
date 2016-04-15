@@ -8,16 +8,16 @@ drawPyrBars = require('./d3/pyramidBars.js');
 pyBarsComponent = React.createClass({displayName: "pyBarsComponent",
   componentDidUpdate: function() {
     var pyrBars;
-    pyrBars = drawPyrBars({
-      container: this.refs.pyramidBarsSvg,
-      age: this.props._mouseOverData.age,
-      females: this.props._mouseOverData.females,
-      males: this.props._mouseOverData.males,
-      initial: this.props._mouseOverData.initial,
-      isDefault: this.props.isDefault,
-      activeBarsValue: this.props.activeBarsValue
-    });
     if (this.props.updateBars === true) {
+      pyrBars = drawPyrBars({
+        container: this.refs.pyramidBarsSvg,
+        age: this.props._mouseOverData.age,
+        females: this.props._mouseOverData.females,
+        males: this.props._mouseOverData.males,
+        initial: this.props._mouseOverData.initial,
+        isDefault: this.props.isDefault,
+        activeBarsValue: this.props.activeBarsValue
+      });
       return pyrBars();
     }
   },
@@ -47,3 +47,5 @@ pyBarsComponent = React.createClass({displayName: "pyBarsComponent",
 });
 
 module.exports = pyBarsComponent;
+
+//# sourceMappingURL=pyramid-bars.map

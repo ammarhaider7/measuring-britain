@@ -14,12 +14,12 @@ Controls = React.createClass({displayName: "Controls",
     return React.createElement("div", {
       "className": "mb-form hidden-xs clearfix pl-medium"
     }, React.createElement("div", {
-      "className": "mb-form-container col-sm-12 row"
+      "className": "mb-form-row col-sm-12 row"
     }, React.createElement("div", {
       "className": "col-sm-9 mb-no-padding"
     }, React.createElement("label", {
       "className": "col-sm-1"
-    }, "Filter"), React.createElement("div", {
+    }, "Bars"), React.createElement("div", {
       "className": "mb-form-group col-sm-5 mb-oxygen"
     }, React.createElement(FancySelect, {
       "className": "mb-input-sm",
@@ -72,7 +72,7 @@ Controls = React.createClass({displayName: "Controls",
       })(this)(),
       "onChange": this.props.onValueChange
     }))), React.createElement("div", {
-      "className": "col-sm-2 col-md-3 mb-no-padding"
+      "className": "col-sm-3 mb-no-padding"
     }, React.createElement("button", {
       "className": "btn btn-sm btn-primary mb-oxygen",
       "onClick": ((function(_this) {
@@ -113,7 +113,7 @@ Controls = React.createClass({displayName: "Controls",
             "onClick": _this.props.onAddOutline
           }, React.createElement("span", {
             "className": "glyphicon glyphicon-plus"
-          }), (_this.props.outlineFilter === false ? " " + "Outline" : ''));
+          }), (_this.props.outlineFilter === false ? " " + "Line" : ''));
         }
       };
     })(this)(), React.createElement("img", {
@@ -126,3 +126,5 @@ Controls = React.createClass({displayName: "Controls",
 });
 
 module.exports = Controls;
+
+//# sourceMappingURL=chart-controls.map

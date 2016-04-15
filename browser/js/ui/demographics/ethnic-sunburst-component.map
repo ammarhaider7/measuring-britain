@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "file": "ethnic-sunburst-component.js",
+  "sourceRoot": "..\\..\\..\\..",
+  "sources": [
+    "browser\\src\\coffee\\ui\\demographics\\ethnic-sunburst-component.cjsx"
+  ],
+  "names": [],
+  "mappings": ";AAAA,IAAA;;AAAA,KAAA,GAAQ,OAAA,CAAQ,OAAR;;AAER,iBAAA,GAAoB,KAAK,CAAC,WAAN,CAClB;EAAA,MAAA,EAAQ,SAAA;WACN,KAAK,CAAC,aAAN,CAAoB,KAApB,EAA2B;MAAC,WAAA,EAAa,+BAAd;KAA3B,EACE,KAAK,CAAC,aAAN,CAAoB,KAApB,EAA2B;MAAC,WAAA,EAAa,mBAAd;KAA3B,EACE,KAAK,CAAC,aAAN,CAAoB,KAApB,EAA2B;MACzB,WAAA,EAAa,cADY;MAEzB,OAAA,EAAU;QAAE,KAAA,EAAO,MAAT;QAAiB,MAAA,EAAQ,OAAzB;OAFe;MAGzB,KAAA,EAAO,aAHkB;KAA3B,EAKE,KAAK,CAAC,aAAN,CAAoB,GAApB,EAAyB;MAAC,WAAA,EAAa,YAAd;KAAzB,CALF,CADF,CADF;EADM,CAAR;CADkB;;AAcpB,MAAM,CAAC,OAAP,GAAiB"
+}

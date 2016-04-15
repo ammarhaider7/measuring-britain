@@ -5982,13 +5982,12 @@ path:first-child {
   display: none; }
 
 .mb-form {
-  background-color: #f3f3f3;
-  background-image: -webkit-linear-gradient(top, #FCFCFA, #F1F1F1);
-  background-image: -moz-linear-gradient(top, #FCFCFA, #F1F1F1);
-  border: 1px solid #E0E0E0;
+  background-color: #F3F3F3;
   border-radius: 6px;
-  padding-bottom: 10px;
-  padding-top: 10px; }
+  padding-bottom: 15px;
+  padding-top: 15px; }
+  .mb-form .mb-form-row {
+    padding-left: 7.5%; }
   .mb-form .mb-input-sm {
     padding: 0 !important; }
   .mb-form option.mb-default-select-value {
@@ -6095,3 +6094,13 @@ path:first-child {
   margin: 0 auto;
   margin-top: 150px;
   display: block; }
+
+.males-outline {
+  fill: none;
+  stroke: #214f76;
+  stroke-width: 1.5px; }
+
+.females-outline {
+  fill: none;
+  stroke: #ff504d;
+  stroke-width: 1.5px; }

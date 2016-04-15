@@ -1,28 +1,38 @@
 window.d3 = require 'd3'
 
 drawPyramid = (options) ->
-	# console.log 'draw Pyramid options'
-	# console.log options
 
-	{ container, 
-	  ages, 
-	  bar_males,
-	  bar_males_perc,
-	  bar_males_perc_format,
-	  bar_males_sum,
-	  bar_females,
-	  bar_females_perc,
-	  bar_females_perc_format,
-	  bar_females_sum,
-	  outline_males,
-	  outline_females,
-	  overlay_data,
+	{ container
+	  ages
+	  bar_males
+	  bar_males_perc
+	  bar_males_perc_format
+	  bar_males_sum
+	  bar_females
+	  bar_females_perc
+	  bar_females_perc_format
+	  bar_females_sum
+	  outline_males
+	  outline_females
+	  outline_males_perc
+	  outline_males_perc_format
+	  outline_males_sum
+	  outline_females_perc
+	  outline_females_perc_format
+	  outline_females_sum
+	  overlay_data
 	  onMouseOver
 	  isDefault
+	  outlineFilter
+	  updatePyramid
+	  updateOutline
 	 } = options
 
 	width = container.offsetWidth ? 750
 	height = container.offsetHeight ? 500
+
+	# Check if we need to draw an outline
+	isOutline = outlineFilter
 
 	# Set margins
 	margin = 
@@ -50,7 +60,7 @@ drawPyramid = (options) ->
 	y = (data) ->
 	  d3.scale.ordinal()
 	  .domain d3.range(data.length)
-	  .rangeRoundBands [0, height - margin.bottom]
+	  .rangeBands [0, height - margin.bottom]
 
 	xAxis = (data) ->
 	  d3.svg.axis()
@@ -66,36 +76,40 @@ drawPyramid = (options) ->
 	  .ticks(5)
 	  .tickFormat d3.format(',.1%')
 
+	# Create svg and g vars
+	svg = d3.select '.pyramid-svg'
+	g = svg.select '.main-group'
+	rightGroup = svg.select '.right-group'
+	leftGroup = svg.select '.left-group'
+	overlayGroup = svg.select '.overlay-group'
+	ticksGroup = svg.select '.ticks-group'
+	xAxisGroupLeft = svg.select '.x.axis.left'
+	xAxisGroupRight = svg.select '.x.axis.right'
+	titleGroup = svg.select '.title-group'
+	keyGroup = svg.select '.key-group'
+	maleKeyGroup = keyGroup.select '.male-key-group'
+	femaleKeyGroup = keyGroup.select '.female-key-group'
+
 	my = ->
-	  
-		# generate chart here, using the options
+		# generate chart here
+
 		if isDefault is yes
 
 			init()
 
+			if isOutline is yes and updateOutline is yes then drawOutline()
+
 		else if isDefault is no
 
 			update()
+
+			if isOutline is yes and updateOutline is yes then drawOutline()
 
 	init = ->
 
 		format = d3.format ','
 		percFormat = d3.format '.0f'
 		maxFemalePerc = d3.max bar_females_perc
-
-		# Create svg and g vars
-		svg = d3.select '.pyramid-svg'
-		g = svg.select '.main-group'
-		rightGroup = svg.select '.right-group'
-		leftGroup = svg.select '.left-group'
-		overlayGroup = svg.select '.overlay-group'
-		ticksGroup = svg.select '.ticks-group'
-		xAxisGroupLeft = svg.select '.x.axis.left'
-		xAxisGroupRight = svg.select '.x.axis.right'
-		titleGroup = svg.select '.title-group'
-		keyGroup = svg.select '.key-group'
-		maleKeyGroup = keyGroup.select '.male-key-group'
-		femaleKeyGroup = keyGroup.select '.female-key-group'
 
 		# Perform transforms on g elements
 		g.attr "transform", "translate(0, #{ margin.top })"
@@ -174,7 +188,7 @@ drawPyramid = (options) ->
 				class: 'pyramid-bar right'
 			}
 			.transition()
-			.duration 1000
+			.duration 1500
 			.attr {
 				opacity: 1
 				width: (d) ->
@@ -202,7 +216,7 @@ drawPyramid = (options) ->
 				class: 'pyramid-bar left'
 			}
 			.transition()
-			.duration 1000
+			.duration 1500
 			.attr {
 				opacity: 1
 				width: (d) ->
@@ -221,7 +235,7 @@ drawPyramid = (options) ->
 			.style 'text-anchor', 'middle'
 			.style 'font-size', '12px'
 		  	.transition()
-		  	.duration 1000
+		  	.duration 1500
 			.text (d) ->
 				return d
 			.attr 'opacity', 1
@@ -240,7 +254,7 @@ drawPyramid = (options) ->
 					opacity: 0
 				}
 			  	.transition()
-			  	.duration 1000
+			  	.duration 1500
 				.text 'Ages'
 				.attr 'opacity', 1
 
@@ -277,6 +291,8 @@ drawPyramid = (options) ->
 		}
 
 	update = ->
+
+		removeOutline()	
 
 		svg = d3.select '.pyramid-svg'
 		leftBars = svg.selectAll '.pyramid-bar.left'
@@ -323,6 +339,58 @@ drawPyramid = (options) ->
 			males: bar_males_sum
 			initial: null
 		}
+
+	drawOutline = ->
+
+		removeOutline()
+
+		malesLine = d3.svg.line()
+			.interpolate 'step-before'
+			.x (d) ->
+				return x(bar_males_perc)(d)
+			.y (d, i) ->
+				if i is bar_males_perc.length
+					return y(bar_males_perc).rangeExtent()[1]
+				else
+					return y(bar_males_perc)(i)
+
+		femalesLine = d3.svg.line()
+			.interpolate 'step-before'
+			.x (d) ->
+				return xLeft(bar_females_perc)(d)
+			.y (d, i) ->
+				if i is bar_females_perc.length
+					return y(bar_females_perc).rangeExtent()[1]
+				else
+					return y(bar_females_perc)(i)
+
+		malesChartLine = rightGroup.append 'path'
+			.attr 'opacity', 0
+			.transition()
+			.duration 500
+			.attr {
+				class: 'males-outline'
+				d: malesLine outline_males_perc.concat [outline_males_perc[outline_males_perc.length - 1]]
+				opacity: 1
+			}
+
+		femalesChartLine = leftGroup.append 'path'
+			.attr 'opacity', 0
+			.transition()
+			.duration 500
+			.attr {
+				class: 'females-outline'
+				d: femalesLine outline_females_perc.concat [outline_females_perc[outline_females_perc.length - 1]]
+				opacity: 1
+			}
+
+	removeOutline = ->
+		# Remove any existing outlines
+		maleOutline = d3.selectAll '.males-outline'
+		femalesOutline = d3.selectAll '.females-outline'
+
+		maleOutline.remove()
+		femalesOutline.remove()
 
 	my.width = (value) ->
 		unless arguments.length then return width

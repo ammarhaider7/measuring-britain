@@ -86,12 +86,20 @@ drawPyrBars = (options) ->
 		  			if d.sex is 'female' then 'bar female' else 'bar male'
 		  		x: (d) ->
 		  			x d.sex
+		  		opacity: 0
+		  		y: y 0
+		  		height: bars_height - y 0
+		  		ry: 3
+		  		width: x.rangeBand()
+		  	}
+		  	.transition()
+		  	.duration 1500
+		  	.attr {
 		  		y: (d) ->
 		  			return y d.value
 		  		height: (d) ->
 		  			return bars_height - y d.value
-		  		ry: 3
-		  		width: x.rangeBand()
+		  		opacity: 1
 		  	}
 
 		# Age label

@@ -1,5 +1,5 @@
 { connect } = require 'react-redux'
-{ mouseOver, toggleCategory, addFilter, toggleOutlineCategory, toggleValue, removeFilter, toggleOutlineValue, requestPyramidData, fetchPyramidData } = require '../actions/demographics-actions.js'
+{ mouseOver, toggleCategory, addFilter, toggleOutlineCategory, toggleValue, removeFilter, toggleOutlineValue, requestPyramidData, fetchPyramidData } = require '../actions/demographics/pyramid-actions.js'
 PyramidComponent = require '../../ui/demographics/pyramid-component.js'
 TableComponent = require '../../ui/demographics/pyramid-table.js'
 pyBarsComponent = require '../../ui/demographics/pyramid-bars.js'
@@ -17,6 +17,7 @@ mapStateToProps = (state) ->
 	error: state.pyramidChart.error
 	updatePyramid: state.pyramidChart.updatePyramid
 	isDefault: state.pyramidChart.isDefault
+	updateOutline: state.pyramidChart.updateOutline
 
 mapStateToPropsPyrTable = (state) ->
 

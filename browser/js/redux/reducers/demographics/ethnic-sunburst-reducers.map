@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "file": "ethnic-sunburst-reducers.js",
+  "sourceRoot": "..\\..\\..\\..\\..",
+  "sources": [
+    "browser\\src\\coffee\\redux\\reducers\\demographics\\ethnic-sunburst-reducers.coffee"
+  ],
+  "names": [],
+  "mappings": ";AAAA,IAAA;;AAAA,YAAA,GAAe,OAAA,CAAQ,eAAR"
+}

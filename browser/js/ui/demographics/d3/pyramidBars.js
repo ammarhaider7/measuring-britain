@@ -67,14 +67,19 @@ drawPyrBars = function(options) {
       x: function(d) {
         return x(d.sex);
       },
+      opacity: 0,
+      y: y(0),
+      height: bars_height - y(0),
+      ry: 3,
+      width: x.rangeBand()
+    }).transition().duration(1500).attr({
       y: function(d) {
         return y(d.value);
       },
       height: function(d) {
         return bars_height - y(d.value);
       },
-      ry: 3,
-      width: x.rangeBand()
+      opacity: 1
     });
     agesGroup.append('text').text(category_value).style('text-anchor', 'middle').style('font-size', 18).style('font-weight', 'bold').attr('x', margin.left / 2).attr('class', 'category-value-label');
     agesGroup.append('text').text('Ages').style('text-anchor', 'middle').style('font-size', 20).attr('x', margin.left / 2).attr('y', 30);
@@ -126,3 +131,5 @@ drawPyrBars = function(options) {
 };
 
 module.exports = drawPyrBars;
+
+//# sourceMappingURL=pyramidBars.map

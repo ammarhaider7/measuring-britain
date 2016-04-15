@@ -1,5 +1,5 @@
 { createStore, applyMiddleware } = require 'redux'
-{ requestPyramidData, fetchPyramidData, mouseOver } = require './actions/demographics-actions.js'
+{ requestPyramidData, fetchPyramidData, mouseOver } = require './actions/demographics/pyramid-actions.js'
 { Provider } = require 'react-redux'
 ReduxThunk = require('redux-thunk').default
 { Pyramid, Table, Bars } = require './containers/containers.js'

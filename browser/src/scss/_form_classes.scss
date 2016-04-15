@@ -1,11 +1,14 @@
 .mb-form {
-	background-color: #f3f3f3;
-    background-image: -webkit-linear-gradient(top,#FCFCFA,#F1F1F1);
-	background-image: -moz-linear-gradient(top,#FCFCFA,#F1F1F1);
-    border: 1px solid #E0E0E0;
+	background-color: $form-bg;
+ //    background-image: -webkit-linear-gradient(top,#FCFCFA,#F1F1F1);
+	// background-image: -moz-linear-gradient(top,#FCFCFA,#F1F1F1);
+ //    border: 1px solid #E0E0E0;
     border-radius: 6px;
-    padding-bottom: 10px;
-    padding-top: 10px;
+    padding-bottom: $form-padding;
+    padding-top: $form-padding;
+    .mb-form-row {
+    	padding-left: 7.5%;
+    }
     .mb-input-sm {
     	@extend select.input-sm;
     	@extend .input-sm;

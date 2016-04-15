@@ -5,17 +5,20 @@ pyBarsComponent = React.createClass
 
 	componentDidUpdate: ->
 
-		pyrBars = drawPyrBars {
-			container: @refs.pyramidBarsSvg
-			age: @props._mouseOverData.age
-			females: @props._mouseOverData.females
-			males: @props._mouseOverData.males
-			initial: @props._mouseOverData.initial
-			isDefault: @props.isDefault
-			activeBarsValue: @props.activeBarsValue
-		}
 
-		pyrBars() if @props.updateBars is yes
+		if @props.updateBars is yes
+			
+			pyrBars = drawPyrBars {
+				container: @refs.pyramidBarsSvg
+				age: @props._mouseOverData.age
+				females: @props._mouseOverData.females
+				males: @props._mouseOverData.males
+				initial: @props._mouseOverData.initial
+				isDefault: @props.isDefault
+				activeBarsValue: @props.activeBarsValue
+			}
+
+			pyrBars() 
 
 	render: ->
 

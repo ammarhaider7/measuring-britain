@@ -6,9 +6,9 @@ $ = require 'jQuery'
 Controls = React.createClass 
   render: ->  
     <div className="mb-form hidden-xs clearfix pl-medium">
-      <div className="mb-form-container col-sm-12 row">
+      <div className="mb-form-row col-sm-12 row">
         <div className="col-sm-9 mb-no-padding">
-          <label className="col-sm-1">Filter</label>
+          <label className="col-sm-1">Bars</label>
           <div className="mb-form-group col-sm-5 mb-oxygen">
             <FancySelect
               className="mb-input-sm"
@@ -41,7 +41,7 @@ Controls = React.createClass
             />
           </div>
         </div>
-        <div className="col-sm-2 col-md-3 mb-no-padding">
+        <div className="col-sm-3 mb-no-padding">
           <button 
             className="btn btn-sm btn-primary mb-oxygen"
             onClick={ =>
@@ -81,7 +81,7 @@ Controls = React.createClass
                 onClick={ @props.onAddOutline }
               >
                 <span className={ "glyphicon glyphicon-plus" }/>
-                { if @props.outlineFilter is no then " " + "Outline" else '' }
+                { if @props.outlineFilter is no then " " + "Line" else '' }
               </button>
           }
         <img src="./images/mb_ajax_loader.gif" 

@@ -3,7 +3,7 @@ var Bars, Pyramid, PyramidComponent, Table, TableComponent, addFilter, connect, 
 
 connect = require('react-redux').connect;
 
-ref = require('../actions/demographics-actions.js'), mouseOver = ref.mouseOver, toggleCategory = ref.toggleCategory, addFilter = ref.addFilter, toggleOutlineCategory = ref.toggleOutlineCategory, toggleValue = ref.toggleValue, removeFilter = ref.removeFilter, toggleOutlineValue = ref.toggleOutlineValue, requestPyramidData = ref.requestPyramidData, fetchPyramidData = ref.fetchPyramidData;
+ref = require('../actions/demographics/pyramid-actions.js'), mouseOver = ref.mouseOver, toggleCategory = ref.toggleCategory, addFilter = ref.addFilter, toggleOutlineCategory = ref.toggleOutlineCategory, toggleValue = ref.toggleValue, removeFilter = ref.removeFilter, toggleOutlineValue = ref.toggleOutlineValue, requestPyramidData = ref.requestPyramidData, fetchPyramidData = ref.fetchPyramidData;
 
 PyramidComponent = require('../../ui/demographics/pyramid-component.js');
 
@@ -23,7 +23,8 @@ mapStateToProps = function(state) {
     _outlineValue: state.pyramidChart._outlineValue,
     error: state.pyramidChart.error,
     updatePyramid: state.pyramidChart.updatePyramid,
-    isDefault: state.pyramidChart.isDefault
+    isDefault: state.pyramidChart.isDefault,
+    updateOutline: state.pyramidChart.updateOutline
   };
 };
 
@@ -88,3 +89,5 @@ module.exports = {
   Table: Table,
   Bars: Bars
 };
+
+//# sourceMappingURL=containers.map

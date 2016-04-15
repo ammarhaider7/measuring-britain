@@ -3,7 +3,7 @@ var Bars, Provider, Pyramid, React, ReactDOM, ReduxThunk, Table, applyMiddleware
 
 ref = require('redux'), createStore = ref.createStore, applyMiddleware = ref.applyMiddleware;
 
-ref1 = require('./actions/demographics-actions.js'), requestPyramidData = ref1.requestPyramidData, fetchPyramidData = ref1.fetchPyramidData, mouseOver = ref1.mouseOver;
+ref1 = require('./actions/demographics/pyramid-actions.js'), requestPyramidData = ref1.requestPyramidData, fetchPyramidData = ref1.fetchPyramidData, mouseOver = ref1.mouseOver;
 
 Provider = require('react-redux').Provider;
 
@@ -37,3 +37,5 @@ renderPyramid = function() {
 };
 
 module.exports = renderPyramid;
+
+//# sourceMappingURL=index.map

@@ -3,9 +3,9 @@ FancySelect = require 'react-select'
 
 Filter = React.createClass
 	render: ->
-		<div className="col-sm-12 row mt-small">
+		<div className="mb-form-row col-sm-12 row mt-small">
 			<div className="col-sm-9 mb-no-padding">
-				<label className="col-sm-1">Outline</label>
+				<label className="col-sm-1">Line</label>
 		        <div className="mb-form-group col-sm-5 mb-oxygen">
 		          <FancySelect
 		            className="mb-input-sm"
@@ -38,7 +38,7 @@ Filter = React.createClass
 		          />
 		        </div>
 		    </div>
-	        <div className="col-sm-2 col-md-3 mb-no-padding">
+	        <div className="col-sm-3 mb-no-padding">
 	          { do =>
 	            if @props.chartName is 'pyramid'
 	              <button 

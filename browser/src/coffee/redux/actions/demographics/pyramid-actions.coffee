@@ -1,5 +1,5 @@
-pyramidService = require '../../services/nomis/pyramid-service.js'
-pyramidDataParser = require '../../services/nomis/pyramid-parser.js'
+pyramidService = require '../../../services/nomis/demographics/pyramid-service.js'
+pyramidDataParser = require '../../../services/nomis/demographics/pyramid-parser.js'
 
 REQUEST_PYRAMID_DATA = "REQUEST_PYRAMID_DATA"
 RECEIVE_PYRAMID_DATA_BARS = "RECEIVE_PYRAMID_DATA_BARS"
@@ -160,6 +160,7 @@ fetchPyramidData = (filterOptions) ->
 
 
 module.exports = {
+
 	RECEIVE_PYRAMID_DATA_BARS
 	RECEIVE_PYRAMID_DATA_OUTLINE
 	ERROR_RECEIVE_PYRAMID_DATA_OUTLINE
@@ -187,4 +188,5 @@ module.exports = {
 	toggleOutlineValue
 	errorReceivingPyramidDataOutline
 	errorReceivingPyramidDataBars
+	
 }

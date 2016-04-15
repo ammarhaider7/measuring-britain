@@ -3,7 +3,7 @@ var ADD_FILTER, ERROR_RECEIVE_PYRAMID_DATA_BARS, ERROR_RECEIVE_PYRAMID_DATA_OUTL
 
 objectAssign = require('object-assign');
 
-ref = require('../actions/demographics-actions.js'), FILTER_USED = ref.FILTER_USED, RECEIVE_PYRAMID_DATA_BARS = ref.RECEIVE_PYRAMID_DATA_BARS, ERROR_RECEIVE_PYRAMID_DATA_BARS = ref.ERROR_RECEIVE_PYRAMID_DATA_BARS, ERROR_RECEIVE_PYRAMID_DATA_OUTLINE = ref.ERROR_RECEIVE_PYRAMID_DATA_OUTLINE, RECEIVE_PYRAMID_DATA_OUTLINE = ref.RECEIVE_PYRAMID_DATA_OUTLINE, REQUEST_PYRAMID_DATA = ref.REQUEST_PYRAMID_DATA, TOGGLE_CATEGORY = ref.TOGGLE_CATEGORY, TOGGLE_VALUE = ref.TOGGLE_VALUE, MOUSE_OVER = ref.MOUSE_OVER, ADD_FILTER = ref.ADD_FILTER, REMOVE_FILTER = ref.REMOVE_FILTER, TOGGLE_OUTLINE_CATEGORY = ref.TOGGLE_OUTLINE_CATEGORY, TOGGLE_OUTLINE_VALUE = ref.TOGGLE_OUTLINE_VALUE;
+ref = require('../../actions/demographics/pyramid-actions.js'), FILTER_USED = ref.FILTER_USED, RECEIVE_PYRAMID_DATA_BARS = ref.RECEIVE_PYRAMID_DATA_BARS, ERROR_RECEIVE_PYRAMID_DATA_BARS = ref.ERROR_RECEIVE_PYRAMID_DATA_BARS, ERROR_RECEIVE_PYRAMID_DATA_OUTLINE = ref.ERROR_RECEIVE_PYRAMID_DATA_OUTLINE, RECEIVE_PYRAMID_DATA_OUTLINE = ref.RECEIVE_PYRAMID_DATA_OUTLINE, REQUEST_PYRAMID_DATA = ref.REQUEST_PYRAMID_DATA, TOGGLE_CATEGORY = ref.TOGGLE_CATEGORY, TOGGLE_VALUE = ref.TOGGLE_VALUE, MOUSE_OVER = ref.MOUSE_OVER, ADD_FILTER = ref.ADD_FILTER, REMOVE_FILTER = ref.REMOVE_FILTER, TOGGLE_OUTLINE_CATEGORY = ref.TOGGLE_OUTLINE_CATEGORY, TOGGLE_OUTLINE_VALUE = ref.TOGGLE_OUTLINE_VALUE;
 
 pyramidInitialState = {
   chartName: 'pyramid',
@@ -35,7 +35,8 @@ pyramidInitialState = {
   },
   error: false,
   updateBars: false,
-  updatePyramid: false
+  updatePyramid: false,
+  updateOutline: false
 };
 
 pyramidChart = function(state, action) {
@@ -47,25 +48,29 @@ pyramidChart = function(state, action) {
       return objectAssign({}, state, {
         _barsCategory: action.selectionOption,
         updatePyramid: false,
-        updateBars: false
+        updateBars: false,
+        updateOutline: false
       });
     case TOGGLE_VALUE:
       return objectAssign({}, state, {
         _barsValue: action.selectionOption,
         updatePyramid: false,
-        updateBars: false
+        updateBars: false,
+        updateOutline: false
       });
     case FILTER_USED:
       return objectAssign({}, state, {
         isDefault: false,
         updatePyramid: false,
-        updateBars: false
+        updateBars: false,
+        updateOutline: false
       });
     case REQUEST_PYRAMID_DATA:
       return objectAssign({}, state, {
         isFetching: true,
         updatePyramid: false,
-        updateBars: false
+        updateBars: false,
+        updateOutline: false
       });
     case RECEIVE_PYRAMID_DATA_BARS:
       return objectAssign({}, state, {
@@ -77,6 +82,7 @@ pyramidChart = function(state, action) {
         lastUpdated: action.receivedAt,
         updatePyramid: true,
         updateBars: true,
+        updateOutline: false,
         activeBarsValue: state._barsValue.label,
         activeBarsCategory: state._barsCategory.label
       });
@@ -88,7 +94,7 @@ pyramidChart = function(state, action) {
           bars: state.data.bars
         },
         lastUpdated: action.receivedAt,
-        updatePyramid: true
+        updateOutline: true
       });
     case ERROR_RECEIVE_PYRAMID_DATA_BARS:
       return objectAssign({}, state, {
@@ -96,7 +102,8 @@ pyramidChart = function(state, action) {
         error: true,
         errorMessage: action.barsError,
         updatePyramid: false,
-        updateBars: false
+        updateBars: false,
+        updateOutline: false
       });
     case ERROR_RECEIVE_PYRAMID_DATA_OUTLINE:
       return objectAssign({}, state, {
@@ -104,36 +111,42 @@ pyramidChart = function(state, action) {
         error: true,
         errorMessage: action.outlineError,
         updatePyramid: false,
-        updateBars: false
+        updateBars: false,
+        updateOutline: false
       });
     case MOUSE_OVER:
       return objectAssign({}, state, {
         _mouseOverData: action.mouseOverData,
-        updateBars: true
+        updateBars: true,
+        updateOutline: false
       });
     case ADD_FILTER:
       return objectAssign({}, state, {
         outlineFilter: true,
         updatePyramid: false,
-        updateBars: false
+        updateBars: false,
+        updateOutline: false
       });
     case REMOVE_FILTER:
       return objectAssign({}, state, {
         outlineFilter: false,
         updatePyramid: false,
-        updateBars: false
+        updateBars: false,
+        updateOutline: false
       });
     case TOGGLE_OUTLINE_CATEGORY:
       return objectAssign({}, state, {
         _outlineCategory: action.selectionOption,
         updatePyramid: false,
-        updateBars: false
+        updateBars: false,
+        updateOutline: false
       });
     case TOGGLE_OUTLINE_VALUE:
       return objectAssign({}, state, {
         _outlineValue: action.selectionOption,
         updatePyramid: false,
-        updateBars: false
+        updateBars: false,
+        updateOutline: false
       });
     default:
       return state;
@@ -141,3 +154,5 @@ pyramidChart = function(state, action) {
 };
 
 module.exports = pyramidChart;
+
+//# sourceMappingURL=pyramid-reducers.map
