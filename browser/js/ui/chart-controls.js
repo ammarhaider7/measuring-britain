@@ -126,5 +126,3 @@ Controls = React.createClass({displayName: "Controls",
 });
 
 module.exports = Controls;
-
-//# sourceMappingURL=chart-controls.map

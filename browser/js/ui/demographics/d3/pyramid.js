@@ -247,7 +247,7 @@ drawPyramid = function(options) {
       d: malesLine(outline_males_perc.concat([outline_males_perc[outline_males_perc.length - 1]])),
       opacity: 1
     });
-    return femalesChartLine = leftGroup.append('path').attr('opacity', 0).transition().duration(500).attr({
+    femalesChartLine = leftGroup.append('path').attr('opacity', 0).transition().duration(500).attr({
       "class": 'females-outline',
       d: femalesLine(outline_females_perc.concat([outline_females_perc[outline_females_perc.length - 1]])),
       opacity: 1
@@ -278,5 +278,3 @@ drawPyramid = function(options) {
 };
 
 module.exports = drawPyramid;
-
-//# sourceMappingURL=pyramid.map

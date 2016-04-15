@@ -384,6 +384,8 @@ drawPyramid = (options) ->
 				opacity: 1
 			}
 
+		return
+
 	removeOutline = ->
 		# Remove any existing outlines
 		maleOutline = d3.selectAll '.males-outline'
