@@ -5983,6 +5983,7 @@ path:first-child {
 
 .mb-form {
   background-color: #F3F3F3;
+  border: 1px solid #E6E6E6;
   border-radius: 6px;
   padding-bottom: 15px;
   padding-top: 15px; }
@@ -6074,7 +6075,8 @@ path:first-child {
 
 .mb-grey-box {
   background-color: #F3F3F3;
-  border-radius: 5px; }
+  border-radius: 5px;
+  border: 1px solid #E6E6E6; }
 
 .pyramid-bars-svg .bar.female {
   fill: #ff9896; }

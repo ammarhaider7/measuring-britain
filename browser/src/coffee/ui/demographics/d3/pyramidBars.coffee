@@ -86,7 +86,6 @@ drawPyrBars = (options) ->
 		  			if d.sex is 'female' then 'bar female' else 'bar male'
 		  		x: (d) ->
 		  			x d.sex
-		  		opacity: 0
 		  		y: y 0
 		  		height: bars_height - y 0
 		  		ry: 3
@@ -99,7 +98,6 @@ drawPyrBars = (options) ->
 		  			return y d.value
 		  		height: (d) ->
 		  			return bars_height - y d.value
-		  		opacity: 1
 		  	}
 
 		# Age label

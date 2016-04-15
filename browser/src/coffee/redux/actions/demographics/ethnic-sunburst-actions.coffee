@@ -1,5 +1,5 @@
-sunBurstService = require '../../services/nomis/demographics/ethnic-sunburst-service.js'
-sunburstDataParser = require '../../services/nomis/demographics/ethnic-sunburst-parser.js'
+sunBurstService = require '../../../services/nomis/demographics/ethnic-sunburst-service.js'
+sunburstDataParser = require '../../../services/nomis/demographics/ethnic-sunburst-parser.js'
 
 REQUEST_ETHNIC_DATA = "REQUEST_ETHNIC_DATA"
 RECEIVE_ETHNIC_DATA = "RECEIVE_ETHNIC_DATA"
@@ -58,7 +58,7 @@ errorReceivingeEthnicData = (error) ->
 # Though its insides are different, you would use it just like any other action creator:
 # store.dispatch(fetchPosts('reactjs'))
 
-# fetchPyramidData = (filterOptions) ->
+fetchSunburstData = (filterOptions) ->
 
 	# Thunk middleware knows how to handle functions.
 	# It passes the dispatch method as an argument to the function,
@@ -80,5 +80,19 @@ errorReceivingeEthnicData = (error) ->
 		# 		return
 
 module.exports = {
+
+	REQUEST_ETHNIC_DATA
+	RECEIVE_ETHNIC_DATA
+	TOGGLE_CATEGORY
+	MOUSE_OVER
+	TOGGLE_VALUE
+	ERROR_RECEIVE_ETHNIC_DATA
+	FILTER_USED
+	requestEthnicData
+	receiveEthnicData
+	toggleCategory
+	toggleValue
+	errorReceivingeEthnicData
+	filterUsed
 	
 }
