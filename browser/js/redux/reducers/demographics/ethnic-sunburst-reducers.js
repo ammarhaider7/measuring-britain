@@ -51,3 +51,5 @@ sunburstChart = function(state, action) {
 };
 
 module.exports = sunburstChart;
+
+//# sourceMappingURL=ethnic-sunburst-reducers.map

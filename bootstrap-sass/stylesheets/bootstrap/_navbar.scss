@@ -396,15 +396,15 @@
 // Default navbar
 .navbar-default {
   // background-color: $navbar-default-bg;
-  background-color: #4285C3;
+  background-color: #FFFFFF;
   border-color: $navbar-default-border;
 
   .navbar-brand {
-    color: #FFF;
+    color: #333;
     &:hover,
     &:focus {
       // color: $navbar-default-brand-hover-color;
-      color: #FFF;
+      color: #333;
       background-color: $navbar-default-brand-hover-bg;
     }
   }
@@ -415,11 +415,12 @@
 
   .navbar-nav {
     > li > a {
-      color: #FFF;
+      color: #333;
+      font-weight: bold;
       &:hover,
       &:focus {
         // color: #FFF;
-        background-color: #5CA0DE;
+        background-color: #E4E4E4;
       }
     }
     > .active > a {
@@ -432,7 +433,7 @@
     }
     > .disabled > a {
       &,
-      &:hover,
+       &:hover,
       &:focus {
         color: $navbar-default-link-disabled-color;
         background-color: $navbar-default-link-disabled-bg;

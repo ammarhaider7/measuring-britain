@@ -29,9 +29,10 @@ unsubscribe = store.subscribe ->
 # store.dispatch mouseOver { chart: 'MOUSEOVER_TOGGLED_CHART', segment: 'MOUSEOVER_TOGGLED_SEGMENT' }
 # unsubscribe()
 
-renderPyramid = ->
+render = ->
 	ReactDOM.render <Provider store={store}><Pyramid/></Provider>, document.getElementById 'pyramid-container'
 	ReactDOM.render <Provider store={store}><Table/></Provider>, document.getElementById 'pyramid-table'
 	ReactDOM.render <Provider store={store}><Bars/></Provider>, document.getElementById 'pyramid-bars'
+	ReactDOM.render <Provider store={store}><Sunburst/></Provider>, document.getElementById 'sunburst-component'
 
-module.exports = renderPyramid
+module.exports = render
