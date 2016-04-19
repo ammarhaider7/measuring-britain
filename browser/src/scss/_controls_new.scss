@@ -1,0 +1,19 @@
+.controls-container {
+	border-top: 2px solid #777474;
+    border-bottom: 2px solid #777474;
+    background-color: #FCFCFA;
+    .glyphicon {
+		margin-top: 10px;
+	    margin-bottom: 10px;
+    }
+	.mb-controls-border-bottom {
+		border-bottom: 1px solid #333;
+	}
+	.mb-control-value {
+		margin-top: 10px;
+	    margin-bottom: 10px;
+		font-weight: 500;
+	    line-height: 1.1;
+	    font-size: 18px;
+	}
+}

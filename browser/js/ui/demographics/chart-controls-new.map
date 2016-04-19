@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "file": "chart-controls-new.js",
+  "sourceRoot": "..\\..\\..\\..",
+  "sources": [
+    "browser\\src\\coffee\\ui\\demographics\\chart-controls-new.cjsx"
+  ],
+  "names": [],
+  "mappings": ""
+}

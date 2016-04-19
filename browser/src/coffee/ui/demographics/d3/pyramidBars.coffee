@@ -49,7 +49,7 @@ drawPyrBars = (options) ->
 		return d.value
 	]
 
-	category_value = if activeBarsValue is 'default' then 'England & Wales' else activeBarsValue
+	category_value = if activeBarsValue is 'default' then 'England \& Wales' else activeBarsValue
 
 	my = ->
 

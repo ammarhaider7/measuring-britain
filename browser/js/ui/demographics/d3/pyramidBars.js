@@ -37,7 +37,7 @@ drawPyrBars = function(options) {
       return d.value;
     })
   ]);
-  category_value = activeBarsValue === 'default' ? 'England & Wales' : activeBarsValue;
+  category_value = activeBarsValue === 'default' ? 'England \& Wales' : activeBarsValue;
   my = function() {
     if (initial === true && isDefault === true) {
       return init();

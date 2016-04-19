@@ -3952,8 +3952,7 @@ tbody.collapse.in {
   .navbar-default .navbar-text {
     color: #777; }
   .navbar-default .navbar-nav > li > a {
-    color: #333;
-    font-weight: bold; }
+    color: #333; }
     .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
       background-color: #E4E4E4; }
   .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
@@ -6117,3 +6116,19 @@ path:first-child {
   fill: none;
   stroke: #ff504d;
   stroke-width: 1.5px; }
+
+.controls-container {
+  border-top: 2px solid #777474;
+  border-bottom: 2px solid #777474;
+  background-color: #FCFCFA; }
+  .controls-container .glyphicon {
+    margin-top: 10px;
+    margin-bottom: 10px; }
+  .controls-container .mb-controls-border-bottom {
+    border-bottom: 1px solid #333; }
+  .controls-container .mb-control-value {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-weight: 500;
+    line-height: 1.1;
+    font-size: 18px; }

@@ -9,18 +9,16 @@ SunburstComponent = require('../../../ui/demographics/ethnic-sunburst-component.
 
 mapStateToProps = function(state) {
   return {
-    chartName: state.pyramidChart.chartName,
-    _barsCategory: state.pyramidChart._barsCategory,
-    _barsValue: state.pyramidChart._barsValue,
-    data: state.pyramidChart.data,
-    isFetching: state.pyramidChart.isFetching,
-    outlineFilter: state.pyramidChart.outlineFilter,
-    _outlineCategory: state.pyramidChart._outlineCategory,
-    _outlineValue: state.pyramidChart._outlineValue,
-    error: state.pyramidChart.error,
-    updatePyramid: state.pyramidChart.updatePyramid,
-    isDefault: state.pyramidChart.isDefault,
-    updateOutline: state.pyramidChart.updateOutline
+    chartName: state.ethnicSunburst.chartName,
+    _category: state.ethnicSunburst._category,
+    _value: state.ethnicSunburst._value,
+    data: state.ethnicSunburst.data,
+    isFetching: state.ethnicSunburst.isFetching,
+    activeCategory: state.ethnicSunburst.activeCategory,
+    activeValue: state.ethnicSunburst.activeValue,
+    error: state.ethnicSunburst.error,
+    updateSunburst: state.ethnicSunburst.updateSunburst,
+    isDefault: state.ethnicSunburst.isDefault
   };
 };
 
