@@ -3,11 +3,13 @@ sunburstDataParser = require '../../../services/nomis/demographics/ethnic-sunbur
 
 REQUEST_ETHNIC_DATA = "REQUEST_ETHNIC_DATA"
 RECEIVE_ETHNIC_DATA = "RECEIVE_ETHNIC_DATA"
-TOGGLE_CATEGORY = "TOGGLE_CATEGORY"
-MOUSE_OVER = "MOUSE_OVER"
-TOGGLE_VALUE = "TOGGLE_VALUE"
+TOGGLE_CATEGORY = "S_TOGGLE_CATEGORY"
+MOUSE_OVER = "S_MOUSE_OVER"
+TOGGLE_VALUE = "S_TOGGLE_VALUE"
 ERROR_RECEIVE_ETHNIC_DATA = "ERROR_RECEIVE_ETHNIC_DATA"
-FILTER_USED = "FILTER_USED"
+FILTER_USED = "S_FILTER_USED"
+CONTROLS_OPENED = "S_CONTROLS_OPENED"
+CONTROLS_CLOSED = "S_CONTROLS_CLOSED"
 
 toggleValue = (value, selectionOption) ->
 	{
@@ -21,6 +23,18 @@ toggleCategory = (category, selectionOption) ->
 		type: TOGGLE_CATEGORY
 		category
 		selectionOption
+	}
+
+controlsOpened = () ->
+	{
+		type: CONTROLS_OPENED
+		isControlsOpen: yes
+	}
+
+controlsClosed = () ->
+	{
+		type: CONTROLS_CLOSED
+		isControlsOpen: no
 	}
 	
 mouseOver = (mouseOverData) ->
@@ -88,11 +102,15 @@ module.exports = {
 	TOGGLE_VALUE
 	ERROR_RECEIVE_ETHNIC_DATA
 	FILTER_USED
+	CONTROLS_OPENED
+	CONTROLS_CLOSED
 	requestEthnicData
 	receiveEthnicData
 	toggleCategory
 	toggleValue
 	errorReceivingeEthnicData
 	filterUsed
-	
+	controlsOpened
+	controlsClosed
+
 }

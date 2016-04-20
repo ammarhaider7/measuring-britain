@@ -3,7 +3,9 @@
   toggleCategory
   toggleValue
   requestSunburstData
-  fetchSunburstData } = require '../../actions/demographics/ethnic-sunburst-actions.js'
+  fetchSunburstData
+  controlsOpened
+  controlsClosed } = require '../../actions/demographics/ethnic-sunburst-actions.js'
 
 SunburstComponent = require '../../../ui/demographics/ethnic-sunburst-component.js'
 # TableComponent = require '../../../ui/demographics/pyramid-table.js'
@@ -20,6 +22,7 @@ mapStateToProps = (state) ->
 	error: state.ethnicSunburst.error
 	updateSunburst: state.ethnicSunburst.updateSunburst
 	isDefault: state.ethnicSunburst.isDefault
+	isControlsOpen: state.ethnicSunburst.isControlsOpen
 
 # mapStateToPropsPyrTable = (state) ->
 
@@ -31,17 +34,21 @@ mapStateToProps = (state) ->
 
 mapDispatchToProps = (dispatch) ->
 
-	onCategoryChange: (category, selectedOption) ->
-		dispatch toggleCategory category, selectedOption[0]
-	onValueChange: (value, selectedOption) ->
-		dispatch toggleValue value, selectedOption[0]
+	onCategoryChange: (category) ->
+		dispatch toggleCategory category
+	onValueChange: (value) ->
+		dispatch toggleValue value
+	onControlsOpen: () ->
+		dispatch controlsOpened()
+	onControlsClosed: () ->
+		dispatch controlsClosed()
 	fetchSunburstData: (filterOptions) ->
 		dispatch fetchSunburstData filterOptions
 	onMouseOver: (mouseOverData) ->
 		dispatch mouseOver mouseOverData
 
 Sunburst = connect(
-	mapStateToProps, 
+	mapStateToProps,
 	mapDispatchToProps
 )(SunburstComponent)
 

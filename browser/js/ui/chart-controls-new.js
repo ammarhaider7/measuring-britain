@@ -6,16 +6,32 @@ React = require('react');
 d3 = require('d3');
 
 ControlsNew = React.createClass({displayName: "ControlsNew",
+  onCategoryChange: function(el) {
+    var catLabel, catVal;
+    catVal = el.target.getAttribute('data-value');
+    catLabel = el.target.innerHTML;
+    return this.props.onCategoryChange({
+      value: catVal,
+      label: catLabel
+    });
+  },
   onControlsOpen: function() {
     var $controlsContainer, isClosed, isOpen;
     $controlsContainer = d3.select(this.refs.controlsContainer);
     isOpen = $controlsContainer.classed('open');
     isClosed = $controlsContainer.classed('closed');
+    if (isOpen) {
+      this.props.onControlsClosed();
+    }
+    if (isClosed) {
+      this.props.onControlsOpen();
+    }
     return $controlsContainer.classed('open', !isOpen).classed('closed', !isClosed);
   },
   render: function() {
+    var category, i, value;
     return React.createElement("div", {
-      "className": "controls-container clearfix closed",
+      "className": "controls-container clearfix closed mb-oxygen",
       "ref": "controlsContainer"
     }, React.createElement("a", {
       "onClick": this.onControlsOpen,
@@ -29,30 +45,59 @@ ControlsNew = React.createClass({displayName: "ControlsNew",
     }, this.props.activeCategory), React.createElement("span", {
       "className": "col-sm-5 text-center mb-control-value"
     }, this.props.activeValue), React.createElement("span", {
-      "className": "glyphicon glyphicon-chevron-down mt-medium"
+      "className": (this.props.isControlsOpen === true ? "glyphicon glyphicon-chevron-up mt-medium" : "glyphicon glyphicon-chevron-down mt-medium")
     })), React.createElement("div", {
-      "className": "collapse col-sm-12",
+      "className": "collapse col-sm-12 mb-collapse",
       "id": "collapseOne"
-    }, React.createElement("div", null, React.createElement("div", {
-      "className": "form-group mt-medium"
     }, React.createElement("div", {
+      "className": "container col-sm-12"
+    }, React.createElement("div", {
+      "className": "form-group mt-medium row"
+    }, React.createElement("label", {
+      "className": "pr-medium"
+    }, "Filter by"), React.createElement("div", {
       "className": "btn-group"
-    }, React.createElement("button", {
-      "type": "button",
-      "className": "btn btn-default"
-    }, "Left"), React.createElement("button", {
-      "type": "button",
-      "className": "btn btn-default"
-    }, "Middle"), React.createElement("button", {
-      "type": "button",
-      "className": "btn btn-default"
-    }, "Middle"), React.createElement("button", {
-      "type": "button",
-      "className": "btn btn-default"
-    }, "Middle"), React.createElement("button", {
-      "type": "button",
-      "className": "btn btn-default"
-    }, "Right"))))));
+    }, (function() {
+      var j, len, ref, results;
+      ref = this.props.categories;
+      results = [];
+      for (i = j = 0, len = ref.length; j < len; i = ++j) {
+        category = ref[i];
+        if (category.value !== 'ethnicities') {
+          results.push(React.createElement("button", {
+            "key": i,
+            "type": "button",
+            "className": (this.props._category.value === category.value ? "btn btn-default active" : "btn btn-default"),
+            "onClick": this.onCategoryChange,
+            "data-value": category.value
+          }, category.label));
+        } else {
+          results.push(void 0);
+        }
+      }
+      return results;
+    }).call(this))), React.createElement("div", {
+      "className": "form-group row"
+    }, React.createElement("ul", {
+      "className": "nav nav-pills"
+    }, ((function() {
+      var j, len, ref, results;
+      if (this.props._category.value !== 'default') {
+        ref = this.props.values[this.props._category.value];
+        results = [];
+        for (i = j = 0, len = ref.length; j < len; i = ++j) {
+          value = ref[i];
+          results.push(React.createElement("li", {
+            "role": "presentation",
+            "key": i,
+            "data-value": value.value
+          }, React.createElement("a", {
+            "href": "#"
+          }, value.label)));
+        }
+        return results;
+      }
+    }).call(this)))))));
   }
 });
 

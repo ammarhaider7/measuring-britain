@@ -6,12 +6,15 @@ objectAssign = require 'object-assign'
   MOUSE_OVER
   TOGGLE_VALUE
   ERROR_RECEIVE_ETHNIC_DATA
-  FILTER_USED } = require '../../actions/demographics/ethnic-sunburst-actions.js'
+  FILTER_USED
+  CONTROLS_OPENED
+  CONTROLS_CLOSED } = require '../../actions/demographics/ethnic-sunburst-actions.js'
 
 sunburstInitialState = {
   chartName: 'sunburst'
   isFetching: no
   isDefault: yes
+  isControlsOpen: no
   _category:
     value: 'default'
     label: 'default'
@@ -30,16 +33,19 @@ sunburstInitialState = {
 sunburstChart = (state = sunburstInitialState, action) ->
   switch action.type
     when TOGGLE_CATEGORY then objectAssign {}, state, {
-      # _barsCategory: action.selectionOption
-      # updatePyramid: no
-      # updateBars: no
-      # updateOutline: no
+      _category: action.category
     }
     when TOGGLE_VALUE then objectAssign {}, state, {
       # _barsValue: action.selectionOption
       # updatePyramid: no
       # updateBars: no
       # updateOutline: no
+    }
+    when CONTROLS_OPENED then objectAssign {}, state, {
+      isControlsOpen: yes
+    }
+    when CONTROLS_CLOSED then objectAssign {}, state, {
+      isControlsOpen: no
     }
     when FILTER_USED then objectAssign {}, state, {
       # isDefault: no

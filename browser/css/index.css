@@ -5945,10 +5945,10 @@ path:first-child {
   height: 700px;
   z-index: 0; }
 
-.mb-roboto, .mb-nav-brand-font {
+.mb-roboto {
   font-family: 'Roboto', sans-serif; }
 
-.mb-roboto-strong, .mb-page-header h1 {
+.mb-roboto-strong, .mb-nav-brand-font, .mb-page-header h1 {
   font-family: 'Roboto', sans-serif;
   font-weight: 700; }
 
@@ -6116,8 +6116,7 @@ path:first-child {
   stroke-width: 1.5px; }
 
 .controls-container {
-  border-top: 2px solid #777474;
-  border-bottom: 2px solid #777474;
+  border-bottom: 1px solid #333;
   -webkit-transition: background 0.5s linear;
   -moz-transition: background 0.5s linear;
   -ms-transition: background 0.5s linear;
@@ -6133,7 +6132,12 @@ path:first-child {
     margin-bottom: 10px;
     font-weight: 500;
     line-height: 1.1;
-    font-size: 18px; }
+    font-size: 18px;
+    color: #333; }
+    .controls-container .mb-control-value:hover {
+      text-decoration: underline; }
+  .controls-container .mb-collapse {
+    border-top: 1px solid #333; }
 
 .controls-container.open {
   background-color: #E4E4E4; }

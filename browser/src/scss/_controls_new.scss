@@ -1,6 +1,6 @@
 .controls-container {
-	border-top: 2px solid #777474;
-    border-bottom: 2px solid #777474;
+	// border-top: 2px solid #E6E6E6;
+    border-bottom: 1px solid #333;
     // Background transition
     -webkit-transition: background 0.5s linear;
     -moz-transition: background 0.5s linear;
@@ -20,6 +20,13 @@
 		font-weight: 500;
 	    line-height: 1.1;
 	    font-size: 18px;
+	    color: #333;
+	    &:hover {
+	    	text-decoration: underline;
+	    }
+	}
+	.mb-collapse {	
+    	border-top: 1px solid #333;
 	}
 }
 .controls-container.open { 
