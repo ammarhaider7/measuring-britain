@@ -1,7 +1,12 @@
 .controls-container {
 	border-top: 2px solid #777474;
     border-bottom: 2px solid #777474;
-    background-color: #FCFCFA;
+    // Background transition
+    -webkit-transition: background 0.5s linear;
+    -moz-transition: background 0.5s linear;
+    -ms-transition: background 0.5s linear;
+    -o-transition: background 0.5s linear;
+    transition: background 0.5s linear;
     .glyphicon {
 		margin-top: 10px;
 	    margin-bottom: 10px;
@@ -16,4 +21,7 @@
 	    line-height: 1.1;
 	    font-size: 18px;
 	}
+}
+.controls-container.open { 
+	background-color: #E4E4E4;
 }

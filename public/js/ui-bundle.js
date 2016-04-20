@@ -3510,13 +3510,15 @@ d3 = require('d3');
 
 ControlsNew = React.createClass({displayName: "ControlsNew",
   onControlsOpen: function() {
-    var $controlsContainer;
+    var $controlsContainer, isClosed, isOpen;
     $controlsContainer = d3.select(this.refs.controlsContainer);
-    return $controlsContainer.transition().duration(500).style('background-color', '#F3F3F3');
+    isOpen = $controlsContainer.classed('open');
+    isClosed = $controlsContainer.classed('closed');
+    return $controlsContainer.classed('open', !isOpen).classed('closed', !isClosed);
   },
   render: function() {
     return React.createElement("div", {
-      "className": "controls-container clearfix",
+      "className": "controls-container clearfix closed",
       "ref": "controlsContainer"
     }, React.createElement("a", {
       "onClick": this.onControlsOpen,

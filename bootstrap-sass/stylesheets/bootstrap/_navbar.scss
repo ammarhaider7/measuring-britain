@@ -11,7 +11,7 @@
 .navbar {
   position: relative;
   min-height: $navbar-height; // Ensure a navbar always shows (e.g., without a .navbar-brand in collapsed mode)
-  margin-bottom: $navbar-margin-bottom;
+  // margin-bottom: $navbar-margin-bottom;
   border: 1px solid transparent;
 
   // Prevent floats from breaking the navbar
@@ -420,15 +420,17 @@
       &:hover,
       &:focus {
         // color: #FFF;
-        background-color: #E4E4E4;
+        // background-color: #E4E4E4;
+        border-bottom: 3px solid #DA4A70;
       }
     }
     > .active > a {
       &,
       &:hover,
       &:focus {
-        color: #FFF;
-        background-color: #DA4A70;
+        color: #DA4A70;
+        border-bottom: 3px solid #DA4A70;
+        font-weight: bold;
       }
     }
     > .disabled > a {

@@ -3,13 +3,16 @@ d3 = require 'd3'
 
 ControlsNew = React.createClass
   onControlsOpen: ->
+
     $controlsContainer = d3.select @refs.controlsContainer
+    isOpen = $controlsContainer.classed 'open'
+    isClosed = $controlsContainer.classed 'closed'
     $controlsContainer
-      .transition()
-      .duration 500 
-      .style 'background-color', '#F3F3F3'
+      .classed 'open', not isOpen
+      .classed 'closed', not isClosed
+
   render: -> 
-    <div className="controls-container clearfix" ref="controlsContainer"> 
+    <div className="controls-container clearfix closed" ref="controlsContainer"> 
       <a 
         onClick={ @onControlsOpen }
         role="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne"

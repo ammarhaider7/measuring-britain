@@ -3558,8 +3558,7 @@ tbody.collapse.in {
       padding: 10px 15px; }
       .nav > li > a:hover, .nav > li > a:focus {
         color: #296298;
-        text-decoration: none;
-        background-color: #EEE; }
+        text-decoration: none; }
     .nav > li.disabled > a {
       color: #777777; }
       .nav > li.disabled > a:hover, .nav > li.disabled > a:focus {
@@ -3663,7 +3662,6 @@ tbody.collapse.in {
 .navbar {
   position: relative;
   min-height: 30px;
-  margin-bottom: 20px;
   border: 1px solid transparent; }
   .navbar:before, .navbar:after {
     content: " ";
@@ -3954,10 +3952,11 @@ tbody.collapse.in {
   .navbar-default .navbar-nav > li > a {
     color: #333; }
     .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
-      background-color: #E4E4E4; }
+      border-bottom: 3px solid #DA4A70; }
   .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
-    color: #FFF;
-    background-color: #DA4A70; }
+    color: #DA4A70;
+    border-bottom: 3px solid #DA4A70;
+    font-weight: bold; }
   .navbar-default .navbar-nav > .disabled > a, .navbar-default .navbar-nav > .disabled > a:hover, .navbar-default .navbar-nav > .disabled > a:focus {
     color: #ccc;
     background-color: transparent; }
@@ -6045,7 +6044,6 @@ path:first-child {
 
 .mb-page-header {
   margin-bottom: 20px;
-  margin-top: 30px;
   background-color: #519DD2;
   color: #fff; }
   .mb-page-header h1 {
@@ -6120,7 +6118,11 @@ path:first-child {
 .controls-container {
   border-top: 2px solid #777474;
   border-bottom: 2px solid #777474;
-  background-color: #FCFCFA; }
+  -webkit-transition: background 0.5s linear;
+  -moz-transition: background 0.5s linear;
+  -ms-transition: background 0.5s linear;
+  -o-transition: background 0.5s linear;
+  transition: background 0.5s linear; }
   .controls-container .glyphicon {
     margin-top: 10px;
     margin-bottom: 10px; }
@@ -6132,3 +6134,6 @@ path:first-child {
     font-weight: 500;
     line-height: 1.1;
     font-size: 18px; }
+
+.controls-container.open {
+  background-color: #E4E4E4; }
