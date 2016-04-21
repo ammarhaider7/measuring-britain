@@ -8,7 +8,8 @@ objectAssign = require 'object-assign'
   ERROR_RECEIVE_ETHNIC_DATA
   FILTER_USED
   CONTROLS_OPENED
-  CONTROLS_CLOSED } = require '../../actions/demographics/ethnic-sunburst-actions.js'
+  CONTROLS_CLOSED
+  DISTRICT_SEARCH } = require '../../actions/demographics/ethnic-sunburst-actions.js'
 
 sunburstInitialState = {
   chartName: 'sunburst'
@@ -16,18 +17,19 @@ sunburstInitialState = {
   isDefault: yes
   isControlsOpen: no
   _category:
-    value: 'default'
-    label: 'default'
+    value: 'countries'
+    label: 'Geography (Countries)'
   _value:
-    value: 'default'
-    label: 'default'
-  activeCategory: 'default'
-  activeValue: 'default'
+    value: 'K04000001'
+    label: 'England \& Wales'
+  activeCategory: 'Geography (Countries)'
+  activeValue: 'England \& Wales'
   data: {}
   _mouseOverData: {}  
   error: no
   updateTable: no
   updateSunburst: no
+  district_query: 'default'
 }
 
 sunburstChart = (state = sunburstInitialState, action) ->
@@ -36,16 +38,16 @@ sunburstChart = (state = sunburstInitialState, action) ->
       _category: action.category
     }
     when TOGGLE_VALUE then objectAssign {}, state, {
-      # _barsValue: action.selectionOption
-      # updatePyramid: no
-      # updateBars: no
-      # updateOutline: no
+      _value: action.value
     }
     when CONTROLS_OPENED then objectAssign {}, state, {
       isControlsOpen: yes
     }
     when CONTROLS_CLOSED then objectAssign {}, state, {
       isControlsOpen: no
+    }
+    when DISTRICT_SEARCH then objectAssign {}, state, {
+      district_query: action.query
     }
     when FILTER_USED then objectAssign {}, state, {
       # isDefault: no
@@ -54,22 +56,14 @@ sunburstChart = (state = sunburstInitialState, action) ->
       # updateOutline: no
     }
     when REQUEST_ETHNIC_DATA then objectAssign {}, state, {
-      # isFetching: yes
-      # updatePyramid: no
-      # updateBars: no
-      # updateOutline: no
+      isFetching: yes
     }
     when RECEIVE_ETHNIC_DATA then objectAssign {}, state, {
-      # isFetching: no
-      # data:
-      #   bars: action.data
-      #   outline: state.data.outline
+      isFetching: no
+      # data: action.data
       # lastUpdated: action.receivedAt
-      # updatePyramid: yes
-      # updateBars: yes
-      # updateOutline: no
-      # activeBarsValue: state._barsValue.label
-      # activeBarsCategory: state._barsCategory.label
+      activeCategory: state._category.label
+      activeValue: state._value.label
     }
     when ERROR_RECEIVE_ETHNIC_DATA then objectAssign {}, state, {
       # isFetching: no

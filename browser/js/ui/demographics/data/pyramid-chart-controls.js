@@ -6,6 +6,9 @@ districts = require('../../../../json/geography/districts.json');
 module.exports = {
   category_options: [
     {
+      value: 'countries',
+      label: 'Geography (Countries)'
+    }, {
       value: 'districts',
       label: 'Geography (Districts)'
     }, {
@@ -17,6 +20,18 @@ module.exports = {
     }, {
       value: 'religions',
       label: 'Religion'
+    }
+  ],
+  countries: [
+    {
+      value: 'K04000001',
+      label: 'England \& Wales'
+    }, {
+      value: 'E92000001',
+      label: 'England'
+    }, {
+      value: 'W92000004',
+      label: 'Wales'
     }
   ],
   districts: districts,
@@ -105,5 +120,3 @@ module.exports = {
     }
   ]
 };
-
-//# sourceMappingURL=pyramid-chart-controls.map

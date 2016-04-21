@@ -1,7 +1,12 @@
 .mb-page-header {
 	margin-bottom: $margin-medium;
 	// margin-top: $margin-large;
-	background-color: #519DD2;
+	// background-color: #296298;
+	background-image: url(/images/voronoi-bg-wide-nav.png);
+	// Box shadow
+	-webkit-box-shadow: 0px 0px 8px 6px rgba(0,0,0,0.34);
+	-moz-box-shadow: 0px 0px 8px 6px rgba(0,0,0,0.34);
+	box-shadow: 0px 0px 8px 6px rgba(0,0,0,0.34);
 	color: #fff;
 	h1 {
 		@extend .mb-roboto-strong;

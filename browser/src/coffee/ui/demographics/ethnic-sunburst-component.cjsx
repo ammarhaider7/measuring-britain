@@ -8,6 +8,7 @@ value_options = {
   ethnicities: data.ethnic_groups
   religions: data.religions
   regions: data.regions
+  countries: data.countries
 }
 
 category_options = data.category_options
@@ -16,9 +17,9 @@ SunburstComponent = React.createClass
   render: ->
     <div className="col-xs-12 col-sm-12 mb-no-padding">
       <div className="sunburst mt-medium">
-        <ControlsNew {...@props} categories=category_options values=value_options />
+        <ControlsNew {...@props} omitted_category="ethnicities" categories=category_options values=value_options />
         <svg
-          className="sunburst-svg" 
+          className="sunburst-svg"  
           style={{ width: '100%', height: '550px' }}
           ref="sunburstSvg"
         >

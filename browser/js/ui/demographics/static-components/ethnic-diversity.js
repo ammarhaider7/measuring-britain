@@ -42,5 +42,3 @@ EthnicSection = function() {
 };
 
 module.exports = EthnicSection;
-
-//# sourceMappingURL=ethnic-diversity.map

@@ -5831,7 +5831,7 @@ button.close {
   color: #FFF; }
 
 .mb-ui-body {
-  background-color: #FCFCFA; }
+  background-color: #FFFFFF; }
 
 .mt-large {
   margin-top: 30px; }
@@ -5845,8 +5845,11 @@ button.close {
 .mt-small {
   margin-top: 10px; }
 
+.mt-xsmall {
+  margin-top: 7px; }
+
 .mb-medium {
-  margin-top: 20px; }
+  margin-bottom: 20px; }
 
 .ml-large {
   margin-left: 30px; }
@@ -6044,7 +6047,10 @@ path:first-child {
 
 .mb-page-header {
   margin-bottom: 20px;
-  background-color: #519DD2;
+  background-image: url(/images/voronoi-bg-wide-nav.png);
+  -webkit-box-shadow: 0px 0px 8px 6px rgba(0, 0, 0, 0.34);
+  -moz-box-shadow: 0px 0px 8px 6px rgba(0, 0, 0, 0.34);
+  box-shadow: 0px 0px 8px 6px rgba(0, 0, 0, 0.34);
   color: #fff; }
   .mb-page-header h1 {
     margin-top: 30px;
@@ -6116,12 +6122,7 @@ path:first-child {
   stroke-width: 1.5px; }
 
 .controls-container {
-  border-bottom: 1px solid #333;
-  -webkit-transition: background 0.5s linear;
-  -moz-transition: background 0.5s linear;
-  -ms-transition: background 0.5s linear;
-  -o-transition: background 0.5s linear;
-  transition: background 0.5s linear; }
+  border-bottom: 1px solid #333; }
   .controls-container .glyphicon {
     margin-top: 10px;
     margin-bottom: 10px; }
@@ -6137,7 +6138,32 @@ path:first-child {
     .controls-container .mb-control-value:hover {
       text-decoration: underline; }
   .controls-container .mb-collapse {
-    border-top: 1px solid #333; }
-
-.controls-container.open {
-  background-color: #E4E4E4; }
+    border-top: 1px solid #333;
+    background-color: #eeeeee; }
+  .controls-container .mb-pill {
+    color: #296298; }
+    .controls-container .mb-pill:hover {
+      background-color: #D8D8D8; }
+  .controls-container .mb-pill.active {
+    color: #FFF;
+    background-color: #296298; }
+  .controls-container .mb-glyphicon-input-addon {
+    top: 0px; }
+  .controls-container .mb-lad-link-div {
+    margin-top: 5px; }
+  .controls-container ul.nav-pills {
+    background-color: white;
+    border: 1px solid white;
+    border-radius: 6px; }
+    .controls-container ul.nav-pills li {
+      font-size: 12px; }
+  .controls-container .mb-btn-primary {
+    color: #FFF;
+    background-color: #DA4A70;
+    font-weight: bold; }
+    .controls-container .mb-btn-primary:hover {
+      background-color: #C11844; }
+  .controls-container .mb-btn-fetching {
+    background-color: #EA87A1; }
+    .controls-container .mb-btn-fetching:hover, .controls-container .mb-btn-fetching:active, .controls-container .mb-btn-fetching:focus {
+      background-color: #EA87A1; }

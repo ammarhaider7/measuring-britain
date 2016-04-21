@@ -6,14 +6,30 @@ React = require('react');
 d3 = require('d3');
 
 ControlsNew = React.createClass({displayName: "ControlsNew",
-  onCategoryChange: function(el) {
-    var catLabel, catVal;
-    catVal = el.target.getAttribute('data-value');
-    catLabel = el.target.innerHTML;
+  onCategoryChange: function(e) {
+    var catLabel, catVal, el;
+    el = e.target;
+    catVal = el.getAttribute('data-value');
+    catLabel = el.innerHTML;
     return this.props.onCategoryChange({
       value: catVal,
       label: catLabel
     });
+  },
+  onValueChange: function(e) {
+    var $currVals, $el, el, valLabel, valVal;
+    e.preventDefault();
+    el = e.target;
+    valVal = el.getAttribute('data-value');
+    valLabel = el.innerHTML;
+    this.props.onValueChange({
+      value: valVal,
+      label: valLabel
+    });
+    $el = d3.select(el);
+    $currVals = d3.selectAll('.mb-pill.active');
+    $currVals.classed('active', false);
+    return $el.classed('active', true);
   },
   onControlsOpen: function() {
     var $controlsContainer, isClosed, isOpen;
@@ -28,13 +44,28 @@ ControlsNew = React.createClass({displayName: "ControlsNew",
     }
     return $controlsContainer.classed('open', !isOpen).classed('closed', !isClosed);
   },
+  doSearch: function(e) {
+    var query;
+    query = e.target.value;
+    return this.props.onDistrictSearch(query);
+  },
+  fetchData: function() {
+    this.props.fetchSunburstData({
+      isDefault: false,
+      category: this.props._category,
+      value: this.props._value
+    });
+    console.log('fetching props');
+    return console.log(this.props);
+  },
   render: function() {
-    var category, i, value;
+    var category, district, i, query, value;
     return React.createElement("div", {
       "className": "controls-container clearfix closed mb-oxygen",
       "ref": "controlsContainer"
     }, React.createElement("a", {
       "onClick": this.onControlsOpen,
+      "className": "controls-toggle-link",
       "role": "button",
       "data-toggle": "collapse",
       "data-target": "#collapseOne",
@@ -63,7 +94,7 @@ ControlsNew = React.createClass({displayName: "ControlsNew",
       results = [];
       for (i = j = 0, len = ref.length; j < len; i = ++j) {
         category = ref[i];
-        if (category.value !== 'ethnicities') {
+        if (category.value !== this.props.omitted_category) {
           results.push(React.createElement("button", {
             "key": i,
             "type": "button",
@@ -78,29 +109,74 @@ ControlsNew = React.createClass({displayName: "ControlsNew",
       return results;
     }).call(this))), React.createElement("div", {
       "className": "form-group row"
-    }, React.createElement("ul", {
-      "className": "nav nav-pills"
-    }, ((function() {
+    }, " ", (this.props._category.value !== 'districts' ? React.createElement("ul", {
+      "className": "nav nav-pills pt-small pb-small pl-small"
+    }, " ", (function() {
       var j, len, ref, results;
-      if (this.props._category.value !== 'default') {
-        ref = this.props.values[this.props._category.value];
-        results = [];
-        for (i = j = 0, len = ref.length; j < len; i = ++j) {
-          value = ref[i];
+      ref = this.props.values[this.props._category.value];
+      results = [];
+      for (i = j = 0, len = ref.length; j < len; i = ++j) {
+        value = ref[i];
+        results.push(React.createElement("li", {
+          "role": "presentation",
+          "key": value.value
+        }, React.createElement("a", {
+          "data-value": value.value,
+          "href": "#",
+          "className": (this.props._value.label === value.label ? "mb-pill active" : "mb-pill"),
+          "onClick": this.onValueChange
+        }, value.label)));
+      }
+      return results;
+    }).call(this)) : React.createElement("div", null, React.createElement("div", {
+      "className": "col-sm-6"
+    }, React.createElement("div", {
+      "className": "input-group"
+    }, React.createElement("span", {
+      "className": "input-group-addon glyphicon glyphicon-search mb-glyphicon-input-addon",
+      "aria-hidden": "true"
+    }), React.createElement("input", {
+      "type": "text",
+      "className": "form-control",
+      "placeholder": "Search Local Authority Districts...",
+      "onChange": this.doSearch
+    }))), React.createElement("div", {
+      "className": "col-sm-6 mt-xsmall"
+    }, React.createElement("a", {
+      "href": "//local.direct.gov.uk/LDGRedirect/Start.do?mode=1",
+      "target": "_blank"
+    }, "What\'s my Local Authority District?"))))), (this.props._category.value === 'districts' ? React.createElement("div", {
+      "className": "form-group row"
+    }, (query = this.props.district_query, query !== '' && query.length > 1 && query !== 'default' ? React.createElement("ul", {
+      "className": "nav nav-pills pl-small pt-small pb-small"
+    }, (function() {
+      var j, len, ref, results;
+      ref = this.props.values.districts;
+      results = [];
+      for (i = j = 0, len = ref.length; j < len; i = ++j) {
+        district = ref[i];
+        if (district.label.toLowerCase().indexOf(query) !== -1) {
           results.push(React.createElement("li", {
             "role": "presentation",
-            "key": i,
-            "data-value": value.value
+            "key": district.value
           }, React.createElement("a", {
-            "href": "#"
-          }, value.label)));
+            "data-value": district.value,
+            "href": "#",
+            "className": (this.props.activeValue === district.label ? "mb-pill active" : "mb-pill"),
+            "onClick": this.onValueChange
+          }, district.label)));
+        } else {
+          results.push(void 0);
         }
-        return results;
       }
-    }).call(this)))))));
+      return results;
+    }).call(this)) : void 0)) : void 0), React.createElement("div", {
+      "className": "row mb-medium"
+    }, React.createElement("button", {
+      "className": (this.props.isFetching === true ? "btn btn-default mb-btn-primary mb-btn-fetching" : "btn btn-default mb-btn-primary"),
+      "onClick": this.fetchData
+    }, (this.props.isFetching === true ? "Loading..." : "Customise"))))));
   }
 });
 
 module.exports = ControlsNew;
-
-//# sourceMappingURL=chart-controls-new.map

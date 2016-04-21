@@ -13,7 +13,8 @@ value_options = {
   districts: data.districts,
   ethnicities: data.ethnic_groups,
   religions: data.religions,
-  regions: data.regions
+  regions: data.regions,
+  countries: data.countries
 };
 
 category_options = data.category_options;
@@ -25,6 +26,7 @@ SunburstComponent = React.createClass({displayName: "SunburstComponent",
     }, React.createElement("div", {
       "className": "sunburst mt-medium"
     }, React.createElement(ControlsNew, React.__spread({}, this.props, {
+      "omitted_category": "ethnicities",
       "categories": category_options,
       "values": value_options
     })), React.createElement("svg", {
@@ -41,5 +43,3 @@ SunburstComponent = React.createClass({displayName: "SunburstComponent",
 });
 
 module.exports = SunburstComponent;
-
-//# sourceMappingURL=ethnic-sunburst-component.map

@@ -10,6 +10,7 @@ ERROR_RECEIVE_ETHNIC_DATA = "ERROR_RECEIVE_ETHNIC_DATA"
 FILTER_USED = "S_FILTER_USED"
 CONTROLS_OPENED = "S_CONTROLS_OPENED"
 CONTROLS_CLOSED = "S_CONTROLS_CLOSED"
+DISTRICT_SEARCH = "S_DISTRICT_SEARCH"
 
 toggleValue = (value, selectionOption) ->
 	{
@@ -29,6 +30,12 @@ controlsOpened = () ->
 	{
 		type: CONTROLS_OPENED
 		isControlsOpen: yes
+	}
+
+districtSearch = (query) ->
+	{
+		type: DISTRICT_SEARCH
+		query: query
 	}
 
 controlsClosed = () ->
@@ -77,21 +84,23 @@ fetchSunburstData = (filterOptions) ->
 	# Thunk middleware knows how to handle functions.
 	# It passes the dispatch method as an argument to the function,
  	# thus making it able to dispatch actions itself.
-# 	(dispatch) ->
+	(dispatch) ->
 
-		# pyramidService(barOptions)
-		# 	.done (response) ->
-		#         # We can dispatch many times!
-		#         # Here, we update the app state with the results of the API call.
-		# 		data = pyramidDataParser response.obs
-		# 		# console.log data
-		# 		dispatch receivePyramidDataBars data
-		# 		return
-		# 	.fail (jqxhr, textStatus, error) ->
-		# 		# Handle errors..
-		# 		dispatch errorReceivingPyramidDataBars textStatus + " : " + error
-		# 		# console.log textStatus + " - " + error
-		# 		return
+		dispatch requestEthnicData filterOptions
+		sunBurstService(filterOptions)
+			.done (response) ->
+		        # We can dispatch many times!
+		        # Here, we update the app state with the results of the API call.
+				# data = sunburstDataParser response.obs
+				# console.log data
+				data = {}
+				dispatch receiveEthnicData data
+				return
+			.fail (jqxhr, textStatus, error) ->
+				# Handle errors..
+				dispatch errorReceivingeEthnicData textStatus + " : " + error
+				# console.log textStatus + " - " + error
+				return
 
 module.exports = {
 
@@ -104,6 +113,9 @@ module.exports = {
 	FILTER_USED
 	CONTROLS_OPENED
 	CONTROLS_CLOSED
+	DISTRICT_SEARCH
+	fetchSunburstData
+	districtSearch
 	requestEthnicData
 	receiveEthnicData
 	toggleCategory

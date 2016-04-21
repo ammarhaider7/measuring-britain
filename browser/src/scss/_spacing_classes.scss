@@ -11,8 +11,11 @@
 .mt-small {
 	margin-top: $margin-small * 2;
 }
+.mt-xsmall {
+	margin-top: $margin-xsmall;
+}
 .mb-medium {
-	margin-top: $margin-medium;
+	margin-bottom: $margin-medium;
 }
 .ml-large {
 	margin-left: $margin-large;

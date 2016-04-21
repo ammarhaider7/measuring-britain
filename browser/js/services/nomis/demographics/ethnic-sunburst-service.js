@@ -6,7 +6,7 @@ $ = require('jQuery');
 
 nomisEndPoint = "https://www.nomisweb.co.uk/api/v01/dataset/";
 
-dataSet = "NM_608_1.data.json";
+dataSet = "NM_659_1.data.json";
 
 defaultOptions = {
   isDefault: true,
@@ -26,8 +26,7 @@ makeSunburstRequest = function(options) {
     dataSet: dataSet,
     queryStringOps: {
       geography: "geography=K04000001",
-      rural_urban: 0,
-      measures: 20100
+      c_relpuk11: 0
     }
   };
   queryStringArr = [];
@@ -38,10 +37,7 @@ makeSunburstRequest = function(options) {
     valLabel = o.value.label;
     valCode = o.value.value;
     return {
-      dataSet: dataSet,
       queryStringOps: {
-        rural_urban: 0,
-        measures: 20100,
         geography: (function() {
           if (catLabel.indexOf('Geography') !== -1) {
             return "geography=" + valCode;
@@ -76,11 +72,11 @@ makeSunburstRequest = function(options) {
         queryStringArr.push(value);
       }
     }
+    console.log('queryStringArr');
+    console.log(queryStringArr);
     return '?' + queryStringArr.join('\&');
   };
-  return $.getJSON(nomisEndPoint + getOptions().dataSet + generateQueryString(getOptions, queryStringArr));
+  return $.getJSON(nomisEndPoint + dataSet + generateQueryString(getOptions, queryStringArr));
 };
 
 module.exports = makeSunburstRequest;
-
-//# sourceMappingURL=ethnic-sunburst-service.map
