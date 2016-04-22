@@ -21,7 +21,7 @@ makeSunburstRequest = (options) ->
 			geography: "geography=K04000001"
 			# rural_urban: 0
 			# measures: 20100 
-			c_relpuk11: 0
+			c_relpuk11: "c_relpuk11=0"
 		}
 	}
 
@@ -72,8 +72,8 @@ makeSunburstRequest = (options) ->
 		for own key, value of getOptions().queryStringOps
 			unless value is ""
 				queryStringArr.push value
-		console.log 'queryStringArr'
-		console.log queryStringArr
+				console.log 'queryStringArr'
+				console.log queryStringArr
 		return '?' + queryStringArr.join '\&'
 
 	# make call using jQuery and return the promise object

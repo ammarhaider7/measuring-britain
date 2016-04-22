@@ -50,13 +50,11 @@ ControlsNew = React.createClass({displayName: "ControlsNew",
     return this.props.onDistrictSearch(query);
   },
   fetchData: function() {
-    this.props.fetchSunburstData({
+    return this.props.fetchSunburstData({
       isDefault: false,
       category: this.props._category,
       value: this.props._value
     });
-    console.log('fetching props');
-    return console.log(this.props);
   },
   render: function() {
     var category, district, i, query, value;
@@ -180,3 +178,5 @@ ControlsNew = React.createClass({displayName: "ControlsNew",
 });
 
 module.exports = ControlsNew;
+
+//# sourceMappingURL=chart-controls-new.map

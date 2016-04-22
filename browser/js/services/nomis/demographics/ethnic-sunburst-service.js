@@ -26,7 +26,7 @@ makeSunburstRequest = function(options) {
     dataSet: dataSet,
     queryStringOps: {
       geography: "geography=K04000001",
-      c_relpuk11: 0
+      c_relpuk11: "c_relpuk11=0"
     }
   };
   queryStringArr = [];
@@ -70,13 +70,15 @@ makeSunburstRequest = function(options) {
       value = ref[key];
       if (value !== "") {
         queryStringArr.push(value);
+        console.log('queryStringArr');
+        console.log(queryStringArr);
       }
     }
-    console.log('queryStringArr');
-    console.log(queryStringArr);
     return '?' + queryStringArr.join('\&');
   };
   return $.getJSON(nomisEndPoint + dataSet + generateQueryString(getOptions, queryStringArr));
 };
 
 module.exports = makeSunburstRequest;
+
+//# sourceMappingURL=ethnic-sunburst-service.map

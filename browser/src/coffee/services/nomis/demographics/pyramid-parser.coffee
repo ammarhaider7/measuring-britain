@@ -2,7 +2,7 @@ _ = require 'underscore'
 
 parse = (dataArray) ->
 
-	window.dataArray = dataArray
+	# window.dataArray = dataArray
 
 	ages = [
 	  '0 to 4'

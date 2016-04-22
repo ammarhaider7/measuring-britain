@@ -25,6 +25,7 @@ mapStateToProps = (state) ->
 	isDefault: state.ethnicSunburst.isDefault
 	isControlsOpen: state.ethnicSunburst.isControlsOpen
 	district_query: state.ethnicSunburst.district_query
+	updateSunburst: state.ethnicSunburst.updateSunburst
 
 # mapStateToPropsPyrTable = (state) ->
 

@@ -93,7 +93,7 @@ receiveEthnicData = function(data) {
 errorReceivingeEthnicData = function(error) {
   return {
     type: ERROR_RECEIVE_ETHNIC_DATA,
-    barsError: error
+    error: error
   };
 };
 
@@ -102,7 +102,8 @@ fetchSunburstData = function(filterOptions) {
     dispatch(requestEthnicData(filterOptions));
     return sunBurstService(filterOptions).done(function(response) {
       var data;
-      data = {};
+      data = sunburstDataParser(response.obs);
+      window.sunburst_data = data;
       dispatch(receiveEthnicData(data));
     }).fail(function(jqxhr, textStatus, error) {
       dispatch(errorReceivingeEthnicData(textStatus + " : " + error));
@@ -132,3 +133,5 @@ module.exports = {
   controlsOpened: controlsOpened,
   controlsClosed: controlsClosed
 };
+
+//# sourceMappingURL=ethnic-sunburst-actions.map

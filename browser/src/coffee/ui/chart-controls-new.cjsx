@@ -51,8 +51,6 @@ ControlsNew = React.createClass
       category: @props._category
       value: @props._value
     }
-    console.log 'fetching props'
-    console.log @props
 
   render: -> 
 

@@ -71,7 +71,7 @@ receiveEthnicData = (data) ->
 errorReceivingeEthnicData = (error) ->
 	{
 		type: ERROR_RECEIVE_ETHNIC_DATA
-		barsError: error
+		error: error
 	}
 
 
@@ -91,9 +91,8 @@ fetchSunburstData = (filterOptions) ->
 			.done (response) ->
 		        # We can dispatch many times!
 		        # Here, we update the app state with the results of the API call.
-				# data = sunburstDataParser response.obs
-				# console.log data
-				data = {}
+				data = sunburstDataParser response.obs
+				window.sunburst_data = data
 				dispatch receiveEthnicData data
 				return
 			.fail (jqxhr, textStatus, error) ->

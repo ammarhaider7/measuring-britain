@@ -60,15 +60,15 @@ sunburstChart = (state = sunburstInitialState, action) ->
     }
     when RECEIVE_ETHNIC_DATA then objectAssign {}, state, {
       isFetching: no
-      # data: action.data
-      # lastUpdated: action.receivedAt
+      data: action.data
       activeCategory: state._category.label
       activeValue: state._value.label
+      updateSunburst: yes
     }
     when ERROR_RECEIVE_ETHNIC_DATA then objectAssign {}, state, {
-      # isFetching: no
-      # error: yes
-      # errorMessage: action.barsError
+      isFetching: no
+      error: yes
+      errorMessage: action.error
       # updatePyramid: no
       # updateBars: no
       # updateOutline: no

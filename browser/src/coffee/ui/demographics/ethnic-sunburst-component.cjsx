@@ -1,7 +1,7 @@
 React = require 'react'
 ControlsNew = require '../chart-controls-new.js'
 data = require './data/pyramid-chart-controls.js'
-ReactCSSTransitionGroup = require 'react-addons-css-transition-group'
+drawSunburst = require './d3/sunburst-partition.js'
 
 value_options = {
   districts: data.districts
@@ -14,7 +14,24 @@ value_options = {
 category_options = data.category_options
 
 SunburstComponent = React.createClass 
+
+  componentWillMount: ->
+
+    @props.fetchSunburstData null
+
+  componentDidUpdate: ->
+
+    if @props.updateSunburst is yes
+
+      sunburst = drawSunburst {
+        container: @refs.sunburstSvg
+        data: @props.data
+      }
+
+      sunburst()
+
   render: ->
+
     <div className="col-xs-12 col-sm-12 mb-no-padding">
       <div className="sunburst mt-medium">
         <ControlsNew {...@props} omitted_category="ethnicities" categories=category_options values=value_options />

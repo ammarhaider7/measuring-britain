@@ -5,7 +5,6 @@ _ = require('underscore');
 
 parse = function(dataArray) {
   var ages, d3ReadyData, femaleObs, females, femalesPerc, femalesPercFormat, femalesSum, maleObs, males, malesPerc, malesPercFormat, malesSum, overlayData, sum, totalArr, utils;
-  window.dataArray = dataArray;
   ages = ['0 to 4', '5 to 7', '8 to 9', '10 to 14', '15', '16 to 17', '18 to 19', '20 to 24', '25 to 29', '30 to 34', '35 to 39', '40 to 44', '45 to 49', '50 to 54', '55 to 59', '60 to 64', '65 to 69', '70 to 74', '75 to 79', '80 to 84', '85 +'];
   utils = {
     sum: function(data) {
@@ -85,3 +84,5 @@ parse = function(dataArray) {
 };
 
 module.exports = parse;
+
+//# sourceMappingURL=pyramid-parser.map

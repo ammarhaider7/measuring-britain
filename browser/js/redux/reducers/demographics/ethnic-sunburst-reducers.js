@@ -62,11 +62,17 @@ sunburstChart = function(state, action) {
     case RECEIVE_ETHNIC_DATA:
       return objectAssign({}, state, {
         isFetching: false,
+        data: action.data,
         activeCategory: state._category.label,
-        activeValue: state._value.label
+        activeValue: state._value.label,
+        updateSunburst: true
       });
     case ERROR_RECEIVE_ETHNIC_DATA:
-      return objectAssign({}, state, {});
+      return objectAssign({}, state, {
+        isFetching: false,
+        error: true,
+        errorMessage: action.error
+      });
     case MOUSE_OVER:
       return objectAssign({}, state, {});
     default:
@@ -75,3 +81,5 @@ sunburstChart = function(state, action) {
 };
 
 module.exports = sunburstChart;
+
+//# sourceMappingURL=ethnic-sunburst-reducers.map
