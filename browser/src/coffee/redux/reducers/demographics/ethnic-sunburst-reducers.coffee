@@ -33,30 +33,36 @@ sunburstInitialState = {
 }
 
 sunburstChart = (state = sunburstInitialState, action) ->
+
   switch action.type
+
     when TOGGLE_CATEGORY then objectAssign {}, state, {
       _category: action.category
+      updateSunburst: no
     }
     when TOGGLE_VALUE then objectAssign {}, state, {
       _value: action.value
+      updateSunburst: no
     }
     when CONTROLS_OPENED then objectAssign {}, state, {
       isControlsOpen: yes
+      updateSunburst: no
     }
     when CONTROLS_CLOSED then objectAssign {}, state, {
       isControlsOpen: no
+      updateSunburst: no
     }
     when DISTRICT_SEARCH then objectAssign {}, state, {
       district_query: action.query
+      updateSunburst: no
     }
     when FILTER_USED then objectAssign {}, state, {
-      # isDefault: no
-      # updatePyramid: no
-      # updateBars: no
-      # updateOutline: no
+      isDefault: no
+      updateSunburst: no
     }
     when REQUEST_ETHNIC_DATA then objectAssign {}, state, {
       isFetching: yes
+      updateSunburst: no
     }
     when RECEIVE_ETHNIC_DATA then objectAssign {}, state, {
       isFetching: no
@@ -74,9 +80,8 @@ sunburstChart = (state = sunburstInitialState, action) ->
       # updateOutline: no
     }  
     when MOUSE_OVER then objectAssign {}, state, {
+      updateSunburst: no
       # _mouseOverData: action.mouseOverData
-      # updateBars: yes
-      # updateOutline: no
     }
     else state
 

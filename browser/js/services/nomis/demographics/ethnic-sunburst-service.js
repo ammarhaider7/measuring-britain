@@ -70,8 +70,6 @@ makeSunburstRequest = function(options) {
       value = ref[key];
       if (value !== "") {
         queryStringArr.push(value);
-        console.log('queryStringArr');
-        console.log(queryStringArr);
       }
     }
     return '?' + queryStringArr.join('\&');

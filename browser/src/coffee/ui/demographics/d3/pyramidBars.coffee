@@ -1,5 +1,5 @@
 d3 = require 'd3'
-man_svg = require '../icons/man.js'
+# man_svg = require '../icons/man.js'
 
 drawPyrBars = (options) ->
 

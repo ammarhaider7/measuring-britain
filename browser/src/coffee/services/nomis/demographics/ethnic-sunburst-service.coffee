@@ -72,8 +72,6 @@ makeSunburstRequest = (options) ->
 		for own key, value of getOptions().queryStringOps
 			unless value is ""
 				queryStringArr.push value
-				console.log 'queryStringArr'
-				console.log queryStringArr
 		return '?' + queryStringArr.join '\&'
 
 	# make call using jQuery and return the promise object

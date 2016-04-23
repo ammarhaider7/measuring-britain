@@ -99,11 +99,13 @@ errorReceivingeEthnicData = function(error) {
 
 fetchSunburstData = function(filterOptions) {
   return function(dispatch) {
+    if (filterOptions != null) {
+      dispatch(filterUsed());
+    }
     dispatch(requestEthnicData(filterOptions));
     return sunBurstService(filterOptions).done(function(response) {
       var data;
       data = sunburstDataParser(response.obs);
-      window.sunburst_data = data;
       dispatch(receiveEthnicData(data));
     }).fail(function(jqxhr, textStatus, error) {
       dispatch(errorReceivingeEthnicData(textStatus + " : " + error));

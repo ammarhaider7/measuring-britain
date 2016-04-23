@@ -35,29 +35,38 @@ sunburstChart = function(state, action) {
   switch (action.type) {
     case TOGGLE_CATEGORY:
       return objectAssign({}, state, {
-        _category: action.category
+        _category: action.category,
+        updateSunburst: false
       });
     case TOGGLE_VALUE:
       return objectAssign({}, state, {
-        _value: action.value
+        _value: action.value,
+        updateSunburst: false
       });
     case CONTROLS_OPENED:
       return objectAssign({}, state, {
-        isControlsOpen: true
+        isControlsOpen: true,
+        updateSunburst: false
       });
     case CONTROLS_CLOSED:
       return objectAssign({}, state, {
-        isControlsOpen: false
+        isControlsOpen: false,
+        updateSunburst: false
       });
     case DISTRICT_SEARCH:
       return objectAssign({}, state, {
-        district_query: action.query
+        district_query: action.query,
+        updateSunburst: false
       });
     case FILTER_USED:
-      return objectAssign({}, state, {});
+      return objectAssign({}, state, {
+        isDefault: false,
+        updateSunburst: false
+      });
     case REQUEST_ETHNIC_DATA:
       return objectAssign({}, state, {
-        isFetching: true
+        isFetching: true,
+        updateSunburst: false
       });
     case RECEIVE_ETHNIC_DATA:
       return objectAssign({}, state, {
@@ -74,7 +83,9 @@ sunburstChart = function(state, action) {
         errorMessage: action.error
       });
     case MOUSE_OVER:
-      return objectAssign({}, state, {});
+      return objectAssign({}, state, {
+        updateSunburst: false
+      });
     default:
       return state;
   }

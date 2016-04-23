@@ -86,13 +86,14 @@ fetchSunburstData = (filterOptions) ->
  	# thus making it able to dispatch actions itself.
 	(dispatch) ->
 
+		dispatch filterUsed() if filterOptions?
 		dispatch requestEthnicData filterOptions
 		sunBurstService(filterOptions)
 			.done (response) ->
 		        # We can dispatch many times!
 		        # Here, we update the app state with the results of the API call.
 				data = sunburstDataParser response.obs
-				window.sunburst_data = data
+				# window.sunburst_data = data
 				dispatch receiveEthnicData data
 				return
 			.fail (jqxhr, textStatus, error) ->

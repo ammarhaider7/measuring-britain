@@ -5,8 +5,8 @@ d3 = require('d3');
 
 parse = function(dataArray) {
   var d3ReadyData, d3_nested_data, last, nested_data, re, reLast, total_item, utils;
-  total_item = dataArray.shift();
   window.sunBurstData = dataArray;
+  total_item = dataArray.shift();
   re = /^\w+/;
   reLast = /\w+$/;
   last = function(str) {
@@ -27,6 +27,20 @@ parse = function(dataArray) {
       return d.obs_value.value;
     });
   }).entries(dataArray);
+  nested_data.forEach(function(ob) {
+    return ob.values.shift();
+  });
+  nested_data = nested_data.map(function(ob) {
+    return {
+      name: ob.key,
+      children: ob.values.map(function(ob) {
+        return {
+          name: ob.key,
+          size: ob.values
+        };
+      })
+    };
+  });
   utils = {
     getValues: function(array) {
       return array.map(function(ob) {
@@ -40,8 +54,8 @@ parse = function(dataArray) {
     }
   };
   d3_nested_data = {
-    key: "ethnic_diversity",
-    values: nested_data
+    name: "ethnic_diversity",
+    children: nested_data
   };
   d3ReadyData = {
     d3_nested_data: d3_nested_data,

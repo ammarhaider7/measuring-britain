@@ -28,7 +28,8 @@ SunburstComponent = React.createClass({displayName: "SunburstComponent",
     if (this.props.updateSunburst === true) {
       sunburst = drawSunburst({
         container: this.refs.sunburstSvg,
-        data: this.props.data
+        data: this.props.data,
+        isDefault: this.props.isDefault
       });
       return sunburst();
     }

@@ -26,6 +26,7 @@ SunburstComponent = React.createClass
       sunburst = drawSunburst {
         container: @refs.sunburstSvg
         data: @props.data
+        isDefault: @props.isDefault
       }
 
       sunburst()

@@ -1,13 +1,14 @@
 d3 = require 'd3'
+# flareJson = require '../../../../json/flare.json'
 
 parse = (dataArray) ->
+
+	# Need to remove totals from children
+	window.sunBurstData = dataArray
 
 	# All ethnic item
 	total_item = dataArray.shift()
 
-	# Need to remove totals from children
-	window.sunBurstData = dataArray
-	
 	# RegEx to match first word
 	re = /^\w+/;
 	# RegEx to match last word
@@ -28,6 +29,23 @@ parse = (dataArray) ->
 				d.obs_value.value
 		.entries dataArray
 
+	# Remove totals ob from values arrays
+	nested_data.forEach (ob) ->
+		ob.values.shift()
+
+	# Change key to name and values to children
+	nested_data = nested_data.map (ob) ->
+		return {
+			name: ob.key
+			children: ob.values.map (ob) ->
+				return {
+					name: ob.key
+					size: ob.values
+				}
+		}
+		
+
+
 	# Utility methods
 	utils = 
 		getValues: (array) ->
@@ -38,8 +56,8 @@ parse = (dataArray) ->
 				num / sum * 100
 
 	d3_nested_data = {
-		key: "ethnic_diversity"
-		values: nested_data
+		name: "ethnic_diversity"
+		children: nested_data
 	}
 
 	d3ReadyData = {
@@ -47,6 +65,8 @@ parse = (dataArray) ->
 		total_item
 	}
 
+	# window.flareJson = flareJson
 	return d3ReadyData
+	# return flareJson
 
 module.exports = parse
