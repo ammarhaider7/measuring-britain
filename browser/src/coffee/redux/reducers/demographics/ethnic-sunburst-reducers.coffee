@@ -25,11 +25,11 @@ sunburstInitialState = {
   activeCategory: 'Geography (Countries)'
   activeValue: 'England \& Wales'
   data: {}
-  _mouseOverData: {}  
   error: no
   updateTable: no
   updateSunburst: no
   district_query: 'default'
+  _mouseOverData: {}
 }
 
 sunburstChart = (state = sunburstInitialState, action) ->
@@ -81,7 +81,7 @@ sunburstChart = (state = sunburstInitialState, action) ->
     }  
     when MOUSE_OVER then objectAssign {}, state, {
       updateSunburst: no
-      # _mouseOverData: action.mouseOverData
+      _mouseOverData: action.mouseOverData
     }
     else state
 

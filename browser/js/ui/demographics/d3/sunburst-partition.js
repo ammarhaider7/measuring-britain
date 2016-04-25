@@ -4,10 +4,38 @@ var d3, drawSunburst;
 d3 = require('d3');
 
 drawSunburst = function(options) {
-  var arc, arcTween, colour, container, data, height, init, isDefault, margin, my, nested_data, partition, radius, ref, ref1, stash, total_item, update, width;
-  container = options.container, data = options.data, isDefault = options.isDefault;
+  var arc, arcTween, colour, container, data, getColour, getSubColour, height, init, isDefault, margin, my, nested_data, onMouseOver, partition, radius, ref, ref1, stash, total_item, update, width;
+  container = options.container, data = options.data, isDefault = options.isDefault, onMouseOver = options.onMouseOver;
   nested_data = data.d3_nested_data;
   total_item = data.total_item;
+  getColour = function(name) {
+    switch (name) {
+      case 'White':
+        return '#FF8380';
+      case 'Black':
+        return '#8c564b';
+      case 'Asian':
+        return '#31a354';
+      case 'Mixed':
+        return '#ff7f0e';
+      case 'Other':
+        return '#1f77b4';
+    }
+  };
+  getSubColour = function(name) {
+    switch (name) {
+      case 'White':
+        return '#F3A3A1';
+      case 'Black':
+        return '#AF7B70';
+      case 'Asian':
+        return '#74c476';
+      case 'Mixed':
+        return '#FFA352';
+      case 'Other':
+        return '#65B1E6';
+    }
+  };
   width = (ref = container.offsetWidth) != null ? ref : 750;
   height = (ref1 = container.offsetHeight) != null ? ref1 : 500;
   margin = {
@@ -18,7 +46,7 @@ drawSunburst = function(options) {
     middle: 0
   };
   radius = Math.min(width, (height - margin.bottom - margin.top) / 2);
-  colour = d3.scale.category20c();
+  colour = d3.scale.category10();
   partition = d3.layout.partition().sort(null).size([2 * Math.PI, radius * radius]).value(function(d) {
     return d.size;
   });
@@ -31,23 +59,25 @@ drawSunburst = function(options) {
   }).outerRadius(function(d) {
     return Math.sqrt(d.y + d.dy);
   });
-  arcTween = function(current_datum) {
-    var interpolate;
-    interpolate = d3.interpolate({
-      x: current_datum.x0,
-      dx: current_datum.dx0
-    }, current_datum);
-    return function(t) {
-      var b;
-      b = interpolate(t);
-      current_datum.x0 = b.x;
-      current_datum.dx0 = b.dx;
-      return arc(b);
-    };
+  arcTween = function(d) {
+    var i;
+    i = d3.interpolate({
+      x: this.x0,
+      dx: this.dx0
+    }, d);
+    return (function(_this) {
+      return function(t) {
+        var b;
+        b = i(t);
+        _this.x0 = b.x;
+        _this.dx0 = b.dx;
+        return arc(b);
+      };
+    })(this);
   };
   stash = function(d) {
-    d.x0 = d.x;
-    return d.dx0 = d.dx;
+    this.x0 = d.x;
+    this.dx0 = d.dx;
   };
   my = function() {
     if (isDefault === true) {
@@ -57,11 +87,13 @@ drawSunburst = function(options) {
     }
   };
   init = function() {
-    var main_group, paths, svg;
+    var center_group, main_group, paths, svg;
     svg = d3.select('.sunburst-svg');
     main_group = svg.select('.main-group');
+    center_group = svg.select('.center-text-group');
     main_group.attr('transform', "translate(" + (width / 2) + ", " + (height * 0.52) + ")");
-    paths = main_group.datum(nested_data).selectAll('path').data(partition.nodes).enter().append('path').attr({
+    center_group.attr('transform', "translate(" + (width / 2) + ", " + (height / 2) + ")");
+    paths = main_group.selectAll('path').data(partition.nodes(nested_data)).enter().append('path').attr({
       display: function(d) {
         if (d.depth) {
           return null;
@@ -70,21 +102,36 @@ drawSunburst = function(options) {
         }
       },
       d: arc,
-      "class": 'sunburst-path'
+      "class": "sunburst-path"
     }).style('stroke', '#fff').style('fill', function(d) {
-      return colour((d.children ? d : d.parent).name);
+      if (d.depth === 1) {
+        return getColour((d.children ? d : d.parent).name);
+      } else {
+        return getSubColour((d.children ? d : d.parent).name);
+      }
     }).style('fill-rule', 'evenodd').each(stash);
+    center_group.append('text').text('center text').attr('text-anchor', 'middle');
     return d3.selectAll('.sunburst-path').on('mouseover', function(d) {
-      console.log('mouseover d');
-      return console.log(d);
+      var _d;
+      onMouseOver({
+        label: d.name,
+        value: d.value
+      });
+      _d = d;
+      return d3.selectAll('.sunburst-path').attr('opacity', function(d) {
+        if (_d !== d) {
+          return 0.3;
+        }
+      });
+    }).on('mouseout', function(d) {
+      return d3.selectAll('.sunburst-path').attr('opacity', 1);
     });
   };
   update = function() {
     var main_group, newSegments, svg;
     svg = d3.select('.sunburst-svg');
     main_group = svg.select('.main-group');
-    newSegments = main_group.datum(nested_data).selectAll('path').data(partition.nodes);
-    newSegments.transition().duration(1500).attrTween('d', arcTween).each(stash);
+    newSegments = main_group.selectAll('path.sunburst-path').data(partition.nodes(nested_data)).transition().duration(1500).attrTween('d', arcTween);
   };
   my.width = function(value) {
     if (!arguments.length) {
@@ -104,5 +151,3 @@ drawSunburst = function(options) {
 };
 
 module.exports = drawSunburst;
-
-//# sourceMappingURL=sunburst-partition.map

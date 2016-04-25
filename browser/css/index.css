@@ -6047,7 +6047,7 @@ path:first-child {
 
 .mb-page-header {
   margin-bottom: 20px;
-  background-image: url(/images/voronoi-bg-wide-nav.png);
+  background-image: url(/images/voronoi-bg-wide-nav.PNG);
   -webkit-box-shadow: 0px 0px 8px 6px rgba(0, 0, 0, 0.34);
   -moz-box-shadow: 0px 0px 8px 6px rgba(0, 0, 0, 0.34);
   box-shadow: 0px 0px 8px 6px rgba(0, 0, 0, 0.34);

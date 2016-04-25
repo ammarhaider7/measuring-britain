@@ -114,6 +114,7 @@ module.exports = {
 	CONTROLS_OPENED
 	CONTROLS_CLOSED
 	DISTRICT_SEARCH
+	mouseOver
 	fetchSunburstData
 	districtSearch
 	requestEthnicData

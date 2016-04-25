@@ -20,8 +20,7 @@ mapStateToProps = function(state) {
     updateSunburst: state.ethnicSunburst.updateSunburst,
     isDefault: state.ethnicSunburst.isDefault,
     isControlsOpen: state.ethnicSunburst.isControlsOpen,
-    district_query: state.ethnicSunburst.district_query,
-    updateSunburst: state.ethnicSunburst.updateSunburst
+    district_query: state.ethnicSunburst.district_query
   };
 };
 
@@ -56,5 +55,3 @@ Sunburst = connect(mapStateToProps, mapDispatchToProps)(SunburstComponent);
 module.exports = {
   Sunburst: Sunburst
 };
-
-//# sourceMappingURL=ethnic-sunburst-containers.map

@@ -14,5 +14,3 @@ EthnicSection = require('./ui/demographics/static-components/ethnic-diversity.js
 ReactDOM.render(React.createElement(EthnicSection, null), document.getElementById('mb_ethnic_diversity'));
 
 render();
-
-//# sourceMappingURL=ui.map

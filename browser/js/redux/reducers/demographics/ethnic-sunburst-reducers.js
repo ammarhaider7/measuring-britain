@@ -21,11 +21,11 @@ sunburstInitialState = {
   activeCategory: 'Geography (Countries)',
   activeValue: 'England \& Wales',
   data: {},
-  _mouseOverData: {},
   error: false,
   updateTable: false,
   updateSunburst: false,
-  district_query: 'default'
+  district_query: 'default',
+  _mouseOverData: {}
 };
 
 sunburstChart = function(state, action) {
@@ -84,7 +84,8 @@ sunburstChart = function(state, action) {
       });
     case MOUSE_OVER:
       return objectAssign({}, state, {
-        updateSunburst: false
+        updateSunburst: false,
+        _mouseOverData: action.mouseOverData
       });
     default:
       return state;
@@ -92,5 +93,3 @@ sunburstChart = function(state, action) {
 };
 
 module.exports = sunburstChart;
-
-//# sourceMappingURL=ethnic-sunburst-reducers.map

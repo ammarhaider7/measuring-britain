@@ -33,6 +33,7 @@ parse = function(dataArray) {
   nested_data = nested_data.map(function(ob) {
     return {
       name: ob.key,
+      size: total_item.obs_value.value,
       children: ob.values.map(function(ob) {
         return {
           name: ob.key,
@@ -65,5 +66,3 @@ parse = function(dataArray) {
 };
 
 module.exports = parse;
-
-//# sourceMappingURL=ethnic-sunburst-parser.map

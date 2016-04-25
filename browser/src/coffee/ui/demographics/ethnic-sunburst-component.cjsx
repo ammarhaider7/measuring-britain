@@ -27,6 +27,7 @@ SunburstComponent = React.createClass
         container: @refs.sunburstSvg
         data: @props.data
         isDefault: @props.isDefault
+        onMouseOver: @props.onMouseOver
       }
 
       sunburst()
@@ -42,6 +43,7 @@ SunburstComponent = React.createClass
           ref="sunburstSvg"
         >
           <g className="main-group"></g>
+          <g className="center-text-group"></g>  
         </svg>
       </div>
     </div>

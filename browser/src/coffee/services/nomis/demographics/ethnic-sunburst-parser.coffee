@@ -37,15 +37,14 @@ parse = (dataArray) ->
 	nested_data = nested_data.map (ob) ->
 		return {
 			name: ob.key
+			size: total_item.obs_value.value
 			children: ob.values.map (ob) ->
 				return {
 					name: ob.key
 					size: ob.values
 				}
 		}
-		
-
-
+	
 	# Utility methods
 	utils = 
 		getValues: (array) ->

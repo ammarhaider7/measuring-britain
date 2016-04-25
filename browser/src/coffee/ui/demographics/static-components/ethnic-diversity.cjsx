@@ -24,7 +24,7 @@ EthnicSection = ->
 				<p>The Ethnic Diversity chart shows the distribution of the population by age group and gender.</p>    
 			</div>
 		</div>
-		<div className="col-sm-8">
+		<div className="col-sm-12">
 			<div id="sunburst-controls"></div>
 			<div id="sunburst-component"></div>
 		</div>

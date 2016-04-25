@@ -124,6 +124,7 @@ module.exports = {
   CONTROLS_OPENED: CONTROLS_OPENED,
   CONTROLS_CLOSED: CONTROLS_CLOSED,
   DISTRICT_SEARCH: DISTRICT_SEARCH,
+  mouseOver: mouseOver,
   fetchSunburstData: fetchSunburstData,
   districtSearch: districtSearch,
   requestEthnicData: requestEthnicData,
@@ -135,5 +136,3 @@ module.exports = {
   controlsOpened: controlsOpened,
   controlsClosed: controlsClosed
 };
-
-//# sourceMappingURL=ethnic-sunburst-actions.map
