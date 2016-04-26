@@ -30,7 +30,9 @@ SunburstComponent = React.createClass({displayName: "SunburstComponent",
         container: this.refs.sunburstSvg,
         data: this.props.data,
         isDefault: this.props.isDefault,
-        onMouseOver: this.props.onMouseOver
+        onMouseOver: this.props.onMouseOver,
+        activeCategory: this.props.activeCategory,
+        activeValue: this.props.activeValue
       });
       return sunburst();
     }
@@ -55,8 +57,12 @@ SunburstComponent = React.createClass({displayName: "SunburstComponent",
       "className": "main-group"
     }), React.createElement("g", {
       "className": "center-text-group"
+    }), React.createElement("g", {
+      "className": "total-value-group"
     }))));
   }
 });
 
 module.exports = SunburstComponent;
+
+//# sourceMappingURL=ethnic-sunburst-component.map

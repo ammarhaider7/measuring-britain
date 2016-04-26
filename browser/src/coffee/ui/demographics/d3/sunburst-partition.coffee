@@ -2,9 +2,13 @@ d3 = require 'd3'
 
 drawSunburst = (options) ->
 
-	{ container, data, isDefault, onMouseOver } = options
-	nested_data = data.d3_nested_data
+	{ container, data, isDefault, onMouseOver, activeCategory, activeValue } = options
+	window.nested_data = data.d3_nested_data
 	total_item = data.total_item
+	nested_data_init = {
+		name: "ethnic_diversity"
+		children: []
+	}
 
 	getColour = (name) ->
 
@@ -34,9 +38,11 @@ drawSunburst = (options) ->
 		bottom: 25
 		left: 0
 		middle: 0
+		text: 50
 
 	radius = Math.min width, (height - margin.bottom - margin.top) / 2
 	colour = d3.scale.category10()
+	format = d3.format '.3s'
 
 	#Partition and arc
 	partition = d3.layout.partition()
@@ -89,10 +95,12 @@ drawSunburst = (options) ->
 		svg = d3.select '.sunburst-svg'
 		main_group = svg.select '.main-group'
 		center_group = svg.select '.center-text-group'
+		center_total_value_group = svg.select '.total-value-group'
 
 		# Transforms
 		main_group.attr 'transform', "translate(#{ width / 2 }, #{ height * 0.52 })"
 		center_group.attr 'transform', "translate(#{ width / 2 }, #{ height / 2 })"
+		center_total_value_group.attr 'transform', "translate(#{ width / 2 }, #{ (height / 2) + margin.text })"
 
 		paths = main_group.selectAll 'path'
 			.data partition.nodes nested_data
@@ -114,8 +122,22 @@ drawSunburst = (options) ->
 		  	.each stash
 
 		center_group.append 'text'
-			.text 'center text'
+			.attr 'opacity', 0
+			.text activeValue
 			.attr 'text-anchor', 'middle'
+			.attr 'class', 'active-value-text'
+			.transition()
+			.duration 1500
+			.attr 'opacity', 1
+
+		center_total_value_group.append 'text'
+			.attr 'opacity', 0
+			.text format total_item.obs_value.value
+			.attr 'text-anchor', 'middle'
+			.attr 'class', 'total-value-text'
+			.transition()
+			.duration 1500
+			.attr 'opacity', 1
 
 		# dispatch onMouseOver action here
 		d3.selectAll '.sunburst-path'
@@ -141,6 +163,26 @@ drawSunburst = (options) ->
 		# update the chart here
 		svg = d3.select '.sunburst-svg'
 		main_group = svg.select '.main-group'
+		center_value_text = svg.select '.active-value-text'
+		total_value_text = svg.select '.total-value-text'
+
+		center_value_text
+			.transition()
+			.duration 500
+			.attr 'opacity', 0
+			.transition()
+			.duration 1000
+			.text activeValue
+			.attr 'opacity', 1
+
+		total_value_text
+			.transition()
+			.duration 500
+			.attr 'opacity', 0
+			.transition()
+			.duration 1000
+			.text format total_item.obs_value.value
+			.attr 'opacity', 1
 
 		newSegments = main_group.selectAll 'path.sunburst-path'
 			.data partition.nodes nested_data

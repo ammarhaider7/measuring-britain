@@ -4,10 +4,14 @@ var d3, drawSunburst;
 d3 = require('d3');
 
 drawSunburst = function(options) {
-  var arc, arcTween, colour, container, data, getColour, getSubColour, height, init, isDefault, margin, my, nested_data, onMouseOver, partition, radius, ref, ref1, stash, total_item, update, width;
-  container = options.container, data = options.data, isDefault = options.isDefault, onMouseOver = options.onMouseOver;
-  nested_data = data.d3_nested_data;
+  var activeCategory, activeValue, arc, arcTween, colour, container, data, format, getColour, getSubColour, height, init, isDefault, margin, my, nested_data_init, onMouseOver, partition, radius, ref, ref1, stash, total_item, update, width;
+  container = options.container, data = options.data, isDefault = options.isDefault, onMouseOver = options.onMouseOver, activeCategory = options.activeCategory, activeValue = options.activeValue;
+  window.nested_data = data.d3_nested_data;
   total_item = data.total_item;
+  nested_data_init = {
+    name: "ethnic_diversity",
+    children: []
+  };
   getColour = function(name) {
     switch (name) {
       case 'White':
@@ -43,10 +47,12 @@ drawSunburst = function(options) {
     right: 0,
     bottom: 25,
     left: 0,
-    middle: 0
+    middle: 0,
+    text: 50
   };
   radius = Math.min(width, (height - margin.bottom - margin.top) / 2);
   colour = d3.scale.category10();
+  format = d3.format('.3s');
   partition = d3.layout.partition().sort(null).size([2 * Math.PI, radius * radius]).value(function(d) {
     return d.size;
   });
@@ -87,12 +93,14 @@ drawSunburst = function(options) {
     }
   };
   init = function() {
-    var center_group, main_group, paths, svg;
+    var center_group, center_total_value_group, main_group, paths, svg;
     svg = d3.select('.sunburst-svg');
     main_group = svg.select('.main-group');
     center_group = svg.select('.center-text-group');
+    center_total_value_group = svg.select('.total-value-group');
     main_group.attr('transform', "translate(" + (width / 2) + ", " + (height * 0.52) + ")");
     center_group.attr('transform', "translate(" + (width / 2) + ", " + (height / 2) + ")");
+    center_total_value_group.attr('transform', "translate(" + (width / 2) + ", " + ((height / 2) + margin.text) + ")");
     paths = main_group.selectAll('path').data(partition.nodes(nested_data)).enter().append('path').attr({
       display: function(d) {
         if (d.depth) {
@@ -110,7 +118,8 @@ drawSunburst = function(options) {
         return getSubColour((d.children ? d : d.parent).name);
       }
     }).style('fill-rule', 'evenodd').each(stash);
-    center_group.append('text').text('center text').attr('text-anchor', 'middle');
+    center_group.append('text').attr('opacity', 0).text(activeValue).attr('text-anchor', 'middle').attr('class', 'active-value-text').transition().duration(1500).attr('opacity', 1);
+    center_total_value_group.append('text').attr('opacity', 0).text(format(total_item.obs_value.value)).attr('text-anchor', 'middle').attr('class', 'total-value-text').transition().duration(1500).attr('opacity', 1);
     return d3.selectAll('.sunburst-path').on('mouseover', function(d) {
       var _d;
       onMouseOver({
@@ -128,9 +137,13 @@ drawSunburst = function(options) {
     });
   };
   update = function() {
-    var main_group, newSegments, svg;
+    var center_value_text, main_group, newSegments, svg, total_value_text;
     svg = d3.select('.sunburst-svg');
     main_group = svg.select('.main-group');
+    center_value_text = svg.select('.active-value-text');
+    total_value_text = svg.select('.total-value-text');
+    center_value_text.transition().duration(500).attr('opacity', 0).transition().duration(1000).text(activeValue).attr('opacity', 1);
+    total_value_text.transition().duration(500).attr('opacity', 0).transition().duration(1000).text(format(total_item.obs_value.value)).attr('opacity', 1);
     newSegments = main_group.selectAll('path.sunburst-path').data(partition.nodes(nested_data)).transition().duration(1500).attrTween('d', arcTween);
   };
   my.width = function(value) {
@@ -151,3 +164,5 @@ drawSunburst = function(options) {
 };
 
 module.exports = drawSunburst;
+
+//# sourceMappingURL=sunburst-partition.map

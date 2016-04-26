@@ -28,6 +28,8 @@ SunburstComponent = React.createClass
         data: @props.data
         isDefault: @props.isDefault
         onMouseOver: @props.onMouseOver
+        activeCategory: @props.activeCategory
+        activeValue: @props.activeValue
       }
 
       sunburst()
@@ -44,6 +46,7 @@ SunburstComponent = React.createClass
         >
           <g className="main-group"></g>
           <g className="center-text-group"></g>  
+          <g className="total-value-group"></g>   
         </svg>
       </div>
     </div>
