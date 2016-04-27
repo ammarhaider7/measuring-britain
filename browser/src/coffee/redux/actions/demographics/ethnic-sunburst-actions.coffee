@@ -11,6 +11,9 @@ FILTER_USED = "S_FILTER_USED"
 CONTROLS_OPENED = "S_CONTROLS_OPENED"
 CONTROLS_CLOSED = "S_CONTROLS_CLOSED"
 DISTRICT_SEARCH = "S_DISTRICT_SEARCH"
+INIT_SUNBURST = "INIT_SUNBURST"
+INIT_SUNBURST_OFF = "INIT_SUNBURST_OFF"
+INIT_DONE = "INIT_DONE"
 
 toggleValue = (value, selectionOption) ->
 	{
@@ -48,6 +51,21 @@ mouseOver = (mouseOverData) ->
 	{
 		type: MOUSE_OVER
 		mouseOverData: mouseOverData 
+	}
+
+initSunburst = () ->
+	{
+		type: INIT_SUNBURST
+	}
+
+initSunburstOff = () ->
+	{
+		type: INIT_SUNBURST_OFF
+	}
+
+initDone = () ->
+	{
+		type: INIT_DONE
 	}
 
 requestEthnicData = (filterOptions) ->
@@ -114,6 +132,12 @@ module.exports = {
 	CONTROLS_OPENED
 	CONTROLS_CLOSED
 	DISTRICT_SEARCH
+	INIT_SUNBURST
+	INIT_SUNBURST_OFF
+	INIT_DONE
+	initDone
+	initSunburst
+	initSunburstOff
 	mouseOver
 	fetchSunburstData
 	districtSearch

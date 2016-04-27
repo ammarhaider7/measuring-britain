@@ -4,8 +4,8 @@ var d3, drawSunburst;
 d3 = require('d3');
 
 drawSunburst = function(options) {
-  var activeCategory, activeValue, arc, arcTween, colour, container, data, format, getColour, getSubColour, height, init, isDefault, margin, my, nested_data_init, onMouseOver, partition, radius, ref, ref1, stash, total_item, update, width;
-  container = options.container, data = options.data, isDefault = options.isDefault, onMouseOver = options.onMouseOver, activeCategory = options.activeCategory, activeValue = options.activeValue;
+  var activeCategory, activeValue, arc, arcTween, colour, container, data, format, getColour, getSubColour, height, initTween, isDefault, margin, my, nested_data_init, onInitDone, onMouseOver, partition, radius, ref, ref1, stash, total_item, width;
+  container = options.container, data = options.data, isDefault = options.isDefault, onMouseOver = options.onMouseOver, activeCategory = options.activeCategory, activeValue = options.activeValue, onInitDone = options.onInitDone;
   window.nested_data = data.d3_nested_data;
   total_item = data.total_item;
   nested_data_init = {
@@ -15,29 +15,29 @@ drawSunburst = function(options) {
   getColour = function(name) {
     switch (name) {
       case 'White':
-        return '#FF8380';
+        return '#FFCFA2';
       case 'Black':
-        return '#8c564b';
+        return '#695D5D';
       case 'Asian':
-        return '#31a354';
+        return '#C55039';
       case 'Mixed':
         return '#ff7f0e';
       case 'Other':
-        return '#1f77b4';
+        return '#DADADA';
     }
   };
   getSubColour = function(name) {
     switch (name) {
       case 'White':
-        return '#F3A3A1';
+        return '#FFDBB9';
       case 'Black':
-        return '#AF7B70';
+        return '#887A7A';
       case 'Asian':
-        return '#74c476';
+        return '#E2735D';
       case 'Mixed':
         return '#FFA352';
       case 'Other':
-        return '#65B1E6';
+        return '#DADADA';
     }
   };
   width = (ref = container.offsetWidth) != null ? ref : 750;
@@ -81,18 +81,26 @@ drawSunburst = function(options) {
       };
     })(this);
   };
+  initTween = function(d) {
+    var i;
+    i = d3.interpolate({
+      x: 0,
+      dx: 0
+    }, d);
+    return (function(_this) {
+      return function(t) {
+        var b;
+        b = i(t);
+        return arc(b);
+      };
+    })(this);
+  };
   stash = function(d) {
     this.x0 = d.x;
     this.dx0 = d.dx;
   };
-  my = function() {
-    if (isDefault === true) {
-      return init();
-    } else if (isDefault === false) {
-      return update();
-    }
-  };
-  init = function() {
+  my = {};
+  my.init = function() {
     var center_group, center_total_value_group, main_group, paths, svg;
     svg = d3.select('.sunburst-svg');
     main_group = svg.select('.main-group');
@@ -109,7 +117,6 @@ drawSunburst = function(options) {
           return 'none';
         }
       },
-      d: arc,
       "class": "sunburst-path"
     }).style('stroke', '#fff').style('fill', function(d) {
       if (d.depth === 1) {
@@ -117,10 +124,10 @@ drawSunburst = function(options) {
       } else {
         return getSubColour((d.children ? d : d.parent).name);
       }
-    }).style('fill-rule', 'evenodd').each(stash);
+    }).style('fill-rule', 'evenodd').transition().duration(1500).attrTween('d', initTween).each(stash);
     center_group.append('text').attr('opacity', 0).text(activeValue).attr('text-anchor', 'middle').attr('class', 'active-value-text').transition().duration(1500).attr('opacity', 1);
     center_total_value_group.append('text').attr('opacity', 0).text(format(total_item.obs_value.value)).attr('text-anchor', 'middle').attr('class', 'total-value-text').transition().duration(1500).attr('opacity', 1);
-    return d3.selectAll('.sunburst-path').on('mouseover', function(d) {
+    d3.selectAll('.sunburst-path').on('mouseover', function(d) {
       var _d;
       onMouseOver({
         label: d.name,
@@ -135,8 +142,9 @@ drawSunburst = function(options) {
     }).on('mouseout', function(d) {
       return d3.selectAll('.sunburst-path').attr('opacity', 1);
     });
+    return onInitDone();
   };
-  update = function() {
+  my.update = function() {
     var center_value_text, main_group, newSegments, svg, total_value_text;
     svg = d3.select('.sunburst-svg');
     main_group = svg.select('.main-group');
@@ -164,5 +172,3 @@ drawSunburst = function(options) {
 };
 
 module.exports = drawSunburst;
-
-//# sourceMappingURL=sunburst-partition.map

@@ -2,7 +2,7 @@ d3 = require 'd3'
 
 drawSunburst = (options) ->
 
-	{ container, data, isDefault, onMouseOver, activeCategory, activeValue } = options
+	{ container, data, isDefault, onMouseOver, activeCategory, activeValue, onInitDone } = options
 	window.nested_data = data.d3_nested_data
 	total_item = data.total_item
 	nested_data_init = {
@@ -13,20 +13,20 @@ drawSunburst = (options) ->
 	getColour = (name) ->
 
 		switch name
-			when 'White' then '#FF8380'
-			when 'Black' then '#8c564b'
-			when 'Asian' then '#31a354'
+			when 'White' then '#FFCFA2'
+			when 'Black' then '#695D5D'
+			when 'Asian' then '#C55039'
 			when 'Mixed' then '#ff7f0e'
-			when 'Other' then '#1f77b4'
+			when 'Other' then '#DADADA'
 
 	getSubColour = (name) ->
 
 		switch name
-			when 'White' then '#F3A3A1'
-			when 'Black' then '#AF7B70'
-			when 'Asian' then '#74c476'
+			when 'White' then '#FFDBB9'
+			when 'Black' then '#887A7A'
+			when 'Asian' then '#E2735D'
 			when 'Mixed' then '#FFA352'
-			when 'Other' then '#65B1E6'
+			when 'Other' then '#DADADA'
 
 	width = container.offsetWidth ? 750
 	height = container.offsetHeight ? 500
@@ -71,23 +71,32 @@ drawSunburst = (options) ->
 			@dx0 = b.dx
 			arc b
 
+	# Interpolate the arcs for initial draw
+	initTween = (d) ->
+
+		i = d3.interpolate { x: 0, dx: 0 }, d
+		return (t) =>
+			b = i t
+			arc b
+
 	 # Stash the old values for transition.
 	stash = (d) ->
 		@x0 = d.x
 		@dx0 = d.dx
 		return
 
-	my = ->
-		# generate chart here
-		if isDefault is yes
+	my = {}
+	# my = ->
+	# 	# generate chart here
+	# 	if isDefault is yes
 
-			init()
+	# 		init()
 
-		else if isDefault is no
+	# 	else if isDefault is no
 
-			update()
+	# 		update()
 
-	init = ->
+	my.init = ->
 
 		# initiate the chart's first render
 
@@ -108,7 +117,7 @@ drawSunburst = (options) ->
 		  	.attr {
 		  		display: (d) ->
 		  			return if d.depth then null else 'none'
-		  		d: arc
+		  		# d: arc
 		  		class: "sunburst-path"
 		  	}
 		  	.style 'stroke', '#fff'
@@ -117,8 +126,10 @@ drawSunburst = (options) ->
 		  			return getColour (if d.children then d else d.parent).name
 		  		else
 		  			return getSubColour (if d.children then d else d.parent).name
-
 		  	.style 'fill-rule', 'evenodd'
+		  	.transition()
+		  	.duration 1500
+		  	.attrTween 'd', initTween
 		  	.each stash
 
 		center_group.append 'text'
@@ -157,8 +168,10 @@ drawSunburst = (options) ->
 		 	.on 'mouseout', (d) ->
 		 		d3.selectAll '.sunburst-path'
 		 			.attr 'opacity', 1
+
+		onInitDone()
  
-	update = ->
+	my.update = ->
 
 		# update the chart here
 		svg = d3.select '.sunburst-svg'

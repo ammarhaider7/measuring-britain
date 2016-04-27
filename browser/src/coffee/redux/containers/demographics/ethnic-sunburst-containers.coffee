@@ -6,7 +6,10 @@
   fetchSunburstData
   controlsOpened
   controlsClosed
-  districtSearch } = require '../../actions/demographics/ethnic-sunburst-actions.js'
+  districtSearch
+  initSunburst
+  initSunburstOff
+  initDone } = require '../../actions/demographics/ethnic-sunburst-actions.js'
 
 SunburstComponent = require '../../../ui/demographics/ethnic-sunburst-component.js'
 # TableComponent = require '../../../ui/demographics/pyramid-table.js'
@@ -25,6 +28,8 @@ mapStateToProps = (state) ->
 	isDefault: state.ethnicSunburst.isDefault
 	isControlsOpen: state.ethnicSunburst.isControlsOpen
 	district_query: state.ethnicSunburst.district_query
+	init_sunburst: state.ethnicSunburst.init_sunburst
+	init_done: state.ethnicSunburst.init_done
 
 # mapStateToPropsPyrTable = (state) ->
 
@@ -50,6 +55,12 @@ mapDispatchToProps = (dispatch) ->
 		dispatch mouseOver mouseOverData
 	onDistrictSearch: (query) ->
 		dispatch districtSearch query
+	onInitSunburst: () ->
+		dispatch initSunburst()
+	offInitSunburst: () ->
+		dispatch initSunburstOff()
+	onInitDone: () ->
+		dispatch initDone()
 
 Sunburst = connect(
 	mapStateToProps,
