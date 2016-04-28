@@ -7,8 +7,6 @@ FancySelect = require('react-select');
 
 Filter = require('./chart-controls-filter.js');
 
-window.$ = require('jQuery');
-
 Controls = React.createClass({displayName: "Controls",
   render: function() {
     return React.createElement("div", {

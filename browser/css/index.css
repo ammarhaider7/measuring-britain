@@ -6168,11 +6168,11 @@ path:first-child {
     .controls-container .mb-btn-fetching:hover, .controls-container .mb-btn-fetching:active, .controls-container .mb-btn-fetching:focus {
       background-color: #EA87A1; }
 
-.total-value-text {
+.percent-text {
   font-size: 36px;
   font-weight: bold; }
 
-.active-value-text {
+.active-value-text, .ethnicity-text, .total-value-text {
   font-size: 26px; }
 
 .sunburst .mb-spinner {

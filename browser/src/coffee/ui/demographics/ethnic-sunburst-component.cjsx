@@ -40,6 +40,7 @@ SunburstComponent = React.createClass
   reactDrawSunburst: ->
 
     sunburst = drawSunburst {
+
       container: @refs.sunburstSvg
       data: @props.data
       isDefault: @props.isDefault
@@ -67,7 +68,7 @@ SunburstComponent = React.createClass
 
   render: ->
 
-    <div className="col-xs-12 col-sm-8 mb-no-padding">
+    <div className="col-xs-12 col-sm-12 mb-no-padding">
       <div className="sunburst mt-medium">
         <ControlsNew {...@props} omitted_category="ethnicities" categories=category_options values=value_options />
         <svg
@@ -76,8 +77,11 @@ SunburstComponent = React.createClass
           ref="sunburstSvg"
         >
           <g className="main-group"></g>
+          <g className="key-group"></g>  
           <g className="center-text-group"></g>  
-          <g className="total-value-group"></g>   
+          <g className="ethnic-group-text"></g>   
+          <g className="total-value-group"></g>  
+          <g className="percentage-group"></g>    
         </svg>
       </div>
     </div>

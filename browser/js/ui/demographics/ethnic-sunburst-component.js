@@ -66,7 +66,7 @@ SunburstComponent = React.createClass({displayName: "SunburstComponent",
   },
   render: function() {
     return React.createElement("div", {
-      "className": "col-xs-12 col-sm-8 mb-no-padding"
+      "className": "col-xs-12 col-sm-12 mb-no-padding"
     }, React.createElement("div", {
       "className": "sunburst mt-medium"
     }, React.createElement(ControlsNew, React.__spread({}, this.props, {
@@ -83,9 +83,15 @@ SunburstComponent = React.createClass({displayName: "SunburstComponent",
     }, React.createElement("g", {
       "className": "main-group"
     }), React.createElement("g", {
+      "className": "key-group"
+    }), React.createElement("g", {
       "className": "center-text-group"
     }), React.createElement("g", {
+      "className": "ethnic-group-text"
+    }), React.createElement("g", {
       "className": "total-value-group"
+    }), React.createElement("g", {
+      "className": "percentage-group"
     }))));
   }
 });

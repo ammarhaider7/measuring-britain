@@ -1,7 +1,7 @@
 React = require 'react'
 FancySelect = require 'react-select'
 Filter = require './chart-controls-filter.js'
-window.$ = require 'jQuery'
+# window.$ = require 'jQuery'
 
 Controls = React.createClass 
   render: ->  

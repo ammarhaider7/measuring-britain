@@ -3,12 +3,41 @@ d3 = require 'd3'
 drawSunburst = (options) ->
 
 	{ container, data, isDefault, onMouseOver, activeCategory, activeValue, onInitDone } = options
+
 	window.nested_data = data.d3_nested_data
+
 	total_item = data.total_item
+
+	# total value
+	total_item_value = total_item.obs_value.value
+	
 	nested_data_init = {
 		name: "ethnic_diversity"
 		children: []
 	}
+
+	ethnic_group_arr = [
+		{
+			name: 'White'
+			colour: '#FFCFA2'
+		}
+		{
+			name: 'Black'
+			colour: '#695D5D'
+		}
+		{
+			name: 'Asian'
+			colour: '#C55039'
+		}
+		{
+			name: 'Mixed'
+			colour: '#ff7f0e'
+		}
+		{
+			name: 'Other'
+			colour: '#DADADA'
+		}
+	]
 
 	getColour = (name) ->
 
@@ -36,13 +65,15 @@ drawSunburst = (options) ->
 		top: 25
 		right: 0
 		bottom: 25
-		left: 0
-		middle: 0
+		left: 25
+		middle: 15
 		text: 50
+		p: 5
 
 	radius = Math.min width, (height - margin.bottom - margin.top) / 2
-	colour = d3.scale.category10()
+	# colour = d3.scale.category10()
 	format = d3.format '.3s'
+	percFormat = d3.format ',.1%'
 
 	#Partition and arc
 	partition = d3.layout.partition()
@@ -60,6 +91,11 @@ drawSunburst = (options) ->
 			return Math.sqrt d.y
 		.outerRadius (d) ->
 			return Math.sqrt d.y + d.dy
+
+	# y scale for key rects
+	y = d3.scale.ordinal()
+		.domain d3.range ethnic_group_arr.length
+		.rangeRoundBands [0, height/2], 0
 
 	# Interpolate the arcs in data space.
 	arcTween = (d) ->
@@ -96,6 +132,48 @@ drawSunburst = (options) ->
 
 	# 		update()
 
+	attachHoverHandlers = ->
+
+		svg = d3.select '.sunburst-svg'
+		center_total_value_group = svg.select '.total-value-group'
+		center_ethnic_group = svg.select '.ethnic-group-text'
+		center_percent_group = svg.select '.percentage-group'
+
+		d3.selectAll '.sunburst-path'
+		 	.on 'mouseover', (d) ->
+
+		 		# dispatch onMouseOver action here
+		 		onMouseOver {
+		 			label: d.name
+		 			value: d.value
+		 		}
+
+		 		# set opacity of arcs
+		 		_d = d
+		 		d3.selectAll '.sunburst-path'
+		 			.attr 'opacity', (d) ->
+		 				unless _d is d
+		 					return 0.3
+
+		 		# update inner circle text values
+		 		center_ethnic_group.select 'text'
+		 			.text d.name
+		 		center_total_value_group.select 'text'
+		 			.text format d.value
+		 		center_percent_group.select 'text'
+		 			.attr 'fill', if d.depth is 1 then getColour d.name else getColour d.parent.name
+		 			.text percFormat d.value / total_item_value
+		 	.on 'mouseout', (d) ->
+		 		d3.selectAll '.sunburst-path'
+		 			.attr 'opacity', 1
+		 		center_ethnic_group.select 'text'
+		 			.text 'All ethnic groups'
+		 		center_total_value_group.select 'text'
+		 			.text format total_item_value
+		 		center_percent_group.select 'text'
+		 			.text '100%'
+		 			.attr 'fill', '#333'
+
 	my.init = ->
 
 		# initiate the chart's first render
@@ -105,11 +183,20 @@ drawSunburst = (options) ->
 		main_group = svg.select '.main-group'
 		center_group = svg.select '.center-text-group'
 		center_total_value_group = svg.select '.total-value-group'
+		center_ethnic_group = svg.select '.ethnic-group-text'
+		center_percent_group = svg.select '.percentage-group'
+		key_group = svg.select '.key-group'
+
+		# halved height for use below
+		half_height = height * 0.52
 
 		# Transforms
-		main_group.attr 'transform', "translate(#{ width / 2 }, #{ height * 0.52 })"
-		center_group.attr 'transform', "translate(#{ width / 2 }, #{ height / 2 })"
-		center_total_value_group.attr 'transform', "translate(#{ width / 2 }, #{ (height / 2) + margin.text })"
+		main_group.attr 'transform', "translate(#{ width / 2 }, #{ half_height })"
+		center_group.attr 'transform', "translate(#{ width / 2 }, #{ half_height + margin.middle - margin.top * 2 })"
+		center_ethnic_group.attr 'transform', "translate(#{ width / 2 }, #{ half_height + margin.text - margin.top * 2 })"
+		center_percent_group.attr 'transform', "translate(#{ width / 2 }, #{ half_height + (margin.text * 2) - margin.top * 2 })"
+		center_total_value_group.attr 'transform', "translate(#{ width / 2 }, #{ half_height + (margin.text * 3) - margin.top * 2 })"
+		key_group.attr 'transform', "translate(#{ margin.left }, #{ margin.top })"
 
 		paths = main_group.selectAll 'path'
 			.data partition.nodes nested_data
@@ -127,7 +214,7 @@ drawSunburst = (options) ->
 		  		else
 		  			return getSubColour (if d.children then d else d.parent).name
 		  	.style 'fill-rule', 'evenodd'
-		  	.transition()
+		   .transition()
 		  	.duration 1500
 		  	.attrTween 'd', initTween
 		  	.each stash
@@ -137,38 +224,54 @@ drawSunburst = (options) ->
 			.text activeValue
 			.attr 'text-anchor', 'middle'
 			.attr 'class', 'active-value-text'
-			.transition()
+		  .transition()
+			.duration 1500
+			.attr 'opacity', 1
+
+		center_ethnic_group.append 'text'
+			.attr 'opacity', 0
+			.text 'All ethnic groups'
+			.attr 'text-anchor', 'middle'
+			.attr 'class', 'ethnicity-text'
+		  .transition()
+			.duration 1500
+			.attr 'opacity', 1
+
+		center_percent_group.append 'text'
+			.attr 'opacity', 0
+			.text '100%'
+			.attr 'text-anchor', 'middle'
+			.attr 'class', 'percent-text'
+		  .transition()
 			.duration 1500
 			.attr 'opacity', 1
 
 		center_total_value_group.append 'text'
 			.attr 'opacity', 0
-			.text format total_item.obs_value.value
+			.text format total_item_value
 			.attr 'text-anchor', 'middle'
 			.attr 'class', 'total-value-text'
-			.transition()
+		  .transition()
 			.duration 1500
 			.attr 'opacity', 1
 
-		# dispatch onMouseOver action here
-		d3.selectAll '.sunburst-path'
-		 	.on 'mouseover', (d) ->
+		# Create key rects
+		key_group.selectAll 'rect'
+			.data ethnic_group_arr
+		  .enter().append 'rect'
+		  	.attr {
+		  		x: 0
+		  		y: (d, i) ->
+		  			y i
+		  		width: margin.p * 3
+		  		height: margin.p * 3
+		  		fill: (d) ->
+		  			return d.colour
+		  	}
 
-		 		onMouseOver {
-		 			label: d.name
-		 			value: d.value
-		 		}
+		attachHoverHandlers()
 
-		 		_d = d
-
-		 		d3.selectAll '.sunburst-path'
-		 			.attr 'opacity', (d) ->
-		 				unless _d is d
-		 					return 0.3
-		 	.on 'mouseout', (d) ->
-		 		d3.selectAll '.sunburst-path'
-		 			.attr 'opacity', 1
-
+		# dispatch to update init_done var on state
 		onInitDone()
  
 	my.update = ->
@@ -178,9 +281,11 @@ drawSunburst = (options) ->
 		main_group = svg.select '.main-group'
 		center_value_text = svg.select '.active-value-text'
 		total_value_text = svg.select '.total-value-text'
+		percent_text = svg.select '.percent-text'
+		ethnic_text = svg.select '.ethnicity-text'
 
 		center_value_text
-			.transition()
+		  .transition()
 			.duration 500
 			.attr 'opacity', 0
 			.transition()
@@ -189,7 +294,35 @@ drawSunburst = (options) ->
 			.attr 'opacity', 1
 
 		total_value_text
+		  .transition()
+			.duration 500
+			.attr 'opacity', 0
 			.transition()
+			.duration 1000
+			.text format total_item_value
+			.attr 'opacity', 1
+
+		percent_text
+		  .transition()
+			.duration 500
+			.attr 'opacity', 0
+			.transition()
+			.duration 1000
+			.attr 'fill', '#333'
+			.text '100%'
+			.attr 'opacity', 1
+
+		ethnic_text
+		  .transition()
+			.duration 500
+			.attr 'opacity', 0
+			.transition()
+			.duration 1000
+			.text 'All ethnic groups'
+			.attr 'opacity', 1
+
+		total_value_text
+		  .transition()
 			.duration 500
 			.attr 'opacity', 0
 			.transition()
@@ -199,9 +332,11 @@ drawSunburst = (options) ->
 
 		newSegments = main_group.selectAll 'path.sunburst-path'
 			.data partition.nodes nested_data
-			.transition()
+		  .transition()
 		    .duration 1500
 			.attrTween 'd', arcTween
+
+		attachHoverHandlers()
 
 		return
 
