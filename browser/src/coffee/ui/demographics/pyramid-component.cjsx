@@ -1,8 +1,9 @@
 React = require 'react'
 d3 = require 'd3'
-Controls = require '../chart-controls.js'
+# Controls = require '../chart-controls.js'
+PyramidControls = require './chart-controls-pyramid.js'
 data = require './data/pyramid-chart-controls.js'
-FancySelect = require 'react-select'
+# FancySelect = require 'react-select'
 drawPyramid = require './d3/pyramid.js'
 
 value_options = {
@@ -10,6 +11,7 @@ value_options = {
 	ethnicities: data.ethnic_groups
 	religions: data.religions
 	regions: data.regions
+	countries: data.countries
 }
 
 PyramidComponent = React.createClass
@@ -56,7 +58,7 @@ PyramidComponent = React.createClass
 	render: ->
 
 		<div className="col-xs-12 col-sm-8 mt-medium">
-	  		<Controls {...@props} categories=data.category_options values=value_options />
+	  		<PyramidControls {...@props} categories=data.category_options values=value_options />
 		  	<div className="pyramid mt-medium">
 		  		<img src="./images/mb_ajax_loader.gif" 
 		  			className={ 

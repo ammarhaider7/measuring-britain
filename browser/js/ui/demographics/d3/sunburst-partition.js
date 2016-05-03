@@ -85,7 +85,7 @@ drawSunburst = function(options) {
   }).outerRadius(function(d) {
     return Math.sqrt(d.y + d.dy);
   });
-  y = d3.scale.ordinal().domain(d3.range(ethnic_group_arr.length)).rangeRoundBands([0, height / 2], 0);
+  y = d3.scale.ordinal().domain(d3.range(ethnic_group_arr.length)).rangeRoundBands([0, height / 3], 0);
   arcTween = function(d) {
     var i;
     i = d3.interpolate({
@@ -150,7 +150,7 @@ drawSunburst = function(options) {
     });
   };
   my.init = function() {
-    var center_ethnic_group, center_group, center_percent_group, center_total_value_group, half_height, key_group, main_group, paths, svg;
+    var center_ethnic_group, center_group, center_percent_group, center_total_value_group, half_height, key_group, key_text_group, main_group, paths, svg;
     svg = d3.select('.sunburst-svg');
     main_group = svg.select('.main-group');
     center_group = svg.select('.center-text-group');
@@ -158,6 +158,7 @@ drawSunburst = function(options) {
     center_ethnic_group = svg.select('.ethnic-group-text');
     center_percent_group = svg.select('.percentage-group');
     key_group = svg.select('.key-group');
+    key_text_group = svg.select('.key-text-group');
     half_height = height * 0.52;
     main_group.attr('transform', "translate(" + (width / 2) + ", " + half_height + ")");
     center_group.attr('transform', "translate(" + (width / 2) + ", " + (half_height + margin.middle - margin.top * 2) + ")");
@@ -165,6 +166,7 @@ drawSunburst = function(options) {
     center_percent_group.attr('transform', "translate(" + (width / 2) + ", " + (half_height + (margin.text * 2) - margin.top * 2) + ")");
     center_total_value_group.attr('transform', "translate(" + (width / 2) + ", " + (half_height + (margin.text * 3) - margin.top * 2) + ")");
     key_group.attr('transform', "translate(" + margin.left + ", " + margin.top + ")");
+    key_text_group.attr('transform', "translate(" + (margin.left * 2) + ", " + (margin.top + 17) + ")");
     paths = main_group.selectAll('path').data(partition.nodes(nested_data)).enter().append('path').attr({
       display: function(d) {
         if (d.depth) {
@@ -190,11 +192,20 @@ drawSunburst = function(options) {
       y: function(d, i) {
         return y(i);
       },
-      width: margin.p * 3,
-      height: margin.p * 3,
+      width: margin.p * 5,
+      height: margin.p * 5,
+      rx: 3,
       fill: function(d) {
         return d.colour;
       }
+    });
+    key_text_group.selectAll('text').data(ethnic_group_arr).enter().append('text').text(function(d) {
+      return d.name;
+    }).attr({
+      y: function(d, i) {
+        return y(i);
+      },
+      x: 10
     });
     attachHoverHandlers();
     return onInitDone();
@@ -233,3 +244,5 @@ drawSunburst = function(options) {
 };
 
 module.exports = drawSunburst;
+
+//# sourceMappingURL=sunburst-partition.map

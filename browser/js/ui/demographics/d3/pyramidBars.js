@@ -127,3 +127,5 @@ drawPyrBars = function(options) {
 };
 
 module.exports = drawPyrBars;
+
+//# sourceMappingURL=pyramidBars.map

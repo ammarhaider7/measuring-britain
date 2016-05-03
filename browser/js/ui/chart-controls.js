@@ -17,7 +17,7 @@ Controls = React.createClass({displayName: "Controls",
       "className": "col-sm-9 mb-no-padding"
     }, React.createElement("label", {
       "className": "col-sm-1"
-    }, "Bars"), React.createElement("div", {
+    }), React.createElement("div", {
       "className": "mb-form-group col-sm-5 mb-oxygen"
     }, React.createElement(FancySelect, {
       "className": "mb-input-sm",
@@ -124,3 +124,5 @@ Controls = React.createClass({displayName: "Controls",
 });
 
 module.exports = Controls;
+
+//# sourceMappingURL=chart-controls.map

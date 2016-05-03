@@ -1,8 +1,8 @@
 React = require 'react'
 d3 = require 'd3'
 
-ControlsNew = React.createClass
-  
+PyramidControls = React.createClass
+
   onCategoryChange: (e) ->
 
     el = e.target
@@ -23,9 +23,9 @@ ControlsNew = React.createClass
       value: valVal
       label: valLabel
     }
-    $ethnicDiv = d3.select '#mb_ethnic_diversity'
+    $pyramidDiv = d3.select '#pyramid-container'
     $el = d3.select el
-    $currVals = $ethnicDiv.selectAll '.mb-pill.active'
+    $currVals = $pyramidDiv.selectAll '.mb-pill.active'
     $currVals.classed 'active', no
     $el.classed 'active', yes
 
@@ -47,57 +47,58 @@ ControlsNew = React.createClass
 
   fetchData: ->
 
-    @props.fetchSunburstData {
+    @props.fetchPyramidData {
       isDefault: no
-      category: @props._category
-      value: @props._value
+      category: @props._barsCategory
+      value: @props._barsValue
     }
 
   render: -> 
-
+    console.log 'PyramidControls props'
+    console.log @props 
     <div className="controls-container clearfix closed mb-oxygen" ref="controlsContainer"> 
       <a 
         onClick={ @onControlsOpen }
         className="controls-toggle-link"
-        role="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne"
+        role="button" data-toggle="collapse" data-target="#collapsePyramid" aria-expanded="false" aria-controls="collapsePyramid"
       >
-          <span className="text-center mb-control-value col-sm-5">{ @props.activeCategory }</span>
-          <span className="col-sm-5 text-center mb-control-value">{ @props.activeValue }</span>
+          <span className="text-center mb-control-value col-sm-4">{ @props.activeBarsCategory }</span>
+          <span className="col-sm-5 text-center mb-control-value">{ @props.activeBarsValue }</span>
           <span 
             className={ if @props.isControlsOpen is yes then "glyphicon glyphicon-chevron-up mt-medium" else "glyphicon glyphicon-chevron-down mt-medium"}
           >
           </span>
       </a>
-      <div className="collapse col-sm-12 mb-collapse" id="collapseOne">
+      <div className="collapse col-sm-12 mb-collapse" id="collapsePyramid">
         <div className="container col-sm-12">
           <div className="form-group mt-medium row">
             <label className="pr-medium">Filter by</label>
             <div className="btn-group">
               {
                 for category, i in @props.categories
-                  unless category.value is @props.omitted_category
-                    <button 
-                      key={i} 
-                      type="button" 
-                      className={ if @props._category.value is category.value then "btn btn-default active" else "btn btn-default" }
-                      onClick={ @onCategoryChange }
-                      data-value={ category.value }
-                    >
-                    { category.label }
-                    </button>
+                  # unless category.value is @props.omitted_category
+                  <button 
+                    key={i} 
+                    type="button" 
+                    className={ if @props._barsCategory.value is category.value then "btn btn-default active" else "btn btn-default" }
+                    onClick={ @onCategoryChange }
+                    data-value={ category.value }
+                  >
+                  { category.label }
+                  </button>
               }
             </div>
           </div>
           <div className="form-group row"> {
-            unless @props._category.value is 'districts'
+            unless @props._barsCategory.value is 'districts'
               <ul className="nav nav-pills pt-small pb-small pl-small"> {
 
-                    for value, i in @props.values[@props._category.value]
+                    for value, i in @props.values[@props._barsCategory.value]
                       <li role="presentation" key={value.value}>
                         <a 
                           data-value={ value.value }
                           href="#" 
-                          className={ if @props._value.label is value.label then "mb-pill active" else "mb-pill" }
+                          className={ if @props._barsValue.label is value.label then "mb-pill active" else "mb-pill" }
                           onClick={ @onValueChange }
                         >
                         { value.label }
@@ -125,7 +126,7 @@ ControlsNew = React.createClass
               </div>
           }
           </div>
-          { if @props._category.value is 'districts'
+          { if @props._barsCategory.value is 'districts'
             <div className="form-group row">
               {
                 query = @props.district_query
@@ -138,7 +139,7 @@ ControlsNew = React.createClass
                             <a 
                               data-value={ district.value }
                               href="#" 
-                              className={ if @props.activeValue is district.label then "mb-pill active" else "mb-pill" }
+                              className={ if @props.activeBarsCategory is district.label then "mb-pill active" else "mb-pill" }
                               onClick={ @onValueChange }
                             >
                             { district.label }
@@ -161,4 +162,4 @@ ControlsNew = React.createClass
       </div>
     </div>
 
-module.exports = ControlsNew
+module.exports = PyramidControls

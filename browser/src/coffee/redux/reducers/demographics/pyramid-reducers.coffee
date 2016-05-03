@@ -1,31 +1,35 @@
 objectAssign = require 'object-assign'
 
-{ FILTER_USED, 
-  RECEIVE_PYRAMID_DATA_BARS, 
-  ERROR_RECEIVE_PYRAMID_DATA_BARS, 
-  ERROR_RECEIVE_PYRAMID_DATA_OUTLINE, 
-  RECEIVE_PYRAMID_DATA_OUTLINE, 
-  REQUEST_PYRAMID_DATA, 
-  TOGGLE_CATEGORY, 
-  TOGGLE_VALUE, 
-  MOUSE_OVER, 
-  ADD_FILTER, 
-  REMOVE_FILTER, 
-  TOGGLE_OUTLINE_CATEGORY, 
+{ FILTER_USED
+  RECEIVE_PYRAMID_DATA_BARS
+  ERROR_RECEIVE_PYRAMID_DATA_BARS
+  ERROR_RECEIVE_PYRAMID_DATA_OUTLINE
+  RECEIVE_PYRAMID_DATA_OUTLINE
+  REQUEST_PYRAMID_DATA
+  TOGGLE_CATEGORY
+  TOGGLE_VALUE
+  MOUSE_OVER
+  CONTROLS_OPENED
+  CONTROLS_CLOSED
+  DISTRICT_SEARCH
+  ADD_FILTER
+  REMOVE_FILTER
+  TOGGLE_OUTLINE_CATEGORY
   TOGGLE_OUTLINE_VALUE } = require '../../actions/demographics/pyramid-actions.js'
 
 pyramidInitialState = {
 	chartName: 'pyramid'
 	isFetching: no
 	isDefault: yes
+	isControlsOpen: no
 	_barsCategory:
-		value: 'default'
-		label: 'default'
+	    value: 'countries'
+	    label: 'Geography (Countries)'
 	_barsValue:
-		value: 'default'
-		label: 'default'
-	activeBarsCategory: 'default'
-	activeBarsValue: 'default'
+	    value: 'K04000001'
+	    label: 'England \& Wales'
+	activeBarsCategory: 'Geography (Countries)'
+	activeBarsValue: 'England \& Wales'
 	data:
 		bars: {}
 		outline: {}

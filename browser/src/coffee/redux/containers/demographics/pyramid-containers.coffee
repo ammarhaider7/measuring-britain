@@ -7,7 +7,10 @@
   removeFilter
   toggleOutlineValue
   requestPyramidData
-  fetchPyramidData } = require '../../actions/demographics/pyramid-actions.js'
+  fetchPyramidData
+  districtSearch
+  controlsOpened
+  controlsClosed } = require '../../actions/demographics/pyramid-actions.js'
 PyramidComponent = require '../../../ui/demographics/pyramid-component.js'
 TableComponent = require '../../../ui/demographics/pyramid-table.js'
 pyBarsComponent = require '../../../ui/demographics/pyramid-bars.js'
@@ -16,7 +19,9 @@ mapStateToProps = (state) ->
 
 	chartName: state.pyramidChart.chartName
 	_barsCategory: state.pyramidChart._barsCategory
-	_barsValue: state.pyramidChart._barsValue	
+	_barsValue: state.pyramidChart._barsValue
+	activeBarsCategory: state.pyramidChart.activeBarsCategory
+	activeBarsValue: state.pyramidChart.activeBarsValue		
 	data: state.pyramidChart.data
 	isFetching: state.pyramidChart.isFetching
 	outlineFilter: state.pyramidChart.outlineFilter
@@ -46,10 +51,10 @@ mapStateToPropsPyrBars = (state) ->
 
 mapDispatchToProps = (dispatch) ->
 
-	onCategoryChange: (category, selectedOption) ->
-		dispatch toggleCategory category, selectedOption[0]
-	onValueChange: (value, selectedOption) ->
-		dispatch toggleValue value, selectedOption[0]
+	onCategoryChange: (category) ->
+		dispatch toggleCategory category
+	onValueChange: (value) ->
+		dispatch toggleValue value
 	onAddOutline: () ->
 		dispatch addFilter()
 	onRemoveFilter: () ->
@@ -62,6 +67,12 @@ mapDispatchToProps = (dispatch) ->
 		dispatch fetchPyramidData filterOptions
 	onMouseOver: (mouseOverData) ->
 		dispatch mouseOver mouseOverData
+	onControlsClosed: () ->
+		dispatch controlsClosed()
+	onControlsOpen: () ->
+		dispatch controlsOpened()
+	onDistrictSearch: (query) ->
+		dispatch districtSearch query
 
 Pyramid = connect(
 	mapStateToProps, 

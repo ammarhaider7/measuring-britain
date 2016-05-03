@@ -22,9 +22,6 @@ value_options = {
 category_options = data.category_options;
 
 SunburstComponent = React.createClass({displayName: "SunburstComponent",
-  componentWillMount: function() {
-    return this.props.fetchSunburstData(null);
-  },
   componentDidMount: function() {
     if (this.props.isDefault === true && this.props.init_done === false) {
       return $(window).on('scroll', (function(_this) {
@@ -36,7 +33,7 @@ SunburstComponent = React.createClass({displayName: "SunburstComponent",
           if ((docHeight - docScrollTop) < sunburstOffsetTop) {
             console.log('scroll reach');
             $(window).off('scroll');
-            return _this.reactDrawSunburst();
+            return _this.props.fetchSunburstData(null);
           }
         };
       })(this));
@@ -60,7 +57,7 @@ SunburstComponent = React.createClass({displayName: "SunburstComponent",
     }
   },
   componentDidUpdate: function() {
-    if (this.props.updateSunburst === true && this.props.init_done === true) {
+    if (this.props.updateSunburst === true) {
       return this.reactDrawSunburst();
     }
   },
@@ -73,7 +70,10 @@ SunburstComponent = React.createClass({displayName: "SunburstComponent",
       "omitted_category": "ethnicities",
       "categories": category_options,
       "values": value_options
-    })), React.createElement("svg", {
+    })), React.createElement("img", {
+      "src": "./images/mb_ajax_loader.gif",
+      "className": (this.props.isFetching === true && this.props.isDefault === true ? 'mb-spinner' : 'hide')
+    }), React.createElement("svg", {
       "className": "sunburst-svg",
       "style": {
         width: '100%',
@@ -84,6 +84,8 @@ SunburstComponent = React.createClass({displayName: "SunburstComponent",
       "className": "main-group"
     }), React.createElement("g", {
       "className": "key-group"
+    }), React.createElement("g", {
+      "className": "key-text-group"
     }), React.createElement("g", {
       "className": "center-text-group"
     }), React.createElement("g", {
@@ -97,3 +99,5 @@ SunburstComponent = React.createClass({displayName: "SunburstComponent",
 });
 
 module.exports = SunburstComponent;
+
+//# sourceMappingURL=ethnic-sunburst-component.map

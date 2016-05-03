@@ -8,7 +8,7 @@ Controls = React.createClass
     <div className="mb-form hidden-xs clearfix pl-medium">
       <div className="mb-form-row col-sm-12 row">
         <div className="col-sm-9 mb-no-padding">
-          <label className="col-sm-1">Bars</label>
+          <label className="col-sm-1"></label>
           <div className="mb-form-group col-sm-5 mb-oxygen">
             <FancySelect
               className="mb-input-sm"

@@ -95,7 +95,7 @@ drawSunburst = (options) ->
 	# y scale for key rects
 	y = d3.scale.ordinal()
 		.domain d3.range ethnic_group_arr.length
-		.rangeRoundBands [0, height/2], 0
+		.rangeRoundBands [0, height/3], 0
 
 	# Interpolate the arcs in data space.
 	arcTween = (d) ->
@@ -107,7 +107,7 @@ drawSunburst = (options) ->
 			@dx0 = b.dx
 			arc b
 
-	# Interpolate the arcs for initial draw
+	# Interpolate the arcs from 0 values for initial draw
 	initTween = (d) ->
 
 		i = d3.interpolate { x: 0, dx: 0 }, d
@@ -186,6 +186,7 @@ drawSunburst = (options) ->
 		center_ethnic_group = svg.select '.ethnic-group-text'
 		center_percent_group = svg.select '.percentage-group'
 		key_group = svg.select '.key-group'
+		key_text_group = svg.select '.key-text-group'
 
 		# halved height for use below
 		half_height = height * 0.52
@@ -197,6 +198,7 @@ drawSunburst = (options) ->
 		center_percent_group.attr 'transform', "translate(#{ width / 2 }, #{ half_height + (margin.text * 2) - margin.top * 2 })"
 		center_total_value_group.attr 'transform', "translate(#{ width / 2 }, #{ half_height + (margin.text * 3) - margin.top * 2 })"
 		key_group.attr 'transform', "translate(#{ margin.left }, #{ margin.top })"
+		key_text_group.attr 'transform', "translate(#{ margin.left * 2 }, #{ margin.top + 17 })"
 
 		paths = main_group.selectAll 'path'
 			.data partition.nodes nested_data
@@ -262,11 +264,23 @@ drawSunburst = (options) ->
 		  	.attr {
 		  		x: 0
 		  		y: (d, i) ->
-		  			y i
-		  		width: margin.p * 3
-		  		height: margin.p * 3
+		  			return y i
+		  		width: margin.p * 5
+		  		height: margin.p * 5
+		  		rx: 3
 		  		fill: (d) ->
 		  			return d.colour
+		  	}
+
+		key_text_group.selectAll 'text'
+			.data ethnic_group_arr
+		  .enter().append 'text'
+			.text (d) ->
+				return d.name
+			.attr {
+		  		y: (d, i) ->
+		  			return y i
+				x: 10
 		  	}
 
 		attachHoverHandlers()

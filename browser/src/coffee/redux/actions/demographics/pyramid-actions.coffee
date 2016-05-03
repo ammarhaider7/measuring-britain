@@ -14,12 +14,33 @@ TOGGLE_VALUE = "TOGGLE_VALUE"
 ERROR_RECEIVE_PYRAMID_DATA_BARS = "ERROR_RECEIVE_PYRAMID_DATA_BARS"
 ERROR_RECEIVE_PYRAMID_DATA_OUTLINE = "ERROR_RECEIVE_PYRAMID_DATA_OUTLINE"
 FILTER_USED = "FILTER_USED"
+CONTROLS_OPENED = "P_CONTROLS_OPENED"
+CONTROLS_CLOSED = "P_CONTROLS_CLOSED"
+DISTRICT_SEARCH = "P_DISTRICT_SEARCH"
 
 toggleValue = (value, selectionOption) ->
 	{
 		type: TOGGLE_VALUE
 		value
 		selectionOption
+	}
+
+controlsClosed = () ->
+	{
+		type: CONTROLS_CLOSED
+		isControlsOpen: no
+	}
+
+controlsOpened = () ->
+	{
+		type: CONTROLS_OPENED
+		isControlsOpen: yes
+	}
+
+districtSearch = (query) ->
+	{
+		type: DISTRICT_SEARCH
+		query: query
 	}
 
 toggleOutlineCategory = (category, selectionOption) ->
@@ -174,6 +195,12 @@ module.exports = {
 	TOGGLE_OUTLINE_VALUE
 	TOGGLE_VALUE
 	FILTER_USED
+	CONTROLS_OPENED
+	CONTROLS_CLOSED
+	DISTRICT_SEARCH
+	controlsOpened
+	controlsClosed
+	districtSearch
 	filterUsed
 	receivePyramidDataBars
 	receivePyramidDataOutline
