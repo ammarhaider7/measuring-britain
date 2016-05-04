@@ -6123,6 +6123,19 @@ path:first-child {
 
 .controls-container {
   border-bottom: 1px solid #333; }
+  .controls-container .mb-controls-tabs {
+    border-bottom: 1px solid #B3B3B3; }
+    .controls-container .mb-controls-tabs .active a {
+      background-color: #EEEEEE;
+      border: 1px solid #B3B3B3;
+      border-bottom-color: transparent; }
+    .controls-container .mb-controls-tabs .active a:hover, .controls-container .mb-controls-tabs .active a:focus {
+      background-color: #EEEEEE;
+      border: 1px solid #B3B3B3;
+      border-bottom-color: transparent; }
+    .controls-container .mb-controls-tabs a:hover {
+      border-color: #eee #eee #B3B3B3;
+      background-color: #D2D2D2; }
   .controls-container .glyphicon {
     margin-top: 10px;
     margin-bottom: 10px; }

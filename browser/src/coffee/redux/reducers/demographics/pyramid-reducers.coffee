@@ -15,7 +15,8 @@ objectAssign = require 'object-assign'
   ADD_FILTER
   REMOVE_FILTER
   TOGGLE_OUTLINE_CATEGORY
-  TOGGLE_OUTLINE_VALUE } = require '../../actions/demographics/pyramid-actions.js'
+  TOGGLE_OUTLINE_VALUE
+  TOGGLE_FILTERING_OPTION } = require '../../actions/demographics/pyramid-actions.js'
 
 pyramidInitialState = {
 	chartName: 'pyramid'
@@ -45,24 +46,35 @@ pyramidInitialState = {
 	updateBars: no
 	updatePyramid: no
 	updateOutline: no
+	district_query: 'default'
+	filteringOption: {
+		cat: '_barsCategory'
+		val: '_barsValue'
+	}
 }
 
 pyramidChart = (state = pyramidInitialState, action) ->
 	switch action.type
 		when TOGGLE_CATEGORY then objectAssign {}, state, {
-			_barsCategory: action.selectionOption
+			_barsCategory: action.category
 			updatePyramid: no
 			updateBars: no
 			updateOutline: no
 		}
 		when TOGGLE_VALUE then objectAssign {}, state, {
-			_barsValue: action.selectionOption
+			_barsValue: action.value
 			updatePyramid: no
 			updateBars: no
 			updateOutline: no
 		}
 		when FILTER_USED then objectAssign {}, state, {
 			isDefault: no
+			updatePyramid: no
+			updateBars: no
+			updateOutline: no
+		}
+		when DISTRICT_SEARCH then objectAssign {}, state, {
+			district_query: action.query
 			updatePyramid: no
 			updateBars: no
 			updateOutline: no
@@ -122,6 +134,12 @@ pyramidChart = (state = pyramidInitialState, action) ->
 		}
 		when REMOVE_FILTER then objectAssign {}, state, {
 			outlineFilter: no
+			updatePyramid: no
+			updateBars: no
+			updateOutline: no
+		}
+		when TOGGLE_FILTERING_OPTION then objectAssign {}, state, {
+			filteringOption: action.filteringOption
 			updatePyramid: no
 			updateBars: no
 			updateOutline: no

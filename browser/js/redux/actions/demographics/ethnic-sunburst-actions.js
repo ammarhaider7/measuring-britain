@@ -31,19 +31,17 @@ INIT_SUNBURST_OFF = "INIT_SUNBURST_OFF";
 
 INIT_DONE = "INIT_DONE";
 
-toggleValue = function(value, selectionOption) {
+toggleValue = function(value) {
   return {
     type: TOGGLE_VALUE,
-    value: value,
-    selectionOption: selectionOption
+    value: value
   };
 };
 
-toggleCategory = function(category, selectionOption) {
+toggleCategory = function(category) {
   return {
     type: TOGGLE_CATEGORY,
-    category: category,
-    selectionOption: selectionOption
+    category: category
   };
 };
 

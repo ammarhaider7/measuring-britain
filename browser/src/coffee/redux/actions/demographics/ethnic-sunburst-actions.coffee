@@ -15,18 +15,16 @@ INIT_SUNBURST = "INIT_SUNBURST"
 INIT_SUNBURST_OFF = "INIT_SUNBURST_OFF"
 INIT_DONE = "INIT_DONE"
 
-toggleValue = (value, selectionOption) ->
+toggleValue = (value) ->
 	{
 		type: TOGGLE_VALUE
 		value
-		selectionOption
 	}
 
-toggleCategory = (category, selectionOption) ->
+toggleCategory = (category) ->
 	{
 		type: TOGGLE_CATEGORY
 		category
-		selectionOption
 	}
 
 controlsOpened = () ->

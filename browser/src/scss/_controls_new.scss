@@ -7,6 +7,25 @@
     // -ms-transition: background 0.5s linear;
     // -o-transition: background 0.5s linear;
     // transition: background 0.5s linear;
+    .mb-controls-tabs {
+    	border-bottom: 1px solid #B3B3B3;
+    	.active {
+    		a {
+    			background-color: #EEEEEE;
+    			border: 1px solid #B3B3B3;
+    			border-bottom-color: transparent;
+    		}
+    		a:hover, a:focus {
+    			background-color: #EEEEEE;
+    			border: 1px solid #B3B3B3;
+    			border-bottom-color: transparent;
+    		}
+    	}
+    	a:hover {
+		    border-color: #eee #eee #B3B3B3;
+    		background-color: #D2D2D2;
+    	}
+    }
     .glyphicon {
 		margin-top: 10px;
 	    margin-bottom: 10px;

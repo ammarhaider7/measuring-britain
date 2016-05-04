@@ -48,9 +48,30 @@ PyramidControls = React.createClass
   fetchData: ->
 
     @props.fetchPyramidData {
+      outlineRequested: if @props.outlineFilter is on then yes else no
       isDefault: no
-      category: @props._barsCategory
-      value: @props._barsValue
+      bars: {
+        isDefault: no
+        category: @props._barsCategory
+        value: @props._barsValue
+      }
+      outline: {
+        isDefault: no
+        category: @props._outlineCategory
+        value: @props._outlineValue
+      }
+    } 
+
+  onToggleFilteringOption: (e) ->
+
+    e.preventDefault()
+    el = e.target
+    cat = el.getAttribute 'data-option-cat'
+    val = el.getAttribute 'data-option-val'
+
+    @props.onToggleFilteringOption {
+      cat
+      val
     }
 
   render: -> 
@@ -62,25 +83,47 @@ PyramidControls = React.createClass
         className="controls-toggle-link"
         role="button" data-toggle="collapse" data-target="#collapsePyramid" aria-expanded="false" aria-controls="collapsePyramid"
       >
-          <span className="text-center mb-control-value col-sm-4">{ @props.activeBarsCategory }</span>
-          <span className="col-sm-5 text-center mb-control-value">{ @props.activeBarsValue }</span>
-          <span 
-            className={ if @props.isControlsOpen is yes then "glyphicon glyphicon-chevron-up mt-medium" else "glyphicon glyphicon-chevron-down mt-medium"}
-          >
-          </span>
+        <span className="col-sm-5 text-center mb-control-value">{ "#{ @props.activeBarsValue } - #{ @props.activeBarsCategory }" }</span>
+        <span 
+          className={ if @props.isControlsOpen is yes then "glyphicon glyphicon-chevron-up mt-medium" else "glyphicon glyphicon-chevron-down mt-medium"}
+        >
+        </span>
       </a>
       <div className="collapse col-sm-12 mb-collapse" id="collapsePyramid">
         <div className="container col-sm-12">
+          <ul className="nav nav-tabs mt-medium mb-controls-tabs">
+            <li 
+              role="presentation" 
+              data-option-cat="_barsCategory" 
+              data-option-val="_barsValue" 
+              className="active">
+              <a 
+                href="#"
+                onClick={ @onToggleFilteringOption }
+              >Bars</a>
+            </li>
+            <li 
+              role="presentation"
+              data-option-cat="_outlineCategory" 
+              data-option-val="_outlineValue">
+              <a 
+                href="#"
+                onClick={ @onToggleFilteringOption }
+              >+ Line</a>
+            </li>
+          </ul>
           <div className="form-group mt-medium row">
             <label className="pr-medium">Filter by</label>
             <div className="btn-group">
               {
+                console.log '@props.filteringOption'
+                console.log @props.filteringOption
                 for category, i in @props.categories
                   # unless category.value is @props.omitted_category
                   <button 
                     key={i} 
                     type="button" 
-                    className={ if @props._barsCategory.value is category.value then "btn btn-default active" else "btn btn-default" }
+                    className={ if @props[@props.filteringOption.cat].value is category.value then "btn btn-default active" else "btn btn-default" }
                     onClick={ @onCategoryChange }
                     data-value={ category.value }
                   >
@@ -95,7 +138,7 @@ PyramidControls = React.createClass
 
                     for value, i in @props.values[@props._barsCategory.value]
                       <li role="presentation" key={value.value}>
-                        <a 
+                        <a
                           data-value={ value.value }
                           href="#" 
                           className={ if @props._barsValue.label is value.label then "mb-pill active" else "mb-pill" }

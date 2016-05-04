@@ -10,7 +10,8 @@
   fetchPyramidData
   districtSearch
   controlsOpened
-  controlsClosed } = require '../../actions/demographics/pyramid-actions.js'
+  controlsClosed
+  toggleFilteringOption } = require '../../actions/demographics/pyramid-actions.js'
 PyramidComponent = require '../../../ui/demographics/pyramid-component.js'
 TableComponent = require '../../../ui/demographics/pyramid-table.js'
 pyBarsComponent = require '../../../ui/demographics/pyramid-bars.js'
@@ -24,6 +25,7 @@ mapStateToProps = (state) ->
 	activeBarsValue: state.pyramidChart.activeBarsValue		
 	data: state.pyramidChart.data
 	isFetching: state.pyramidChart.isFetching
+	district_query: state.pyramidChart.district_query
 	outlineFilter: state.pyramidChart.outlineFilter
 	_outlineCategory: state.pyramidChart._outlineCategory	
 	_outlineValue: state.pyramidChart._outlineValue
@@ -31,6 +33,7 @@ mapStateToProps = (state) ->
 	updatePyramid: state.pyramidChart.updatePyramid
 	isDefault: state.pyramidChart.isDefault
 	updateOutline: state.pyramidChart.updateOutline
+	filteringOption: state.pyramidChart.filteringOption
 
 mapStateToPropsPyrTable = (state) ->
 
@@ -73,6 +76,8 @@ mapDispatchToProps = (dispatch) ->
 		dispatch controlsOpened()
 	onDistrictSearch: (query) ->
 		dispatch districtSearch query
+	onFilterOptionToggle: (option) ->
+		dispatch toggleFilteringOption option
 
 Pyramid = connect(
 	mapStateToProps, 

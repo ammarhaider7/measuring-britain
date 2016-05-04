@@ -17,12 +17,12 @@ FILTER_USED = "FILTER_USED"
 CONTROLS_OPENED = "P_CONTROLS_OPENED"
 CONTROLS_CLOSED = "P_CONTROLS_CLOSED"
 DISTRICT_SEARCH = "P_DISTRICT_SEARCH"
+TOGGLE_FILTERING_OPTION = "TOGGLE_FILTERING_OPTION"
 
-toggleValue = (value, selectionOption) ->
+toggleValue = (value) ->
 	{
 		type: TOGGLE_VALUE
 		value
-		selectionOption
 	}
 
 controlsClosed = () ->
@@ -37,17 +37,22 @@ controlsOpened = () ->
 		isControlsOpen: yes
 	}
 
+toggleFilteringOption = (option) ->
+	{
+		type: TOGGLE_FILTERING_OPTION
+		filteringOption: option
+	}
+
 districtSearch = (query) ->
 	{
 		type: DISTRICT_SEARCH
 		query: query
 	}
 
-toggleOutlineCategory = (category, selectionOption) ->
+toggleOutlineCategory = (category) ->
 	{
 		type: TOGGLE_OUTLINE_CATEGORY
 		category
-		selectionOption
 	}
 
 toggleOutlineValue = (value, selectionOption) ->
@@ -67,11 +72,10 @@ removeFilter = () ->
 		type: REMOVE_FILTER
 	}
 
-toggleCategory = (category, selectionOption) ->
+toggleCategory = (category) ->
 	{
 		type: TOGGLE_CATEGORY
 		category
-		selectionOption
 	}
 	
 mouseOver = (mouseOverData) ->
@@ -198,6 +202,8 @@ module.exports = {
 	CONTROLS_OPENED
 	CONTROLS_CLOSED
 	DISTRICT_SEARCH
+	TOGGLE_FILTERING_OPTION
+	toggleFilteringOption
 	controlsOpened
 	controlsClosed
 	districtSearch

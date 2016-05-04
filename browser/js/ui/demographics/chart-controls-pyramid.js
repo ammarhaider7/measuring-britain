@@ -52,9 +52,29 @@ PyramidControls = React.createClass({displayName: "PyramidControls",
   },
   fetchData: function() {
     return this.props.fetchPyramidData({
+      outlineRequested: this.props.outlineFilter === true ? true : false,
       isDefault: false,
-      category: this.props._barsCategory,
-      value: this.props._barsValue
+      bars: {
+        isDefault: false,
+        category: this.props._barsCategory,
+        value: this.props._barsValue
+      },
+      outline: {
+        isDefault: false,
+        category: this.props._outlineCategory,
+        value: this.props._outlineValue
+      }
+    });
+  },
+  onToggleFilteringOption: function(e) {
+    var cat, el, val;
+    e.preventDefault();
+    el = e.target;
+    cat = el.getAttribute('data-option-cat');
+    val = el.getAttribute('data-option-val');
+    return this.props.onToggleFilteringOption({
+      cat: cat,
+      val: val
     });
   },
   render: function() {
@@ -73,24 +93,41 @@ PyramidControls = React.createClass({displayName: "PyramidControls",
       "aria-expanded": "false",
       "aria-controls": "collapsePyramid"
     }, React.createElement("span", {
-      "className": "text-center mb-control-value col-sm-4"
-    }, this.props.activeBarsCategory), React.createElement("span", {
       "className": "col-sm-5 text-center mb-control-value"
-    }, this.props.activeBarsValue), React.createElement("span", {
+    }, this.props.activeBarsValue + " - " + this.props.activeBarsCategory), React.createElement("span", {
       "className": (this.props.isControlsOpen === true ? "glyphicon glyphicon-chevron-up mt-medium" : "glyphicon glyphicon-chevron-down mt-medium")
     })), React.createElement("div", {
       "className": "collapse col-sm-12 mb-collapse",
       "id": "collapsePyramid"
     }, React.createElement("div", {
       "className": "container col-sm-12"
-    }, React.createElement("div", {
+    }, React.createElement("ul", {
+      "className": "nav nav-tabs mt-medium mb-controls-tabs"
+    }, React.createElement("li", {
+      "role": "presentation",
+      "data-option-cat": "_barsCategory",
+      "data-option-val": "_barsValue",
+      "className": "active"
+    }, React.createElement("a", {
+      "href": "#",
+      "onClick": this.onToggleFilteringOption
+    }, "Bars")), React.createElement("li", {
+      "role": "presentation",
+      "data-option-cat": "_outlineCategory",
+      "data-option-val": "_outlineValue"
+    }, React.createElement("a", {
+      "href": "#",
+      "onClick": this.onToggleFilteringOption
+    }, "+ Line"))), React.createElement("div", {
       "className": "form-group mt-medium row"
     }, React.createElement("label", {
       "className": "pr-medium"
     }, "Filter by"), React.createElement("div", {
       "className": "btn-group"
-    }, (function() {
+    }, ((function() {
       var j, len, ref, results;
+      console.log('@props.filteringOption');
+      console.log(this.props.filteringOption);
       ref = this.props.categories;
       results = [];
       for (i = j = 0, len = ref.length; j < len; i = ++j) {
@@ -98,13 +135,13 @@ PyramidControls = React.createClass({displayName: "PyramidControls",
         results.push(React.createElement("button", {
           "key": i,
           "type": "button",
-          "className": (this.props._barsCategory.value === category.value ? "btn btn-default active" : "btn btn-default"),
+          "className": (this.props[this.props.filteringOption.cat].value === category.value ? "btn btn-default active" : "btn btn-default"),
           "onClick": this.onCategoryChange,
           "data-value": category.value
         }, category.label));
       }
       return results;
-    }).call(this))), React.createElement("div", {
+    }).call(this)))), React.createElement("div", {
       "className": "form-group row"
     }, " ", (this.props._barsCategory.value !== 'districts' ? React.createElement("ul", {
       "className": "nav nav-pills pt-small pb-small pl-small"
