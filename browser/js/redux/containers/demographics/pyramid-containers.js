@@ -18,6 +18,8 @@ mapStateToProps = function(state) {
     _barsValue: state.pyramidChart._barsValue,
     activeBarsCategory: state.pyramidChart.activeBarsCategory,
     activeBarsValue: state.pyramidChart.activeBarsValue,
+    activeLineCategory: state.pyramidChart.activeLineCategory,
+    activeLineValue: state.pyramidChart.activeLineValue,
     data: state.pyramidChart.data,
     isFetching: state.pyramidChart.isFetching,
     district_query: state.pyramidChart.district_query,
@@ -28,7 +30,8 @@ mapStateToProps = function(state) {
     updatePyramid: state.pyramidChart.updatePyramid,
     isDefault: state.pyramidChart.isDefault,
     updateOutline: state.pyramidChart.updateOutline,
-    filteringOption: state.pyramidChart.filteringOption
+    filteringOption: state.pyramidChart.filteringOption,
+    isControlsOpen: state.pyramidChart.isControlsOpen
   };
 };
 
@@ -67,11 +70,11 @@ mapDispatchToProps = function(dispatch) {
     onRemoveFilter: function() {
       return dispatch(removeFilter());
     },
-    onOutlineCategoryChange: function(value, selectedOption) {
-      return dispatch(toggleOutlineCategory(value, selectedOption[0]));
+    onOutlineCategoryChange: function(category) {
+      return dispatch(toggleOutlineCategory(category));
     },
-    onOutlineValueChange: function(value, selectedOption) {
-      return dispatch(toggleOutlineValue(value, selectedOption[0]));
+    onOutlineValueChange: function(value) {
+      return dispatch(toggleOutlineValue(value));
     },
     fetchPyramidData: function(filterOptions) {
       return dispatch(fetchPyramidData(filterOptions));

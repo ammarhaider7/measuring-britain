@@ -2618,11 +2618,10 @@ toggleOutlineCategory = function(category) {
   };
 };
 
-toggleOutlineValue = function(value, selectionOption) {
+toggleOutlineValue = function(value) {
   return {
     type: TOGGLE_OUTLINE_VALUE,
-    value: value,
-    selectionOption: selectionOption
+    value: value
   };
 };
 
@@ -2865,6 +2864,8 @@ mapStateToProps = function(state) {
     _barsValue: state.pyramidChart._barsValue,
     activeBarsCategory: state.pyramidChart.activeBarsCategory,
     activeBarsValue: state.pyramidChart.activeBarsValue,
+    activeLineCategory: state.pyramidChart.activeLineCategory,
+    activeLineValue: state.pyramidChart.activeLineValue,
     data: state.pyramidChart.data,
     isFetching: state.pyramidChart.isFetching,
     district_query: state.pyramidChart.district_query,
@@ -2875,7 +2876,8 @@ mapStateToProps = function(state) {
     updatePyramid: state.pyramidChart.updatePyramid,
     isDefault: state.pyramidChart.isDefault,
     updateOutline: state.pyramidChart.updateOutline,
-    filteringOption: state.pyramidChart.filteringOption
+    filteringOption: state.pyramidChart.filteringOption,
+    isControlsOpen: state.pyramidChart.isControlsOpen
   };
 };
 
@@ -2914,11 +2916,11 @@ mapDispatchToProps = function(dispatch) {
     onRemoveFilter: function() {
       return dispatch(removeFilter());
     },
-    onOutlineCategoryChange: function(value, selectedOption) {
-      return dispatch(toggleOutlineCategory(value, selectedOption[0]));
+    onOutlineCategoryChange: function(category) {
+      return dispatch(toggleOutlineCategory(category));
     },
-    onOutlineValueChange: function(value, selectedOption) {
-      return dispatch(toggleOutlineValue(value, selectedOption[0]));
+    onOutlineValueChange: function(value) {
+      return dispatch(toggleOutlineValue(value));
     },
     fetchPyramidData: function(filterOptions) {
       return dispatch(fetchPyramidData(filterOptions));
@@ -3143,11 +3145,13 @@ pyramidInitialState = {
     label: 'Geography (Countries)'
   },
   _barsValue: {
-    value: 'K04000001',
-    label: 'England \& Wales'
+    value: 'E92000001',
+    label: 'England'
   },
   activeBarsCategory: 'Geography (Countries)',
-  activeBarsValue: 'England \& Wales',
+  activeBarsValue: 'England',
+  activeLineCategory: 'Geography (Countries)',
+  activeLineValue: 'Wales',
   data: {
     bars: {},
     outline: {}
@@ -3155,12 +3159,12 @@ pyramidInitialState = {
   _mouseOverData: {},
   outlineFilter: false,
   _outlineCategory: {
-    value: 'default',
-    label: 'default'
+    value: 'countries',
+    label: 'Geography (Countries)'
   },
   _outlineValue: {
-    value: 'default',
-    label: 'default'
+    value: 'W92000004',
+    label: 'Wales'
   },
   error: false,
   updateBars: false,
@@ -3168,6 +3172,7 @@ pyramidInitialState = {
   updateOutline: false,
   district_query: 'default',
   filteringOption: {
+    option: 'bars',
     cat: '_barsCategory',
     val: '_barsValue'
   }
@@ -3188,6 +3193,20 @@ pyramidChart = function(state, action) {
     case TOGGLE_VALUE:
       return objectAssign({}, state, {
         _barsValue: action.value,
+        updatePyramid: false,
+        updateBars: false,
+        updateOutline: false
+      });
+    case CONTROLS_OPENED:
+      return objectAssign({}, state, {
+        isControlsOpen: true,
+        updatePyramid: false,
+        updateBars: false,
+        updateOutline: false
+      });
+    case CONTROLS_CLOSED:
+      return objectAssign({}, state, {
+        isControlsOpen: false,
         updatePyramid: false,
         updateBars: false,
         updateOutline: false
@@ -3284,14 +3303,14 @@ pyramidChart = function(state, action) {
       });
     case TOGGLE_OUTLINE_CATEGORY:
       return objectAssign({}, state, {
-        _outlineCategory: action.selectionOption,
+        _outlineCategory: action.category,
         updatePyramid: false,
         updateBars: false,
         updateOutline: false
       });
     case TOGGLE_OUTLINE_VALUE:
       return objectAssign({}, state, {
-        _outlineValue: action.selectionOption,
+        _outlineValue: action.value,
         updatePyramid: false,
         updateBars: false,
         updateOutline: false
@@ -3617,7 +3636,7 @@ makePyramidRequest = function(options) {
     dataSet: relDataSet,
     queryStringOps: {
       date: "date=latest",
-      geography: "geography=K04000001",
+      geography: "geography=E92000001",
       age: "c_age=1...21",
       sex: "c_sex=1,2",
       religion: "c_relpuk11=0"
@@ -3909,25 +3928,41 @@ d3 = require('d3');
 
 PyramidControls = React.createClass({displayName: "PyramidControls",
   onCategoryChange: function(e) {
-    var catLabel, catVal, el;
+    var catLabel, catVal, el, filteringOption;
     el = e.target;
     catVal = el.getAttribute('data-value');
     catLabel = el.innerHTML;
-    return this.props.onCategoryChange({
-      value: catVal,
-      label: catLabel
-    });
+    filteringOption = this.props.filteringOption.option;
+    if (filteringOption === 'bars') {
+      return this.props.onCategoryChange({
+        value: catVal,
+        label: catLabel
+      });
+    } else if (filteringOption === 'line') {
+      return this.props.onOutlineCategoryChange({
+        value: catVal,
+        label: catLabel
+      });
+    }
   },
   onValueChange: function(e) {
-    var $currVals, $el, $pyramidDiv, el, valLabel, valVal;
+    var $currVals, $el, $pyramidDiv, el, filteringOption, valLabel, valVal;
     e.preventDefault();
     el = e.target;
     valVal = el.getAttribute('data-value');
     valLabel = el.innerHTML;
-    this.props.onValueChange({
-      value: valVal,
-      label: valLabel
-    });
+    filteringOption = this.props.filteringOption.option;
+    if (filteringOption === 'bars') {
+      this.props.onValueChange({
+        value: valVal,
+        label: valLabel
+      });
+    } else if (filteringOption === 'line') {
+      this.props.onOutlineValueChange({
+        value: valVal,
+        label: valLabel
+      });
+    }
     $pyramidDiv = d3.select('#pyramid-container');
     $el = d3.select(el);
     $currVals = $pyramidDiv.selectAll('.mb-pill.active');
@@ -3969,14 +4004,23 @@ PyramidControls = React.createClass({displayName: "PyramidControls",
     });
   },
   onToggleFilteringOption: function(e) {
-    var cat, el, val;
+    var activeCat, activeVal, cat, el, option, val;
     e.preventDefault();
     el = e.target;
     cat = el.getAttribute('data-option-cat');
     val = el.getAttribute('data-option-val');
-    return this.props.onToggleFilteringOption({
+    activeCat = el.getAttribute('data-active-cat');
+    activeVal = el.getAttribute('data-active-val');
+    option = el.getAttribute('data-option');
+    if (option === 'line') {
+      this.props.onAddOutline();
+    }
+    return this.props.onFilterOptionToggle({
+      option: option,
       cat: cat,
-      val: val
+      val: val,
+      activeCat: activeCat,
+      activeVal: activeVal
     });
   },
   render: function() {
@@ -3996,7 +4040,11 @@ PyramidControls = React.createClass({displayName: "PyramidControls",
       "aria-controls": "collapsePyramid"
     }, React.createElement("span", {
       "className": "col-sm-5 text-center mb-control-value"
-    }, this.props.activeBarsValue + " - " + this.props.activeBarsCategory), React.createElement("span", {
+    }, "Bars - " + this.props.activeBarsValue), React.createElement("span", {
+      "className": "col-sm-2 text-center mb-control-value"
+    }, "compared to"), React.createElement("span", {
+      "className": "col-sm-5 text-center mb-control-value"
+    }, "Line - " + this.props.activeLineValue), React.createElement("span", {
       "className": (this.props.isControlsOpen === true ? "glyphicon glyphicon-chevron-up mt-medium" : "glyphicon glyphicon-chevron-down mt-medium")
     })), React.createElement("div", {
       "className": "collapse col-sm-12 mb-collapse",
@@ -4007,29 +4055,34 @@ PyramidControls = React.createClass({displayName: "PyramidControls",
       "className": "nav nav-tabs mt-medium mb-controls-tabs"
     }, React.createElement("li", {
       "role": "presentation",
+      "className": (this.props.filteringOption.option === 'bars' ? "active" : '')
+    }, React.createElement("a", {
+      "href": "#",
+      "onClick": this.onToggleFilteringOption,
+      "data-option": "bars",
       "data-option-cat": "_barsCategory",
       "data-option-val": "_barsValue",
-      "className": "active"
-    }, React.createElement("a", {
-      "href": "#",
-      "onClick": this.onToggleFilteringOption
+      "data-active-cat": "activeBarsCategory",
+      "data-active-val": "activeBarsValue"
     }, "Bars")), React.createElement("li", {
       "role": "presentation",
-      "data-option-cat": "_outlineCategory",
-      "data-option-val": "_outlineValue"
+      "className": (this.props.filteringOption.option === 'line' ? "active" : '')
     }, React.createElement("a", {
       "href": "#",
-      "onClick": this.onToggleFilteringOption
+      "onClick": this.onToggleFilteringOption,
+      "data-option": "line",
+      "data-option-cat": "_outlineCategory",
+      "data-option-val": "_outlineValue",
+      "data-active-cat": "activeLineCategory",
+      "data-active-val": "activeLineValue"
     }, "+ Line"))), React.createElement("div", {
       "className": "form-group mt-medium row"
     }, React.createElement("label", {
       "className": "pr-medium"
     }, "Filter by"), React.createElement("div", {
       "className": "btn-group"
-    }, ((function() {
+    }, (function() {
       var j, len, ref, results;
-      console.log('@props.filteringOption');
-      console.log(this.props.filteringOption);
       ref = this.props.categories;
       results = [];
       for (i = j = 0, len = ref.length; j < len; i = ++j) {
@@ -4043,13 +4096,13 @@ PyramidControls = React.createClass({displayName: "PyramidControls",
         }, category.label));
       }
       return results;
-    }).call(this)))), React.createElement("div", {
+    }).call(this))), React.createElement("div", {
       "className": "form-group row"
-    }, " ", (this.props._barsCategory.value !== 'districts' ? React.createElement("ul", {
+    }, " ", (this.props[this.props.filteringOption.cat].value !== 'districts' ? React.createElement("ul", {
       "className": "nav nav-pills pt-small pb-small pl-small"
     }, " ", (function() {
       var j, len, ref, results;
-      ref = this.props.values[this.props._barsCategory.value];
+      ref = this.props.values[this.props[this.props.filteringOption.cat].value];
       results = [];
       for (i = j = 0, len = ref.length; j < len; i = ++j) {
         value = ref[i];
@@ -4059,7 +4112,7 @@ PyramidControls = React.createClass({displayName: "PyramidControls",
         }, React.createElement("a", {
           "data-value": value.value,
           "href": "#",
-          "className": (this.props._barsValue.label === value.label ? "mb-pill active" : "mb-pill"),
+          "className": (this.props[this.props.filteringOption.val].label === value.label ? "mb-pill active" : "mb-pill"),
           "onClick": this.onValueChange
         }, value.label)));
       }
@@ -4081,7 +4134,7 @@ PyramidControls = React.createClass({displayName: "PyramidControls",
     }, React.createElement("a", {
       "href": "//local.direct.gov.uk/LDGRedirect/Start.do?mode=1",
       "target": "_blank"
-    }, "What\'s my Local Authority District?"))))), (this.props._barsCategory.value === 'districts' ? React.createElement("div", {
+    }, "What\'s my Local Authority District?"))))), (this.props[this.props.filteringOption.cat].value === 'districts' ? React.createElement("div", {
       "className": "form-group row"
     }, (query = this.props.district_query, query !== '' && query.length > 1 && query !== 'default' ? React.createElement("ul", {
       "className": "nav nav-pills pl-small pt-small pb-small"
@@ -4098,7 +4151,7 @@ PyramidControls = React.createClass({displayName: "PyramidControls",
           }, React.createElement("a", {
             "data-value": district.value,
             "href": "#",
-            "className": (this.props.activeBarsCategory === district.label ? "mb-pill active" : "mb-pill"),
+            "className": (this.props[this.props.filteringOption.val].label === district.label ? "mb-pill active" : "mb-pill"),
             "onClick": this.onValueChange
           }, district.label)));
         } else {

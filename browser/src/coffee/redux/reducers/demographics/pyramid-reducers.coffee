@@ -27,27 +27,30 @@ pyramidInitialState = {
 	    value: 'countries'
 	    label: 'Geography (Countries)'
 	_barsValue:
-	    value: 'K04000001'
-	    label: 'England \& Wales'
+	    value: 'E92000001'
+	    label: 'England'
 	activeBarsCategory: 'Geography (Countries)'
-	activeBarsValue: 'England \& Wales'
+	activeBarsValue: 'England'
+	activeLineCategory: 'Geography (Countries)'
+	activeLineValue: 'Wales'
 	data:
 		bars: {}
 		outline: {}
 	_mouseOverData: {}
 	outlineFilter: no
 	_outlineCategory:
-		value: 'default'
-		label: 'default'
+	    value: 'countries'
+	    label: 'Geography (Countries)'
 	_outlineValue:
-		value: 'default'
-		label: 'default'		
+		value: 'W92000004'
+		label: 'Wales'		
 	error: no
 	updateBars: no
 	updatePyramid: no
 	updateOutline: no
 	district_query: 'default'
 	filteringOption: {
+		option: 'bars'
 		cat: '_barsCategory'
 		val: '_barsValue'
 	}
@@ -63,6 +66,18 @@ pyramidChart = (state = pyramidInitialState, action) ->
 		}
 		when TOGGLE_VALUE then objectAssign {}, state, {
 			_barsValue: action.value
+			updatePyramid: no
+			updateBars: no
+			updateOutline: no
+		}
+		when CONTROLS_OPENED then objectAssign {}, state, {
+			isControlsOpen: yes
+			updatePyramid: no
+			updateBars: no
+			updateOutline: no
+		}
+		when CONTROLS_CLOSED then objectAssign {}, state, {
+			isControlsOpen: no
 			updatePyramid: no
 			updateBars: no
 			updateOutline: no
@@ -145,13 +160,13 @@ pyramidChart = (state = pyramidInitialState, action) ->
 			updateOutline: no
 		}
 		when TOGGLE_OUTLINE_CATEGORY then objectAssign {}, state, {
-			_outlineCategory: action.selectionOption
+			_outlineCategory: action.category
 			updatePyramid: no
 			updateBars: no
 			updateOutline: no
 		}
 		when TOGGLE_OUTLINE_VALUE then objectAssign {}, state, {
-			_outlineValue: action.selectionOption
+			_outlineValue: action.value
 			updatePyramid: no
 			updateBars: no
 			updateOutline: no

@@ -30,7 +30,7 @@ makePyramidRequest = (options) ->
 		dataSet: relDataSet
 		queryStringOps: {
 			date: "date=latest"
-			geography: "geography=K04000001"
+			geography: "geography=E92000001"
 			age: "c_age=1...21"
 			sex: "c_sex=1,2"
 			religion: "c_relpuk11=0"

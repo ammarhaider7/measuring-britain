@@ -8,10 +8,21 @@ PyramidControls = React.createClass
     el = e.target
     catVal = el.getAttribute 'data-value'
     catLabel = el.innerHTML
-    @props.onCategoryChange {
-      value: catVal
-      label: catLabel
-    }
+    filteringOption = @props.filteringOption.option
+
+    if filteringOption is 'bars'
+
+      @props.onCategoryChange {
+        value: catVal
+        label: catLabel
+      }
+
+    else if filteringOption is 'line'
+
+      @props.onOutlineCategoryChange {
+        value: catVal
+        label: catLabel
+      }
 
   onValueChange: (e) ->
 
@@ -19,10 +30,22 @@ PyramidControls = React.createClass
     el = e.target
     valVal = el.getAttribute 'data-value'
     valLabel = el.innerHTML
-    @props.onValueChange {
-      value: valVal
-      label: valLabel
-    }
+    filteringOption = @props.filteringOption.option
+
+    if filteringOption is 'bars'
+
+      @props.onValueChange {
+        value: valVal
+        label: valLabel
+      }
+
+    else if filteringOption is 'line'
+
+      @props.onOutlineValueChange {
+        value: valVal
+        label: valLabel
+      }
+
     $pyramidDiv = d3.select '#pyramid-container'
     $el = d3.select el
     $currVals = $pyramidDiv.selectAll '.mb-pill.active'
@@ -68,10 +91,20 @@ PyramidControls = React.createClass
     el = e.target
     cat = el.getAttribute 'data-option-cat'
     val = el.getAttribute 'data-option-val'
+    activeCat = el.getAttribute 'data-active-cat'
+    activeVal = el.getAttribute 'data-active-val'
+    option = el.getAttribute 'data-option'
 
-    @props.onToggleFilteringOption {
+    if option is 'line'
+
+      @props.onAddOutline()
+
+    @props.onFilterOptionToggle {
+      option
       cat
       val
+      activeCat
+      activeVal
     }
 
   render: -> 
@@ -83,7 +116,9 @@ PyramidControls = React.createClass
         className="controls-toggle-link"
         role="button" data-toggle="collapse" data-target="#collapsePyramid" aria-expanded="false" aria-controls="collapsePyramid"
       >
-        <span className="col-sm-5 text-center mb-control-value">{ "#{ @props.activeBarsValue } - #{ @props.activeBarsCategory }" }</span>
+        <span className="col-sm-5 text-center mb-control-value">{ "Bars - #{ @props.activeBarsValue }" }</span>
+        <span className="col-sm-2 text-center mb-control-value">compared to</span>
+        <span className="col-sm-5 text-center mb-control-value">{ "Line - #{ @props.activeLineValue }" }</span>
         <span 
           className={ if @props.isControlsOpen is yes then "glyphicon glyphicon-chevron-up mt-medium" else "glyphicon glyphicon-chevron-down mt-medium"}
         >
@@ -94,21 +129,30 @@ PyramidControls = React.createClass
           <ul className="nav nav-tabs mt-medium mb-controls-tabs">
             <li 
               role="presentation" 
-              data-option-cat="_barsCategory" 
-              data-option-val="_barsValue" 
-              className="active">
+              className={ if @props.filteringOption.option is 'bars' then "active" else ''}
+            >
               <a 
                 href="#"
                 onClick={ @onToggleFilteringOption }
+                data-option="bars"
+                data-option-cat="_barsCategory" 
+                data-option-val="_barsValue" 
+                data-active-cat="activeBarsCategory"
+                data-active-val="activeBarsValue"
               >Bars</a>
             </li>
             <li 
               role="presentation"
-              data-option-cat="_outlineCategory" 
-              data-option-val="_outlineValue">
+              className={ if @props.filteringOption.option is 'line' then "active" else ''}
+            >
               <a 
                 href="#"
                 onClick={ @onToggleFilteringOption }
+                data-option="line"
+                data-option-cat="_outlineCategory" 
+                data-option-val="_outlineValue"
+                data-active-cat="activeLineCategory"
+                data-active-val="activeLineValue"
               >+ Line</a>
             </li>
           </ul>
@@ -116,8 +160,6 @@ PyramidControls = React.createClass
             <label className="pr-medium">Filter by</label>
             <div className="btn-group">
               {
-                console.log '@props.filteringOption'
-                console.log @props.filteringOption
                 for category, i in @props.categories
                   # unless category.value is @props.omitted_category
                   <button 
@@ -133,15 +175,15 @@ PyramidControls = React.createClass
             </div>
           </div>
           <div className="form-group row"> {
-            unless @props._barsCategory.value is 'districts'
+            unless @props[@props.filteringOption.cat].value is 'districts'
               <ul className="nav nav-pills pt-small pb-small pl-small"> {
 
-                    for value, i in @props.values[@props._barsCategory.value]
+                    for value, i in @props.values[@props[@props.filteringOption.cat].value]
                       <li role="presentation" key={value.value}>
                         <a
                           data-value={ value.value }
                           href="#" 
-                          className={ if @props._barsValue.label is value.label then "mb-pill active" else "mb-pill" }
+                          className={ if @props[@props.filteringOption.val].label is value.label then "mb-pill active" else "mb-pill" }
                           onClick={ @onValueChange }
                         >
                         { value.label }
@@ -169,7 +211,7 @@ PyramidControls = React.createClass
               </div>
           }
           </div>
-          { if @props._barsCategory.value is 'districts'
+          { if @props[@props.filteringOption.cat].value is 'districts'
             <div className="form-group row">
               {
                 query = @props.district_query
@@ -182,7 +224,7 @@ PyramidControls = React.createClass
                             <a 
                               data-value={ district.value }
                               href="#" 
-                              className={ if @props.activeBarsCategory is district.label then "mb-pill active" else "mb-pill" }
+                              className={ if @props[@props.filteringOption.val].label is district.label then "mb-pill active" else "mb-pill" }
                               onClick={ @onValueChange }
                             >
                             { district.label }

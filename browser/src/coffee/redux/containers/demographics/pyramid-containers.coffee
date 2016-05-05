@@ -23,6 +23,8 @@ mapStateToProps = (state) ->
 	_barsValue: state.pyramidChart._barsValue
 	activeBarsCategory: state.pyramidChart.activeBarsCategory
 	activeBarsValue: state.pyramidChart.activeBarsValue		
+	activeLineCategory: state.pyramidChart.activeLineCategory
+	activeLineValue: state.pyramidChart.activeLineValue		
 	data: state.pyramidChart.data
 	isFetching: state.pyramidChart.isFetching
 	district_query: state.pyramidChart.district_query
@@ -34,6 +36,7 @@ mapStateToProps = (state) ->
 	isDefault: state.pyramidChart.isDefault
 	updateOutline: state.pyramidChart.updateOutline
 	filteringOption: state.pyramidChart.filteringOption
+	isControlsOpen: state.pyramidChart.isControlsOpen
 
 mapStateToPropsPyrTable = (state) ->
 
@@ -62,10 +65,10 @@ mapDispatchToProps = (dispatch) ->
 		dispatch addFilter()
 	onRemoveFilter: () ->
 		dispatch removeFilter()
-	onOutlineCategoryChange: (value, selectedOption) ->
-		dispatch toggleOutlineCategory value, selectedOption[0]
-	onOutlineValueChange: (value, selectedOption) ->
-		dispatch toggleOutlineValue value, selectedOption[0]
+	onOutlineCategoryChange: (category) ->
+		dispatch toggleOutlineCategory category
+	onOutlineValueChange: (value) ->
+		dispatch toggleOutlineValue value
 	fetchPyramidData: (filterOptions) ->
 		dispatch fetchPyramidData filterOptions
 	onMouseOver: (mouseOverData) ->

@@ -19,6 +19,20 @@ PyramidComponent = React.createClass
 	componentWillMount: ->
 
 		@props.fetchPyramidData null
+	    # @props.fetchPyramidData {
+	    #   outlineRequested: yes
+	    #   isDefault: yes
+	    #   bars: {
+	    #     isDefault: yes
+	    #     category: @props._barsCategory
+	    #     value: @props._barsValue
+	    #   }
+	    #   outline: {
+	    #     isDefault: yes
+	    #     category: @props._outlineCategory
+	    #     value: @props._outlineValue
+	    #   }
+	    # } 
 
 	componentDidUpdate: ->
 		# console.log 'pyramid@props'

@@ -81,11 +81,10 @@ toggleOutlineCategory = function(category) {
   };
 };
 
-toggleOutlineValue = function(value, selectionOption) {
+toggleOutlineValue = function(value) {
   return {
     type: TOGGLE_OUTLINE_VALUE,
-    value: value,
-    selectionOption: selectionOption
+    value: value
   };
 };
 

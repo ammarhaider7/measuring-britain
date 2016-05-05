@@ -15,11 +15,13 @@ pyramidInitialState = {
     label: 'Geography (Countries)'
   },
   _barsValue: {
-    value: 'K04000001',
-    label: 'England \& Wales'
+    value: 'E92000001',
+    label: 'England'
   },
   activeBarsCategory: 'Geography (Countries)',
-  activeBarsValue: 'England \& Wales',
+  activeBarsValue: 'England',
+  activeLineCategory: 'Geography (Countries)',
+  activeLineValue: 'Wales',
   data: {
     bars: {},
     outline: {}
@@ -27,12 +29,12 @@ pyramidInitialState = {
   _mouseOverData: {},
   outlineFilter: false,
   _outlineCategory: {
-    value: 'default',
-    label: 'default'
+    value: 'countries',
+    label: 'Geography (Countries)'
   },
   _outlineValue: {
-    value: 'default',
-    label: 'default'
+    value: 'W92000004',
+    label: 'Wales'
   },
   error: false,
   updateBars: false,
@@ -40,6 +42,7 @@ pyramidInitialState = {
   updateOutline: false,
   district_query: 'default',
   filteringOption: {
+    option: 'bars',
     cat: '_barsCategory',
     val: '_barsValue'
   }
@@ -60,6 +63,20 @@ pyramidChart = function(state, action) {
     case TOGGLE_VALUE:
       return objectAssign({}, state, {
         _barsValue: action.value,
+        updatePyramid: false,
+        updateBars: false,
+        updateOutline: false
+      });
+    case CONTROLS_OPENED:
+      return objectAssign({}, state, {
+        isControlsOpen: true,
+        updatePyramid: false,
+        updateBars: false,
+        updateOutline: false
+      });
+    case CONTROLS_CLOSED:
+      return objectAssign({}, state, {
+        isControlsOpen: false,
         updatePyramid: false,
         updateBars: false,
         updateOutline: false
@@ -156,14 +173,14 @@ pyramidChart = function(state, action) {
       });
     case TOGGLE_OUTLINE_CATEGORY:
       return objectAssign({}, state, {
-        _outlineCategory: action.selectionOption,
+        _outlineCategory: action.category,
         updatePyramid: false,
         updateBars: false,
         updateOutline: false
       });
     case TOGGLE_OUTLINE_VALUE:
       return objectAssign({}, state, {
-        _outlineValue: action.selectionOption,
+        _outlineValue: action.value,
         updatePyramid: false,
         updateBars: false,
         updateOutline: false

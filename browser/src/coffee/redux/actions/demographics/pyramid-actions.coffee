@@ -55,11 +55,10 @@ toggleOutlineCategory = (category) ->
 		category
 	}
 
-toggleOutlineValue = (value, selectionOption) ->
+toggleOutlineValue = (value) ->
 	{
 		type: TOGGLE_OUTLINE_VALUE
 		value
-		selectionOption
 	}	
 
 addFilter = () ->
