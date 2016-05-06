@@ -118,12 +118,12 @@ PyramidControls = React.createClass({displayName: "PyramidControls",
       "aria-expanded": "false",
       "aria-controls": "collapsePyramid"
     }, React.createElement("span", {
-      "className": "col-sm-5 text-center mb-control-value"
-    }, "Bars - " + this.props.activeBarsValue), React.createElement("span", {
-      "className": "col-sm-2 text-center mb-control-value"
+      "className": (this.props.activeLineValue !== 'default' ? "col-sm-4 text-center mb-control-value" : "col-sm-11 text-center mb-control-value")
+    }, "" + this.props.activeBarsValue), (this.props.activeLineValue !== 'default' ? React.createElement("div", null, React.createElement("span", {
+      "className": "col-sm-3 text-center mb-control-value"
     }, "compared to"), React.createElement("span", {
-      "className": "col-sm-5 text-center mb-control-value"
-    }, "Line - " + this.props.activeLineValue), React.createElement("span", {
+      "className": "col-sm-4 text-center mb-control-value"
+    }, "" + this.props.activeLineValue)) : void 0), React.createElement("span", {
       "className": (this.props.isControlsOpen === true ? "glyphicon glyphicon-chevron-up mt-medium" : "glyphicon glyphicon-chevron-down mt-medium")
     })), React.createElement("div", {
       "className": "collapse col-sm-12 mb-collapse",
@@ -177,7 +177,7 @@ PyramidControls = React.createClass({displayName: "PyramidControls",
       return results;
     }).call(this))), React.createElement("div", {
       "className": "form-group row"
-    }, " ", (this.props[this.props.filteringOption.cat].value !== 'districts' ? React.createElement("ul", {
+    }, " ", (this.props[this.props.filteringOption.cat].value !== 'districts' && this.props[this.props.filteringOption.cat].value !== 'default' ? React.createElement("ul", {
       "className": "nav nav-pills pt-small pb-small pl-small"
     }, " ", (function() {
       var j, len, ref, results;
@@ -196,7 +196,7 @@ PyramidControls = React.createClass({displayName: "PyramidControls",
         }, value.label)));
       }
       return results;
-    }).call(this)) : React.createElement("div", null, React.createElement("div", {
+    }).call(this)) : this.props[this.props.filteringOption.cat].value === 'districts' ? React.createElement("div", null, React.createElement("div", {
       "className": "col-sm-6"
     }, React.createElement("div", {
       "className": "input-group"
@@ -213,7 +213,7 @@ PyramidControls = React.createClass({displayName: "PyramidControls",
     }, React.createElement("a", {
       "href": "//local.direct.gov.uk/LDGRedirect/Start.do?mode=1",
       "target": "_blank"
-    }, "What\'s my Local Authority District?"))))), (this.props[this.props.filteringOption.cat].value === 'districts' ? React.createElement("div", {
+    }, "What\'s my Local Authority District?"))) : void 0)), (this.props[this.props.filteringOption.cat].value === 'districts' ? React.createElement("div", {
       "className": "form-group row"
     }, (query = this.props.district_query, query !== '' && query.length > 1 && query !== 'default' ? React.createElement("ul", {
       "className": "nav nav-pills pl-small pt-small pb-small"

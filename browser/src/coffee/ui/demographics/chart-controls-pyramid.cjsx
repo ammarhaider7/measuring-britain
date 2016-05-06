@@ -116,9 +116,15 @@ PyramidControls = React.createClass
         className="controls-toggle-link"
         role="button" data-toggle="collapse" data-target="#collapsePyramid" aria-expanded="false" aria-controls="collapsePyramid"
       >
-        <span className="col-sm-5 text-center mb-control-value">{ "Bars - #{ @props.activeBarsValue }" }</span>
-        <span className="col-sm-2 text-center mb-control-value">compared to</span>
-        <span className="col-sm-5 text-center mb-control-value">{ "Line - #{ @props.activeLineValue }" }</span>
+        <span 
+          className={ unless @props.activeLineValue is 'default' then "col-sm-4 text-center mb-control-value" else "col-sm-11 text-center mb-control-value" }
+        >{ "#{ @props.activeBarsValue }" }</span>
+        { unless @props.activeLineValue is 'default'
+            <div>
+              <span className="col-sm-3 text-center mb-control-value">compared to</span>
+              <span className="col-sm-4 text-center mb-control-value">{ "#{ @props.activeLineValue }" }</span>
+            </div>
+        }
         <span 
           className={ if @props.isControlsOpen is yes then "glyphicon glyphicon-chevron-up mt-medium" else "glyphicon glyphicon-chevron-down mt-medium"}
         >
@@ -175,7 +181,7 @@ PyramidControls = React.createClass
             </div>
           </div>
           <div className="form-group row"> {
-            unless @props[@props.filteringOption.cat].value is 'districts'
+            if @props[@props.filteringOption.cat].value isnt 'districts' and @props[@props.filteringOption.cat].value isnt 'default'
               <ul className="nav nav-pills pt-small pb-small pl-small"> {
 
                     for value, i in @props.values[@props[@props.filteringOption.cat].value]
@@ -192,7 +198,7 @@ PyramidControls = React.createClass
 
               }
               </ul>
-            else
+            else if @props[@props.filteringOption.cat].value is 'districts'
               <div>
                 <div className="col-sm-6">
                   <div className="input-group">

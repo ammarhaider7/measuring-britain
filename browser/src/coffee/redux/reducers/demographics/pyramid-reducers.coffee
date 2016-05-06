@@ -27,23 +27,23 @@ pyramidInitialState = {
 	    value: 'countries'
 	    label: 'Geography (Countries)'
 	_barsValue:
-	    value: 'E92000001'
-	    label: 'England'
+	    value: 'K04000001'
+	    label: 'England \& Wales'
 	activeBarsCategory: 'Geography (Countries)'
-	activeBarsValue: 'England'
-	activeLineCategory: 'Geography (Countries)'
-	activeLineValue: 'Wales'
+	activeBarsValue: 'England \& Wales'
+	activeLineCategory: 'default'
+	activeLineValue: 'default'
 	data:
 		bars: {}
 		outline: {}
 	_mouseOverData: {}
 	outlineFilter: no
 	_outlineCategory:
-	    value: 'countries'
-	    label: 'Geography (Countries)'
+	    value: 'default'
+	    label: 'default'
 	_outlineValue:
-		value: 'W92000004'
-		label: 'Wales'		
+		value: 'default'
+		label: 'default'		
 	error: no
 	updateBars: no
 	updatePyramid: no
@@ -119,6 +119,8 @@ pyramidChart = (state = pyramidInitialState, action) ->
 				bars: state.data.bars
 			lastUpdated: action.receivedAt
 			updateOutline: yes
+			activeLineValue: state._outlineValue.label
+			activeLineCategory: state._outlineCategory.label
 		}
 		when ERROR_RECEIVE_PYRAMID_DATA_BARS then objectAssign {}, state, {
 			isFetching: no

@@ -15,13 +15,13 @@ pyramidInitialState = {
     label: 'Geography (Countries)'
   },
   _barsValue: {
-    value: 'E92000001',
-    label: 'England'
+    value: 'K04000001',
+    label: 'England \& Wales'
   },
   activeBarsCategory: 'Geography (Countries)',
-  activeBarsValue: 'England',
-  activeLineCategory: 'Geography (Countries)',
-  activeLineValue: 'Wales',
+  activeBarsValue: 'England \& Wales',
+  activeLineCategory: 'default',
+  activeLineValue: 'default',
   data: {
     bars: {},
     outline: {}
@@ -29,12 +29,12 @@ pyramidInitialState = {
   _mouseOverData: {},
   outlineFilter: false,
   _outlineCategory: {
-    value: 'countries',
-    label: 'Geography (Countries)'
+    value: 'default',
+    label: 'default'
   },
   _outlineValue: {
-    value: 'W92000004',
-    label: 'Wales'
+    value: 'default',
+    label: 'default'
   },
   error: false,
   updateBars: false,
@@ -124,7 +124,9 @@ pyramidChart = function(state, action) {
           bars: state.data.bars
         },
         lastUpdated: action.receivedAt,
-        updateOutline: true
+        updateOutline: true,
+        activeLineValue: state._outlineValue.label,
+        activeLineCategory: state._outlineCategory.label
       });
     case ERROR_RECEIVE_PYRAMID_DATA_BARS:
       return objectAssign({}, state, {
