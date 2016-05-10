@@ -20,8 +20,8 @@ store = createStore mbReducer, applyMiddleware ReduxThunk
 # Every time the state changes, log it
 # Note that subscribe() returns a function for unregistering the listener
 unsubscribe = store.subscribe ->
-	console.log 'getState 2'
-	console.log store.getState()
+	# console.log 'getState 2'
+	# console.log store.getState()
 
 # Dispatch some actions
 # store.dispatch toggleFilter { category: 'FILTER_TOGGLED_CATEGORY', value: 'FILTER_TOGGLED_VALUE' }

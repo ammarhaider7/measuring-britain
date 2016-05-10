@@ -19,10 +19,7 @@ React = require('react');
 
 store = createStore(mbReducer, applyMiddleware(ReduxThunk));
 
-unsubscribe = store.subscribe(function() {
-  console.log('getState 2');
-  return console.log(store.getState());
-});
+unsubscribe = store.subscribe(function() {});
 
 render = function() {
   ReactDOM.render(React.createElement(Provider, {
