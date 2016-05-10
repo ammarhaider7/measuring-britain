@@ -23,16 +23,14 @@ SunburstComponent = React.createClass
       $(window).on 'scroll', () =>
 
         docScrollTop = $(document).scrollTop()
-        sunburstOffsetTop = ($('.sunburst').offset().top - 75)
+        sunburstOffsetTop = ($('.sunburst').offset().top + 750)
         docHeight = $(document).height()
 
         if (docHeight - docScrollTop) < sunburstOffsetTop
           console.log 'scroll reach'
           $(window).off 'scroll'
-          # @props.onInitSunburst()
-          # @reactDrawSunburst()
           @props.fetchSunburstData null
-          # @props.offInitSunburst()
+
 
   reactDrawSunburst: ->
 

@@ -4,9 +4,9 @@ var d3, drawSunburst;
 d3 = require('d3');
 
 drawSunburst = function(options) {
-  var activeCategory, activeValue, arc, arcTween, attachHoverHandlers, container, data, ethnic_group_arr, format, getColour, getSubColour, height, initTween, isDefault, margin, my, nested_data_init, onInitDone, onMouseOver, partition, percFormat, radius, ref, ref1, stash, total_item, total_item_value, width, y;
+  var activeCategory, activeValue, arc, arcTween, attachHoverHandlers, container, data, ethnic_group_arr, format, getColour, getSubColour, height, initTween, isDefault, margin, my, nested_data, nested_data_init, onInitDone, onMouseOver, partition, percFormat, radius, ref, ref1, stash, total_item, total_item_value, width, y;
   container = options.container, data = options.data, isDefault = options.isDefault, onMouseOver = options.onMouseOver, activeCategory = options.activeCategory, activeValue = options.activeValue, onInitDone = options.onInitDone;
-  window.nested_data = data.d3_nested_data;
+  nested_data = data.d3_nested_data;
   total_item = data.total_item;
   total_item_value = total_item.obs_value.value;
   nested_data_init = {

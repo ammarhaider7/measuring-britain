@@ -4,7 +4,7 @@ drawSunburst = (options) ->
 
 	{ container, data, isDefault, onMouseOver, activeCategory, activeValue, onInitDone } = options
 
-	window.nested_data = data.d3_nested_data
+	nested_data = data.d3_nested_data
 
 	total_item = data.total_item
 
