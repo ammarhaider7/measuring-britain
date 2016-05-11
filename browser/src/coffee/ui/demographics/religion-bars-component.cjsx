@@ -30,6 +30,10 @@ BarsComponent = React.createClass
     #       console.log 'scroll reach'
     #       $(window).off 'scroll'
     #       @props.fetchBarsData null
+    if @props.isDefault is yes and @props.init_done is no
+
+      @props.fetchReligionData null
+
 
   reactDrawBars: ->
 
@@ -42,11 +46,10 @@ BarsComponent = React.createClass
       activeCategory: @props.activeCategory
       activeValue: @props.activeValue
       onInitDone: @props.onInitDone
+
     }
 
-    # sunburst()
-
-    if @props.isDefault is yes and @props.updateSunburst is yes
+    if @props.isDefault is yes and @props.updateRelBars is yes
 
       bars.init()
 
@@ -56,8 +59,7 @@ BarsComponent = React.createClass
 
   componentDidUpdate: ->
 
-    # if @props.updateSunburst is yes and @props.init_done is yes
-    if @props.updateBars is yes
+    if @props.updateRelBars is yes
 
       @reactDrawBars()
 

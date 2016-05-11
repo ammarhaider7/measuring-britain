@@ -22,7 +22,11 @@ value_options = {
 category_options = data.category_options;
 
 BarsComponent = React.createClass({displayName: "BarsComponent",
-  componentDidMount: function() {},
+  componentDidMount: function() {
+    if (this.props.isDefault === true && this.props.init_done === false) {
+      return this.props.fetchReligionData(null);
+    }
+  },
   reactDrawBars: function() {
     var bars;
     bars = drawRelBars({
@@ -34,14 +38,14 @@ BarsComponent = React.createClass({displayName: "BarsComponent",
       activeValue: this.props.activeValue,
       onInitDone: this.props.onInitDone
     });
-    if (this.props.isDefault === true && this.props.updateSunburst === true) {
+    if (this.props.isDefault === true && this.props.updateRelBars === true) {
       return bars.init();
     } else {
       return bars.update();
     }
   },
   componentDidUpdate: function() {
-    if (this.props.updateBars === true) {
+    if (this.props.updateRelBars === true) {
       return this.reactDrawBars();
     }
   },

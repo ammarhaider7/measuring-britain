@@ -104,8 +104,6 @@ PyramidControls = React.createClass({displayName: "PyramidControls",
   },
   render: function() {
     var category, district, i, query, value;
-    console.log('PyramidControls props');
-    console.log(this.props);
     return React.createElement("div", {
       "className": "controls-container clearfix closed mb-oxygen",
       "ref": "controlsContainer"

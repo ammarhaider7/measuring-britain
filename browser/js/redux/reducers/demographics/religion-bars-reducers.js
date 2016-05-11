@@ -6,7 +6,7 @@ objectAssign = require('object-assign');
 ref = require('../../actions/demographics/religion-bars-actions.js'), REQUEST_RELIGION_DATA = ref.REQUEST_RELIGION_DATA, RECEIVE_RELIGION_DATA = ref.RECEIVE_RELIGION_DATA, TOGGLE_CATEGORY = ref.TOGGLE_CATEGORY, MOUSE_OVER = ref.MOUSE_OVER, TOGGLE_VALUE = ref.TOGGLE_VALUE, ERROR_RECEIVE_RELIGION_DATA = ref.ERROR_RECEIVE_RELIGION_DATA, FILTER_USED = ref.FILTER_USED, CONTROLS_OPENED = ref.CONTROLS_OPENED, CONTROLS_CLOSED = ref.CONTROLS_CLOSED, DISTRICT_SEARCH = ref.DISTRICT_SEARCH, INIT_BARS = ref.INIT_BARS, INIT_BARS_OFF = ref.INIT_BARS_OFF, INIT_DONE = ref.INIT_DONE;
 
 barsInitialState = {
-  chartName: 'religiousBars',
+  chartName: 'relBars',
   isFetching: false,
   isDefault: true,
   isControlsOpen: false,

@@ -23,7 +23,7 @@ mapStateToProps = (state) ->
 	activeCategory: state.relBarChart.activeCategory
 	activeValue: state.relBarChart.activeValue	
 	error: state.relBarChart.error
-	updateBars: state.relBarChart.updateBars
+	updateRelBars: state.relBarChart.updateRelBars
 	isDefault: state.relBarChart.isDefault
 	isControlsOpen: state.relBarChart.isControlsOpen
 	district_query: state.relBarChart.district_query

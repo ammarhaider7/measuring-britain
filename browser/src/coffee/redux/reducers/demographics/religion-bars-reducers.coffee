@@ -15,7 +15,7 @@ objectAssign = require 'object-assign'
   INIT_DONE } = require '../../actions/demographics/religion-bars-actions.js'
 
 barsInitialState = {
-  chartName: 'religiousBars'
+  chartName: 'relBars'
   isFetching: no
   isDefault: yes
   isControlsOpen: no

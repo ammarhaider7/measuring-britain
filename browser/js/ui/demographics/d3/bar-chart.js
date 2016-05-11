@@ -4,12 +4,51 @@ var d3, drawBarChart;
 d3 = require('d3');
 
 drawBarChart = function(options) {
-  var activeCategory, activeValue, container, data, isDefault, onInitDone, onMouseOver;
+  var activeCategory, activeValue, chart_height, chart_width, container, data, height, isDefault, margin, my, onInitDone, onMouseOver, ref, ref1, width, x, xAxis, y;
   container = options.container, data = options.data, isDefault = options.isDefault, onMouseOver = options.onMouseOver, activeCategory = options.activeCategory, activeValue = options.activeValue, onInitDone = options.onInitDone;
-  my.init = function() {};
+  my = {};
+  width = (ref = container.offsetWidth) != null ? ref : 750;
+  height = (ref1 = container.offsetHeight) != null ? ref1 : 500;
+  margin = {
+    top: 10,
+    right: 0,
+    bottom: 10,
+    left: 30
+  };
+  chart_width = width - margin.left - margin.right;
+  chart_height = height - margin.top - margin.bottom;
+  y = d3.scale.ordinal().domain(d3.range(data.d3_array.length)).rangeRoundBands([0, chart_height], 0.1);
+  x = d3.scale.linear().domain([0, data.sum]).range([0, chart_width]);
+  xAxis = d3.svg.axis().scale(x).orient('top');
+  my.init = function() {
+    var bar, barsEnter, key, key_group, key_text_group, labels_group, main_group, svg, x_axis_group, y_axis_group;
+    svg = d3.select('.bars-svg');
+    main_group = svg.select('.main-group');
+    labels_group = svg.select('.labels-group');
+    x_axis_group = svg.select('.x-axis-group');
+    y_axis_group = svg.select('.y-axis-group');
+    key_group = svg.select('.key-group');
+    key_text_group = svg.select('.key-text-group');
+    main_group.attr('transform', "translate(" + margin.left + ", " + margin.top + ")");
+    key = function(d) {
+      return d.name;
+    };
+    bar = main_group.selectAll('rect').data(data.d3_array, key);
+    return barsEnter = bar.enter().append('rect').attr({
+      width: function(d) {
+        return x(d.value);
+      },
+      height: function() {
+        return y.rangeBand();
+      },
+      y: function(d, i) {
+        return y(i);
+      },
+      x: 0
+    });
+  };
   my.update = function() {};
   my.width = function(value) {
-    var width;
     if (!arguments.length) {
       return width;
     }
@@ -17,7 +56,6 @@ drawBarChart = function(options) {
     return my;
   };
   my.height = function(value) {
-    var height;
     if (!arguments.length) {
       return height;
     }

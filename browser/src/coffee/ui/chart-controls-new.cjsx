@@ -47,7 +47,15 @@ ControlsNew = React.createClass
 
   fetchData: ->
 
-    @props.fetchSunburstData {
+    if @props.chartName is 'sunburst' 
+
+      fetchChartData = 'fetchSunburstData' 
+
+    else if @props.chartName is 'relBars'
+
+      fetchChartData = 'fetchReligionData'
+
+    @props[fetchChartData] {
       isDefault: no
       category: @props._category
       value: @props._value
@@ -59,7 +67,7 @@ ControlsNew = React.createClass
       <a 
         onClick={ @onControlsOpen }
         className="controls-toggle-link"
-        role="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne"
+        role="button" data-toggle="collapse" data-target={ "#collapse#{ @props.chartName }" } aria-expanded="false" aria-controls={ "collapse#{ @props.chartName }" }
       >
           <span className="text-center mb-control-value col-sm-5">{ @props.activeCategory }</span>
           <span className="col-sm-5 text-center mb-control-value">{ @props.activeValue }</span>
@@ -68,7 +76,7 @@ ControlsNew = React.createClass
           >
           </span>
       </a>
-      <div className="collapse col-sm-12 mb-collapse" id="collapseOne">
+      <div className="collapse col-sm-12 mb-collapse" id={ "collapse#{ @props.chartName }" }>
         <div className="container col-sm-12">
           <div className="form-group mt-medium row">
             <label className="pr-medium">Filter by</label>

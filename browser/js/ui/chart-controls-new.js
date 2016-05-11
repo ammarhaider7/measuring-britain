@@ -51,7 +51,13 @@ ControlsNew = React.createClass({displayName: "ControlsNew",
     return this.props.onDistrictSearch(query);
   },
   fetchData: function() {
-    return this.props.fetchSunburstData({
+    var fetchChartData;
+    if (this.props.chartName === 'sunburst') {
+      fetchChartData = 'fetchSunburstData';
+    } else if (this.props.chartName === 'relBars') {
+      fetchChartData = 'fetchReligionData';
+    }
+    return this.props[fetchChartData]({
       isDefault: false,
       category: this.props._category,
       value: this.props._value
@@ -67,9 +73,9 @@ ControlsNew = React.createClass({displayName: "ControlsNew",
       "className": "controls-toggle-link",
       "role": "button",
       "data-toggle": "collapse",
-      "data-target": "#collapseOne",
+      "data-target": "#collapse" + this.props.chartName,
       "aria-expanded": "false",
-      "aria-controls": "collapseOne"
+      "aria-controls": "collapse" + this.props.chartName
     }, React.createElement("span", {
       "className": "text-center mb-control-value col-sm-5"
     }, this.props.activeCategory), React.createElement("span", {
@@ -78,7 +84,7 @@ ControlsNew = React.createClass({displayName: "ControlsNew",
       "className": (this.props.isControlsOpen === true ? "glyphicon glyphicon-chevron-up mt-medium" : "glyphicon glyphicon-chevron-down mt-medium")
     })), React.createElement("div", {
       "className": "collapse col-sm-12 mb-collapse",
-      "id": "collapseOne"
+      "id": "collapse" + this.props.chartName
     }, React.createElement("div", {
       "className": "container col-sm-12"
     }, React.createElement("div", {

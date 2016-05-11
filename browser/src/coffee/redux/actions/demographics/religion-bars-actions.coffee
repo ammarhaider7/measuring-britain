@@ -1,5 +1,5 @@
-# sunBurstService = require '../../../services/nomis/demographics/ethnic-sunburst-service.js'
-# sunburstDataParser = require '../../../services/nomis/demographics/ethnic-sunburst-parser.js'
+relBarsService = require '../../../services/nomis/demographics/rel-bars-service.js'
+relBarsDataParser = require '../../../services/nomis/demographics/rel-bars-parser.js'
 
 REQUEST_RELIGION_DATA = "REQUEST_RELIGION_DATA"
 RECEIVE_RELIGION_DATA = "RECEIVE_RELIGION_DATA"
@@ -7,10 +7,10 @@ TOGGLE_CATEGORY = "R_TOGGLE_CATEGORY"
 MOUSE_OVER = "R_MOUSE_OVER"
 TOGGLE_VALUE = "R_TOGGLE_VALUE"
 ERROR_RECEIVE_RELIGION_DATA = "ERROR_RECEIVE_RELIGION_DATA"
-FILTER_USED = "P_FILTER_USED"
-CONTROLS_OPENED = "P_CONTROLS_OPENED"
-CONTROLS_CLOSED = "P_CONTROLS_CLOSED"
-DISTRICT_SEARCH = "P_DISTRICT_SEARCH"
+FILTER_USED = "R_FILTER_USED"
+CONTROLS_OPENED = "R_CONTROLS_OPENED"
+CONTROLS_CLOSED = "R_CONTROLS_CLOSED"
+DISTRICT_SEARCH = "R_DISTRICT_SEARCH"
 INIT_BARS = "INIT_BARS"
 INIT_BARS_OFF = "INIT_BARS_OFF"
 INIT_DONE = "INIT_DONE"
@@ -53,12 +53,12 @@ mouseOver = (mouseOverData) ->
 
 initBars = () ->
 	{
-		type: INIT_SUNBURST
+		type: INIT_BARS
 	}
 
 initBarsOff = () ->
 	{
-		type: INIT_SUNBURST_OFF
+		type: INIT_BARS_OFF
 	}
 
 initDone = () ->
@@ -68,7 +68,7 @@ initDone = () ->
 
 requestReligionData = (filterOptions) ->
 	{
-		type: REQUEST_ETHNIC_DATA
+		type: REQUEST_RELIGION_DATA
 		filterOptions
 	}
 
@@ -79,14 +79,14 @@ filterUsed = () ->
 
 receiveReligionData = (data) ->
 	{
-		type: RECEIVE_ETHNIC_DATA
+		type: RECEIVE_RELIGION_DATA
 		data: data
 		receivedAt: Date.now()
 	}
 
 errorReceivingeReligionData = (error) ->
 	{
-		type: ERROR_RECEIVE_ETHNIC_DATA
+		type: ERROR_RECEIVE_RELIGION_DATA
 		error: error
 	}
 
@@ -104,19 +104,17 @@ fetchReligionData = (filterOptions) ->
 
 		dispatch filterUsed() if filterOptions?
 		dispatch requestReligionData filterOptions
-		# sunBurstService(filterOptions)
-		# 	.done (response) ->
-		#         # We can dispatch many times!
-		#         # Here, we update the app state with the results of the API call.
-		# 		data = sunburstDataParser response.obs
-		# 		# window.sunburst_data = data
-		# 		dispatch receiveEthnicData data
-		# 		return
-		# 	.fail (jqxhr, textStatus, error) ->
-		# 		# Handle errors..
-		# 		dispatch errorReceivingeEthnicData textStatus + " : " + error
-		# 		# console.log textStatus + " - " + error
-		# 		return
+		relBarsService(filterOptions)
+			.done (response) ->
+		        # We can dispatch many times!
+		        # Here, we update the app state with the results of the API call.
+				data = relBarsDataParser response.obs
+				dispatch receiveReligionData data
+				return
+			.fail (jqxhr, textStatus, error) ->
+				# Handle errors..
+				dispatch errorReceivingeEthnicData textStatus + " : " + error
+				return
 
 module.exports = {
 

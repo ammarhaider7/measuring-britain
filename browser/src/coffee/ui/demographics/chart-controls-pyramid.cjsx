@@ -108,8 +108,7 @@ PyramidControls = React.createClass
     }
 
   render: -> 
-    console.log 'PyramidControls props'
-    console.log @props 
+
     <div className="controls-container clearfix closed mb-oxygen" ref="controlsContainer"> 
       <a 
         onClick={ @onControlsOpen }
