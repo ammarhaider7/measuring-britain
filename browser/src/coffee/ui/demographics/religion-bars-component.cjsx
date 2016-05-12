@@ -74,14 +74,14 @@ BarsComponent = React.createClass
           }
         />
         <svg
-          className="bars-svg"  
-          style={{ width: '100%', height: '550px' }}
+          className="bars-svg mb-oxygen"  
+          style={{ width: '100%', height: '425px' }}
           ref="barsSvg"
         >
           <g className="main-group"></g>
           <g className="labels-group"></g>
-          <g className="x-axis-group"></g>
-          <g className="y-axis-group"></g>
+          <g className="x axis"></g>
+          <g className="y axis"></g>
           <g className="key-group"></g>
           <g className="key-text-group"></g>  
         </svg>

@@ -62,10 +62,10 @@ BarsComponent = React.createClass({displayName: "BarsComponent",
       "src": "./images/mb_ajax_loader.gif",
       "className": (this.props.isFetching === true && this.props.isDefault === true ? 'mb-spinner' : 'hide')
     }), React.createElement("svg", {
-      "className": "bars-svg",
+      "className": "bars-svg mb-oxygen",
       "style": {
         width: '100%',
-        height: '550px'
+        height: '425px'
       },
       "ref": "barsSvg"
     }, React.createElement("g", {
@@ -73,9 +73,9 @@ BarsComponent = React.createClass({displayName: "BarsComponent",
     }), React.createElement("g", {
       "className": "labels-group"
     }), React.createElement("g", {
-      "className": "x-axis-group"
+      "className": "x axis"
     }), React.createElement("g", {
-      "className": "y-axis-group"
+      "className": "y axis"
     }), React.createElement("g", {
       "className": "key-group"
     }), React.createElement("g", {

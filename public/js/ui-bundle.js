@@ -4100,32 +4100,27 @@ var d3, parse;
 d3 = require('d3');
 
 parse = function(dataArray) {
-  var d3ReadyData, d3_array, last, re, reLast, sum, total_item, utils;
-  window.relBarsData = dataArray;
+  var d3ReadyData, d3_array, getName, relBarsData, sum, total_item;
+  relBarsData = dataArray;
   total_item = dataArray.shift();
-  re = /^\w+/;
-  reLast = /\w+$/;
-  last = function(str) {
-    return str.substr(str.indexOf(':') + 2, str.length);
-  };
-  utils = {
-    getValues: function(array) {
-      return array.map(function(ob) {
-        return ob.obs_value.value;
-      });
-    },
-    percArray: function(array, sum) {
-      return array.map(function(num) {
-        return num / sum * 100;
-      });
+  getName = function(ob) {
+    if (ob.c_relpuk11.description === 'Religion not stated') {
+      return 'Not stated';
+    } else if (ob.c_relpuk11.description === 'Other religion') {
+      return 'Other';
+    } else {
+      return ob.c_relpuk11.description;
     }
   };
   sum = total_item.obs_value.value;
   d3_array = dataArray.map(function(ob) {
     return {
-      name: ob.c_relpuk11.description,
+      name: getName(ob),
       value: ob.obs_value.value
     };
+  });
+  d3_array.sort(function(a, b) {
+    return b.value - a.value;
   });
   d3ReadyData = {
     d3_array: d3_array,
@@ -4696,37 +4691,44 @@ var d3, drawBarChart;
 d3 = require('d3');
 
 drawBarChart = function(options) {
-  var activeCategory, activeValue, chart_height, chart_width, container, data, height, isDefault, margin, my, onInitDone, onMouseOver, ref, ref1, width, x, xAxis, y;
+  var activeCategory, activeValue, chart_height, chart_width, container, d3_array, data, format, height, isDefault, key, margin, my, onInitDone, onMouseOver, ref, ref1, width, x, xAxis, y;
   container = options.container, data = options.data, isDefault = options.isDefault, onMouseOver = options.onMouseOver, activeCategory = options.activeCategory, activeValue = options.activeValue, onInitDone = options.onInitDone;
   my = {};
   width = (ref = container.offsetWidth) != null ? ref : 750;
   height = (ref1 = container.offsetHeight) != null ? ref1 : 500;
   margin = {
-    top: 10,
-    right: 0,
+    top: 40,
+    right: 40,
     bottom: 10,
-    left: 30
+    left: 70
   };
   chart_width = width - margin.left - margin.right;
   chart_height = height - margin.top - margin.bottom;
-  y = d3.scale.ordinal().domain(d3.range(data.d3_array.length)).rangeRoundBands([0, chart_height], 0.1);
-  x = d3.scale.linear().domain([0, data.sum]).range([0, chart_width]);
-  xAxis = d3.svg.axis().scale(x).orient('top');
+  format = d3.format('.2s');
+  d3_array = data.d3_array;
+  y = d3.scale.ordinal().domain(d3_array.map(function(d) {
+    return d.name;
+  })).rangeRoundBands([0, chart_height], 0.1);
+  x = d3.scale.linear().domain([
+    0, d3.max(d3_array, function(d) {
+      return d.value;
+    })
+  ]).range([0, chart_width]);
+  xAxis = d3.svg.axis().scale(x).tickSize(-chart_height - margin.bottom).tickFormat(format).ticks(10).orient('top');
+  key = function(d) {
+    return d.name;
+  };
   my.init = function() {
-    var bar, barsEnter, key, key_group, key_text_group, labels_group, main_group, svg, x_axis_group, y_axis_group;
+    var bar, barsEnter, labels_group, main_group, svg, x_axis_group;
     svg = d3.select('.bars-svg');
     main_group = svg.select('.main-group');
     labels_group = svg.select('.labels-group');
-    x_axis_group = svg.select('.x-axis-group');
-    y_axis_group = svg.select('.y-axis-group');
-    key_group = svg.select('.key-group');
-    key_text_group = svg.select('.key-text-group');
+    x_axis_group = svg.select('.x.axis');
     main_group.attr('transform', "translate(" + margin.left + ", " + margin.top + ")");
-    key = function(d) {
-      return d.name;
-    };
-    bar = main_group.selectAll('rect').data(data.d3_array, key);
-    return barsEnter = bar.enter().append('rect').attr({
+    labels_group.attr('transform', "translate(" + (margin.left - 10) + ", " + (margin.top + 22) + ")");
+    x_axis_group.attr('transform', "translate(" + margin.left + ", " + margin.top + ")");
+    bar = main_group.selectAll('rect').data(d3_array, key);
+    barsEnter = bar.enter().append('rect').attr({
       width: function(d) {
         return x(d.value);
       },
@@ -4734,12 +4736,35 @@ drawBarChart = function(options) {
         return y.rangeBand();
       },
       y: function(d, i) {
-        return y(i);
+        return y(d.name);
       },
-      x: 0
+      x: 0,
+      "class": 'bar',
+      rx: 4
     });
+    labels_group.selectAll('text').data(d3_array, key).enter().append('text').text(function(d) {
+      return d.name;
+    }).style('text-anchor', 'end').attr('y', function(d, i) {
+      return y(d.name);
+    }).attr('class', 'rel-label');
+    return x_axis_group.call(xAxis);
   };
-  my.update = function() {};
+  my.update = function() {
+    var labels_group_labels, main_group_bars, svg, x_axis_group;
+    svg = d3.select('.bars-svg');
+    main_group_bars = svg.selectAll('.main-group .bar');
+    labels_group_labels = svg.selectAll('.labels-group text');
+    x_axis_group = svg.select('.x.axis');
+    main_group_bars.data(d3_array, key).transition().duration(1000).attr('width', function(d) {
+      return x(d.value);
+    }).attr('y', function(d, i) {
+      return y(d.name);
+    });
+    labels_group_labels.data(d3_array, key).transition().duration(1000).attr('y', function(d, i) {
+      return y(d.name);
+    });
+    return x_axis_group.transition().duration(1000).call(xAxis);
+  };
   my.width = function(value) {
     if (!arguments.length) {
       return width;
@@ -5907,10 +5932,10 @@ BarsComponent = React.createClass({displayName: "BarsComponent",
       "src": "./images/mb_ajax_loader.gif",
       "className": (this.props.isFetching === true && this.props.isDefault === true ? 'mb-spinner' : 'hide')
     }), React.createElement("svg", {
-      "className": "bars-svg",
+      "className": "bars-svg mb-oxygen",
       "style": {
         width: '100%',
-        height: '550px'
+        height: '425px'
       },
       "ref": "barsSvg"
     }, React.createElement("g", {
@@ -5918,9 +5943,9 @@ BarsComponent = React.createClass({displayName: "BarsComponent",
     }), React.createElement("g", {
       "className": "labels-group"
     }), React.createElement("g", {
-      "className": "x-axis-group"
+      "className": "x axis"
     }), React.createElement("g", {
-      "className": "y-axis-group"
+      "className": "y axis"
     }), React.createElement("g", {
       "className": "key-group"
     }), React.createElement("g", {

@@ -4,32 +4,27 @@ var d3, parse;
 d3 = require('d3');
 
 parse = function(dataArray) {
-  var d3ReadyData, d3_array, last, re, reLast, sum, total_item, utils;
-  window.relBarsData = dataArray;
+  var d3ReadyData, d3_array, getName, relBarsData, sum, total_item;
+  relBarsData = dataArray;
   total_item = dataArray.shift();
-  re = /^\w+/;
-  reLast = /\w+$/;
-  last = function(str) {
-    return str.substr(str.indexOf(':') + 2, str.length);
-  };
-  utils = {
-    getValues: function(array) {
-      return array.map(function(ob) {
-        return ob.obs_value.value;
-      });
-    },
-    percArray: function(array, sum) {
-      return array.map(function(num) {
-        return num / sum * 100;
-      });
+  getName = function(ob) {
+    if (ob.c_relpuk11.description === 'Religion not stated') {
+      return 'Not stated';
+    } else if (ob.c_relpuk11.description === 'Other religion') {
+      return 'Other';
+    } else {
+      return ob.c_relpuk11.description;
     }
   };
   sum = total_item.obs_value.value;
   d3_array = dataArray.map(function(ob) {
     return {
-      name: ob.c_relpuk11.description,
+      name: getName(ob),
       value: ob.obs_value.value
     };
+  });
+  d3_array.sort(function(a, b) {
+    return b.value - a.value;
   });
   d3ReadyData = {
     d3_array: d3_array,

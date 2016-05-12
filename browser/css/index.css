@@ -6111,16 +6111,6 @@ path:first-child {
   margin-top: 150px;
   display: block; }
 
-.males-outline {
-  fill: none;
-  stroke: #214f76;
-  stroke-width: 1.5px; }
-
-.females-outline {
-  fill: none;
-  stroke: #ff504d;
-  stroke-width: 1.5px; }
-
 .controls-container {
   border-bottom: 1px solid #333; }
   .controls-container .mb-controls-tabs {
@@ -6191,3 +6181,22 @@ path:first-child {
 .sunburst .mb-spinner {
   margin: 150px auto 0;
   display: block; }
+
+.bars-svg .bar {
+  fill: #1F77B4; }
+
+.bars-svg .axis {
+  shape-rendering: crispEdges; }
+  .bars-svg .axis text {
+    font-size: 11px; }
+
+.bars-svg .axis path {
+  fill: none;
+  stroke: none; }
+
+.bars-svg .x.axis line {
+  stroke: #fff;
+  stroke-opacity: .8; }
+
+.bars-svg .rel-label {
+  font-size: 12px; }
