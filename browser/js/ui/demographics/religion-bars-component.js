@@ -24,7 +24,21 @@ category_options = data.category_options;
 BarsComponent = React.createClass({displayName: "BarsComponent",
   componentDidMount: function() {
     if (this.props.isDefault === true && this.props.init_done === false) {
-      return this.props.fetchReligionData(null);
+      return $(window).on('scroll', (function(_this) {
+        return function() {
+          var docHeight, docScrollTop, relBarsOffsetTop;
+          docScrollTop = $(document).scrollTop();
+          relBarsOffsetTop = $('.rel-bars').offset().top - 650;
+          docHeight = $(document).height();
+          console.log("docHeight - docScrollTop: " + (docHeight - docScrollTop));
+          console.log("relBarsOffsetTop: " + relBarsOffsetTop);
+          if ((docHeight - docScrollTop) < relBarsOffsetTop) {
+            console.log('scroll reach relbars');
+            $(window).off('scroll');
+            return _this.props.fetchReligionData(null);
+          }
+        };
+      })(this));
     }
   },
   reactDrawBars: function() {
@@ -74,16 +88,8 @@ BarsComponent = React.createClass({displayName: "BarsComponent",
       "className": "labels-group"
     }), React.createElement("g", {
       "className": "x axis"
-    }), React.createElement("g", {
-      "className": "y axis"
-    }), React.createElement("g", {
-      "className": "key-group"
-    }), React.createElement("g", {
-      "className": "key-text-group"
     }))));
   }
 });
 
 module.exports = BarsComponent;
-
-//# sourceMappingURL=religion-bars-component.map

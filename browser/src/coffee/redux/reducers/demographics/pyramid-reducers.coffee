@@ -16,7 +16,8 @@ objectAssign = require 'object-assign'
   REMOVE_FILTER
   TOGGLE_OUTLINE_CATEGORY
   TOGGLE_OUTLINE_VALUE
-  TOGGLE_FILTERING_OPTION } = require '../../actions/demographics/pyramid-actions.js'
+  TOGGLE_FILTERING_OPTION
+  FIRST_LINE_DRAWN } = require '../../actions/demographics/pyramid-actions.js'
 
 pyramidInitialState = {
 	chartName: 'pyramid'
@@ -48,6 +49,7 @@ pyramidInitialState = {
 	updateBars: no
 	updatePyramid: no
 	updateOutline: no
+	isFirstLine: yes
 	district_query: 'default'
 	filteringOption: {
 		option: 'bars'
@@ -121,6 +123,12 @@ pyramidChart = (state = pyramidInitialState, action) ->
 			updateOutline: yes
 			activeLineValue: state._outlineValue.label
 			activeLineCategory: state._outlineCategory.label
+		}
+		when FIRST_LINE_DRAWN then objectAssign {}, state, {
+			isFirstLine: no
+			updatePyramid: no
+			updateBars: no
+			updateOutline: no
 		}
 		when ERROR_RECEIVE_PYRAMID_DATA_BARS then objectAssign {}, state, {
 			isFetching: no

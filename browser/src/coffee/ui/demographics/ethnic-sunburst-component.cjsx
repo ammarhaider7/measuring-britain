@@ -19,6 +19,7 @@ SunburstComponent = React.createClass
   componentDidMount: ->
 
     if @props.isDefault is yes and @props.init_done is no
+
       # Only load sunburst once user scrolls to it
       $(window).on 'scroll', () =>
 
@@ -28,9 +29,10 @@ SunburstComponent = React.createClass
 
         if (docHeight - docScrollTop) < sunburstOffsetTop
           console.log 'scroll reach'
-          $(window).off 'scroll'
-          @props.fetchSunburstData null
-
+          # $(window).off 'scroll'
+          if @props.init_done is no
+            @props.fetchSunburstData null
+          @props.onInitDone()
 
   reactDrawSunburst: ->
 
@@ -79,7 +81,7 @@ SunburstComponent = React.createClass
         >
           <g className="main-group"></g>
           <g className="key-group"></g>
-          <g className="key-text-group"></g> 
+          <g className="key-text-group mb-oxygen"></g> 
           <g className="center-text-group"></g>  
           <g className="ethnic-group-text"></g>   
           <g className="total-value-group"></g>  

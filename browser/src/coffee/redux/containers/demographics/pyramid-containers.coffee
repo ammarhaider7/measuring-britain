@@ -11,7 +11,8 @@
   districtSearch
   controlsOpened
   controlsClosed
-  toggleFilteringOption } = require '../../actions/demographics/pyramid-actions.js'
+  toggleFilteringOption
+  firstLineDrawn } = require '../../actions/demographics/pyramid-actions.js'
 PyramidComponent = require '../../../ui/demographics/pyramid-component.js'
 TableComponent = require '../../../ui/demographics/pyramid-table.js'
 pyBarsComponent = require '../../../ui/demographics/pyramid-bars.js'
@@ -37,6 +38,7 @@ mapStateToProps = (state) ->
 	updateOutline: state.pyramidChart.updateOutline
 	filteringOption: state.pyramidChart.filteringOption
 	isControlsOpen: state.pyramidChart.isControlsOpen
+	isFirstLine: state.pyramidChart.isFirstLine
 
 mapStateToPropsPyrTable = (state) ->
 
@@ -81,6 +83,8 @@ mapDispatchToProps = (dispatch) ->
 		dispatch districtSearch query
 	onFilterOptionToggle: (option) ->
 		dispatch toggleFilteringOption option
+	onFirstLineDrawn: () ->
+		dispatch firstLineDrawn()
 
 Pyramid = connect(
 	mapStateToProps, 

@@ -3,9 +3,6 @@ d3 = require 'd3'
 
 drawPyrBars = (options) ->
 
-	# console.log "drawPyrBars options"
-	# console.log options
-
 	{ container, age, females, males, initial, isDefault, activeBarsValue } = options
 
 	width = container.offsetWidth ? 399

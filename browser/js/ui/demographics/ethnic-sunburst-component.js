@@ -32,8 +32,10 @@ SunburstComponent = React.createClass({displayName: "SunburstComponent",
           docHeight = $(document).height();
           if ((docHeight - docScrollTop) < sunburstOffsetTop) {
             console.log('scroll reach');
-            $(window).off('scroll');
-            return _this.props.fetchSunburstData(null);
+            if (_this.props.init_done === false) {
+              _this.props.fetchSunburstData(null);
+            }
+            return _this.props.onInitDone();
           }
         };
       })(this));
@@ -85,7 +87,7 @@ SunburstComponent = React.createClass({displayName: "SunburstComponent",
     }), React.createElement("g", {
       "className": "key-group"
     }), React.createElement("g", {
-      "className": "key-text-group"
+      "className": "key-text-group mb-oxygen"
     }), React.createElement("g", {
       "className": "center-text-group"
     }), React.createElement("g", {
@@ -99,5 +101,3 @@ SunburstComponent = React.createClass({displayName: "SunburstComponent",
 });
 
 module.exports = SunburstComponent;
-
-//# sourceMappingURL=ethnic-sunburst-component.map

@@ -66,8 +66,7 @@ drawBarChart = (options) ->
 			.append 'rect'
 			.attr {
 
-				width: (d) ->
-					return x d.value
+				width: 0
 				height: ->
 					return y.rangeBand()
 				y: (d, i) ->
@@ -77,18 +76,28 @@ drawBarChart = (options) ->
 				rx: 4
 
 			}
+			.transition()
+			.duration 1500
+			.attr 'width', (d) ->
+				return x d.value
 
 		labels_group.selectAll 'text'
 			.data d3_array, key
 		  .enter().append 'text'
+		  	.attr 'opacity', 0
 		  	.text (d) ->
 		  		return d.name
 			.style 'text-anchor', 'end'
 		  	.attr 'y', (d, i) ->
 		  		return y d.name
 		  	.attr 'class', 'rel-label'
+		  	.transition()
+		  	.duration 1500
+		  	.attr 'opacity', 1
 
-		x_axis_group.call xAxis
+		x_axis_group.transition()
+			.duration 1500
+			.call xAxis
 
 	my.update = ->
 

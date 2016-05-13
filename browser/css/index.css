@@ -6200,3 +6200,7 @@ path:first-child {
 
 .bars-svg .rel-label {
   font-size: 12px; }
+
+.rel-bars .mb-spinner {
+  margin: 150px auto 0;
+  display: block; }

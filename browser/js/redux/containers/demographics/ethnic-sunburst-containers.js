@@ -66,5 +66,3 @@ Sunburst = connect(mapStateToProps, mapDispatchToProps)(SunburstComponent);
 module.exports = {
   Sunburst: Sunburst
 };
-
-//# sourceMappingURL=ethnic-sunburst-containers.map

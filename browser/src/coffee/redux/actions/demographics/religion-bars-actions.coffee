@@ -90,11 +90,6 @@ errorReceivingeReligionData = (error) ->
 		error: error
 	}
 
-
-# Meet our first thunk action creator!
-# Though its insides are different, you would use it just like any other action creator:
-# store.dispatch(fetchPosts('reactjs'))
-
 fetchReligionData = (filterOptions) ->
 
 	# Thunk middleware knows how to handle functions.

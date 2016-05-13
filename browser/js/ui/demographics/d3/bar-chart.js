@@ -42,9 +42,7 @@ drawBarChart = function(options) {
     x_axis_group.attr('transform', "translate(" + margin.left + ", " + margin.top + ")");
     bar = main_group.selectAll('rect').data(d3_array, key);
     barsEnter = bar.enter().append('rect').attr({
-      width: function(d) {
-        return x(d.value);
-      },
+      width: 0,
       height: function() {
         return y.rangeBand();
       },
@@ -54,13 +52,15 @@ drawBarChart = function(options) {
       x: 0,
       "class": 'bar',
       rx: 4
+    }).transition().duration(1500).attr('width', function(d) {
+      return x(d.value);
     });
-    labels_group.selectAll('text').data(d3_array, key).enter().append('text').text(function(d) {
+    labels_group.selectAll('text').data(d3_array, key).enter().append('text').attr('opacity', 0).text(function(d) {
       return d.name;
     }).style('text-anchor', 'end').attr('y', function(d, i) {
       return y(d.name);
-    }).attr('class', 'rel-label');
-    return x_axis_group.call(xAxis);
+    }).attr('class', 'rel-label').transition().duration(1500).attr('opacity', 1);
+    return x_axis_group.transition().duration(1500).call(xAxis);
   };
   my.update = function() {
     var labels_group_labels, main_group_bars, svg, x_axis_group;
@@ -96,5 +96,3 @@ drawBarChart = function(options) {
 };
 
 module.exports = drawBarChart;
-
-//# sourceMappingURL=bar-chart.map

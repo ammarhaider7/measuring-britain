@@ -21,7 +21,7 @@ parse = (dataArray) ->
 	d3_array = dataArray.map (ob) ->
 
 		return {
-			name: getName(ob)
+			name: getName ob
 			value: ob.obs_value.value
 		}
 

@@ -47,10 +47,14 @@ PyramidComponent = React.createClass({displayName: "PyramidComponent",
         outline_females_sum: (ref7 = this.props.data.outline.femalesSum) != null ? ref7 : null,
         overlay_data: this.props.data.bars.overlayData,
         onMouseOver: this.props.onMouseOver,
+        onFirstLineDrawn: this.props.onFirstLineDrawn,
         isDefault: this.props.isDefault,
         outlineFilter: this.props.outlineFilter,
         updatePyramid: this.props.updatePyramid,
-        updateOutline: this.props.updateOutline
+        updateOutline: this.props.updateOutline,
+        activeLineCategory: this.props.activeLineCategory,
+        activeLineValue: this.props.activeLineValue,
+        isFirstLine: this.props.isFirstLine
       });
       return pyramid();
     }
@@ -102,5 +106,3 @@ PyramidComponent = React.createClass({displayName: "PyramidComponent",
 });
 
 module.exports = PyramidComponent;
-
-//# sourceMappingURL=pyramid-component.map

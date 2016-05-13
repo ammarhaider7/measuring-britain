@@ -4,8 +4,8 @@ var drawPyramid;
 window.d3 = require('d3');
 
 drawPyramid = function(options) {
-  var ages, bar_females, bar_females_perc, bar_females_perc_format, bar_females_sum, bar_males, bar_males_perc, bar_males_perc_format, bar_males_sum, container, drawOutline, femaleKeyGroup, g, height, init, isDefault, isOutline, keyGroup, leftGroup, maleKeyGroup, margin, my, onMouseOver, outlineFilter, outline_females, outline_females_perc, outline_females_perc_format, outline_females_sum, outline_males, outline_males_perc, outline_males_perc_format, outline_males_sum, overlayGroup, overlay_data, ref, ref1, removeOutline, rightGroup, svg, ticksGroup, titleGroup, update, updateOutline, updatePyramid, width, x, xAxis, xAxisGroupLeft, xAxisGroupRight, xAxisLeft, xLeft, y;
-  container = options.container, ages = options.ages, bar_males = options.bar_males, bar_males_perc = options.bar_males_perc, bar_males_perc_format = options.bar_males_perc_format, bar_males_sum = options.bar_males_sum, bar_females = options.bar_females, bar_females_perc = options.bar_females_perc, bar_females_perc_format = options.bar_females_perc_format, bar_females_sum = options.bar_females_sum, outline_males = options.outline_males, outline_females = options.outline_females, outline_males_perc = options.outline_males_perc, outline_males_perc_format = options.outline_males_perc_format, outline_males_sum = options.outline_males_sum, outline_females_perc = options.outline_females_perc, outline_females_perc_format = options.outline_females_perc_format, outline_females_sum = options.outline_females_sum, overlay_data = options.overlay_data, onMouseOver = options.onMouseOver, isDefault = options.isDefault, outlineFilter = options.outlineFilter, updatePyramid = options.updatePyramid, updateOutline = options.updateOutline;
+  var activeLineCategory, activeLineValue, ages, bar_females, bar_females_perc, bar_females_perc_format, bar_females_sum, bar_males, bar_males_perc, bar_males_perc_format, bar_males_sum, container, drawOutline, femaleKeyGroup, g, height, init, isDefault, isFirstLine, isOutline, keyGroup, leftGroup, maleKeyGroup, margin, my, onFirstLineDrawn, onMouseOver, outlineFilter, outline_females, outline_females_perc, outline_females_perc_format, outline_females_sum, outline_males, outline_males_perc, outline_males_perc_format, outline_males_sum, overlayGroup, overlay_data, ref, ref1, removeOutline, rightGroup, svg, ticksGroup, titleGroup, update, updateOutline, updatePyramid, width, x, xAxis, xAxisGroupLeft, xAxisGroupRight, xAxisLeft, xLeft, y;
+  container = options.container, ages = options.ages, bar_males = options.bar_males, bar_males_perc = options.bar_males_perc, bar_males_perc_format = options.bar_males_perc_format, bar_males_sum = options.bar_males_sum, bar_females = options.bar_females, bar_females_perc = options.bar_females_perc, bar_females_perc_format = options.bar_females_perc_format, bar_females_sum = options.bar_females_sum, outline_males = options.outline_males, outline_females = options.outline_females, outline_males_perc = options.outline_males_perc, outline_males_perc_format = options.outline_males_perc_format, outline_males_sum = options.outline_males_sum, outline_females_perc = options.outline_females_perc, outline_females_perc_format = options.outline_females_perc_format, outline_females_sum = options.outline_females_sum, overlay_data = options.overlay_data, onMouseOver = options.onMouseOver, onFirstLineDrawn = options.onFirstLineDrawn, isDefault = options.isDefault, outlineFilter = options.outlineFilter, updatePyramid = options.updatePyramid, updateOutline = options.updateOutline, activeLineValue = options.activeLineValue, activeLineCategory = options.activeLineCategory, isFirstLine = options.isFirstLine;
   width = (ref = container.offsetWidth) != null ? ref : 750;
   height = (ref1 = container.offsetHeight) != null ? ref1 : 500;
   isOutline = outlineFilter;
@@ -59,7 +59,7 @@ drawPyramid = function(options) {
       }
     } else if (isDefault === false) {
       update();
-      if (isOutline === true && updateOutline === true) {
+      if (isOutline === true) {
         return drawOutline();
       }
     }
@@ -191,7 +191,6 @@ drawPyramid = function(options) {
   };
   update = function() {
     var leftBars, overlayBars, rightBars;
-    removeOutline();
     svg = d3.select('.pyramid-svg');
     leftBars = svg.selectAll('.pyramid-bar.left');
     rightBars = svg.selectAll('.pyramid-bar.right');
@@ -223,7 +222,6 @@ drawPyramid = function(options) {
   };
   drawOutline = function() {
     var femalesChartLine, femalesLine, malesChartLine, malesLine;
-    removeOutline();
     malesLine = d3.svg.line().interpolate('step-before').x(function(d) {
       return x(bar_males_perc)(d);
     }).y(function(d, i) {
@@ -242,16 +240,29 @@ drawPyramid = function(options) {
         return y(bar_females_perc)(i);
       }
     });
-    malesChartLine = rightGroup.append('path').attr('opacity', 0).transition().duration(500).attr({
-      "class": 'males-outline',
-      d: malesLine(outline_males_perc.concat([outline_males_perc[outline_males_perc.length - 1]])),
-      opacity: 1
-    });
-    femalesChartLine = leftGroup.append('path').attr('opacity', 0).transition().duration(500).attr({
-      "class": 'females-outline',
-      d: femalesLine(outline_females_perc.concat([outline_females_perc[outline_females_perc.length - 1]])),
-      opacity: 1
-    });
+    if (isFirstLine === false) {
+      svg = d3.select('.pyramid-svg');
+      malesChartLine = svg.select('.males-outline');
+      femalesChartLine = svg.select('.females-outline');
+      malesChartLine.transition().duration(1000).attr({
+        d: malesLine(outline_males_perc.concat([outline_males_perc[outline_males_perc.length - 1]]))
+      });
+      femalesChartLine.transition().duration(1000).attr({
+        d: femalesLine(outline_females_perc.concat([outline_females_perc[outline_females_perc.length - 1]]))
+      });
+    } else {
+      malesChartLine = rightGroup.append('path').attr('opacity', 0).transition().duration(500).attr({
+        "class": 'males-outline',
+        d: malesLine(outline_males_perc.concat([outline_males_perc[outline_males_perc.length - 1]])),
+        opacity: 1
+      });
+      femalesChartLine = leftGroup.append('path').attr('opacity', 0).transition().duration(500).attr({
+        "class": 'females-outline',
+        d: femalesLine(outline_females_perc.concat([outline_females_perc[outline_females_perc.length - 1]])),
+        opacity: 1
+      });
+      onFirstLineDrawn();
+    }
   };
   removeOutline = function() {
     var femalesOutline, maleOutline;
@@ -278,5 +289,3 @@ drawPyramid = function(options) {
 };
 
 module.exports = drawPyramid;
-
-//# sourceMappingURL=pyramid.map

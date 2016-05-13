@@ -22,10 +22,14 @@ drawPyramid = (options) ->
 	  outline_females_sum
 	  overlay_data
 	  onMouseOver
+	  onFirstLineDrawn
 	  isDefault
 	  outlineFilter
 	  updatePyramid
 	  updateOutline
+	  activeLineValue
+	  activeLineCategory
+	  isFirstLine
 	 } = options
 
 	width = container.offsetWidth ? 750
@@ -103,7 +107,8 @@ drawPyramid = (options) ->
 
 			update()
 
-			if isOutline is yes and updateOutline is yes then drawOutline()
+			# if isOutline is yes and updateOutline is yes then drawOutline()
+			if isOutline is yes then drawOutline()
 
 	init = ->
 
@@ -292,7 +297,7 @@ drawPyramid = (options) ->
 
 	update = ->
 
-		removeOutline()	
+		# removeOutline()	
 
 		svg = d3.select '.pyramid-svg'
 		leftBars = svg.selectAll '.pyramid-bar.left'
@@ -342,7 +347,7 @@ drawPyramid = (options) ->
 
 	drawOutline = ->
 
-		removeOutline()
+		# removeOutline()
 
 		malesLine = d3.svg.line()
 			.interpolate 'step-before'
@@ -364,25 +369,48 @@ drawPyramid = (options) ->
 				else
 					return y(bar_females_perc)(i)
 
-		malesChartLine = rightGroup.append 'path'
-			.attr 'opacity', 0
-			.transition()
-			.duration 500
-			.attr {
-				class: 'males-outline'
-				d: malesLine outline_males_perc.concat [outline_males_perc[outline_males_perc.length - 1]]
-				opacity: 1
-			}
+		if isFirstLine is no
 
-		femalesChartLine = leftGroup.append 'path'
-			.attr 'opacity', 0
-			.transition()
-			.duration 500
-			.attr {
-				class: 'females-outline'
-				d: femalesLine outline_females_perc.concat [outline_females_perc[outline_females_perc.length - 1]]
-				opacity: 1
-			}
+			svg = d3.select '.pyramid-svg'
+			malesChartLine = svg.select '.males-outline'
+			femalesChartLine = svg.select '.females-outline'
+
+			malesChartLine.transition()
+				.duration 1000
+				.attr {
+					d: malesLine outline_males_perc.concat [outline_males_perc[outline_males_perc.length - 1]]
+				}
+
+			femalesChartLine.transition()
+				.duration 1000
+				.attr {
+					d: femalesLine outline_females_perc.concat [outline_females_perc[outline_females_perc.length - 1]]
+				}
+
+		else
+
+			malesChartLine = rightGroup.append 'path'
+				.attr 'opacity', 0
+				.transition()
+				.duration 500
+				.attr {
+					class: 'males-outline'
+					d: malesLine outline_males_perc.concat [outline_males_perc[outline_males_perc.length - 1]]
+					opacity: 1
+				}
+
+			femalesChartLine = leftGroup.append 'path'
+				.attr 'opacity', 0
+				.transition()
+				.duration 500
+				.attr {
+					class: 'females-outline'
+					d: femalesLine outline_females_perc.concat [outline_females_perc[outline_females_perc.length - 1]]
+					opacity: 1
+				}
+
+			# Dispatch action to let state know first line has been drawn..
+			onFirstLineDrawn()
 
 		return
 

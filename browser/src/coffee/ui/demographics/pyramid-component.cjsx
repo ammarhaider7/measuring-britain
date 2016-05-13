@@ -45,10 +45,14 @@ PyramidComponent = React.createClass
 				outline_females_sum: @props.data.outline.femalesSum ? null
 				overlay_data: @props.data.bars.overlayData
 				onMouseOver: @props.onMouseOver
+				onFirstLineDrawn: @props.onFirstLineDrawn
 				isDefault: @props.isDefault
 				outlineFilter: @props.outlineFilter
 				updatePyramid: @props.updatePyramid
 				updateOutline: @props.updateOutline
+				activeLineCategory: @props.activeLineCategory
+				activeLineValue: @props.activeLineValue
+				isFirstLine: @props.isFirstLine
 			})
 
 			pyramid() 

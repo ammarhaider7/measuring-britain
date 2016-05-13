@@ -18,6 +18,7 @@ CONTROLS_OPENED = "P_CONTROLS_OPENED"
 CONTROLS_CLOSED = "P_CONTROLS_CLOSED"
 DISTRICT_SEARCH = "P_DISTRICT_SEARCH"
 TOGGLE_FILTERING_OPTION = "TOGGLE_FILTERING_OPTION"
+FIRST_LINE_DRAWN = "FIRST_LINE_DRAWN"
 
 toggleValue = (value) ->
 	{
@@ -81,6 +82,11 @@ mouseOver = (mouseOverData) ->
 	{
 		type: MOUSE_OVER
 		mouseOverData: mouseOverData 
+	}
+
+firstLineDrawn = () ->
+	{
+		type: FIRST_LINE_DRAWN
 	}
 
 requestPyramidData = (filterOptions) ->
@@ -202,6 +208,8 @@ module.exports = {
 	CONTROLS_CLOSED
 	DISTRICT_SEARCH
 	TOGGLE_FILTERING_OPTION
+	FIRST_LINE_DRAWN
+	firstLineDrawn
 	toggleFilteringOption
 	controlsOpened
 	controlsClosed

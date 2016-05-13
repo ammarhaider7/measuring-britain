@@ -18,22 +18,21 @@ BarsComponent = React.createClass
 
   componentDidMount: ->
 
-    # if @props.isDefault is yes and @props.init_done is no
-    #   # Only load sunburst once user scrolls to it
-    #   $(window).on 'scroll', () =>
-
-    #     docScrollTop = $(document).scrollTop()
-    #     sunburstOffsetTop = ($('.rel-bars').offset().top - 75)
-    #     docHeight = $(document).height()
-
-    #     if (docHeight - docScrollTop) < sunburstOffsetTop
-    #       console.log 'scroll reach'
-    #       $(window).off 'scroll'
-    #       @props.fetchBarsData null
     if @props.isDefault is yes and @props.init_done is no
 
-      @props.fetchReligionData null
+      $(window).on 'scroll', () =>
 
+        docScrollTop = $(document).scrollTop()
+        relBarsOffsetTop = ($('.rel-bars').offset().top - 650)
+        docHeight = $(document).height()
+
+        console.log("docHeight - docScrollTop: #{(docHeight - docScrollTop)}")
+        console.log "relBarsOffsetTop: #{relBarsOffsetTop}"
+
+        if (docHeight - docScrollTop) < relBarsOffsetTop
+          console.log 'scroll reach relbars'
+          $(window).off 'scroll'
+          @props.fetchReligionData null
 
   reactDrawBars: ->
 
@@ -54,7 +53,7 @@ BarsComponent = React.createClass
       bars.init()
 
     else
-
+      
       bars.update()
 
   componentDidUpdate: ->
@@ -81,9 +80,6 @@ BarsComponent = React.createClass
           <g className="main-group"></g>
           <g className="labels-group"></g>
           <g className="x axis"></g>
-          <g className="y axis"></g>
-          <g className="key-group"></g>
-          <g className="key-text-group"></g>  
         </svg>
       </div>
     </div>  
