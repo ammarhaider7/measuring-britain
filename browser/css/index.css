@@ -6201,6 +6201,18 @@ path:first-child {
 .bars-svg .rel-label {
   font-size: 12px; }
 
+.bars-svg .detail-text-religion {
+  text-anchor: middle;
+  font-size: 30px; }
+
+.bars-svg .detail-text-value {
+  text-anchor: middle;
+  font-size: 45px; }
+
+.bars-svg .detail-text-percent {
+  text-anchor: middle;
+  font-size: 20px; }
+
 .rel-bars .mb-spinner {
   margin: 150px auto 0;
   display: block; }

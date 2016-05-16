@@ -122,15 +122,6 @@ drawSunburst = (options) ->
 		return
 
 	my = {}
-	# my = ->
-	# 	# generate chart here
-	# 	if isDefault is yes
-
-	# 		init()
-
-	# 	else if isDefault is no
-
-	# 		update()
 
 	attachHoverHandlers = ->
 
@@ -153,7 +144,7 @@ drawSunburst = (options) ->
 		 		d3.selectAll '.sunburst-path'
 		 			.attr 'opacity', (d) ->
 		 				unless _d is d
-		 					return 0.3
+		 					return 0.2
 
 		 		# update inner circle text values
 		 		center_ethnic_group.select 'text'

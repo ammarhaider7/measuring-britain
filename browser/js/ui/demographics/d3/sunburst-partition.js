@@ -136,7 +136,7 @@ drawSunburst = function(options) {
       _d = d;
       d3.selectAll('.sunburst-path').attr('opacity', function(d) {
         if (_d !== d) {
-          return 0.3;
+          return 0.2;
         }
       });
       center_ethnic_group.select('text').text(d.name);
@@ -244,3 +244,5 @@ drawSunburst = function(options) {
 };
 
 module.exports = drawSunburst;
+
+//# sourceMappingURL=sunburst-partition.map

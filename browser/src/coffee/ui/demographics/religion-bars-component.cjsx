@@ -80,6 +80,7 @@ BarsComponent = React.createClass
           <g className="main-group"></g>
           <g className="labels-group"></g>
           <g className="x axis"></g>
+          <g className="detail-group"></g>
         </svg>
       </div>
     </div>  

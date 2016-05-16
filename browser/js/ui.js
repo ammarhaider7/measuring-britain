@@ -18,3 +18,5 @@ ReactDOM.render(React.createElement(EthnicSection, null), document.getElementByI
 ReactDOM.render(React.createElement(ReligiousSection, null), document.getElementById('mb_religious_diversity'));
 
 render();
+
+//# sourceMappingURL=ui.map

@@ -88,8 +88,12 @@ BarsComponent = React.createClass({displayName: "BarsComponent",
       "className": "labels-group"
     }), React.createElement("g", {
       "className": "x axis"
+    }), React.createElement("g", {
+      "className": "detail-group"
     }))));
   }
 });
 
 module.exports = BarsComponent;
+
+//# sourceMappingURL=religion-bars-component.map

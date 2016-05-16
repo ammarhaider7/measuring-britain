@@ -13,3 +13,5 @@ module.exports = (function() {
   };
   return showNextQuote();
 })();
+
+//# sourceMappingURL=blinker.map

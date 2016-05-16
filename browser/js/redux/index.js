@@ -49,3 +49,5 @@ render = function() {
 };
 
 module.exports = render;
+
+//# sourceMappingURL=index.map

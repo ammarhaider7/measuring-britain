@@ -34,3 +34,5 @@ parse = function(dataArray) {
 };
 
 module.exports = parse;
+
+//# sourceMappingURL=rel-bars-parser.map
