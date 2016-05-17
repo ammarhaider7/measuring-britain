@@ -6154,12 +6154,12 @@ path:first-child {
     top: 0px; }
   .controls-container .mb-lad-link-div {
     margin-top: 5px; }
-  .controls-container ul.nav-pills {
-    background-color: white;
-    border: 1px solid white;
-    border-radius: 6px; }
-    .controls-container ul.nav-pills li {
-      font-size: 12px; }
+  .controls-container ul.nav-pills li {
+    font-size: 12px;
+    background-color: #FFFFFF;
+    border: 1px solid #D6D6D6;
+    border-radius: 6px;
+    margin-bottom: 5px; }
   .controls-container .mb-btn-primary {
     color: #FFF;
     background-color: #DA4A70;

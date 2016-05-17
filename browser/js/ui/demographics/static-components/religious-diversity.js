@@ -46,5 +46,3 @@ ReligiousSection = function() {
 };
 
 module.exports = ReligiousSection;
-
-//# sourceMappingURL=religious-diversity.map

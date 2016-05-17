@@ -26,9 +26,6 @@ BarsComponent = React.createClass
         relBarsOffsetTop = ($('.rel-bars').offset().top - 650)
         docHeight = $(document).height()
 
-        console.log("docHeight - docScrollTop: #{(docHeight - docScrollTop)}")
-        console.log "relBarsOffsetTop: #{relBarsOffsetTop}"
-
         if (docHeight - docScrollTop) < relBarsOffsetTop
           console.log 'scroll reach relbars'
           $(window).off 'scroll'
@@ -80,7 +77,7 @@ BarsComponent = React.createClass
           <g className="main-group"></g>
           <g className="labels-group"></g>
           <g className="x axis"></g>
-          <g className="detail-group"></g>
+          <g className="detail-group mb-quicksand"></g>
         </svg>
       </div>
     </div>  

@@ -30,8 +30,6 @@ BarsComponent = React.createClass({displayName: "BarsComponent",
           docScrollTop = $(document).scrollTop();
           relBarsOffsetTop = $('.rel-bars').offset().top - 650;
           docHeight = $(document).height();
-          console.log("docHeight - docScrollTop: " + (docHeight - docScrollTop));
-          console.log("relBarsOffsetTop: " + relBarsOffsetTop);
           if ((docHeight - docScrollTop) < relBarsOffsetTop) {
             console.log('scroll reach relbars');
             $(window).off('scroll');
@@ -89,11 +87,9 @@ BarsComponent = React.createClass({displayName: "BarsComponent",
     }), React.createElement("g", {
       "className": "x axis"
     }), React.createElement("g", {
-      "className": "detail-group"
+      "className": "detail-group mb-quicksand"
     }))));
   }
 });
 
 module.exports = BarsComponent;
-
-//# sourceMappingURL=religion-bars-component.map

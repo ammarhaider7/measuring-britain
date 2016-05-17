@@ -201,5 +201,3 @@ pyramidChart = function(state, action) {
 };
 
 module.exports = pyramidChart;
-
-//# sourceMappingURL=pyramid-reducers.map

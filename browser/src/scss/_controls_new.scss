@@ -66,11 +66,15 @@
 		margin-top: $margin-small;
 	}
 	ul.nav-pills {
-		background-color: white;
-	    border: 1px solid white;
-	    border-radius: 6px;
+		// background-color: white;
+	    // border: 1px solid white;
+	    // border-radius: 6px;
 	    li {
 	    	font-size: 12px;
+		    background-color: #FFFFFF;
+		    border: 1px solid #D6D6D6;
+		    border-radius: 6px;
+		    margin-bottom: 5px;
 	    }
 	}
 	.mb-btn-primary {

@@ -1,5 +1,5 @@
-React = require 'react'
-d3 = require 'd3'
+# React = require 'react'
+# d3 = require 'd3'
 
 PyramidControls = React.createClass
 
@@ -109,7 +109,7 @@ PyramidControls = React.createClass
 
   render: -> 
 
-    <div className="controls-container clearfix closed mb-oxygen" ref="controlsContainer"> 
+    <div className="controls-container clearfix closed mb-oxygen" ref="controlsContainer" data-toggle="tooltip" data-placement="top" title="Customise this chart!"> 
       <a 
         onClick={ @onControlsOpen }
         className="controls-toggle-link"

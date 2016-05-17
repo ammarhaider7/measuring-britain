@@ -31,7 +31,6 @@ SunburstComponent = React.createClass({displayName: "SunburstComponent",
           sunburstOffsetTop = $('.sunburst').offset().top + 750;
           docHeight = $(document).height();
           if ((docHeight - docScrollTop) < sunburstOffsetTop) {
-            console.log('scroll reach');
             if (_this.props.init_done === false) {
               _this.props.fetchSunburstData(null);
             }
@@ -101,5 +100,3 @@ SunburstComponent = React.createClass({displayName: "SunburstComponent",
 });
 
 module.exports = SunburstComponent;
-
-//# sourceMappingURL=ethnic-sunburst-component.map

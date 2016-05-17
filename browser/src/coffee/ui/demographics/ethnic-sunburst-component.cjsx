@@ -28,7 +28,7 @@ SunburstComponent = React.createClass
         docHeight = $(document).height()
 
         if (docHeight - docScrollTop) < sunburstOffsetTop
-          console.log 'scroll reach'
+
           # $(window).off 'scroll'
           if @props.init_done is no
             @props.fetchSunburstData null

@@ -78,5 +78,3 @@ makeRelBarsRequest = function(options) {
 };
 
 module.exports = makeRelBarsRequest;
-
-//# sourceMappingURL=rel-bars-service.map

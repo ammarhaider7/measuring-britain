@@ -1,4 +1,4 @@
-d3 = require 'd3'
+# d3 = require 'd3'
 
 drawBarChart = (options) ->
 
