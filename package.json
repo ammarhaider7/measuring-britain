@@ -10,9 +10,9 @@
     "compile-js-dev": "coffee -cb -mo ./browser/js/ ./browser/src/coffee && cjsx -cb -mo ./browser/js/ ./browser/src/coffee",
     "build-js": "npm run compile-js && npm run bundle-js && npm run bundle-js-ui",
     "build-js-dev": "npm run compile-js-dev && npm run bundle-js-dev && npm run bundle-js-ui-dev",
-    "bundle-js": "browserify ./browser/js/main.js -t loose-envify | uglifyjs -mc > ./public/js/bundle.js",
+    "bundle-js": "browserify ./browser/js/main.js | uglifyjs -mc > ./public/js/bundle.js",
     "bundle-js-dev": "browserify ./browser/js/main.js > ./public/js/bundle.js",
-    "bundle-js-ui": "browserify ./browser/js/ui.js -t loose-envify | uglifyjs -mc -t loose-envify > ./public/js/ui-bundle.js",
+    "bundle-js-ui": "browserify ./browser/js/ui.js | uglifyjs -mc > ./public/js/ui-bundle.js",
     "bundle-js-ui-dev": "browserify ./browser/js/ui.js > ./public/js/ui-bundle.js",
     "watch": "concurrent \"npm run watch-js\" \"npm run watch-sass\" \"node ./bin/www\"",
     "watch-js": "nodemon -e coffee,cjsx -x \"npm run build-js-dev\"",
@@ -56,7 +56,6 @@
     "browserify": "^13.0.0",
     "coffee-react": "^4.1.0",
     "concurrently": "^1.0.0",
-    "loose-envify": "^1.1.0",
     "nodemon": "^1.8.1"
   },
   "jshintConfig": {
