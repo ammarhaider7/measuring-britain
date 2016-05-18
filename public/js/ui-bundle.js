@@ -3321,8 +3321,8 @@ drawBarChart = function(options) {
   var activeCategory, activeValue, attachHoverHandlers, chart_height, chart_width, container, d3_array, data, format, height, isDefault, key, margin, my, onInitDone, onMouseOver, percFormat, ref, ref1, width, x, xAxis, y;
   container = options.container, data = options.data, isDefault = options.isDefault, onMouseOver = options.onMouseOver, activeCategory = options.activeCategory, activeValue = options.activeValue, onInitDone = options.onInitDone;
   my = {};
-  width = (ref = container.offsetWidth) != null ? ref : 750;
-  height = (ref1 = container.offsetHeight) != null ? ref1 : 500;
+  width = (ref = $(container).width()) != null ? ref : 750;
+  height = (ref1 = $(container).height()) != null ? ref1 : 500;
   margin = {
     top: 40,
     right: 40,
@@ -3478,8 +3478,8 @@ var drawPyramid;
 drawPyramid = function(options) {
   var activeLineCategory, activeLineValue, ages, bar_females, bar_females_perc, bar_females_perc_format, bar_females_sum, bar_males, bar_males_perc, bar_males_perc_format, bar_males_sum, container, drawOutline, femaleKeyGroup, g, height, init, isDefault, isFirstLine, isOutline, keyGroup, leftGroup, maleKeyGroup, margin, my, onFirstLineDrawn, onMouseOver, outlineFilter, outline_females, outline_females_perc, outline_females_perc_format, outline_females_sum, outline_males, outline_males_perc, outline_males_perc_format, outline_males_sum, overlayGroup, overlay_data, ref, ref1, removeOutline, rightGroup, svg, ticksGroup, titleGroup, update, updateOutline, updatePyramid, width, x, xAxis, xAxisGroupLeft, xAxisGroupRight, xAxisLeft, xLeft, y;
   container = options.container, ages = options.ages, bar_males = options.bar_males, bar_males_perc = options.bar_males_perc, bar_males_perc_format = options.bar_males_perc_format, bar_males_sum = options.bar_males_sum, bar_females = options.bar_females, bar_females_perc = options.bar_females_perc, bar_females_perc_format = options.bar_females_perc_format, bar_females_sum = options.bar_females_sum, outline_males = options.outline_males, outline_females = options.outline_females, outline_males_perc = options.outline_males_perc, outline_males_perc_format = options.outline_males_perc_format, outline_males_sum = options.outline_males_sum, outline_females_perc = options.outline_females_perc, outline_females_perc_format = options.outline_females_perc_format, outline_females_sum = options.outline_females_sum, overlay_data = options.overlay_data, onMouseOver = options.onMouseOver, onFirstLineDrawn = options.onFirstLineDrawn, isDefault = options.isDefault, outlineFilter = options.outlineFilter, updatePyramid = options.updatePyramid, updateOutline = options.updateOutline, activeLineValue = options.activeLineValue, activeLineCategory = options.activeLineCategory, isFirstLine = options.isFirstLine;
-  width = (ref = container.offsetWidth) != null ? ref : 750;
-  height = (ref1 = container.offsetHeight) != null ? ref1 : 500;
+  width = (ref = $(container).width()) != null ? ref : 750;
+  height = (ref1 = $(container).height()) != null ? ref1 : 550;
   isOutline = outlineFilter;
   margin = {
     top: 25,
@@ -3771,8 +3771,8 @@ var drawPyrBars;
 drawPyrBars = function(options) {
   var activeBarsValue, age, bars_height, bars_width, category_value, container, dataArr, females, format, height, init, initial, isDefault, males, margin, my, ref, ref1, update, width, x, xAxis, y;
   container = options.container, age = options.age, females = options.females, males = options.males, initial = options.initial, isDefault = options.isDefault, activeBarsValue = options.activeBarsValue;
-  width = (ref = container.offsetWidth) != null ? ref : 399;
-  height = (ref1 = container.offsetHeight) != null ? ref1 : 275;
+  width = (ref = $(container).width()) != null ? ref : 399;
+  height = (ref1 = $(container).height()) != null ? ref1 : 275;
   dataArr = [
     {
       sex: 'female',
@@ -3955,8 +3955,8 @@ drawSunburst = function(options) {
         return '#DADADA';
     }
   };
-  width = (ref = container.offsetWidth) != null ? ref : 750;
-  height = (ref1 = container.offsetHeight) != null ? ref1 : 500;
+  width = (ref = $(container).width()) != null ? ref : 750;
+  height = (ref1 = $(container).height()) != null ? ref1 : 500;
   margin = {
     top: 25,
     right: 0,

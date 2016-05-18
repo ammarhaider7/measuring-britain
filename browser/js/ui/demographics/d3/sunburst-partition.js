@@ -57,8 +57,8 @@ drawSunburst = function(options) {
         return '#DADADA';
     }
   };
-  width = (ref = container.offsetWidth) != null ? ref : 750;
-  height = (ref1 = container.offsetHeight) != null ? ref1 : 500;
+  width = (ref = $(container).width()) != null ? ref : 750;
+  height = (ref1 = $(container).height()) != null ? ref1 : 500;
   margin = {
     top: 25,
     right: 0,

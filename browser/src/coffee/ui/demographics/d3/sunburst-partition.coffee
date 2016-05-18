@@ -57,8 +57,8 @@ drawSunburst = (options) ->
 			when 'Mixed' then '#FFA352'
 			when 'Other' then '#DADADA'
 
-	width = container.offsetWidth ? 750
-	height = container.offsetHeight ? 500
+	width = $(container).width() ? 750
+	height = $(container).height() ? 500
 
 	# Set margins
 	margin = 

@@ -5,8 +5,8 @@ drawPyrBars = (options) ->
 
 	{ container, age, females, males, initial, isDefault, activeBarsValue } = options
 
-	width = container.offsetWidth ? 399
-	height = container.offsetHeight ? 275
+	width = $(container).width() ? 399
+	height = $(container).height() ? 275
 
 	dataArr = [{
 		sex: 'female'

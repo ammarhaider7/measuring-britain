@@ -4,8 +4,8 @@ var drawPyrBars;
 drawPyrBars = function(options) {
   var activeBarsValue, age, bars_height, bars_width, category_value, container, dataArr, females, format, height, init, initial, isDefault, males, margin, my, ref, ref1, update, width, x, xAxis, y;
   container = options.container, age = options.age, females = options.females, males = options.males, initial = options.initial, isDefault = options.isDefault, activeBarsValue = options.activeBarsValue;
-  width = (ref = container.offsetWidth) != null ? ref : 399;
-  height = (ref1 = container.offsetHeight) != null ? ref1 : 275;
+  width = (ref = $(container).width()) != null ? ref : 399;
+  height = (ref1 = $(container).height()) != null ? ref1 : 275;
   dataArr = [
     {
       sex: 'female',

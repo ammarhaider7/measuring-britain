@@ -32,8 +32,8 @@ drawPyramid = (options) ->
 	  isFirstLine
 	 } = options
 
-	width = container.offsetWidth ? 750
-	height = container.offsetHeight ? 500
+	width = $(container).width() ? 750
+	height = $(container).height() ? 550
 
 	# Check if we need to draw an outline
 	isOutline = outlineFilter
