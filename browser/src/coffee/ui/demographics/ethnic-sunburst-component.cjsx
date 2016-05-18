@@ -1,8 +1,7 @@
-React = require 'react'
+# React = require 'react'
 ControlsNew = require '../chart-controls-new.js'
 data = require './data/pyramid-chart-controls.js'
 drawSunburst = require './d3/sunburst-partition.js'
-$ = require 'jQuery'
 
 value_options = {
   districts: data.districts

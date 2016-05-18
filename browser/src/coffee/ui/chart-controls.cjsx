@@ -1,4 +1,4 @@
-React = require 'react'
+# React = require 'react'
 FancySelect = require 'react-select'
 Filter = require './chart-controls-filter.js'
 # window.$ = require 'jQuery'

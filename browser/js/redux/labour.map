@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "file": "labour.js",
+  "sourceRoot": "..\\..\\..",
+  "sources": [
+    "browser\\src\\coffee\\redux\\labour.cjsx"
+  ],
+  "names": [],
+  "mappings": ""
+}

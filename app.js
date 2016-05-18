@@ -9,6 +9,7 @@ var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var demographics = require('./routes/demographics');
+var health = require('./routes/health');
 
 var app = express();
 
@@ -39,7 +40,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/users', users);
 app.use('/demographics', demographics);
-
+app.use('/health', health);
 
 // catch 404 and forward to error handler
 // Ammar's note: Acts as a catch-all for 'unrouted' pages because the above routes will execute first

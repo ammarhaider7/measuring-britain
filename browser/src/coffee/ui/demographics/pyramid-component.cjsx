@@ -1,5 +1,5 @@
-React = require 'react'
-d3 = require 'd3'
+# React = require 'react'
+# d3 = require 'd3'
 # Controls = require '../chart-controls.js'
 PyramidControls = require './chart-controls-pyramid.js'
 data = require './data/pyramid-chart-controls.js'

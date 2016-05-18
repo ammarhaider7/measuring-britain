@@ -1,4 +1,4 @@
-React = require 'react'
+# React = require 'react'
 FancySelect = require 'react-select'
 
 Filter = React.createClass

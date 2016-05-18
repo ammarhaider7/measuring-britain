@@ -287,3 +287,5 @@ drawPyramid = function(options) {
 };
 
 module.exports = drawPyramid;
+
+//# sourceMappingURL=pyramid.map

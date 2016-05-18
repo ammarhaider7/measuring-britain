@@ -164,3 +164,5 @@ module.exports = {
   controlsOpened: controlsOpened,
   controlsClosed: controlsClosed
 };
+
+//# sourceMappingURL=religion-bars-actions.map

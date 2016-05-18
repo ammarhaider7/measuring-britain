@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "file": "health-reducers.js",
+  "sourceRoot": "..\\..\\..\\..",
+  "sources": [
+    "browser\\src\\coffee\\redux\\reducers\\health-reducers.coffee"
+  ],
+  "names": [],
+  "mappings": ";AAAA,IAAA;;AAAE,kBAAoB,OAAA,CAAQ,OAAR,EAApB;;AACF,YAAA,GAAe,OAAA,CAAQ,eAAR;;AACf,gBAAA,GAAmB,OAAA,CAAQ,qCAAR;;AAEnB,SAAA,GAAY,eAAA,CAAgB;EAC3B,kBAAA,gBAD2B;CAAhB;;AAIZ,MAAM,CAAC,OAAP,GAAiB"
+}

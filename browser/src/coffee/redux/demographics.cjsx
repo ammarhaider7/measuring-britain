@@ -5,9 +5,7 @@ ReduxThunk = require('redux-thunk').default
 { Pyramid, Table, Bars } = require './containers/demographics/pyramid-containers.js'
 { Sunburst, SunburstTable } = require './containers/demographics/ethnic-sunburst-containers.js'
 { ReligionBars } = require './containers/demographics/religion-bars-containers.js'
-mbReducer = require './reducers/reducers.js'
-ReactDOM = require 'react-dom'
-React = require 'react'
+mbReducer = require './reducers/demographics-reducers.js'
 
 # creating the store, associating the root reducer and thunk middleware
 store = createStore mbReducer, applyMiddleware ReduxThunk

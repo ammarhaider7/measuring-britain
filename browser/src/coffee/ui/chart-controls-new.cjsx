@@ -1,5 +1,5 @@
-React = require 'react'
-d3 = require 'd3'
+# React = require 'react'
+# d3 = require 'd3'
 
 ControlsNew = React.createClass
   
