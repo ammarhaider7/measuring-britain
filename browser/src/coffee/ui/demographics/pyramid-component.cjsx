@@ -22,8 +22,8 @@ PyramidComponent = React.createClass
 
 	componentDidUpdate: ->
 
-		if @props.updatePyramid is yes
-
+		if @props.updatePyramid is yes or @props.updateOutline is yes
+			console.log 'updatePyramid'
 			pyramid = drawPyramid({
 				container: @refs.pyramidSvg
 				ages: @props.data.bars.ages

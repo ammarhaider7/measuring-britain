@@ -120,6 +120,7 @@ pyramidChart = (state = pyramidInitialState, action) ->
 				outline: action.data
 				bars: state.data.bars
 			lastUpdated: action.receivedAt
+			updatePyramid: no
 			updateOutline: yes
 			activeLineValue: state._outlineValue.label
 			activeLineCategory: state._outlineCategory.label

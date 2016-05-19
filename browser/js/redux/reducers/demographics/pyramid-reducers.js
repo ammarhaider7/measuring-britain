@@ -125,6 +125,7 @@ pyramidChart = function(state, action) {
           bars: state.data.bars
         },
         lastUpdated: action.receivedAt,
+        updatePyramid: false,
         updateOutline: true,
         activeLineValue: state._outlineValue.label,
         activeLineCategory: state._outlineCategory.label

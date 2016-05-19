@@ -1981,6 +1981,7 @@ pyramidChart = function(state, action) {
           bars: state.data.bars
         },
         lastUpdated: action.receivedAt,
+        updatePyramid: false,
         updateOutline: true,
         activeLineValue: state._outlineValue.label,
         activeLineCategory: state._outlineCategory.label
@@ -3387,7 +3388,8 @@ drawBarChart = function(options) {
       y: 0,
       x: 0,
       rx: 4,
-      fill: '#F3F3F3'
+      fill: '#F3F3F3',
+      stroke: '#E6E6E6'
     });
     detail_group.append('text').attr({
       x: detail_width / 2,
@@ -3524,6 +3526,7 @@ drawPyramid = function(options) {
   maleKeyGroup = keyGroup.select('.male-key-group');
   femaleKeyGroup = keyGroup.select('.female-key-group');
   my = function() {
+    var outlineDataReceived;
     if (isDefault === true) {
       init();
       if (isOutline === true && updateOutline === true) {
@@ -3531,7 +3534,8 @@ drawPyramid = function(options) {
       }
     } else if (isDefault === false) {
       update();
-      if (isOutline === true) {
+      outlineDataReceived = outline_males_perc != null;
+      if (isOutline === true && outlineDataReceived === true) {
         return drawOutline();
       }
     }
@@ -4446,7 +4450,8 @@ PyramidComponent = React.createClass({displayName: "PyramidComponent",
   },
   componentDidUpdate: function() {
     var pyramid, ref, ref1, ref2, ref3, ref4, ref5, ref6, ref7;
-    if (this.props.updatePyramid === true) {
+    if (this.props.updatePyramid === true || this.props.updateOutline === true) {
+      console.log('updatePyramid');
       pyramid = drawPyramid({
         container: this.refs.pyramidSvg,
         ages: this.props.data.bars.ages,

@@ -71,7 +71,8 @@ drawBarChart = function(options) {
       y: 0,
       x: 0,
       rx: 4,
-      fill: '#F3F3F3'
+      fill: '#F3F3F3',
+      stroke: '#E6E6E6'
     });
     detail_group.append('text').attr({
       x: detail_width / 2,

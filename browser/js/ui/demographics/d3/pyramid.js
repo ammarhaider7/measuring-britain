@@ -50,6 +50,7 @@ drawPyramid = function(options) {
   maleKeyGroup = keyGroup.select('.male-key-group');
   femaleKeyGroup = keyGroup.select('.female-key-group');
   my = function() {
+    var outlineDataReceived;
     if (isDefault === true) {
       init();
       if (isOutline === true && updateOutline === true) {
@@ -57,7 +58,8 @@ drawPyramid = function(options) {
       }
     } else if (isDefault === false) {
       update();
-      if (isOutline === true) {
+      outlineDataReceived = outline_males_perc != null;
+      if (isOutline === true && outlineDataReceived === true) {
         return drawOutline();
       }
     }

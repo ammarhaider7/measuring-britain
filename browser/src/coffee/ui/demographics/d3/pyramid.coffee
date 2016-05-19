@@ -107,8 +107,10 @@ drawPyramid = (options) ->
 
 			update()
 
+			outlineDataReceived = outline_males_perc?
+
 			# if isOutline is yes and updateOutline is yes then drawOutline()
-			if isOutline is yes then drawOutline()
+			if isOutline is yes and outlineDataReceived is yes then drawOutline()
 
 	init = ->
 

@@ -116,6 +116,7 @@ drawBarChart = (options) ->
 				x: 0
 				rx: 4
 				fill: '#F3F3F3'
+				stroke: '#E6E6E6'
 
 			}
 
