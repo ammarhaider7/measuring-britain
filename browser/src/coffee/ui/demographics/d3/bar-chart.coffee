@@ -6,7 +6,7 @@ drawBarChart = (options) ->
 
 	my = {}
 
-	width = $(container).width() ? 750
+	width = $(container).width() ? 1140
 	height = $(container).height() ? 500
 
 	# Set margins

@@ -5,7 +5,7 @@ drawBarChart = function(options) {
   var activeCategory, activeValue, attachHoverHandlers, chart_height, chart_width, container, d3_array, data, format, height, isDefault, key, margin, my, onInitDone, onMouseOver, percFormat, ref, ref1, width, x, xAxis, y;
   container = options.container, data = options.data, isDefault = options.isDefault, onMouseOver = options.onMouseOver, activeCategory = options.activeCategory, activeValue = options.activeValue, onInitDone = options.onInitDone;
   my = {};
-  width = (ref = $(container).width()) != null ? ref : 750;
+  width = (ref = $(container).width()) != null ? ref : 1140;
   height = (ref1 = $(container).height()) != null ? ref1 : 500;
   margin = {
     top: 40,

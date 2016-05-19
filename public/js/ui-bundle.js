@@ -3321,7 +3321,7 @@ drawBarChart = function(options) {
   var activeCategory, activeValue, attachHoverHandlers, chart_height, chart_width, container, d3_array, data, format, height, isDefault, key, margin, my, onInitDone, onMouseOver, percFormat, ref, ref1, width, x, xAxis, y;
   container = options.container, data = options.data, isDefault = options.isDefault, onMouseOver = options.onMouseOver, activeCategory = options.activeCategory, activeValue = options.activeValue, onInitDone = options.onInitDone;
   my = {};
-  width = (ref = $(container).width()) != null ? ref : 750;
+  width = (ref = $(container).width()) != null ? ref : 1140;
   height = (ref1 = $(container).height()) != null ? ref1 : 500;
   margin = {
     top: 40,
@@ -3771,7 +3771,7 @@ var drawPyrBars;
 drawPyrBars = function(options) {
   var activeBarsValue, age, bars_height, bars_width, category_value, container, dataArr, females, format, height, init, initial, isDefault, males, margin, my, ref, ref1, update, width, x, xAxis, y;
   container = options.container, age = options.age, females = options.females, males = options.males, initial = options.initial, isDefault = options.isDefault, activeBarsValue = options.activeBarsValue;
-  width = (ref = $(container).width()) != null ? ref : 399;
+  width = (ref = $(container).width()) != null ? ref : 358;
   height = (ref1 = $(container).height()) != null ? ref1 : 275;
   dataArr = [
     {
@@ -3955,7 +3955,7 @@ drawSunburst = function(options) {
         return '#DADADA';
     }
   };
-  width = (ref = $(container).width()) != null ? ref : 750;
+  width = (ref = $(container).width()) != null ? ref : 1140;
   height = (ref1 = $(container).height()) != null ? ref1 : 500;
   margin = {
     top: 25,

@@ -57,7 +57,7 @@ drawSunburst = function(options) {
         return '#DADADA';
     }
   };
-  width = (ref = $(container).width()) != null ? ref : 750;
+  width = (ref = $(container).width()) != null ? ref : 1140;
   height = (ref1 = $(container).height()) != null ? ref1 : 500;
   margin = {
     top: 25,
