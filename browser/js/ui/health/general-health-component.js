@@ -22,7 +22,7 @@ StackedAreaChart = React.createClass({displayName: "StackedAreaChart",
     }, React.createElement("div", {
       "className": "rel-bars mt-medium"
     }, React.createElement(ControlsNew, React.__spread({}, this.props, {
-      "omitted_category": "religions",
+      "omitted_category": "ethnicities",
       "categories": category_options,
       "values": value_options
     })), React.createElement("img", {

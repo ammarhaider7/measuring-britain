@@ -1,5 +1,5 @@
-ReactDOM = require 'react-dom'
-React = require 'react'
+# ReactDOM = require 'react-dom'
+# React = require 'react'
 
 ReligiousSection = ->
 

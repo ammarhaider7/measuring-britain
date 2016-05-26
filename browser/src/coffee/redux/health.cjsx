@@ -18,6 +18,6 @@ unsubscribe = store.subscribe ->
 	console.log store.getState()
 
 render = ->
-	ReactDOM.render <Provider store={store}><StackedAreaChart/></Provider>, document.getElementById 'mb_general_health'
+	ReactDOM.render <Provider store={store}><StackedAreaChart/></Provider>, document.getElementById 'general-health-component'
 
 module.exports = render

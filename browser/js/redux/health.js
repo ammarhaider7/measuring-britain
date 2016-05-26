@@ -25,7 +25,7 @@ unsubscribe = store.subscribe(function() {
 render = function() {
   return ReactDOM.render(React.createElement(Provider, {
     "store": store
-  }, React.createElement(StackedAreaChart, null)), document.getElementById('mb_general_health'));
+  }, React.createElement(StackedAreaChart, null)), document.getElementById('general-health-component'));
 };
 
 module.exports = render;

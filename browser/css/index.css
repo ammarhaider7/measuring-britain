@@ -6111,6 +6111,9 @@ path:first-child {
   margin-top: 150px;
   display: block; }
 
+nav.hidden-xs {
+  border-bottom: 1px solid #265787; }
+
 .controls-container {
   border-bottom: 1px solid #333; }
   .controls-container .mb-controls-tabs {
