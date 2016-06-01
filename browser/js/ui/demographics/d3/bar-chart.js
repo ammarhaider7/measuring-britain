@@ -98,15 +98,15 @@ drawBarChart = function(options) {
     labels_group_labels = svg.selectAll('.labels-group text');
     x_axis_group = svg.select('.x.axis');
     detail_text_value = svg.select('.detail-text-value');
-    main_group_bars.data(d3_array, key).transition().duration(1000).attr('width', function(d) {
+    main_group_bars.data(d3_array, key).transition().duration(1000).delay(500).attr('width', function(d) {
       return x(d.value);
     }).attr('y', function(d, i) {
       return y(d.name);
     });
-    labels_group_labels.data(d3_array, key).transition().duration(1000).attr('y', function(d, i) {
+    labels_group_labels.data(d3_array, key).transition().duration(1000).delay(500).attr('y', function(d, i) {
       return y(d.name);
     });
-    x_axis_group.transition().duration(1000).call(xAxis);
+    x_axis_group.transition().duration(1000).delay(500).call(xAxis);
     detail_text_value.text(format(data.sum));
     return attachHoverHandlers();
   };

@@ -311,7 +311,8 @@ drawPyramid = (options) ->
 		# Update bars
 		leftBars.data bar_females_perc
 			.transition()
-			.duration(1000)
+			.duration 1000
+			.delay 500
 		  	.attr {
 				width: (d) ->
 					return x(bar_females_perc)(d)
@@ -321,7 +322,8 @@ drawPyramid = (options) ->
 
 		rightBars.data bar_males_perc
 			.transition()
-			.duration(1000)
+			.duration 1000
+			.delay 500
 			.attr {
 				width: (d) ->
 					return x(bar_males_perc)(d)
@@ -333,10 +335,12 @@ drawPyramid = (options) ->
 		# Update the axes
 		xAxisGroupLeft.transition()
 			.duration 1000
+			.delay 500
 			.call xAxisLeft bar_females_perc_format
 
 		xAxisGroupRight.transition()
 			.duration 1000
+			.delay 500
 			.call xAxis(bar_males_perc_format)			
 
 		# Dispatch the initial values for the bars
@@ -379,12 +383,14 @@ drawPyramid = (options) ->
 
 			malesChartLine.transition()
 				.duration 1000
+				.delay 500
 				.attr {
 					d: malesLine outline_males_perc.concat [outline_males_perc[outline_males_perc.length - 1]]
 				}
 
 			femalesChartLine.transition()
 				.duration 1000
+				.delay 500
 				.attr {
 					d: femalesLine outline_females_perc.concat [outline_females_perc[outline_females_perc.length - 1]]
 				}
@@ -395,6 +401,7 @@ drawPyramid = (options) ->
 				.attr 'opacity', 0
 				.transition()
 				.duration 500
+				.delay 500
 				.attr {
 					class: 'males-outline'
 					d: malesLine outline_males_perc.concat [outline_males_perc[outline_males_perc.length - 1]]
@@ -405,6 +412,7 @@ drawPyramid = (options) ->
 				.attr 'opacity', 0
 				.transition()
 				.duration 500
+				.delay 500
 				.attr {
 					class: 'females-outline'
 					d: femalesLine outline_females_perc.concat [outline_females_perc[outline_females_perc.length - 1]]

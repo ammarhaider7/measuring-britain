@@ -1,18 +1,18 @@
-relBarsService = require '../../../services/nomis/demographics/rel-bars-service.js'
-relBarsDataParser = require '../../../services/nomis/demographics/rel-bars-parser.js'
+genHealthService = require '../../../services/nomis/health/general-health-service.js'
+genHealthDataParser = require '../../../services/nomis/health/general-health-parser.js'
 
-REQUEST_RELIGION_DATA = "REQUEST_RELIGION_DATA"
-RECEIVE_RELIGION_DATA = "RECEIVE_RELIGION_DATA"
-TOGGLE_CATEGORY = "R_TOGGLE_CATEGORY"
-MOUSE_OVER = "R_MOUSE_OVER"
-TOGGLE_VALUE = "R_TOGGLE_VALUE"
-ERROR_RECEIVE_RELIGION_DATA = "ERROR_RECEIVE_RELIGION_DATA"
-FILTER_USED = "R_FILTER_USED"
-CONTROLS_OPENED = "R_CONTROLS_OPENED"
-CONTROLS_CLOSED = "R_CONTROLS_CLOSED"
-DISTRICT_SEARCH = "R_DISTRICT_SEARCH"
-INIT_BARS = "INIT_BARS"
-INIT_BARS_OFF = "INIT_BARS_OFF"
+REQUEST_GEN_HEALTH_DATA = "REQUEST_GEN_HEALTH_DATA"
+RECEIVE_GEN_HEALTH_DATA = "RECEIVE_GEN_HEALTH_DATA"
+TOGGLE_CATEGORY = "H_TOGGLE_CATEGORY"
+MOUSE_OVER = "H_MOUSE_OVER"
+TOGGLE_VALUE = "H_TOGGLE_VALUE"
+ERROR_RECEIVE_GEN_HEALTH_DATA = "ERROR_RECEIVE_GEN_HEALTH_DATA"
+FILTER_USED = "H_FILTER_USED"
+CONTROLS_OPENED = "H_CONTROLS_OPENED"
+CONTROLS_CLOSED = "H_CONTROLS_CLOSED"
+DISTRICT_SEARCH = "H_DISTRICT_SEARCH"
+INIT_GEN_HEALTH = "INIT_GEN_HEALTH"
+INIT_GEN_HEALTH_OFF = "INIT_GEN_HEALTH_OFF"
 INIT_DONE = "INIT_DONE"
 
 toggleValue = (value) ->
@@ -51,12 +51,12 @@ mouseOver = (mouseOverData) ->
 		mouseOverData: mouseOverData 
 	}
 
-initBars = () ->
+initGenHealth = () ->
 	{
 		type: INIT_BARS
 	}
 
-initBarsOff = () ->
+initGenHealthOff = () ->
 	{
 		type: INIT_BARS_OFF
 	}
@@ -66,9 +66,9 @@ initDone = () ->
 		type: INIT_DONE
 	}
 
-requestReligionData = (filterOptions) ->
+requestGenHealthData = (filterOptions) ->
 	{
-		type: REQUEST_RELIGION_DATA
+		type: REQUEST_GEN_HEALTH_DATA
 		filterOptions
 	}
 
@@ -77,20 +77,20 @@ filterUsed = () ->
 		type: FILTER_USED
 	}
 
-receiveReligionData = (data) ->
+receiveGenHealthData = (data) ->
 	{
-		type: RECEIVE_RELIGION_DATA
+		type: RECEIVE_GEN_HEALTH_DATA
 		data: data
 		receivedAt: Date.now()
 	}
 
-errorReceivingeReligionData = (error) ->
+errorReceivingeGenHealthData = (error) ->
 	{
-		type: ERROR_RECEIVE_RELIGION_DATA
+		type: ERROR_RECEIVE_GEN_HEALTH_DATA
 		error: error
 	}
 
-fetchReligionData = (filterOptions) ->
+fetchGenHealthData = (filterOptions) ->
 
 	# Thunk middleware knows how to handle functions.
 	# It passes the dispatch method as an argument to the function,
@@ -98,45 +98,45 @@ fetchReligionData = (filterOptions) ->
 	(dispatch) ->
 
 		dispatch filterUsed() if filterOptions?
-		dispatch requestReligionData filterOptions
-		relBarsService(filterOptions)
+		dispatch requestGenHealthData filterOptions
+		genHealthService filterOptions
 			.done (response) ->
 		        # We can dispatch many times!
 		        # Here, we update the app state with the results of the API call.
-				data = relBarsDataParser response.obs
-				dispatch receiveReligionData data
+				data = genHealthDataParser response.obs
+				dispatch receiveGenHealthData data
 				return
 			.fail (jqxhr, textStatus, error) ->
 				# Handle errors..
-				dispatch errorReceivingeEthnicData textStatus + " : " + error
+				dispatch errorReceivingeGenHealthData textStatus + " : " + error
 				return
 
 module.exports = {
 
-	REQUEST_RELIGION_DATA
-	RECEIVE_RELIGION_DATA
+	REQUEST_GEN_HEALTH_DATA
+	RECEIVE_GEN_HEALTH_DATA
 	TOGGLE_CATEGORY
 	MOUSE_OVER
 	TOGGLE_VALUE
-	ERROR_RECEIVE_RELIGION_DATA
+	ERROR_RECEIVE_GEN_HEALTH_DATA
 	FILTER_USED
 	CONTROLS_OPENED
 	CONTROLS_CLOSED
 	DISTRICT_SEARCH
-	INIT_BARS
-	INIT_BARS_OFF
+	INIT_GEN_HEALTH
+	INIT_GEN_HEALTH_OFF
 	INIT_DONE
 	initDone
-	initBars
-	initBarsOff
+	initGenHealth
+	initGenHealthOff
 	mouseOver
-	fetchReligionData
+	fetchGenHealthData
 	districtSearch
-	requestReligionData
-	receiveReligionData
+	requestGenHealthData
+	receiveGenHealthData
 	toggleCategory
 	toggleValue
-	errorReceivingeReligionData
+	errorReceivingeGenHealthData
 	filterUsed
 	controlsOpened
 	controlsClosed

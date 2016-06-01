@@ -23,7 +23,7 @@ makeGenHealthRequest = (options) ->
 			c_ethpuk11: "c_ethpuk11=2...5,7...10,12...16,18...20,22,23"
 			c_health: "c_health=1...3"
 			c_age: "c_age=1...6"
-			measure: "measures=20100"
+			measures: "measures=20100"
 			c_sex: "c_sex=0"
 		}
 	}
@@ -31,7 +31,7 @@ makeGenHealthRequest = (options) ->
 	queryStringArr = []
 
 	generateDataObject = (o) ->
-		# bar values
+
 		catCode = o.category.value
 		catLabel = o.category.label
 		valLabel =  o.value.label
@@ -39,31 +39,29 @@ makeGenHealthRequest = (options) ->
 
 		return {
 			queryStringOps: {
+				# default values
+				date: "date=latest"
+				c_ethpuk11: "c_ethpuk11=2...5,7...10,12...16,18...20,22,23"
+				c_health: "c_health=1...3"
+				c_age: "c_age=1...6"
+				measures: "measures=20100"
+				c_sex: "c_sex=0"
 				geography: do ->
 					if catLabel.indexOf('Geography') isnt -1 
 						"geography=#{ valCode }"
 					else
 						"geography=K04000001"
-				ethnicity: do ->
-					if catCode is 'ethnicities' 
-						"c_ethpuk11=#{ valCode }" 
-					else
-						"c_ethpuk11=0"
 			}
 		}
 
 	getOptions = ->
 
-		# if options.isDefault is yes
 		if options?
 
-			# console.log 'options'
-			# console.log options
 			return generateDataObject options
 
 		else
 
-			# console.log 'options.isDefault is on'
 			return defaultNomisOptions
 	
 	generateQueryString = (getOptions, queryStringArr) ->

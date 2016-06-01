@@ -169,7 +169,7 @@ drawPyrBars = (options) ->
 		main_group.selectAll '.bar'
 			.data dataArr
 			.transition()
-			.duration(250)
+			.duration 250
 		  	.attr {
 		  		y: (d) ->
 		  			return y d.value

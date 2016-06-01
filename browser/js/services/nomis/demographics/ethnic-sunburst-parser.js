@@ -2,8 +2,8 @@
 var parse;
 
 parse = function(dataArray) {
-  var d3ReadyData, d3_nested_data, last, nested_data, re, reLast, total_item, utils;
-  window.sunBurstData = dataArray;
+  var d3ReadyData, d3_nested_data, last, nested_data, re, reLast, sunBurstData, total_item, utils;
+  sunBurstData = dataArray;
   total_item = dataArray.shift();
   re = /^\w+/;
   reLast = /\w+$/;

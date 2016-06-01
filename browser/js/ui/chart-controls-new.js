@@ -48,10 +48,13 @@ ControlsNew = React.createClass({displayName: "ControlsNew",
   },
   fetchData: function() {
     var fetchChartData;
+    this.refs.controlsLink.click();
     if (this.props.chartName === 'sunburst') {
       fetchChartData = 'fetchSunburstData';
     } else if (this.props.chartName === 'relBars') {
       fetchChartData = 'fetchReligionData';
+    } else if (this.props.chartName === "genHealthChart") {
+      fetchChartData = 'fetchGenHealthData';
     }
     return this.props[fetchChartData]({
       isDefault: false,
@@ -66,19 +69,25 @@ ControlsNew = React.createClass({displayName: "ControlsNew",
       "ref": "controlsContainer"
     }, React.createElement("a", {
       "onClick": this.onControlsOpen,
+      "ref": "controlsLink",
       "className": "controls-toggle-link",
       "role": "button",
       "data-toggle": "collapse",
       "data-target": "#collapse" + this.props.chartName,
       "aria-expanded": "false",
       "aria-controls": "collapse" + this.props.chartName
+    }, React.createElement("img", {
+      "src": "./images/mb_ajax_loader.gif",
+      "className": (this.props.isFetching === true ? 'mb-spinner-controls' : 'hide')
+    }), React.createElement("div", {
+      "className": (this.props.isFetching === true ? 'hide' : void 0)
     }, React.createElement("span", {
       "className": "text-center mb-control-value col-sm-5"
     }, this.props.activeCategory), React.createElement("span", {
       "className": "col-sm-5 text-center mb-control-value"
     }, this.props.activeValue), React.createElement("span", {
       "className": (this.props.isControlsOpen === true ? "glyphicon glyphicon-chevron-up mt-medium" : "glyphicon glyphicon-chevron-down mt-medium")
-    })), React.createElement("div", {
+    }))), React.createElement("div", {
       "className": "collapse col-sm-12 mb-collapse",
       "id": "collapse" + this.props.chartName
     }, React.createElement("div", {

@@ -1,9 +1,9 @@
 { combineReducers } = require 'redux'
 objectAssign = require 'object-assign'
-stackedAreaChart = require './health/general-health-reducers.js'
+genHealthChart = require './health/general-health-reducers.js'
 
 mbReducer = combineReducers {
-	stackedAreaChart
+	genHealthChart
 }
 
 module.exports = mbReducer

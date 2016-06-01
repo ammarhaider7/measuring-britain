@@ -70,6 +70,9 @@ PyramidControls = React.createClass
 
   fetchData: ->
 
+    # Manually trigger click on controls link
+    @refs.controlsLink.click()
+
     @props.fetchPyramidData {
       outlineRequested: if @props.outlineFilter is on then yes else no
       isDefault: no
@@ -113,21 +116,29 @@ PyramidControls = React.createClass
       <a 
         onClick={ @onControlsOpen }
         className="controls-toggle-link"
+        ref="controlsLink"
         role="button" data-toggle="collapse" data-target="#collapsePyramid" aria-expanded="false" aria-controls="collapsePyramid"
       >
-        <span 
-          className={ unless @props.activeLineValue is 'default' then "col-sm-4 text-center mb-control-value" else "col-sm-11 text-center mb-control-value" }
-        >{ "#{ @props.activeBarsValue }" }</span>
-        { unless @props.activeLineValue is 'default'
-            <div>
-              <span className="col-sm-3 text-center mb-control-value">compared to</span>
-              <span className="col-sm-4 text-center mb-control-value">{ "#{ @props.activeLineValue }" }</span>
-            </div>
-        }
-        <span 
-          className={ if @props.isControlsOpen is yes then "glyphicon glyphicon-chevron-up mt-medium" else "glyphicon glyphicon-chevron-down mt-medium"}
-        >
-        </span>
+        <img src="./images/mb_ajax_loader.gif" 
+          className={ 
+            if @props.isFetching is yes then 'mb-spinner-controls' else 'hide'
+          }
+        />
+        <div className={ if @props.isFetching is yes then 'hide' }>
+          <span 
+            className={ unless @props.activeLineValue is 'default' then "col-sm-4 text-center mb-control-value" else "col-sm-11 text-center mb-control-value" }
+          >{ "#{ @props.activeBarsValue }" }</span>
+          { unless @props.activeLineValue is 'default'
+              <div>
+                <span className="col-sm-3 text-center mb-control-value">compared to</span>
+                <span className="col-sm-4 text-center mb-control-value">{ "#{ @props.activeLineValue }" }</span>
+              </div>
+          }
+          <span 
+            className={ if @props.isControlsOpen is yes then "glyphicon glyphicon-chevron-up mt-medium" else "glyphicon glyphicon-chevron-down mt-medium"}
+          >
+          </span>
+        </div>
       </a>
       <div className="collapse col-sm-12 mb-collapse" id="collapsePyramid">
         <div className="container col-sm-12">

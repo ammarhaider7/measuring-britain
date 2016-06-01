@@ -30,7 +30,7 @@ ControlsNew = React.createClass
     $el.classed 'active', yes
 
   onControlsOpen: ->
-
+  
     $controlsContainer = d3.select @refs.controlsContainer
     isOpen = $controlsContainer.classed 'open'
     isClosed = $controlsContainer.classed 'closed'
@@ -47,6 +47,9 @@ ControlsNew = React.createClass
 
   fetchData: ->
 
+    # Manually trigger click on controls link
+    @refs.controlsLink.click()
+
     if @props.chartName is 'sunburst' 
 
       fetchChartData = 'fetchSunburstData' 
@@ -54,6 +57,10 @@ ControlsNew = React.createClass
     else if @props.chartName is 'relBars'
 
       fetchChartData = 'fetchReligionData'
+
+    else if @props.chartName is "genHealthChart"
+
+      fetchChartData = 'fetchGenHealthData'
 
     @props[fetchChartData] {
       isDefault: no
@@ -63,18 +70,26 @@ ControlsNew = React.createClass
 
   render: -> 
 
-    <div className="controls-container clearfix closed mb-oxygen" ref="controlsContainer"> 
+    <div className="controls-container clearfix closed mb-oxygen" ref="controlsContainer">
       <a 
         onClick={ @onControlsOpen }
+        ref="controlsLink"
         className="controls-toggle-link"
         role="button" data-toggle="collapse" data-target={ "#collapse#{ @props.chartName }" } aria-expanded="false" aria-controls={ "collapse#{ @props.chartName }" }
       >
+        <img src="./images/mb_ajax_loader.gif" 
+          className={ 
+            if @props.isFetching is yes then 'mb-spinner-controls' else 'hide'
+          }
+        />
+        <div className={ if @props.isFetching is yes then 'hide' }>
           <span className="text-center mb-control-value col-sm-5">{ @props.activeCategory }</span>
           <span className="col-sm-5 text-center mb-control-value">{ @props.activeValue }</span>
           <span 
             className={ if @props.isControlsOpen is yes then "glyphicon glyphicon-chevron-up mt-medium" else "glyphicon glyphicon-chevron-down mt-medium"}
           >
           </span>
+        </div>
       </a>
       <div className="collapse col-sm-12 mb-collapse" id={ "collapse#{ @props.chartName }" }>
         <div className="container col-sm-12">

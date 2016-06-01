@@ -4,7 +4,7 @@
 parse = (dataArray) ->
 
 	# Need to remove totals from children
-	window.sunBurstData = dataArray
+	sunBurstData = dataArray
 
 	# All ethnic item
 	total_item = dataArray.shift()
@@ -26,7 +26,7 @@ parse = (dataArray) ->
 			return if ethnicity.indexOf('English') isnt -1 then ethnicity.match reLast else last ethnicity
 		.rollup (values) ->
 			d3.sum values, (d) ->
-				d.obs_value.value
+				return d.obs_value.value
 		.entries dataArray
 
 	# Remove totals ob from values arrays

@@ -2,33 +2,33 @@
 { mouseOver
   toggleCategory
   toggleValue
-  requestReligionData
-  fetchReligionData
+  requestGenHealthData
+  fetchGenHealthData
   controlsOpened
   controlsClosed
   districtSearch
-  initBars
-  initBarsOff
+  initGenHealth
+  initGenHealthOff
   initDone } = require '../../actions/health/general-health-actions.js'
 
-StackedAreaComponent = require '../../../ui/health/general-health-component.js'
+GenHealthChartComponent = require '../../../ui/health/general-health-component.js'
 
 mapStateToProps = (state) ->
 
-	chartName: state.stackedAreaChart.chartName
-	_category: state.stackedAreaChart._category
-	_value: state.stackedAreaChart._value	
-	data: state.stackedAreaChart.data
-	isFetching: state.stackedAreaChart.isFetching
-	activeCategory: state.stackedAreaChart.activeCategory
-	activeValue: state.stackedAreaChart.activeValue	
-	error: state.stackedAreaChart.error
-	updateRelBars: state.stackedAreaChart.updateRelBars
-	isDefault: state.stackedAreaChart.isDefault
-	isControlsOpen: state.stackedAreaChart.isControlsOpen
-	district_query: state.stackedAreaChart.district_query
-	init_bars: state.stackedAreaChart.init_bars
-	init_done: state.stackedAreaChart.init_done
+	chartName: state.genHealthChart.chartName
+	_category: state.genHealthChart._category
+	_value: state.genHealthChart._value	
+	data: state.genHealthChart.data
+	isFetching: state.genHealthChart.isFetching
+	activeCategory: state.genHealthChart.activeCategory
+	activeValue: state.genHealthChart.activeValue	
+	error: state.genHealthChart.error
+	updateGenHealth: state.genHealthChart.updateGenHealth
+	isDefault: state.genHealthChart.isDefault
+	isControlsOpen: state.genHealthChart.isControlsOpen
+	district_query: state.genHealthChart.district_query
+	init_gen_health: state.genHealthChart.init_gen_health
+	init_done: state.genHealthChart.init_done
 
 mapDispatchToProps = (dispatch) ->
 
@@ -40,24 +40,24 @@ mapDispatchToProps = (dispatch) ->
 		dispatch controlsOpened()
 	onControlsClosed: () ->
 		dispatch controlsClosed()
-	fetchReligionData: (filterOptions) ->
-		dispatch fetchReligionData filterOptions
+	fetchGenHealthData: (filterOptions) ->
+		dispatch fetchGenHealthData filterOptions
 	onMouseOver: (mouseOverData) ->
 		dispatch mouseOver mouseOverData
 	onDistrictSearch: (query) ->
 		dispatch districtSearch query
-	onInitBars: () ->
-		dispatch initBars()
-	offInitBars: () ->
-		dispatch initBarsOff()
+	onInitGenHealth: () ->
+		dispatch initGenHealth()
+	offInitGenHealth: () ->
+		dispatch initGenHealthOff()
 	onInitDone: () ->
 		dispatch initDone()
 
-StackedAreaChart = connect(
+GenHealthChart = connect(
 	mapStateToProps,
 	mapDispatchToProps
-)(StackedAreaComponent)
+)(GenHealthChartComponent)
 
 module.exports = {
-	StackedAreaChart
+	GenHealthChart
 }

@@ -63,6 +63,7 @@ PyramidControls = React.createClass({displayName: "PyramidControls",
     return this.props.onDistrictSearch(query);
   },
   fetchData: function() {
+    this.refs.controlsLink.click();
     return this.props.fetchPyramidData({
       outlineRequested: this.props.outlineFilter === true ? true : false,
       isDefault: false,
@@ -109,11 +110,17 @@ PyramidControls = React.createClass({displayName: "PyramidControls",
     }, React.createElement("a", {
       "onClick": this.onControlsOpen,
       "className": "controls-toggle-link",
+      "ref": "controlsLink",
       "role": "button",
       "data-toggle": "collapse",
       "data-target": "#collapsePyramid",
       "aria-expanded": "false",
       "aria-controls": "collapsePyramid"
+    }, React.createElement("img", {
+      "src": "./images/mb_ajax_loader.gif",
+      "className": (this.props.isFetching === true ? 'mb-spinner-controls' : 'hide')
+    }), React.createElement("div", {
+      "className": (this.props.isFetching === true ? 'hide' : void 0)
     }, React.createElement("span", {
       "className": (this.props.activeLineValue !== 'default' ? "col-sm-4 text-center mb-control-value" : "col-sm-11 text-center mb-control-value")
     }, "" + this.props.activeBarsValue), (this.props.activeLineValue !== 'default' ? React.createElement("div", null, React.createElement("span", {
@@ -122,7 +129,7 @@ PyramidControls = React.createClass({displayName: "PyramidControls",
       "className": "col-sm-4 text-center mb-control-value"
     }, "" + this.props.activeLineValue)) : void 0), React.createElement("span", {
       "className": (this.props.isControlsOpen === true ? "glyphicon glyphicon-chevron-up mt-medium" : "glyphicon glyphicon-chevron-down mt-medium")
-    })), React.createElement("div", {
+    }))), React.createElement("div", {
       "className": "collapse col-sm-12 mb-collapse",
       "id": "collapsePyramid"
     }, React.createElement("div", {

@@ -1,21 +1,21 @@
 objectAssign = require 'object-assign'
 
-{ REQUEST_RELIGION_DATA
-  RECEIVE_RELIGION_DATA
+{ REQUEST_GEN_HEALTH_DATA
+  RECEIVE_GEN_HEALTH_DATA
   TOGGLE_CATEGORY
   MOUSE_OVER
   TOGGLE_VALUE
-  ERROR_RECEIVE_RELIGION_DATA
+  ERROR_RECEIVE_GEN_HEALTH_DATA
   FILTER_USED
   CONTROLS_OPENED
   CONTROLS_CLOSED
   DISTRICT_SEARCH
-  INIT_BARS
-  INIT_BARS_OFF
+  INIT_GEN_HEALTH
+  INIT_GEN_HEALTH_OFF
   INIT_DONE } = require '../../actions/health/general-health-actions.js'
 
 genHealthInitState = {
-  chartName: 'stackedAreaChart'
+  chartName: 'genHealthChart'
   isFetching: no
   isDefault: yes
   isControlsOpen: no
@@ -30,81 +30,81 @@ genHealthInitState = {
   data: {}
   error: no
   updateTable: no
-  updateRelBars: no
+  updateGenHealth: no
   district_query: 'default'
   _mouseOverData: {}
-  init_bars: no
+  init_gen_health: no
   init_done: no
 }
 
-stackedAreaChart = (state = genHealthInitState, action) ->
+GenHealthChart = (state = genHealthInitState, action) ->
 
   switch action.type
 
     when TOGGLE_CATEGORY then objectAssign {}, state, {
       _category: action.category
-      updateRelBars: no
-      init_bars: no
+      updateGenHealth: no
+      init_gen_health: no
     }
     when TOGGLE_VALUE then objectAssign {}, state, {
       _value: action.value
-      updateRelBars: no
-      init_bars: no
+      updateGenHealth: no
+      init_gen_health: no
     }
     when CONTROLS_OPENED then objectAssign {}, state, {
       isControlsOpen: yes
-      updateRelBars: no
-      init_bars: no
+      updateGenHealth: no
+      init_gen_health: no
     }
     when CONTROLS_CLOSED then objectAssign {}, state, {
       isControlsOpen: no
-      updateRelBars: no
-      init_bars: no
+      updateGenHealth: no
+      init_gen_health: no
     }
     when DISTRICT_SEARCH then objectAssign {}, state, {
       district_query: action.query
-      updateRelBars: no
-      init_bars: no
+      updateGenHealth: no
+      init_gen_health: no
     }
     when FILTER_USED then objectAssign {}, state, {
       isDefault: no
-      updateRelBars: no
-      init_bars: no
+      updateGenHealth: no
+      init_gen_health: no
     }
-    when INIT_BARS then objectAssign {}, state, {
-      init_bars: yes
+    when INIT_GEN_HEALTH then objectAssign {}, state, {
+      init_gen_health: yes
     }
-    when INIT_BARS_OFF then objectAssign {}, state, {
-      init_bars: no
+    when INIT_GEN_HEALTH_OFF then objectAssign {}, state, {
+      init_gen_health: no
     }
     when INIT_DONE then objectAssign {}, state, {
       init_done: yes
-      updateRelBars: no
+      updateGenHealth: no
     }
-    when REQUEST_RELIGION_DATA then objectAssign {}, state, {
+    when REQUEST_GEN_HEALTH_DATA then objectAssign {}, state, {
       isFetching: yes
-      updateRelBars: no
-      init_bars: no
+      updateGenHealth: no
+      init_gen_health: no
     }
-    when RECEIVE_RELIGION_DATA then objectAssign {}, state, {
+    when RECEIVE_GEN_HEALTH_DATA then objectAssign {}, state, {
       isFetching: no
       data: action.data
       activeCategory: state._category.label
       activeValue: state._value.label
-      updateRelBars: yes
-      init_bars: no
+      updateGenHealth: yes
+      init_gen_health: no
     }
-    when ERROR_RECEIVE_RELIGION_DATA then objectAssign {}, state, {
+    when ERROR_RECEIVE_GEN_HEALTH_DATA then objectAssign {}, state, {
       isFetching: no
       error: yes
       errorMessage: action.error
-      init_bars: no
+      init_gen_health: no
     }  
     when MOUSE_OVER then objectAssign {}, state, {
-      updateRelBars: no
+      updateGenHealth: no
       _mouseOverData: action.mouseOverData
-      init_bars: no
+      init_gen_health: no
     }
     else state
 
-module.exports = stackedAreaChart
+module.exports = GenHealthChart

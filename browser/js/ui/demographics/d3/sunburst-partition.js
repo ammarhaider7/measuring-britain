@@ -216,12 +216,12 @@ drawSunburst = function(options) {
     total_value_text = svg.select('.total-value-text');
     percent_text = svg.select('.percent-text');
     ethnic_text = svg.select('.ethnicity-text');
-    center_value_text.transition().duration(500).attr('opacity', 0).transition().duration(1000).text(activeValue).attr('opacity', 1);
-    total_value_text.transition().duration(500).attr('opacity', 0).transition().duration(1000).text(format(total_item_value)).attr('opacity', 1);
-    percent_text.transition().duration(500).attr('opacity', 0).transition().duration(1000).attr('fill', '#333').text('100%').attr('opacity', 1);
-    ethnic_text.transition().duration(500).attr('opacity', 0).transition().duration(1000).text('All ethnic groups').attr('opacity', 1);
-    total_value_text.transition().duration(500).attr('opacity', 0).transition().duration(1000).text(format(total_item.obs_value.value)).attr('opacity', 1);
-    newSegments = main_group.selectAll('path.sunburst-path').data(partition.nodes(nested_data)).transition().duration(1500).attrTween('d', arcTween);
+    center_value_text.transition().duration(500).attr('opacity', 0).transition().duration(1000).delay(500).text(activeValue).attr('opacity', 1);
+    total_value_text.transition().duration(500).attr('opacity', 0).transition().duration(1000).delay(500).text(format(total_item_value)).attr('opacity', 1);
+    percent_text.transition().duration(500).attr('opacity', 0).transition().duration(1000).delay(500).attr('fill', '#333').text('100%').attr('opacity', 1);
+    ethnic_text.transition().duration(500).attr('opacity', 0).transition().duration(1000).delay(500).text('All ethnic groups').attr('opacity', 1);
+    total_value_text.transition().duration(500).attr('opacity', 0).transition().duration(1000).delay(500).text(format(total_item.obs_value.value)).attr('opacity', 1);
+    newSegments = main_group.selectAll('path.sunburst-path').data(partition.nodes(nested_data)).transition().duration(1500).delay(500).attrTween('d', arcTween);
     attachHoverHandlers();
   };
   my.width = function(value) {

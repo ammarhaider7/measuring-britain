@@ -12,7 +12,6 @@
   initDone } = require '../../actions/demographics/ethnic-sunburst-actions.js'
 
 SunburstComponent = require '../../../ui/demographics/ethnic-sunburst-component.js'
-# TableComponent = require '../../../ui/demographics/pyramid-table.js'
 
 mapStateToProps = (state) ->
 
@@ -30,14 +29,6 @@ mapStateToProps = (state) ->
 	district_query: state.ethnicSunburst.district_query
 	init_sunburst: state.ethnicSunburst.init_sunburst
 	init_done: state.ethnicSunburst.init_done
-
-# mapStateToPropsPyrTable = (state) ->
-
-# 	data: state.ethnicSunburst.data
-# 	activeBarsCategory: state.ethnicSunburst.activeBarsCategory
-# 	activeBarsValue: state.ethnicSunburst.activeBarsValue	
-# 	isFetching: state.ethnicSunburst.isFetching
-# 	isDefault: state.ethnicSunburst.isDefault
 
 mapDispatchToProps = (dispatch) ->
 
@@ -66,10 +57,6 @@ Sunburst = connect(
 	mapStateToProps,
 	mapDispatchToProps
 )(SunburstComponent)
-
-# SunburstTable = connect(
-# 	mapStateToPropsPyrTable
-# )(TableComponent)
 
 module.exports = {
 	Sunburst

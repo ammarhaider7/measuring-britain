@@ -197,7 +197,7 @@ drawPyramid = function(options) {
     overlayBars = svg.selectAll('.overlay-rect');
     xAxisGroupLeft = svg.select('.x.axis.left');
     xAxisGroupRight = svg.select('.x.axis.right');
-    leftBars.data(bar_females_perc).transition().duration(1000).attr({
+    leftBars.data(bar_females_perc).transition().duration(1000).delay(500).attr({
       width: function(d) {
         return x(bar_females_perc)(d);
       },
@@ -205,14 +205,14 @@ drawPyramid = function(options) {
         return xLeft(bar_females_perc)(d);
       }
     });
-    rightBars.data(bar_males_perc).transition().duration(1000).attr({
+    rightBars.data(bar_males_perc).transition().duration(1000).delay(500).attr({
       width: function(d) {
         return x(bar_males_perc)(d);
       }
     });
     overlayBars.data(overlay_data);
-    xAxisGroupLeft.transition().duration(1000).call(xAxisLeft(bar_females_perc_format));
-    xAxisGroupRight.transition().duration(1000).call(xAxis(bar_males_perc_format));
+    xAxisGroupLeft.transition().duration(1000).delay(500).call(xAxisLeft(bar_females_perc_format));
+    xAxisGroupRight.transition().duration(1000).delay(500).call(xAxis(bar_males_perc_format));
     return onMouseOver({
       age: 'All Ages',
       females: bar_females_sum,
@@ -244,19 +244,19 @@ drawPyramid = function(options) {
       svg = d3.select('.pyramid-svg');
       malesChartLine = svg.select('.males-outline');
       femalesChartLine = svg.select('.females-outline');
-      malesChartLine.transition().duration(1000).attr({
+      malesChartLine.transition().duration(1000).delay(500).attr({
         d: malesLine(outline_males_perc.concat([outline_males_perc[outline_males_perc.length - 1]]))
       });
-      femalesChartLine.transition().duration(1000).attr({
+      femalesChartLine.transition().duration(1000).delay(500).attr({
         d: femalesLine(outline_females_perc.concat([outline_females_perc[outline_females_perc.length - 1]]))
       });
     } else {
-      malesChartLine = rightGroup.append('path').attr('opacity', 0).transition().duration(500).attr({
+      malesChartLine = rightGroup.append('path').attr('opacity', 0).transition().duration(500).delay(500).attr({
         "class": 'males-outline',
         d: malesLine(outline_males_perc.concat([outline_males_perc[outline_males_perc.length - 1]])),
         opacity: 1
       });
-      femalesChartLine = leftGroup.append('path').attr('opacity', 0).transition().duration(500).attr({
+      femalesChartLine = leftGroup.append('path').attr('opacity', 0).transition().duration(500).delay(500).attr({
         "class": 'females-outline',
         d: femalesLine(outline_females_perc.concat([outline_females_perc[outline_females_perc.length - 1]])),
         opacity: 1

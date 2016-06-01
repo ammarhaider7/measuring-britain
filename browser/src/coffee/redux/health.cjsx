@@ -2,7 +2,7 @@
 { Provider } = require 'react-redux'
 ReduxThunk = require('redux-thunk').default
 mbReducer = require './reducers/health-reducers.js'
-{ StackedAreaChart } = require './containers/health/general-health-containers.js'
+{ GenHealthChart } = require './containers/health/general-health-containers.js'
 
 # creating the store, associating the root reducer and thunk middleware
 store = createStore mbReducer, applyMiddleware ReduxThunk
@@ -18,6 +18,6 @@ unsubscribe = store.subscribe ->
 	console.log store.getState()
 
 render = ->
-	ReactDOM.render <Provider store={store}><StackedAreaChart/></Provider>, document.getElementById 'general-health-component'
+	ReactDOM.render <Provider store={store}><GenHealthChart/></Provider>, document.getElementById 'general-health-component'
 
 module.exports = render

@@ -5924,22 +5924,6 @@ button.close {
 .mb-left {
   float: left; }
 
-path {
-  stroke: #245584;
-  stroke-width: 1px; }
-
-path:first-child {
-  fill: #1B548A !important; }
-
-.q0-9 {
-  fill: #295F92; }
-
-.q1-9 {
-  fill: #285C8E; }
-
-.q2-9 {
-  fill: #296298; }
-
 .cell-background {
   position: fixed;
   top: 0;
@@ -5947,6 +5931,17 @@ path:first-child {
   width: 100%;
   height: 700px;
   z-index: 0; }
+  .cell-background path {
+    stroke: #245584;
+    stroke-width: 1px; }
+  .cell-background path:first-child {
+    fill: #1B548A !important; }
+  .cell-background .q0-9 {
+    fill: #295F92; }
+  .cell-background .q1-9 {
+    fill: #285C8E; }
+  .cell-background .q2-9 {
+    fill: #296298; }
 
 .mb-roboto {
   font-family: 'Roboto', sans-serif; }
@@ -6037,6 +6032,11 @@ path:first-child {
 
 .mb-spinner {
   height: 30px; }
+
+.mb-spinner-controls {
+  margin: 0 auto 0;
+  margin-bottom: 10px;
+  display: block; }
 
 .mb-ajax-success {
   color: #5cb85c;
@@ -6219,3 +6219,24 @@ nav.hidden-xs {
 .rel-bars .mb-spinner {
   margin: 150px auto 0;
   display: block; }
+
+.gen-health-svg .axis text {
+  font-size: 11px; }
+
+.gen-health-svg .axis path, .gen-health-svg .axis line {
+  fill: none;
+  stroke: #333;
+  shape-rendering: crispEdges; }
+
+.gen-health-svg .x.axis path {
+  fill: none;
+  stroke: none; }
+
+.gen-health-svg .x.axis line {
+  stroke: #333;
+  stroke-opacity: .8; }
+
+.gen-health-svg .line {
+  fill: none;
+  stroke: steelblue;
+  stroke-width: 2px; }

@@ -165,6 +165,7 @@ drawBarChart = (options) ->
 		main_group_bars.data d3_array, key
 			.transition()
 			.duration 1000
+			.delay 500
 			.attr 'width', (d) ->
 				return x d.value
 			.attr 'y', (d, i) ->
@@ -173,11 +174,13 @@ drawBarChart = (options) ->
 		labels_group_labels.data d3_array, key
 			.transition()
 			.duration 1000
+			.delay 500
 			.attr 'y', (d, i) ->
 				return y d.name
 
 		x_axis_group.transition()
 			.duration 1000
+			.delay 500
 			.call xAxis
 
 		# reset detail content

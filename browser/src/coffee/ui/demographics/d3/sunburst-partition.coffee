@@ -295,6 +295,7 @@ drawSunburst = (options) ->
 			.attr 'opacity', 0
 			.transition()
 			.duration 1000
+			.delay 500
 			.text activeValue
 			.attr 'opacity', 1
 
@@ -304,6 +305,7 @@ drawSunburst = (options) ->
 			.attr 'opacity', 0
 			.transition()
 			.duration 1000
+			.delay 500
 			.text format total_item_value
 			.attr 'opacity', 1
 
@@ -313,6 +315,7 @@ drawSunburst = (options) ->
 			.attr 'opacity', 0
 			.transition()
 			.duration 1000
+			.delay 500
 			.attr 'fill', '#333'
 			.text '100%'
 			.attr 'opacity', 1
@@ -323,6 +326,7 @@ drawSunburst = (options) ->
 			.attr 'opacity', 0
 			.transition()
 			.duration 1000
+			.delay 500
 			.text 'All ethnic groups'
 			.attr 'opacity', 1
 
@@ -332,6 +336,7 @@ drawSunburst = (options) ->
 			.attr 'opacity', 0
 			.transition()
 			.duration 1000
+			.delay 500
 			.text format total_item.obs_value.value
 			.attr 'opacity', 1
 
@@ -339,6 +344,7 @@ drawSunburst = (options) ->
 			.data partition.nodes nested_data
 		  .transition()
 		    .duration 1500
+			.delay 500
 			.attrTween 'd', arcTween
 
 		attachHoverHandlers()

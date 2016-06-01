@@ -1,0 +1,36 @@
+.gen-health-svg {
+	.axis {
+	  text {
+	  	font-size: 11px;
+	  }
+  		path, line {
+		  fill: none;
+		  stroke: #333;
+		  shape-rendering: crispEdges;
+		}
+	}
+
+	.x.axis path {
+	  fill: none;
+	  stroke: none;
+	}
+
+	.x.axis line {
+	  stroke: #333;
+	  stroke-opacity: .8;
+	}
+	.line {
+	  fill: none;
+	  stroke: steelblue;
+	  stroke-width: 2px;
+	}
+
+	// .tick line {
+	// 	stroke: #E9E9E9;
+	// 	stroke-opacity: .8;
+	// }
+	// .tick:nth-child(1) line {
+	//     stroke: #333;
+	//     stroke-opacity: .8;
+	// }
+}
