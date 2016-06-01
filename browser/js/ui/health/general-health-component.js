@@ -54,7 +54,7 @@ GenHealthChart = React.createClass({displayName: "GenHealthChart",
       "className": "gen-health-svg mb-oxygen",
       "style": {
         width: '100%',
-        height: '425px'
+        height: '465px'
       },
       "ref": "genHealthSvg"
     }, React.createElement("g", {

@@ -8,7 +8,7 @@ drawGenHealthChart = function(options) {
   width = (ref = $(container).width()) != null ? ref : 750;
   height = (ref1 = $(container).height()) != null ? ref1 : 500;
   margin = {
-    top: 60,
+    top: 20,
     right: 80,
     bottom: 20,
     left: 45,

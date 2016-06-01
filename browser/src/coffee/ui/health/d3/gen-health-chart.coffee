@@ -11,7 +11,7 @@ drawGenHealthChart = (options) ->
 
 	# Set margins
 	margin = 
-		top: 60
+		top: 20
 		right: 80
 		bottom: 20
 		left: 45
