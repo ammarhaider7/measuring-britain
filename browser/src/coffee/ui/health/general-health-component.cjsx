@@ -28,6 +28,7 @@ GenHealthChart = React.createClass
         data: @props.data
         activeCategory: @props.activeCategory
         activeValue: @props.activeValue
+        onMouseOver: @props.onMouseOver
       }
 
       if @props.isDefault is yes then draw.init() else draw.update()
@@ -36,7 +37,7 @@ GenHealthChart = React.createClass
 
     <div className="col-xs-12 col-sm-12 mb-no-padding">
       <div className="rel-bars mt-medium">
-        <ControlsNew {...@props} omitted_category="ethnicities" categories=category_options values=value_options />
+        <ControlsNew {...@props} omitted_categories={["ethnicities", "districts", "religions"]} categories=category_options values=value_options />
         <img src="./images/mb_ajax_loader.gif" 
           className={ 
             if @props.isFetching is yes and @props.isDefault is yes then 'mb-spinner' else 'hide' 

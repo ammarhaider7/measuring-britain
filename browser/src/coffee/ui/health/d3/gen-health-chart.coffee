@@ -27,15 +27,15 @@ drawGenHealthChart = (options) ->
 	ages = data.ages
 	max_value = data.max_value
 	max_perc = data.max_perc
-	colour = d3.scale.category10()
+	colour = d3.scale.category20()
 		.domain ethnic_groups
 
 	# Scales, axes and layouts
-	window.x = d3.scale.ordinal()
+	x = d3.scale.ordinal()
 		.domain ages
 		.rangePoints [0, chart_width]
 
-	window.y = d3.scale.linear()
+	y = d3.scale.linear()
 		.domain [0, max_perc]
 		.range [chart_height, 0]
 
@@ -52,7 +52,7 @@ drawGenHealthChart = (options) ->
 		.orient 'bottom'
 
 	line = d3.svg.line()
-		.interpolate 'basis'
+		.interpolate 'cardinal'
 		.x (d) ->
 			return x d.key
 		.y (d) ->
@@ -73,7 +73,7 @@ drawGenHealthChart = (options) ->
 		main_group.attr 'transform', "translate(#{ margin.left }, #{ margin.top })"
 		x_axis_group.attr 'transform', "translate(#{ margin.left }, #{ chart_height + margin.top })"
 		y_axis_group.attr 'transform', "translate(#{ margin.left }, #{ margin.top })"
-		title_group.attr 'transform', "translate(#{ chart_width / 2 - margin.left }, #{margin.p})"
+		title_group.attr 'transform', "translate(#{ chart_width / 2 - margin.left }, 0)"
 
 		x_axis_group.call xAxis
 		y_axis_group.call yAxis
@@ -201,42 +201,36 @@ drawGenHealthChart = (options) ->
 		svg = d3.select '.gen-health-svg'
 		main_group_lines = svg.selectAll '.main-group path'
 		labels = svg.selectAll '.label'
-		# detail_text_religion = svg.select '.detail-text-religion'
-		# detail_text_value = svg.select '.detail-text-value'
-		# detail_text_percent = svg.select '.detail-text-percent'
 
 		main_group_lines.on 'mouseover', (d) ->
 
-	 		# set opacity of arcs
-	 		_d = d
+			# set opacity of arcs
+			_d = d
+			# onMouseOver d
 
-	 		main_group_lines.attr 'opacity', (d) ->
+			main_group_lines.attr 'opacity', (d) ->
 
- 				unless _d is d
- 					return 0.1
- 				else
- 					return 1
+				unless _d is d
+					return 0.1
+				else
+					return 1
 
- 			labels.attr 'opacity', (d) ->
+			labels.attr 'opacity', (d) ->
 
- 				unless _d is d
- 					return 0.05
- 				else
- 					return 1
+				unless _d is d
+					return 0.05
+				else
+					return 1
 
- 			# detail_text_religion.text d.name
- 			# detail_text_value.text format d.value
- 			# detail_text_percent.text percFormat d.value / data.sum
+		.on 'mouseout', (d) ->
 
- 		.on 'mouseout', (d) ->
+			main_group_lines.attr 'opacity', 1
+			labels.attr 'opacity', 0.1
 
- 			main_group_lines.attr 'opacity', 1
- 			labels.attr 'opacity', 0.1
-
- 			# reset detail content
- 			# detail_text_religion.text 'Total'
- 			# detail_text_value.text format data.sum
- 			# detail_text_percent.text '100%'
+			# onMouseOver {
+			# 	key: 'All'
+			# 	values: []
+			# }
 
 	my.width = (value) ->
 		unless arguments.length then return width

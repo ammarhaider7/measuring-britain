@@ -12,6 +12,7 @@
   initDone } = require '../../actions/health/general-health-actions.js'
 
 GenHealthChartComponent = require '../../../ui/health/general-health-component.js'
+GenHealthChartDetailComponent = require '../../../ui/health/general-health-detail-component.js'
 
 mapStateToProps = (state) ->
 
@@ -29,6 +30,16 @@ mapStateToProps = (state) ->
 	district_query: state.genHealthChart.district_query
 	init_gen_health: state.genHealthChart.init_gen_health
 	init_done: state.genHealthChart.init_done
+
+mapStateToPropsDetail = (state) ->
+
+	data: state.genHealthChart.data
+	activeCategory: state.genHealthChart.activeCategory
+	activeValue: state.genHealthChart.activeValue	
+	isFetching: state.genHealthChart.isFetching
+	isDefault: state.genHealthChart.isDefault
+	mouseOverData: state.genHealthChart._mouseOverData
+	updateTable: state.genHealthChart.updateTable
 
 mapDispatchToProps = (dispatch) ->
 
@@ -58,6 +69,11 @@ GenHealthChart = connect(
 	mapDispatchToProps
 )(GenHealthChartComponent)
 
+GenHealthChartDetail = connect(
+	mapStateToPropsDetail
+)(GenHealthChartDetailComponent)
+
 module.exports = {
 	GenHealthChart
+	GenHealthChartDetail
 }

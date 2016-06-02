@@ -121,10 +121,10 @@ PyramidControls = React.createClass
       >
         <img src="./images/mb_ajax_loader.gif" 
           className={ 
-            if @props.isFetching is yes then 'mb-spinner-controls' else 'hide'
+            if @props.isFetching is yes and @props.isDefault is no then 'mb-spinner-controls' else 'hide'
           }
         />
-        <div className={ if @props.isFetching is yes then 'hide' }>
+        <div className={ if @props.isFetching is yes and @props.isDefault is no then 'hide' }>
           <span 
             className={ unless @props.activeLineValue is 'default' then "col-sm-4 text-center mb-control-value" else "col-sm-11 text-center mb-control-value" }
           >{ "#{ @props.activeBarsValue }" }</span>

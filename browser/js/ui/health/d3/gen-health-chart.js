@@ -2,7 +2,7 @@
 var drawGenHealthChart;
 
 drawGenHealthChart = function(options) {
-  var activeCategory, activeValue, ages, attachHoverHandlers, chart_height, chart_width, colour, container, d3_array, data, ethnic_groups, format, height, isDefault, line, margin, max_perc, max_value, my, onInitDone, onMouseOver, percFormat, ref, ref1, width, xAxis, yAxis;
+  var activeCategory, activeValue, ages, attachHoverHandlers, chart_height, chart_width, colour, container, d3_array, data, ethnic_groups, format, height, isDefault, line, margin, max_perc, max_value, my, onInitDone, onMouseOver, percFormat, ref, ref1, width, x, xAxis, y, yAxis;
   container = options.container, data = options.data, isDefault = options.isDefault, onMouseOver = options.onMouseOver, activeCategory = options.activeCategory, activeValue = options.activeValue, onInitDone = options.onInitDone;
   my = {};
   width = (ref = $(container).width()) != null ? ref : 750;
@@ -23,12 +23,12 @@ drawGenHealthChart = function(options) {
   ages = data.ages;
   max_value = data.max_value;
   max_perc = data.max_perc;
-  colour = d3.scale.category10().domain(ethnic_groups);
-  window.x = d3.scale.ordinal().domain(ages).rangePoints([0, chart_width]);
-  window.y = d3.scale.linear().domain([0, max_perc]).range([chart_height, 0]);
+  colour = d3.scale.category20().domain(ethnic_groups);
+  x = d3.scale.ordinal().domain(ages).rangePoints([0, chart_width]);
+  y = d3.scale.linear().domain([0, max_perc]).range([chart_height, 0]);
   yAxis = d3.svg.axis().scale(y).tickFormat(percFormat).ticks(6).orient('left');
   xAxis = d3.svg.axis().scale(x).orient('bottom');
-  line = d3.svg.line().interpolate('basis').x(function(d) {
+  line = d3.svg.line().interpolate('cardinal').x(function(d) {
     return x(d.key);
   }).y(function(d) {
     return y(d.values.bad);
@@ -43,7 +43,7 @@ drawGenHealthChart = function(options) {
     main_group.attr('transform', "translate(" + margin.left + ", " + margin.top + ")");
     x_axis_group.attr('transform', "translate(" + margin.left + ", " + (chart_height + margin.top) + ")");
     y_axis_group.attr('transform', "translate(" + margin.left + ", " + margin.top + ")");
-    title_group.attr('transform', "translate(" + (chart_width / 2 - margin.left) + ", " + margin.p + ")");
+    title_group.attr('transform', "translate(" + (chart_width / 2 - margin.left) + ", 0)");
     x_axis_group.call(xAxis);
     y_axis_group.call(yAxis).append("text").attr("transform", "rotate(-90)").attr("y", 6).attr("dy", ".71em").style("text-anchor", "end").text("% of Population");
     ethnicity = main_group.selectAll('.ethnicity').data(d3_array).enter().append('g').attr('class', 'ethnicity');

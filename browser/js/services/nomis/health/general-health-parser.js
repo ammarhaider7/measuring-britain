@@ -2,7 +2,7 @@
 var parse;
 
 parse = function(dataArray) {
-  var ages, ethnicities, max_perc, max_value, nested_data, percentages;
+  var ages, ethnicities, ethnicity_age_detail, flatMaxPercsArray, max_perc, max_value, nested_data, number_bad_health, percentages, total_age_detail, total_item, total_population;
   nested_data = d3.nest().key(function(d) {
     return d.c_ethpuk11.description;
   }).key(function(d) {
@@ -29,6 +29,50 @@ parse = function(dataArray) {
       })
     };
   }).entries(dataArray);
+  ethnicity_age_detail = d3.nest().key(function(d) {
+    return d.c_ethpuk11.description;
+  }).key(function(d) {
+    return d.c_age.description;
+  }).rollup(function(values) {
+    return {
+      total_population: d3.sum(values, function(d) {
+        return d.obs_value.value;
+      }),
+      bad_health: d3.sum(values, function(d) {
+        if (d.c_health.value === 3) {
+          return d.obs_value.value;
+        }
+      })
+    };
+  }).entries(dataArray);
+  total_population = d3.sum(dataArray, function(d) {
+    return d.obs_value.value;
+  });
+  number_bad_health = d3.sum(dataArray, function(d) {
+    if (d.c_health.value === 3) {
+      return d.obs_value.value;
+    }
+  });
+  total_age_detail = d3.nest().key(function(d) {
+    return d.c_age.description;
+  }).rollup(function(values) {
+    return {
+      total_population: d3.sum(values, function(d) {
+        return d.obs_value.value;
+      }),
+      bad_health: d3.sum(values, function(d) {
+        if (d.c_health.value === 3) {
+          return d.obs_value.value;
+        }
+      })
+    };
+  }).entries(dataArray);
+  total_item = {
+    population: total_population,
+    number_bad_health: number_bad_health,
+    percent_bad_health: number_bad_health / total_population,
+    total_age_detail: total_age_detail
+  };
   percentages = nested_data.map(function(ethnicity) {
     return {
       key: ethnicity.key,
@@ -44,7 +88,7 @@ parse = function(dataArray) {
       })
     };
   });
-  window.flatMaxPercsArray = percentages.map(function(ethnicity) {
+  flatMaxPercsArray = percentages.map(function(ethnicity) {
     return {
       max_bad_perc: d3.max(ethnicity.values, function(d) {
         return d.values.bad;
@@ -67,6 +111,8 @@ parse = function(dataArray) {
     ethnicities: ethnicities,
     nested_data: nested_data,
     percentages: percentages,
+    ethnicity_age_detail: ethnicity_age_detail,
+    total_item: total_item,
     max_perc: max_perc,
     max_value: max_value,
     ages: ages

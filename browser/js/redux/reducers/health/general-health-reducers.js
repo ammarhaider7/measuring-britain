@@ -39,55 +39,65 @@ GenHealthChart = function(state, action) {
       return objectAssign({}, state, {
         _category: action.category,
         updateGenHealth: false,
+        updateTable: false,
         init_gen_health: false
       });
     case TOGGLE_VALUE:
       return objectAssign({}, state, {
         _value: action.value,
         updateGenHealth: false,
-        init_gen_health: false
+        init_gen_health: false,
+        updateTable: false
       });
     case CONTROLS_OPENED:
       return objectAssign({}, state, {
         isControlsOpen: true,
         updateGenHealth: false,
-        init_gen_health: false
+        init_gen_health: false,
+        updateTable: false
       });
     case CONTROLS_CLOSED:
       return objectAssign({}, state, {
         isControlsOpen: false,
         updateGenHealth: false,
-        init_gen_health: false
+        init_gen_health: false,
+        updateTable: false
       });
     case DISTRICT_SEARCH:
       return objectAssign({}, state, {
         district_query: action.query,
         updateGenHealth: false,
-        init_gen_health: false
+        init_gen_health: false,
+        updateTable: false
       });
     case FILTER_USED:
       return objectAssign({}, state, {
         isDefault: false,
         updateGenHealth: false,
-        init_gen_health: false
+        init_gen_health: false,
+        updateTable: false
       });
     case INIT_GEN_HEALTH:
       return objectAssign({}, state, {
-        init_gen_health: true
+        init_gen_health: true,
+        updateTable: false
       });
     case INIT_GEN_HEALTH_OFF:
       return objectAssign({}, state, {
-        init_gen_health: false
+        init_gen_health: false,
+        updateTable: false
       });
     case INIT_DONE:
       return objectAssign({}, state, {
         init_done: true,
-        updateGenHealth: false
+        updateGenHealth: false,
+        updateTable: false
       });
     case REQUEST_GEN_HEALTH_DATA:
       return objectAssign({}, state, {
         isFetching: true,
         updateGenHealth: false,
+        updateTable: false,
         init_gen_health: false
       });
     case RECEIVE_GEN_HEALTH_DATA:
@@ -97,20 +107,23 @@ GenHealthChart = function(state, action) {
         activeCategory: state._category.label,
         activeValue: state._value.label,
         updateGenHealth: true,
-        init_gen_health: false
+        init_gen_health: false,
+        updateTable: false
       });
     case ERROR_RECEIVE_GEN_HEALTH_DATA:
       return objectAssign({}, state, {
         isFetching: false,
         error: true,
         errorMessage: action.error,
-        init_gen_health: false
+        init_gen_health: false,
+        updateTable: false
       });
     case MOUSE_OVER:
       return objectAssign({}, state, {
         updateGenHealth: false,
         _mouseOverData: action.mouseOverData,
-        init_gen_health: false
+        init_gen_health: false,
+        updateTable: true
       });
     default:
       return state;

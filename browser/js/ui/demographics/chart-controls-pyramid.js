@@ -118,9 +118,9 @@ PyramidControls = React.createClass({displayName: "PyramidControls",
       "aria-controls": "collapsePyramid"
     }, React.createElement("img", {
       "src": "./images/mb_ajax_loader.gif",
-      "className": (this.props.isFetching === true ? 'mb-spinner-controls' : 'hide')
+      "className": (this.props.isFetching === true && this.props.isDefault === false ? 'mb-spinner-controls' : 'hide')
     }), React.createElement("div", {
-      "className": (this.props.isFetching === true ? 'hide' : void 0)
+      "className": (this.props.isFetching === true && this.props.isDefault === false ? 'hide' : void 0)
     }, React.createElement("span", {
       "className": (this.props.activeLineValue !== 'default' ? "col-sm-4 text-center mb-control-value" : "col-sm-11 text-center mb-control-value")
     }, "" + this.props.activeBarsValue), (this.props.activeLineValue !== 'default' ? React.createElement("div", null, React.createElement("span", {

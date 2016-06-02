@@ -63,7 +63,7 @@ BarsComponent = React.createClass({displayName: "BarsComponent",
     }, React.createElement("div", {
       "className": "rel-bars mt-medium"
     }, React.createElement(ControlsNew, React.__spread({}, this.props, {
-      "omitted_category": "religions",
+      "omitted_categories": ["religions"],
       "categories": category_options,
       "values": value_options
     })), React.createElement("img", {

@@ -44,46 +44,56 @@ GenHealthChart = (state = genHealthInitState, action) ->
     when TOGGLE_CATEGORY then objectAssign {}, state, {
       _category: action.category
       updateGenHealth: no
+      updateTable: no
       init_gen_health: no
     }
     when TOGGLE_VALUE then objectAssign {}, state, {
       _value: action.value
       updateGenHealth: no
       init_gen_health: no
+      updateTable: no
     }
     when CONTROLS_OPENED then objectAssign {}, state, {
       isControlsOpen: yes
       updateGenHealth: no
       init_gen_health: no
+      updateTable: no
     }
     when CONTROLS_CLOSED then objectAssign {}, state, {
       isControlsOpen: no
       updateGenHealth: no
       init_gen_health: no
+      updateTable: no
     }
     when DISTRICT_SEARCH then objectAssign {}, state, {
       district_query: action.query
       updateGenHealth: no
       init_gen_health: no
+      updateTable: no
     }
     when FILTER_USED then objectAssign {}, state, {
       isDefault: no
       updateGenHealth: no
       init_gen_health: no
+      updateTable: no
     }
     when INIT_GEN_HEALTH then objectAssign {}, state, {
       init_gen_health: yes
+      updateTable: no
     }
     when INIT_GEN_HEALTH_OFF then objectAssign {}, state, {
       init_gen_health: no
+      updateTable: no
     }
     when INIT_DONE then objectAssign {}, state, {
       init_done: yes
       updateGenHealth: no
+      updateTable: no
     }
     when REQUEST_GEN_HEALTH_DATA then objectAssign {}, state, {
       isFetching: yes
       updateGenHealth: no
+      updateTable: no
       init_gen_health: no
     }
     when RECEIVE_GEN_HEALTH_DATA then objectAssign {}, state, {
@@ -93,17 +103,20 @@ GenHealthChart = (state = genHealthInitState, action) ->
       activeValue: state._value.label
       updateGenHealth: yes
       init_gen_health: no
+      updateTable: no
     }
     when ERROR_RECEIVE_GEN_HEALTH_DATA then objectAssign {}, state, {
       isFetching: no
       error: yes
       errorMessage: action.error
       init_gen_health: no
+      updateTable: no
     }  
     when MOUSE_OVER then objectAssign {}, state, {
       updateGenHealth: no
       _mouseOverData: action.mouseOverData
       init_gen_health: no
+      updateTable: yes
     }
     else state
 

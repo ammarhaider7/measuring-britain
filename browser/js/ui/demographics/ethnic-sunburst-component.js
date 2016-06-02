@@ -64,7 +64,7 @@ SunburstComponent = React.createClass({displayName: "SunburstComponent",
     }, React.createElement("div", {
       "className": "sunburst mt-medium"
     }, React.createElement(ControlsNew, React.__spread({}, this.props, {
-      "omitted_category": "ethnicities",
+      "omitted_categories": ["ethnicities"],
       "categories": category_options,
       "values": value_options
     })), React.createElement("img", {

@@ -29,7 +29,8 @@ GenHealthChart = React.createClass({displayName: "GenHealthChart",
         isDefault: this.props.isDefault,
         data: this.props.data,
         activeCategory: this.props.activeCategory,
-        activeValue: this.props.activeValue
+        activeValue: this.props.activeValue,
+        onMouseOver: this.props.onMouseOver
       });
       if (this.props.isDefault === true) {
         return draw.init();
@@ -44,7 +45,7 @@ GenHealthChart = React.createClass({displayName: "GenHealthChart",
     }, React.createElement("div", {
       "className": "rel-bars mt-medium"
     }, React.createElement(ControlsNew, React.__spread({}, this.props, {
-      "omitted_category": "ethnicities",
+      "omitted_categories": ["ethnicities", "districts", "religions"],
       "categories": category_options,
       "values": value_options
     })), React.createElement("img", {

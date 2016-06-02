@@ -34,6 +34,65 @@ parse = (dataArray) ->
 		}
 	.entries dataArray
 
+	# Total populations for each ethnicity
+	# Total bad health populations for each age group in each ethnicity
+	ethnicity_age_detail = d3.nest().key (d) ->
+
+		return d.c_ethpuk11.description
+
+	.key (d) ->
+
+	  return d.c_age.description
+
+	.rollup (values) ->
+
+		return {
+
+			total_population: d3.sum values, (d) ->
+				return d.obs_value.value
+			bad_health: d3.sum values, (d) ->
+				if d.c_health.value is 3
+					return d.obs_value.value
+
+		}
+	.entries dataArray
+
+	# Total population
+	total_population = d3.sum dataArray, (d) ->
+		return d.obs_value.value
+
+	# Total in bad health
+	number_bad_health = d3.sum dataArray, (d) ->
+		if d.c_health.value is 3
+			return d.obs_value.value
+
+	# Total populations and no. bad health for each age group
+	total_age_detail = d3.nest().key (d) ->
+
+		return d.c_age.description
+
+	.rollup (values) ->
+
+		return {
+
+			total_population: d3.sum values, (d) ->
+				return d.obs_value.value
+			bad_health: d3.sum values, (d) ->
+				if d.c_health.value is 3
+					return d.obs_value.value
+		}
+	.entries dataArray
+
+	# Collate in total_item
+	total_item = {
+
+		population: total_population
+		number_bad_health: number_bad_health
+		percent_bad_health: number_bad_health / total_population
+		total_age_detail: total_age_detail
+
+	}
+
 	# Map to %'s
 	percentages = nested_data.map (ethnicity) ->
 
@@ -54,7 +113,7 @@ parse = (dataArray) ->
 
 		}
 
-	window.flatMaxPercsArray = percentages.map (ethnicity) ->
+	flatMaxPercsArray = percentages.map (ethnicity) ->
 
 		return {
 
@@ -84,6 +143,8 @@ parse = (dataArray) ->
 		ethnicities
 		nested_data
 		percentages
+		ethnicity_age_detail
+		total_item
 		max_perc
 		max_value
 		ages

@@ -79,10 +79,10 @@ ControlsNew = React.createClass
       >
         <img src="./images/mb_ajax_loader.gif" 
           className={ 
-            if @props.isFetching is yes then 'mb-spinner-controls' else 'hide'
+            if @props.isFetching is yes and @props.isDefault is no then 'mb-spinner-controls' else 'hide'
           }
         />
-        <div className={ if @props.isFetching is yes then 'hide' }>
+        <div className={ if @props.isFetching is yes and @props.isDefault is no then 'hide' }>
           <span className="text-center mb-control-value col-sm-5">{ @props.activeCategory }</span>
           <span className="col-sm-5 text-center mb-control-value">{ @props.activeValue }</span>
           <span 
@@ -98,7 +98,8 @@ ControlsNew = React.createClass
             <div className="btn-group">
               {
                 for category, i in @props.categories
-                  unless category.value is @props.omitted_category
+                  # unless category.value is @props.omitted_category
+                  unless $.inArray(category.value, @props.omitted_categories) isnt -1
                     <button 
                       key={i} 
                       type="button" 

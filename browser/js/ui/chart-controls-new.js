@@ -78,9 +78,9 @@ ControlsNew = React.createClass({displayName: "ControlsNew",
       "aria-controls": "collapse" + this.props.chartName
     }, React.createElement("img", {
       "src": "./images/mb_ajax_loader.gif",
-      "className": (this.props.isFetching === true ? 'mb-spinner-controls' : 'hide')
+      "className": (this.props.isFetching === true && this.props.isDefault === false ? 'mb-spinner-controls' : 'hide')
     }), React.createElement("div", {
-      "className": (this.props.isFetching === true ? 'hide' : void 0)
+      "className": (this.props.isFetching === true && this.props.isDefault === false ? 'hide' : void 0)
     }, React.createElement("span", {
       "className": "text-center mb-control-value col-sm-5"
     }, this.props.activeCategory), React.createElement("span", {
@@ -104,7 +104,7 @@ ControlsNew = React.createClass({displayName: "ControlsNew",
       results = [];
       for (i = j = 0, len = ref.length; j < len; i = ++j) {
         category = ref[i];
-        if (category.value !== this.props.omitted_category) {
+        if ($.inArray(category.value, this.props.omitted_categories) === -1) {
           results.push(React.createElement("button", {
             "key": i,
             "type": "button",
