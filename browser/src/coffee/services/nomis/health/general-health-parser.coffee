@@ -131,16 +131,53 @@ parse = (dataArray) ->
 
 		return d.obs_value.value
 
-	ethnicities = nested_data.map (eth) ->
+	# Create array of ethnicities
+	ethnicities = nested_data.map (ethnicity) ->
 
-		return eth.key
+		return ethnicity.key
 
+	breakArrayIntoGroups = (data, maxPerGroup) ->
+
+		numInGroupProcessed = 0
+		groups = [[]]
+		i = 0
+
+		while i < data.length
+
+			groups[groups.length - 1].push data[i]
+			++numInGroupProcessed
+
+			if numInGroupProcessed >= maxPerGroup and i != data.length - 1
+				groups.push []
+				numInGroupProcessed = 0
+
+			i++
+
+		return groups
+
+	# Ethnicities grouped object
+
+	ethnicities_titles = do ->
+
+		arr = ethnicities
+		arr.splice 0, 0, { title: 'White' }
+		arr.splice 5, 0, { title: 'Mixed' }
+		arr.splice 10, 0, { title: 'Asian' }
+		arr.splice 16, 0, { title: 'Black' }
+		arr.splice 20, 0, { title: 'Other' }
+
+		return arr
+
+	ethnicities_grouped = breakArrayIntoGroups ethnicities_titles, 8 
+
+	# Create ages array
 	ages = nested_data[0].values.map (age) ->
 
 		return age.key
 
 	return {
 		ethnicities
+		ethnicities_grouped
 		nested_data
 		percentages
 		ethnicity_age_detail

@@ -34,3 +34,16 @@
 	//     stroke-opacity: .8;
 	// }
 }
+#general-health-details {
+	label {
+		font-size: 12px;
+	}
+	.ethnic-checkboxes-column:nth-child(2) {
+		margin-top: 30px;
+	    border-left: 1px solid #E6E6E6;
+	    border-right: 1px solid #E6E6E6;
+	}
+	.ethnic_title {
+		margin: 0;
+	}
+}

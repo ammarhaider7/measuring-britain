@@ -4,6 +4,8 @@ objectAssign = require 'object-assign'
   RECEIVE_GEN_HEALTH_DATA
   TOGGLE_CATEGORY
   MOUSE_OVER
+  HIGHLIGHT_LINE
+  UNHIGHLIGHT_LINE
   TOGGLE_VALUE
   ERROR_RECEIVE_GEN_HEALTH_DATA
   FILTER_USED
@@ -30,7 +32,9 @@ genHealthInitState = {
   data: {}
   error: no
   updateTable: no
+  _highlights: []
   updateGenHealth: no
+  updateHighlights: no
   district_query: 'default'
   _mouseOverData: {}
   init_gen_health: no
@@ -44,11 +48,13 @@ GenHealthChart = (state = genHealthInitState, action) ->
     when TOGGLE_CATEGORY then objectAssign {}, state, {
       _category: action.category
       updateGenHealth: no
+      updateHighlights: no
       updateTable: no
       init_gen_health: no
     }
     when TOGGLE_VALUE then objectAssign {}, state, {
       _value: action.value
+      updateHighlights: no
       updateGenHealth: no
       init_gen_health: no
       updateTable: no
@@ -58,43 +64,51 @@ GenHealthChart = (state = genHealthInitState, action) ->
       updateGenHealth: no
       init_gen_health: no
       updateTable: no
+      updateHighlights: no
     }
     when CONTROLS_CLOSED then objectAssign {}, state, {
       isControlsOpen: no
       updateGenHealth: no
       init_gen_health: no
       updateTable: no
+      updateHighlights: no
     }
     when DISTRICT_SEARCH then objectAssign {}, state, {
       district_query: action.query
       updateGenHealth: no
       init_gen_health: no
       updateTable: no
+      updateHighlights: no
     }
     when FILTER_USED then objectAssign {}, state, {
       isDefault: no
       updateGenHealth: no
       init_gen_health: no
       updateTable: no
+      updateHighlights: no
     }
     when INIT_GEN_HEALTH then objectAssign {}, state, {
       init_gen_health: yes
       updateTable: no
+      updateHighlights: no
     }
     when INIT_GEN_HEALTH_OFF then objectAssign {}, state, {
       init_gen_health: no
+      updateHighlights: no
       updateTable: no
     }
     when INIT_DONE then objectAssign {}, state, {
       init_done: yes
       updateGenHealth: no
       updateTable: no
+      updateHighlights: no
     }
     when REQUEST_GEN_HEALTH_DATA then objectAssign {}, state, {
       isFetching: yes
       updateGenHealth: no
       updateTable: no
       init_gen_health: no
+      updateHighlights: no
     }
     when RECEIVE_GEN_HEALTH_DATA then objectAssign {}, state, {
       isFetching: no
@@ -104,6 +118,7 @@ GenHealthChart = (state = genHealthInitState, action) ->
       updateGenHealth: yes
       init_gen_health: no
       updateTable: no
+      updateHighlights: no
     }
     when ERROR_RECEIVE_GEN_HEALTH_DATA then objectAssign {}, state, {
       isFetching: no
@@ -111,12 +126,30 @@ GenHealthChart = (state = genHealthInitState, action) ->
       errorMessage: action.error
       init_gen_health: no
       updateTable: no
+      updateHighlights: no
     }  
     when MOUSE_OVER then objectAssign {}, state, {
       updateGenHealth: no
       _mouseOverData: action.mouseOverData
       init_gen_health: no
       updateTable: yes
+      updateHighlights: no
+    }
+    when HIGHLIGHT_LINE then objectAssign {}, state, {
+      updateGenHealth: no
+      # using concat instead of push so as not to mutate the state
+      _highlights: state._highlights.concat [action.ethnicity]
+      init_gen_health: no
+      updateTable: no
+      updateHighlights: yes
+    }
+    when UNHIGHLIGHT_LINE then objectAssign {}, state, {
+      updateGenHealth: no
+      # using slice instead of splice so as not to mutate the state
+      _highlights: state._highlights.slice(0, action.index).concat(state._highlights.slice(action.index + 1))
+      init_gen_health: no
+      updateTable: no
+      updateHighlights: yes
     }
     else state
 

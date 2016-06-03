@@ -2,7 +2,41 @@ format = d3.format '.3s'
 percFormat = d3.format ',.2%'
 
 GenHealthDetailComponent = React.createClass 
+
+  highlight: (ethnicity) ->
+
+    @props.onHighlightLine ethnicity
+
+  unHighlight: (ethnicity, index) ->
+
+    @props.onUnHighlightLine ethnicity, index
+
+  handleChange: (event) ->
+    
+    $el = $(event.target)
+    value = event.target.value
+    if $el.hasClass('highlight') is yes
+      $el.removeClass 'highlight'
+      arr = @props._highlights
+      index = arr.indexOf value
+      @unHighlight value, index
+    else 
+      $el.addClass 'highlight'
+      @highlight value
+
+  trimEthnicity: (ethnicity_string) ->
+
+      if ethnicity_string.indexOf('Gypsy') isnt -1
+        trimmedStr = 'Gypsy'
+      else if ethnicity_string.indexOf('English') isnt -1
+        trimmedStr = 'British'
+      else  
+        str = ethnicity_string
+        trimmedStr = str.substr(str.indexOf(':') + 2, str.length)
+      return trimmedStr
+
   render: ->
+
     <div>
       <table className="table table-condensed table-hover table-striped mb-oxygen">
         <tbody>
@@ -16,6 +50,7 @@ GenHealthDetailComponent = React.createClass
           </tr>###}
         </tbody>
       </table>
+      {###
       <table className="table table-condensed table-hover table-striped mb-oxygen">
         <thead>
             <tr>
@@ -105,7 +140,36 @@ GenHealthDetailComponent = React.createClass
             <td><strong>{ if @props.data.total_item? then percFormat @props.data.total_item.percent_bad_health else '' }</strong></td>   
           </tr>
         </tbody>
-      </table>
+      </table>###}
+      <div className="mb-oxygen">
+        <h4><strong>Highlight ethnic groups</strong></h4>
+        <div className="mb-grey-box clearfix">
+        {
+          if @props.data.ethnicities?
+            for group, i in @props.data.ethnicities_grouped
+              <div key={i} className="col-sm-4 mt-small ethnic-checkboxes-column">
+                {
+                  for ethnicity, j in group
+                    if typeof ethnicity is 'object'
+                      <div key={ethnicity.title}>
+                        <label className="ethnic_title"><strong>{ ethnicity.title }</strong></label>
+                      </div>
+                    else
+                      <div className="checkbox" key={ethnicity}>
+                        <label>
+                          <input 
+                            type="checkbox" 
+                            value={ ethnicity } 
+                            onChange={ @handleChange }
+                          />
+                          { @trimEthnicity ethnicity }
+                        </label>
+                      </div>
+                }
+              </div>
+        }
+        </div>
+      </div>
     </div>
 
 module.exports = GenHealthDetailComponent

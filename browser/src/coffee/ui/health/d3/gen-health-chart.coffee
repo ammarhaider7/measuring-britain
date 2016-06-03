@@ -114,8 +114,8 @@ drawGenHealthChart = (options) ->
 					trimmedStr = 'British'
 				else	
 					str = d.key
-					trimmedStr = str.substr(str.indexOf(':') + 2, str.length);
-				return trimmedStr;
+					trimmedStr = str.substr(str.indexOf(':') + 2, str.length)
+				return trimmedStr
 			.transition()
 			.duration 1750
 			.attr 'opacity', 0.1
@@ -188,9 +188,6 @@ drawGenHealthChart = (options) ->
 			.duration 1000
 			.delay 500
 			.call yAxis
-
-		# reset detail content
-		# detail_text_value.text format data.sum
 
 		# Add mouse over handler
 		attachHoverHandlers()

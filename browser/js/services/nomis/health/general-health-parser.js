@@ -2,7 +2,7 @@
 var parse;
 
 parse = function(dataArray) {
-  var ages, ethnicities, ethnicity_age_detail, flatMaxPercsArray, max_perc, max_value, nested_data, number_bad_health, percentages, total_age_detail, total_item, total_population;
+  var ages, breakArrayIntoGroups, ethnicities, ethnicities_grouped, ethnicities_titles, ethnicity_age_detail, flatMaxPercsArray, max_perc, max_value, nested_data, number_bad_health, percentages, total_age_detail, total_item, total_population;
   nested_data = d3.nest().key(function(d) {
     return d.c_ethpuk11.description;
   }).key(function(d) {
@@ -101,14 +101,52 @@ parse = function(dataArray) {
   max_value = d3.max(dataArray, function(d) {
     return d.obs_value.value;
   });
-  ethnicities = nested_data.map(function(eth) {
-    return eth.key;
+  ethnicities = nested_data.map(function(ethnicity) {
+    return ethnicity.key;
   });
+  breakArrayIntoGroups = function(data, maxPerGroup) {
+    var groups, i, numInGroupProcessed;
+    numInGroupProcessed = 0;
+    groups = [[]];
+    i = 0;
+    while (i < data.length) {
+      groups[groups.length - 1].push(data[i]);
+      ++numInGroupProcessed;
+      if (numInGroupProcessed >= maxPerGroup && i !== data.length - 1) {
+        groups.push([]);
+        numInGroupProcessed = 0;
+      }
+      i++;
+    }
+    return groups;
+  };
+  ethnicities_titles = (function() {
+    var arr;
+    arr = ethnicities;
+    arr.splice(0, 0, {
+      title: 'White'
+    });
+    arr.splice(5, 0, {
+      title: 'Mixed'
+    });
+    arr.splice(10, 0, {
+      title: 'Asian'
+    });
+    arr.splice(16, 0, {
+      title: 'Black'
+    });
+    arr.splice(20, 0, {
+      title: 'Other'
+    });
+    return arr;
+  })();
+  ethnicities_grouped = breakArrayIntoGroups(ethnicities_titles, 8);
   ages = nested_data[0].values.map(function(age) {
     return age.key;
   });
   return {
     ethnicities: ethnicities,
+    ethnicities_grouped: ethnicities_grouped,
     nested_data: nested_data,
     percentages: percentages,
     ethnicity_age_detail: ethnicity_age_detail,

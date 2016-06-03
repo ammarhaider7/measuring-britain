@@ -22,7 +22,7 @@ GenHealthChart = React.createClass({displayName: "GenHealthChart",
     return this.props.fetchGenHealthData(null);
   },
   componentDidUpdate: function() {
-    var draw;
+    var draw, highlights, svg;
     if (this.props.updateGenHealth === true) {
       draw = genHealthChart({
         container: this.refs.genHealthSvg,
@@ -33,10 +33,28 @@ GenHealthChart = React.createClass({displayName: "GenHealthChart",
         onMouseOver: this.props.onMouseOver
       });
       if (this.props.isDefault === true) {
-        return draw.init();
+        draw.init();
       } else {
-        return draw.update();
+        draw.update();
       }
+    }
+    if (this.props.updateHighlights === true) {
+      highlights = this.props._highlights;
+      svg = d3.select('.gen-health-svg');
+      svg.selectAll('.line').attr('opacity', function(d) {
+        if (!(highlights.indexOf(d.key) > -1)) {
+          return 0.1;
+        } else {
+          return 1;
+        }
+      });
+      return svg.selectAll('.label').attr('opacity', function(d) {
+        if (!(highlights.indexOf(d.key) > -1)) {
+          return 0.05;
+        } else {
+          return 1;
+        }
+      });
     }
   },
   render: function() {
@@ -55,7 +73,7 @@ GenHealthChart = React.createClass({displayName: "GenHealthChart",
       "className": "gen-health-svg mb-oxygen",
       "style": {
         width: '100%',
-        height: '465px'
+        height: '485px'
       },
       "ref": "genHealthSvg"
     }, React.createElement("g", {

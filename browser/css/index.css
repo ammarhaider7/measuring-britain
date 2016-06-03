@@ -6240,3 +6240,14 @@ nav.hidden-xs {
   fill: none;
   stroke: steelblue;
   stroke-width: 2.25px; }
+
+#general-health-details label {
+  font-size: 12px; }
+
+#general-health-details .ethnic-checkboxes-column:nth-child(2) {
+  margin-top: 30px;
+  border-left: 1px solid #E6E6E6;
+  border-right: 1px solid #E6E6E6; }
+
+#general-health-details .ethnic_title {
+  margin: 0; }

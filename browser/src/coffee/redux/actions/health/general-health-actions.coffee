@@ -5,6 +5,8 @@ REQUEST_GEN_HEALTH_DATA = "REQUEST_GEN_HEALTH_DATA"
 RECEIVE_GEN_HEALTH_DATA = "RECEIVE_GEN_HEALTH_DATA"
 TOGGLE_CATEGORY = "H_TOGGLE_CATEGORY"
 MOUSE_OVER = "H_MOUSE_OVER"
+HIGHLIGHT_LINE = "HIGHLIGHT_LINE"
+UNHIGHLIGHT_LINE = "UNHIGHLIGHT_LINE"
 TOGGLE_VALUE = "H_TOGGLE_VALUE"
 ERROR_RECEIVE_GEN_HEALTH_DATA = "ERROR_RECEIVE_GEN_HEALTH_DATA"
 FILTER_USED = "H_FILTER_USED"
@@ -49,6 +51,18 @@ mouseOver = (mouseOverData) ->
 	{
 		type: MOUSE_OVER
 		mouseOverData: mouseOverData 
+	}
+
+highlightLine = (ethnicity) ->
+	{
+		type: HIGHLIGHT_LINE
+		ethnicity: ethnicity
+	}
+unHighlightLine = (ethnicity, index) ->
+	{
+		type: UNHIGHLIGHT_LINE
+		ethnicity: ethnicity
+		index: index
 	}
 
 initGenHealth = () ->
@@ -117,6 +131,8 @@ module.exports = {
 	RECEIVE_GEN_HEALTH_DATA
 	TOGGLE_CATEGORY
 	MOUSE_OVER
+	HIGHLIGHT_LINE
+	UNHIGHLIGHT_LINE
 	TOGGLE_VALUE
 	ERROR_RECEIVE_GEN_HEALTH_DATA
 	FILTER_USED
@@ -130,6 +146,8 @@ module.exports = {
 	initGenHealth
 	initGenHealthOff
 	mouseOver
+	highlightLine
+	unHighlightLine
 	fetchGenHealthData
 	districtSearch
 	requestGenHealthData

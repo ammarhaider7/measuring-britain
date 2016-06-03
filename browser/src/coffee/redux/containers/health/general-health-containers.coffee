@@ -1,6 +1,8 @@
 { connect } = require 'react-redux'
 { mouseOver
   toggleCategory
+  highlightLine
+  unHighlightLine
   toggleValue
   requestGenHealthData
   fetchGenHealthData
@@ -19,6 +21,7 @@ mapStateToProps = (state) ->
 	chartName: state.genHealthChart.chartName
 	_category: state.genHealthChart._category
 	_value: state.genHealthChart._value	
+	_highlights: state.genHealthChart._highlights
 	data: state.genHealthChart.data
 	isFetching: state.genHealthChart.isFetching
 	activeCategory: state.genHealthChart.activeCategory
@@ -30,6 +33,7 @@ mapStateToProps = (state) ->
 	district_query: state.genHealthChart.district_query
 	init_gen_health: state.genHealthChart.init_gen_health
 	init_done: state.genHealthChart.init_done
+	updateHighlights: state.genHealthChart.updateHighlights
 
 mapStateToPropsDetail = (state) ->
 
@@ -40,6 +44,14 @@ mapStateToPropsDetail = (state) ->
 	isDefault: state.genHealthChart.isDefault
 	mouseOverData: state.genHealthChart._mouseOverData
 	updateTable: state.genHealthChart.updateTable
+	_highlights: state.genHealthChart._highlights
+
+mapDispatchToPropsDetail = (dispatch) ->
+
+	onHighlightLine: (ethnicity) ->
+		dispatch highlightLine ethnicity
+	onUnHighlightLine: (ethnicity, index) ->
+		dispatch unHighlightLine ethnicity, index
 
 mapDispatchToProps = (dispatch) ->
 
@@ -70,7 +82,8 @@ GenHealthChart = connect(
 )(GenHealthChartComponent)
 
 GenHealthChartDetail = connect(
-	mapStateToPropsDetail
+	mapStateToPropsDetail,
+	mapDispatchToPropsDetail
 )(GenHealthChartDetailComponent)
 
 module.exports = {
