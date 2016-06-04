@@ -145,7 +145,10 @@ GenHealthDetailComponent = React.createClass({displayName: "GenHealthDetailCompo
        */
     })()), React.createElement("div", {
       "className": "mb-oxygen"
-    }, React.createElement("h4", null, React.createElement("strong", null, "Highlight ethnic groups")), React.createElement("div", {
+    }, React.createElement("img", {
+      "src": "./images/mb_ajax_loader.gif",
+      "className": (this.props.isFetching === true && this.props.isDefault === true ? 'mb-spinner' : 'hide')
+    }), React.createElement("h4", null, React.createElement("strong", null, "Highlight ethnicities")), React.createElement("div", {
       "className": "mb-grey-box clearfix"
     }, ((function() {
       var k, len, ref, results;

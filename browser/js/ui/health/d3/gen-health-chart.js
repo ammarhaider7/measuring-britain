@@ -86,13 +86,12 @@ drawGenHealthChart = function(options) {
       width: 0,
       x: chart_width
     }).remove();
-    title_group.append('text').attr({
+    return title_group.append('text').attr({
       x: 0,
       y: margin.p,
       opacity: 0,
       'font-size': '12px'
     }).text('Self-proclaimed bad or very bad health').transition().duration(1500).attr('opacity', 1);
-    return attachHoverHandlers();
   };
   my.update = function() {
     var labels, main_group_lines, svg, x_axis_group, y_axis_group;
@@ -110,8 +109,7 @@ drawGenHealthChart = function(options) {
       }
     });
     x_axis_group.transition().duration(1000).delay(500).call(xAxis);
-    y_axis_group.transition().duration(1000).delay(500).call(yAxis);
-    return attachHoverHandlers();
+    return y_axis_group.transition().duration(1000).delay(500).call(yAxis);
   };
   attachHoverHandlers = function() {
     var labels, main_group_lines, svg;

@@ -30,7 +30,8 @@ GenHealthChart = React.createClass({displayName: "GenHealthChart",
         data: this.props.data,
         activeCategory: this.props.activeCategory,
         activeValue: this.props.activeValue,
-        onMouseOver: this.props.onMouseOver
+        onMouseOver: this.props.onMouseOver,
+        highlights: this.props._highlights
       });
       if (this.props.isDefault === true) {
         draw.init();
@@ -41,15 +42,20 @@ GenHealthChart = React.createClass({displayName: "GenHealthChart",
     if (this.props.updateHighlights === true) {
       highlights = this.props._highlights;
       svg = d3.select('.gen-health-svg');
-      svg.selectAll('.line').attr('opacity', function(d) {
-        if (!(highlights.indexOf(d.key) > -1)) {
+      svg.selectAll('.line').transition().duration(250).attr('opacity', function(d) {
+        if (highlights.length === 0) {
+          return 1;
+        } else if (highlights.indexOf(d.key) === -1) {
           return 0.1;
         } else {
           return 1;
         }
       });
-      return svg.selectAll('.label').attr('opacity', function(d) {
-        if (!(highlights.indexOf(d.key) > -1)) {
+      return svg.selectAll('.label').transition().duration(250).attr('opacity', function(d) {
+        if (highlights.length === 0) {
+          return 0.05;
+        }
+        if (highlights.indexOf(d.key) === -1) {
           return 0.05;
         } else {
           return 1;

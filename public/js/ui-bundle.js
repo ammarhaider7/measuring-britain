@@ -5197,13 +5197,12 @@ drawGenHealthChart = function(options) {
       width: 0,
       x: chart_width
     }).remove();
-    title_group.append('text').attr({
+    return title_group.append('text').attr({
       x: 0,
       y: margin.p,
       opacity: 0,
       'font-size': '12px'
     }).text('Self-proclaimed bad or very bad health').transition().duration(1500).attr('opacity', 1);
-    return attachHoverHandlers();
   };
   my.update = function() {
     var labels, main_group_lines, svg, x_axis_group, y_axis_group;
@@ -5221,8 +5220,7 @@ drawGenHealthChart = function(options) {
       }
     });
     x_axis_group.transition().duration(1000).delay(500).call(xAxis);
-    y_axis_group.transition().duration(1000).delay(500).call(yAxis);
-    return attachHoverHandlers();
+    return y_axis_group.transition().duration(1000).delay(500).call(yAxis);
   };
   attachHoverHandlers = function() {
     var labels, main_group_lines, svg;
@@ -5305,7 +5303,8 @@ GenHealthChart = React.createClass({displayName: "GenHealthChart",
         data: this.props.data,
         activeCategory: this.props.activeCategory,
         activeValue: this.props.activeValue,
-        onMouseOver: this.props.onMouseOver
+        onMouseOver: this.props.onMouseOver,
+        highlights: this.props._highlights
       });
       if (this.props.isDefault === true) {
         draw.init();
@@ -5316,15 +5315,20 @@ GenHealthChart = React.createClass({displayName: "GenHealthChart",
     if (this.props.updateHighlights === true) {
       highlights = this.props._highlights;
       svg = d3.select('.gen-health-svg');
-      svg.selectAll('.line').attr('opacity', function(d) {
-        if (!(highlights.indexOf(d.key) > -1)) {
+      svg.selectAll('.line').transition().duration(250).attr('opacity', function(d) {
+        if (highlights.length === 0) {
+          return 1;
+        } else if (highlights.indexOf(d.key) === -1) {
           return 0.1;
         } else {
           return 1;
         }
       });
-      return svg.selectAll('.label').attr('opacity', function(d) {
-        if (!(highlights.indexOf(d.key) > -1)) {
+      return svg.selectAll('.label').transition().duration(250).attr('opacity', function(d) {
+        if (highlights.length === 0) {
+          return 0.05;
+        }
+        if (highlights.indexOf(d.key) === -1) {
           return 0.05;
         } else {
           return 1;
@@ -5515,7 +5519,10 @@ GenHealthDetailComponent = React.createClass({displayName: "GenHealthDetailCompo
        */
     })()), React.createElement("div", {
       "className": "mb-oxygen"
-    }, React.createElement("h4", null, React.createElement("strong", null, "Highlight ethnic groups")), React.createElement("div", {
+    }, React.createElement("img", {
+      "src": "./images/mb_ajax_loader.gif",
+      "className": (this.props.isFetching === true && this.props.isDefault === true ? 'mb-spinner' : 'hide')
+    }), React.createElement("h4", null, React.createElement("strong", null, "Highlight ethnicities")), React.createElement("div", {
       "className": "mb-grey-box clearfix"
     }, ((function() {
       var k, len, ref, results;

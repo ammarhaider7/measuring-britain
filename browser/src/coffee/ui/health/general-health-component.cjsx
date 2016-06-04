@@ -30,6 +30,7 @@ GenHealthChart = React.createClass
         activeCategory: @props.activeCategory
         activeValue: @props.activeValue
         onMouseOver: @props.onMouseOver
+        highlights: @props._highlights
       }
 
       if @props.isDefault is yes then draw.init() else draw.update()
@@ -41,14 +42,22 @@ GenHealthChart = React.createClass
 
       svg = d3.select '.gen-health-svg'
       svg.selectAll '.line'
+        .transition()
+        .duration 250
         .attr 'opacity', (d) ->
-          unless highlights.indexOf(d.key) > -1
+          if highlights.length is 0
+            return 1
+          else if highlights.indexOf(d.key) is -1
             return 0.1
           else
             return 1
       svg.selectAll '.label'
+        .transition()
+        .duration 250
         .attr 'opacity', (d) ->
-          unless highlights.indexOf(d.key) > -1
+          if highlights.length is 0
+            return 0.05
+          if highlights.indexOf(d.key) is -1
             return 0.05
           else
             return 1

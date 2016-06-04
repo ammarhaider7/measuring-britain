@@ -151,7 +151,7 @@ drawGenHealthChart = (options) ->
 			.attr 'opacity', 1
 
 		# Add mouse over handler
-		attachHoverHandlers()
+		# attachHoverHandlers()
 
 	my.update = ->
 
@@ -190,7 +190,7 @@ drawGenHealthChart = (options) ->
 			.call yAxis
 
 		# Add mouse over handler
-		attachHoverHandlers()
+		# attachHoverHandlers()
 
 	attachHoverHandlers = ->
 
@@ -201,7 +201,7 @@ drawGenHealthChart = (options) ->
 
 		main_group_lines.on 'mouseover', (d) ->
 
-			# set opacity of arcs
+			# set opacity of paths
 			_d = d
 			# onMouseOver d
 
