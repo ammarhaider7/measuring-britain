@@ -142,13 +142,13 @@ GenHealthDetailComponent = React.createClass
         </tbody>
       </table>###}
       <div className="mb-oxygen">
-        <img src="./images/mb_ajax_loader.gif" 
-          className={ 
-            if @props.isFetching is yes and @props.isDefault is yes then 'mb-spinner' else 'hide' 
-          }
-        />
         <h4><strong>Highlight ethnicities</strong></h4>
         <div className="mb-grey-box clearfix">
+          <img src="./images/mb_ajax_loader.gif" 
+            className={ 
+              if @props.isFetching is yes and @props.isDefault is yes then 'mb-spinner' else 'hide' 
+            }
+          />
         {
           if @props.data.ethnicities?
             for group, i in @props.data.ethnicities_grouped
