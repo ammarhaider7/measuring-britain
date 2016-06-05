@@ -5113,8 +5113,33 @@ module.exports = ReligiousSection;
 var drawGenHealthChart;
 
 drawGenHealthChart = function(options) {
-  var activeCategory, activeValue, ages, attachHoverHandlers, chart_height, chart_width, colour, container, d3_array, data, ethnic_groups, format, height, isDefault, line, margin, max_perc, max_value, my, onInitDone, onMouseOver, percFormat, ref, ref1, width, x, xAxis, y, yAxis;
-  container = options.container, data = options.data, isDefault = options.isDefault, onMouseOver = options.onMouseOver, activeCategory = options.activeCategory, activeValue = options.activeValue, onInitDone = options.onInitDone;
+  var activeCategory, activeValue, ages, attachHoverHandlers, chart_height, chart_width, colour, container, d3_array, data, ethnic_groups, format, height, highlights, isDefault, line, margin, max_perc, max_value, my, onInitDone, onMouseOver, percFormat, ref, ref1, updateHighlights, width, x, xAxis, y, yAxis;
+  container = options.container, data = options.data, isDefault = options.isDefault, onMouseOver = options.onMouseOver, activeCategory = options.activeCategory, activeValue = options.activeValue, onInitDone = options.onInitDone, highlights = options.highlights, updateHighlights = options.updateHighlights;
+  if (updateHighlights === true) {
+    return (function() {
+      var svg;
+      svg = d3.select('.gen-health-svg');
+      svg.selectAll('.line').transition().duration(250).attr('opacity', function(d) {
+        if (highlights.length === 0) {
+          return 1;
+        } else if (highlights.indexOf(d.key) === -1) {
+          return 0.1;
+        } else {
+          return 1;
+        }
+      });
+      return svg.selectAll('.label').transition().duration(250).attr('opacity', function(d) {
+        if (highlights.length === 0) {
+          return 0.05;
+        }
+        if (highlights.indexOf(d.key) === -1) {
+          return 0.05;
+        } else {
+          return 1;
+        }
+      });
+    })();
+  }
   my = {};
   width = (ref = $(container).width()) != null ? ref : 750;
   height = (ref1 = $(container).height()) != null ? ref1 : 500;
@@ -5162,7 +5187,8 @@ drawGenHealthChart = function(options) {
       "class": 'line',
       d: function(d) {
         return line(d.values);
-      }
+      },
+      opacity: 1
     }).style('stroke', function(d) {
       return colour(d.key);
     });
@@ -5230,6 +5256,8 @@ drawGenHealthChart = function(options) {
     return main_group_lines.on('mouseover', function(d) {
       var _d;
       _d = d;
+      console.log('highlights');
+      console.log(highlights);
       main_group_lines.attr('opacity', function(d) {
         if (_d !== d) {
           return 0.1;
@@ -5295,7 +5323,7 @@ GenHealthChart = React.createClass({displayName: "GenHealthChart",
     return this.props.fetchGenHealthData(null);
   },
   componentDidUpdate: function() {
-    var draw, highlights, svg;
+    var draw;
     if (this.props.updateGenHealth === true) {
       draw = genHealthChart({
         container: this.refs.genHealthSvg,
@@ -5304,7 +5332,8 @@ GenHealthChart = React.createClass({displayName: "GenHealthChart",
         activeCategory: this.props.activeCategory,
         activeValue: this.props.activeValue,
         onMouseOver: this.props.onMouseOver,
-        highlights: this.props._highlights
+        highlights: this.props._highlights,
+        updateHighlights: this.props.updateHighlights
       });
       if (this.props.isDefault === true) {
         draw.init();
@@ -5313,26 +5342,9 @@ GenHealthChart = React.createClass({displayName: "GenHealthChart",
       }
     }
     if (this.props.updateHighlights === true) {
-      highlights = this.props._highlights;
-      svg = d3.select('.gen-health-svg');
-      svg.selectAll('.line').transition().duration(250).attr('opacity', function(d) {
-        if (highlights.length === 0) {
-          return 1;
-        } else if (highlights.indexOf(d.key) === -1) {
-          return 0.1;
-        } else {
-          return 1;
-        }
-      });
-      return svg.selectAll('.label').transition().duration(250).attr('opacity', function(d) {
-        if (highlights.length === 0) {
-          return 0.05;
-        }
-        if (highlights.indexOf(d.key) === -1) {
-          return 0.05;
-        } else {
-          return 1;
-        }
+      return genHealthChart({
+        highlights: this.props._highlights,
+        updateHighlights: this.props.updateHighlights
       });
     }
   },

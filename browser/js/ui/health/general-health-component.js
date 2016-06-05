@@ -22,7 +22,7 @@ GenHealthChart = React.createClass({displayName: "GenHealthChart",
     return this.props.fetchGenHealthData(null);
   },
   componentDidUpdate: function() {
-    var draw, highlights, svg;
+    var draw;
     if (this.props.updateGenHealth === true) {
       draw = genHealthChart({
         container: this.refs.genHealthSvg,
@@ -31,7 +31,8 @@ GenHealthChart = React.createClass({displayName: "GenHealthChart",
         activeCategory: this.props.activeCategory,
         activeValue: this.props.activeValue,
         onMouseOver: this.props.onMouseOver,
-        highlights: this.props._highlights
+        highlights: this.props._highlights,
+        updateHighlights: this.props.updateHighlights
       });
       if (this.props.isDefault === true) {
         draw.init();
@@ -40,26 +41,9 @@ GenHealthChart = React.createClass({displayName: "GenHealthChart",
       }
     }
     if (this.props.updateHighlights === true) {
-      highlights = this.props._highlights;
-      svg = d3.select('.gen-health-svg');
-      svg.selectAll('.line').transition().duration(250).attr('opacity', function(d) {
-        if (highlights.length === 0) {
-          return 1;
-        } else if (highlights.indexOf(d.key) === -1) {
-          return 0.1;
-        } else {
-          return 1;
-        }
-      });
-      return svg.selectAll('.label').transition().duration(250).attr('opacity', function(d) {
-        if (highlights.length === 0) {
-          return 0.05;
-        }
-        if (highlights.indexOf(d.key) === -1) {
-          return 0.05;
-        } else {
-          return 1;
-        }
+      return genHealthChart({
+        highlights: this.props._highlights,
+        updateHighlights: this.props.updateHighlights
       });
     }
   },

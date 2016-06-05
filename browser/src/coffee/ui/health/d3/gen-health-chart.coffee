@@ -2,8 +2,37 @@
 
 drawGenHealthChart = (options) ->
 
-	{ container, data, isDefault, onMouseOver, activeCategory, activeValue, onInitDone } = options
+	{ container, data, isDefault, onMouseOver, activeCategory, activeValue, onInitDone, highlights, updateHighlights } = options
 
+	# First check if it is a trivial highlights event
+	if updateHighlights is yes
+
+		return do ->
+
+			svg = d3.select '.gen-health-svg'
+			svg.selectAll '.line'
+				.transition()
+				.duration 250
+				.attr 'opacity', (d) ->
+					if highlights.length is 0
+						return 1
+					else if highlights.indexOf(d.key) is -1
+						return 0.1
+					else
+						return 1
+
+			svg.selectAll '.label'
+				.transition()
+				.duration 250
+				.attr 'opacity', (d) ->
+					if highlights.length is 0
+						return 0.05
+					if highlights.indexOf(d.key) is -1
+						return 0.05
+					else
+						return 1
+
+	# Actual chart code
 	my = {}
 
 	width = $(container).width() ? 750
@@ -94,6 +123,7 @@ drawGenHealthChart = (options) ->
 				class: 'line'
 				d: (d) ->
 					return line d.values
+				opacity: 1
 			}
 			.style 'stroke', (d) ->
 				return colour d.key
@@ -204,6 +234,8 @@ drawGenHealthChart = (options) ->
 			# set opacity of paths
 			_d = d
 			# onMouseOver d
+			console.log 'highlights'
+			console.log highlights
 
 			main_group_lines.attr 'opacity', (d) ->
 

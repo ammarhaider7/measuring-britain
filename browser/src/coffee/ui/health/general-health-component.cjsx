@@ -31,6 +31,7 @@ GenHealthChart = React.createClass
         activeValue: @props.activeValue
         onMouseOver: @props.onMouseOver
         highlights: @props._highlights
+        updateHighlights: @props.updateHighlights
       }
 
       if @props.isDefault is yes then draw.init() else draw.update()
@@ -38,29 +39,35 @@ GenHealthChart = React.createClass
     # Update highlights only
     if @props.updateHighlights is yes
 
-      highlights = @props._highlights
+      genHealthChart {
+        highlights: @props._highlights
+        updateHighlights: @props.updateHighlights
+      }
 
-      svg = d3.select '.gen-health-svg'
-      svg.selectAll '.line'
-        .transition()
-        .duration 250
-        .attr 'opacity', (d) ->
-          if highlights.length is 0
-            return 1
-          else if highlights.indexOf(d.key) is -1
-            return 0.1
-          else
-            return 1
-      svg.selectAll '.label'
-        .transition()
-        .duration 250
-        .attr 'opacity', (d) ->
-          if highlights.length is 0
-            return 0.05
-          if highlights.indexOf(d.key) is -1
-            return 0.05
-          else
-            return 1
+      # highlights = @props._highlights
+
+      # svg = d3.select '.gen-health-svg'
+      # svg.selectAll '.line'
+      #   .transition()
+      #   .duration 250
+      #   .attr 'opacity', (d) ->
+      #     if highlights.length is 0
+      #       return 1
+      #     else if highlights.indexOf(d.key) is -1
+      #       return 0.1
+      #     else
+      #       return 1
+
+      # svg.selectAll '.label'
+      #   .transition()
+      #   .duration 250
+      #   .attr 'opacity', (d) ->
+      #     if highlights.length is 0
+      #       return 0.05
+      #     if highlights.indexOf(d.key) is -1
+      #       return 0.05
+      #     else
+      #       return 1
 
   render: ->
 
