@@ -1,3 +1,9 @@
+#general-health-component{
+	.mb-spinner {
+	    margin: 150px auto 0;
+	    display: block;
+	}
+}
 .gen-health-svg {
 	.axis {
 	  text {
@@ -24,17 +30,19 @@
 	  stroke: steelblue;
 	  stroke-width: 1.75px;
 	}
-
-	// .tick line {
-	// 	stroke: #E9E9E9;
-	// 	stroke-opacity: .8;
+	// .y .tick:nth-child(1) line {
+	// 	display: none;
 	// }
-	// .tick:nth-child(1) line {
-	//     stroke: #333;
-	//     stroke-opacity: .8;
+	// .y .tick line {
+	// 	stroke-dasharray: 3, 3;
+ //    	stroke: #EEE;
 	// }
 }
 #general-health-details {
+	.mb-gender-toggles-label {
+		font-weight: bold;
+  		line-height: 30px;
+	}
 	label {
 		font-size: 12px;
 	}

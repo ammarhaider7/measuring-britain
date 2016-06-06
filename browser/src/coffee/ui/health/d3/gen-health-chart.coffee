@@ -1,5 +1,3 @@
-# d3 = require 'd3'
-
 drawGenHealthChart = (options) ->
 
 	{ container, data, isDefault, onMouseOver, activeCategory, activeValue, onInitDone, highlights, updateHighlights } = options
@@ -10,7 +8,11 @@ drawGenHealthChart = (options) ->
 		return do ->
 
 			svg = d3.select '.gen-health-svg'
-			svg.selectAll '.line'
+			groups = svg.selectAll '.ethnicity'
+			lines = svg.selectAll '.line'
+			labels = svg.selectAll '.label'
+
+			lines
 				.transition()
 				.duration 250
 				.attr 'opacity', (d) ->
@@ -21,7 +23,9 @@ drawGenHealthChart = (options) ->
 					else
 						return 1
 
-			svg.selectAll '.label'
+
+
+			labels
 				.transition()
 				.duration 250
 				.attr 'opacity', (d) ->
@@ -71,7 +75,7 @@ drawGenHealthChart = (options) ->
 	yAxis = d3.svg.axis()
 		.scale y
 		.tickFormat percFormat
-		.ticks 6
+		.ticks 10
 		# .tickSize -chart_width
 		.orient 'left'
 

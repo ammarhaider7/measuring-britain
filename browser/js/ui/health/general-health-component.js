@@ -51,7 +51,7 @@ GenHealthChart = React.createClass({displayName: "GenHealthChart",
     return React.createElement("div", {
       "className": "col-xs-12 col-sm-12 mb-no-padding"
     }, React.createElement("div", {
-      "className": "rel-bars mt-medium"
+      "className": "mt-medium"
     }, React.createElement(ControlsNew, React.__spread({}, this.props, {
       "omitted_categories": ["ethnicities", "districts", "religions"],
       "categories": category_options,

@@ -34,11 +34,13 @@ makeGenHealthRequest = function(options) {
   };
   queryStringArr = [];
   generateDataObject = function(o) {
-    var catCode, catLabel, valCode, valLabel;
+    var catCode, catLabel, sexCode, sexLabel, valCode, valLabel;
     catCode = o.category.value;
     catLabel = o.category.label;
     valLabel = o.value.label;
     valCode = o.value.value;
+    sexLabel = o.sex.label;
+    sexCode = o.sex.value;
     return {
       queryStringOps: {
         date: "date=latest",
@@ -46,7 +48,15 @@ makeGenHealthRequest = function(options) {
         c_health: "c_health=1...3",
         c_age: "c_age=1...6",
         measures: "measures=20100",
-        c_sex: "c_sex=0",
+        c_sex: (function() {
+          if (sexLabel === 'Female') {
+            return "c_sex=2";
+          } else if (sexLabel === 'Male') {
+            return "c_sex=1";
+          } else {
+            return "c_sex=0";
+          }
+        })(),
         geography: (function() {
           if (catLabel.indexOf('Geography') !== -1) {
             return "geography=" + valCode;

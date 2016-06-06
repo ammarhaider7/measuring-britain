@@ -6,6 +6,22 @@ format = d3.format('.3s');
 percFormat = d3.format(',.2%');
 
 GenHealthDetailComponent = React.createClass({displayName: "GenHealthDetailComponent",
+  onToggleSex: function(e) {
+    var el, sexLabel, sexVal;
+    el = e.target;
+    sexVal = el.getAttribute('data-value');
+    sexLabel = el.innerHTML;
+    this.props.onToggleSex(sexLabel, sexVal);
+    return this.props.fetchGenHealthData({
+      isDefault: false,
+      category: this.props._category,
+      value: this.props._value,
+      sex: {
+        label: sexLabel,
+        value: sexVal
+      }
+    });
+  },
   highlight: function(ethnicity) {
     return this.props.onHighlightLine(ethnicity);
   },
@@ -48,16 +64,30 @@ GenHealthDetailComponent = React.createClass({displayName: "GenHealthDetailCompo
   },
   render: function() {
     var ethnicity, group, i, j;
-    return React.createElement("div", null, React.createElement("table", {
-      "className": "table table-condensed table-hover table-striped mb-oxygen"
-    }, React.createElement("tbody", null, React.createElement("tr", null, React.createElement("td", null, (this.props.activeCategory === 'default' ? 'Geography:' : this.props.activeCategory + ':')), React.createElement("td", null, React.createElement("strong", null, (this.props.activeValue === 'default' ? 'England \& Wales' : this.props.activeValue)))), ((function() {
-
-      /*<tr>
-        <td>Ethnicity:</td> 
-        <td><strong>{ if @props.mouseOverData.key? then @props.mouseOverData.key else 'All' }</strong></td>
-      </tr>
-       */
-    })()))), ((function() {
+    return React.createElement("div", null, React.createElement("div", {
+      "className": "clearfix"
+    }, React.createElement("span", {
+      "className": "mb-oxygen mb-gender-toggles-label"
+    }, "Choose gender: "), React.createElement("div", {
+      "className": "btn-group mb-gender-toggles mb-oxygen mb-right",
+      "role": "group",
+      "aria-label": "..."
+    }, React.createElement("button", {
+      "type": "button",
+      "className": (this.props.sex === 'All' ? "btn btn-default active" : "btn btn-default"),
+      "data-value": 0.,
+      "onClick": this.onToggleSex
+    }, "All"), React.createElement("button", {
+      "type": "button",
+      "className": (this.props.sex === 'Female' ? "btn btn-default active" : "btn btn-default"),
+      "data-value": 2.,
+      "onClick": this.onToggleSex
+    }, "Female"), React.createElement("button", {
+      "type": "button",
+      "className": (this.props.sex === 'Male' ? "btn btn-default active" : "btn btn-default"),
+      "data-value": 1.,
+      "onClick": this.onToggleSex
+    }, "Male"))), ((function() {
 
       /*
       <table className="table table-condensed table-hover table-striped mb-oxygen">

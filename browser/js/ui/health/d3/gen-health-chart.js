@@ -6,9 +6,12 @@ drawGenHealthChart = function(options) {
   container = options.container, data = options.data, isDefault = options.isDefault, onMouseOver = options.onMouseOver, activeCategory = options.activeCategory, activeValue = options.activeValue, onInitDone = options.onInitDone, highlights = options.highlights, updateHighlights = options.updateHighlights;
   if (updateHighlights === true) {
     return (function() {
-      var svg;
+      var groups, labels, lines, svg;
       svg = d3.select('.gen-health-svg');
-      svg.selectAll('.line').transition().duration(250).attr('opacity', function(d) {
+      groups = svg.selectAll('.ethnicity');
+      lines = svg.selectAll('.line');
+      labels = svg.selectAll('.label');
+      lines.transition().duration(250).attr('opacity', function(d) {
         if (highlights.length === 0) {
           return 1;
         } else if (highlights.indexOf(d.key) === -1) {
@@ -17,7 +20,7 @@ drawGenHealthChart = function(options) {
           return 1;
         }
       });
-      return svg.selectAll('.label').transition().duration(250).attr('opacity', function(d) {
+      return labels.transition().duration(250).attr('opacity', function(d) {
         if (highlights.length === 0) {
           return 0.1;
         }
@@ -51,7 +54,7 @@ drawGenHealthChart = function(options) {
   colour = d3.scale.category20().domain(ethnic_groups);
   x = d3.scale.ordinal().domain(ages).rangePoints([0, chart_width]);
   y = d3.scale.linear().domain([0, max_perc]).range([chart_height, 0]);
-  yAxis = d3.svg.axis().scale(y).tickFormat(percFormat).ticks(6).orient('left');
+  yAxis = d3.svg.axis().scale(y).tickFormat(percFormat).ticks(10).orient('left');
   xAxis = d3.svg.axis().scale(x).orient('bottom');
   line = d3.svg.line().interpolate('cardinal').x(function(d) {
     return x(d.key);

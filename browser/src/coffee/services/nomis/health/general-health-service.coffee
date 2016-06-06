@@ -36,6 +36,8 @@ makeGenHealthRequest = (options) ->
 		catLabel = o.category.label
 		valLabel =  o.value.label
 		valCode = o.value.value
+		sexLabel = o.sex.label
+		sexCode = o.sex.value
 
 		return {
 			queryStringOps: {
@@ -45,12 +47,18 @@ makeGenHealthRequest = (options) ->
 				c_health: "c_health=1...3"
 				c_age: "c_age=1...6"
 				measures: "measures=20100"
-				c_sex: "c_sex=0"
+				c_sex: do ->
+					if sexLabel is 'Female'
+						return "c_sex=2"
+					else if sexLabel is 'Male'
+						return "c_sex=1"
+					else
+						return "c_sex=0"
 				geography: do ->
 					if catLabel.indexOf('Geography') isnt -1 
-						"geography=#{ valCode }"
+						return "geography=#{ valCode }"
 					else
-						"geography=K04000001"
+						return "geography=K04000001"
 			}
 		}
 

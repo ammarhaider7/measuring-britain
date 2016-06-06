@@ -44,35 +44,10 @@ GenHealthChart = React.createClass
         updateHighlights: @props.updateHighlights
       }
 
-      # highlights = @props._highlights
-
-      # svg = d3.select '.gen-health-svg'
-      # svg.selectAll '.line'
-      #   .transition()
-      #   .duration 250
-      #   .attr 'opacity', (d) ->
-      #     if highlights.length is 0
-      #       return 1
-      #     else if highlights.indexOf(d.key) is -1
-      #       return 0.1
-      #     else
-      #       return 1
-
-      # svg.selectAll '.label'
-      #   .transition()
-      #   .duration 250
-      #   .attr 'opacity', (d) ->
-      #     if highlights.length is 0
-      #       return 0.05
-      #     if highlights.indexOf(d.key) is -1
-      #       return 0.05
-      #     else
-      #       return 1
-
   render: ->
 
     <div className="col-xs-12 col-sm-12 mb-no-padding">
-      <div className="rel-bars mt-medium">
+      <div className="mt-medium">
         <ControlsNew {...@props} omitted_categories={["ethnicities", "districts", "religions"]} categories=category_options values=value_options />
         <img src="./images/mb_ajax_loader.gif" 
           className={ 

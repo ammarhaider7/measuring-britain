@@ -14,7 +14,8 @@ objectAssign = require 'object-assign'
   DISTRICT_SEARCH
   INIT_GEN_HEALTH
   INIT_GEN_HEALTH_OFF
-  INIT_DONE } = require '../../actions/health/general-health-actions.js'
+  INIT_DONE
+  TOGGLE_SEX } = require '../../actions/health/general-health-actions.js'
 
 genHealthInitState = {
   chartName: 'genHealthChart'
@@ -38,6 +39,8 @@ genHealthInitState = {
   district_query: 'default'
   _mouseOverData: {}
   init_gen_health: no
+  sex: 'All'
+  sex_code: 0
   init_done: no
 }
 
@@ -54,6 +57,14 @@ GenHealthChart = (state = genHealthInitState, action) ->
     }
     when TOGGLE_VALUE then objectAssign {}, state, {
       _value: action.value
+      updateHighlights: no
+      updateGenHealth: no
+      init_gen_health: no
+      updateTable: no
+    }
+    when TOGGLE_SEX then objectAssign {}, state, {
+      sex: action.sex
+      sex_code: action.sex_code
       updateHighlights: no
       updateGenHealth: no
       init_gen_health: no

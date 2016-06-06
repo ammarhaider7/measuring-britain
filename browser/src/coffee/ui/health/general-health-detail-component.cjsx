@@ -3,6 +3,24 @@ percFormat = d3.format ',.2%'
 
 GenHealthDetailComponent = React.createClass 
 
+  onToggleSex: (e) ->
+
+    el = e.target
+    sexVal = el.getAttribute 'data-value'
+    sexLabel = el.innerHTML
+    # dispatch toggle sex action
+    @props.onToggleSex sexLabel, sexVal
+    # Fetch new data
+    @props.fetchGenHealthData {
+      isDefault: no
+      category: @props._category
+      value: @props._value
+      sex: {
+        label: sexLabel
+        value: sexVal
+      }
+    }
+
   highlight: (ethnicity) ->
 
     @props.onHighlightLine ethnicity
@@ -46,18 +64,27 @@ GenHealthDetailComponent = React.createClass
   render: ->
 
     <div>
-      <table className="table table-condensed table-hover table-striped mb-oxygen">
-        <tbody>
-          <tr>
-            <td>{ if @props.activeCategory is 'default' then 'Geography:' else @props.activeCategory + ':'}</td>
-            <td><strong>{ if @props.activeValue is 'default' then 'England \& Wales' else @props.activeValue }</strong></td>
-          </tr>
-          {###<tr>
-            <td>Ethnicity:</td> 
-            <td><strong>{ if @props.mouseOverData.key? then @props.mouseOverData.key else 'All' }</strong></td>
-          </tr>###}
-        </tbody>
-      </table>
+      <div className="clearfix">
+        <span className="mb-oxygen mb-gender-toggles-label">Choose gender: </span>
+        <div className="btn-group mb-gender-toggles mb-oxygen mb-right" role="group" aria-label="...">
+          <button type="button" 
+            className={ if @props.sex is 'All' then "btn btn-default active" else "btn btn-default" }
+            data-value={ 0 }
+            onClick={ @onToggleSex }
+          >All
+          </button>
+          <button type="button" 
+            className={ if @props.sex is 'Female' then "btn btn-default active" else "btn btn-default" }
+            data-value={ 2 }
+            onClick={ @onToggleSex }
+          >Female</button>
+          <button type="button" 
+            className={ if @props.sex is 'Male' then "btn btn-default active" else "btn btn-default" }
+            data-value={ 1 }
+            onClick={ @onToggleSex }
+          >Male</button>
+        </div>
+      </div>
       {###
       <table className="table table-condensed table-hover table-striped mb-oxygen">
         <thead>

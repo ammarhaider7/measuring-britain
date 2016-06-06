@@ -61,6 +61,16 @@ ControlsNew = React.createClass
     else if @props.chartName is "genHealthChart"
 
       fetchChartData = 'fetchGenHealthData'
+      # Need to add extra 'sex' prop so return straight away
+      return @props[fetchChartData] {
+        isDefault: no
+        category: @props._category
+        value: @props._value
+        sex: {
+          label: @props.sex
+          value: +@props.sex_code
+        }
+      }
 
     @props[fetchChartData] {
       isDefault: no

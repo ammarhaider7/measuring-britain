@@ -16,6 +16,7 @@ DISTRICT_SEARCH = "H_DISTRICT_SEARCH"
 INIT_GEN_HEALTH = "INIT_GEN_HEALTH"
 INIT_GEN_HEALTH_OFF = "INIT_GEN_HEALTH_OFF"
 INIT_DONE = "INIT_DONE"
+TOGGLE_SEX = "TOGGLE_SEX"
 
 toggleValue = (value) ->
 	{
@@ -27,6 +28,12 @@ toggleCategory = (category) ->
 	{
 		type: TOGGLE_CATEGORY
 		category
+	}
+toggleSex = (sex, code) ->
+	{
+		type: TOGGLE_SEX
+		sex: sex
+		sex_code: code
 	}
 
 controlsOpened = () ->
@@ -142,6 +149,8 @@ module.exports = {
 	INIT_GEN_HEALTH
 	INIT_GEN_HEALTH_OFF
 	INIT_DONE
+	TOGGLE_SEX
+	toggleSex
 	initDone
 	initGenHealth
 	initGenHealthOff

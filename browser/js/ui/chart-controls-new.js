@@ -55,6 +55,15 @@ ControlsNew = React.createClass({displayName: "ControlsNew",
       fetchChartData = 'fetchReligionData';
     } else if (this.props.chartName === "genHealthChart") {
       fetchChartData = 'fetchGenHealthData';
+      return this.props[fetchChartData]({
+        isDefault: false,
+        category: this.props._category,
+        value: this.props._value,
+        sex: {
+          label: this.props.sex,
+          value: +this.props.sex_code
+        }
+      });
     }
     return this.props[fetchChartData]({
       isDefault: false,

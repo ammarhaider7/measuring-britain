@@ -4,6 +4,7 @@
   highlightLine
   unHighlightLine
   toggleValue
+  toggleSex
   requestGenHealthData
   fetchGenHealthData
   controlsOpened
@@ -34,10 +35,14 @@ mapStateToProps = (state) ->
 	init_gen_health: state.genHealthChart.init_gen_health
 	init_done: state.genHealthChart.init_done
 	updateHighlights: state.genHealthChart.updateHighlights
+	sex: state.genHealthChart.sex
+	sex_code: state.genHealthChart.sex_code
 
 mapStateToPropsDetail = (state) ->
 
 	data: state.genHealthChart.data
+	_category: state.genHealthChart._category
+	_value: state.genHealthChart._value	
 	activeCategory: state.genHealthChart.activeCategory
 	activeValue: state.genHealthChart.activeValue	
 	isFetching: state.genHealthChart.isFetching
@@ -45,6 +50,8 @@ mapStateToPropsDetail = (state) ->
 	mouseOverData: state.genHealthChart._mouseOverData
 	updateTable: state.genHealthChart.updateTable
 	_highlights: state.genHealthChart._highlights
+	sex: state.genHealthChart.sex
+	sex_code: state.genHealthChart.sex_code
 
 mapDispatchToPropsDetail = (dispatch) ->
 
@@ -52,6 +59,10 @@ mapDispatchToPropsDetail = (dispatch) ->
 		dispatch highlightLine ethnicity
 	onUnHighlightLine: (ethnicity, index) ->
 		dispatch unHighlightLine ethnicity, index
+	fetchGenHealthData: (filterOptions) ->
+		dispatch fetchGenHealthData filterOptions
+	onToggleSex: (sex, code) ->
+		dispatch toggleSex sex, code
 
 mapDispatchToProps = (dispatch) ->
 
