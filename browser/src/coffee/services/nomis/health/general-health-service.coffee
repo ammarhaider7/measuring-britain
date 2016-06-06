@@ -1,4 +1,4 @@
-nomisEndPoint = "//www.nomisweb.co.uk/api/v01/dataset/"
+nomisEndPoint = "https://www.nomisweb.co.uk/api/v01/dataset/"
 dataSet = "NM_739_1.data.json" # DC3204EWr - General health by ethnic group by sex by age (regional) 
 
 # ?date=latest&geography=2092957703&c_sex=0&c_age=1...6&c_health=1...3&c_ethpuk11=2...5,7...10,12...16,18...20,22,23&measures=20100

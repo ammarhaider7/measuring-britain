@@ -2,7 +2,7 @@
 var dataSet, defaultOptions, makeGenHealthRequest, nomisEndPoint,
   hasProp = {}.hasOwnProperty;
 
-nomisEndPoint = "//www.nomisweb.co.uk/api/v01/dataset/";
+nomisEndPoint = "https://www.nomisweb.co.uk/api/v01/dataset/";
 
 dataSet = "NM_739_1.data.json";
 
