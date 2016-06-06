@@ -26,9 +26,9 @@ drawGenHealthChart = (options) ->
 				.duration 250
 				.attr 'opacity', (d) ->
 					if highlights.length is 0
-						return 0.05
+						return 0.1
 					if highlights.indexOf(d.key) is -1
-						return 0.05
+						return 0.1
 					else
 						return 1
 
@@ -181,7 +181,7 @@ drawGenHealthChart = (options) ->
 			.attr 'opacity', 1
 
 		# Add mouse over handler
-		# attachHoverHandlers()
+		attachHoverHandlers()
 
 	my.update = ->
 
@@ -220,46 +220,37 @@ drawGenHealthChart = (options) ->
 			.call yAxis
 
 		# Add mouse over handler
-		# attachHoverHandlers()
+		attachHoverHandlers() 
 
 	attachHoverHandlers = ->
 
 		# update the chart here
 		svg = d3.select '.gen-health-svg'
-		main_group_lines = svg.selectAll '.main-group path'
-		labels = svg.selectAll '.label'
+		groups = svg.selectAll '.ethnicity'
 
-		main_group_lines.on 'mouseover', (d) ->
+		groups.on 'mouseover', (d) ->
 
-			# set opacity of paths
-			_d = d
-			# onMouseOver d
-			console.log 'highlights'
-			console.log highlights
+			g = d3.select @
+			_line = g.select '.line'
+			_label = g.select '.label'
 
-			main_group_lines.attr 'opacity', (d) ->
+			if _line.attr('opacity') isnt '1'
+				_line.attr 'opacity', 0.99
 
-				unless _d is d
-					return 0.1
-				else
-					return 1
-
-			labels.attr 'opacity', (d) ->
-
-				unless _d is d
-					return 0.05
-				else
-					return 1
+			if _label.attr('opacity') is '0.1'
+				_label.attr 'opacity', 0.99
 
 		.on 'mouseout', (d) ->
 
-			main_group_lines.attr 'opacity', 1
-			labels.attr 'opacity', 0.1
+			g = d3.select @
+			_line = g.select '.line'
+			_label = g.select '.label'
 
-			# onMouseOver {
-			# 	key: 'All'
-			# 	values: []
-			# }
+			if _line.attr('opacity') is '0.99'
+				_line.attr 'opacity', 0.1
+
+			if _label.attr('opacity') is '0.99'
+				_label.attr 'opacity', 0.1
 
 	my.width = (value) ->
 		unless arguments.length then return width

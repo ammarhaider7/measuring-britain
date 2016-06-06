@@ -50,4 +50,23 @@
 		display: block;
   		margin: 120px auto;
 	}
+	div.checkbox {
+		width: 110%;
+	}
+	.checkbox-zone:hover {
+		background-color: #DA4A70;
+	    font-weight: 700;
+	    color: white;
+	}
+	.checkbox-zone {
+	    background-color: #eee;
+	    border: 1px solid #E6E6E6;
+	    padding: 2px 40px 2px 25px;
+	    border-radius: 5px;
+	}
+	.highlight {
+		background-color: #DA4A70;
+	    font-weight: 700;
+	    color: white;
+	}
 }

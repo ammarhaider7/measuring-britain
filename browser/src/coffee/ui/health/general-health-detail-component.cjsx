@@ -15,25 +15,33 @@ GenHealthDetailComponent = React.createClass
     
     $el = $(event.target)
     value = event.target.value
-    if $el.hasClass('highlight') is yes
-      $el.removeClass 'highlight'
+    if $el.parent().hasClass('highlight') is yes
+      $el.parent().removeClass 'highlight'
       arr = @props._highlights
       index = arr.indexOf value
       @unHighlight value, index
     else 
-      $el.addClass 'highlight'
+      $el.parent().addClass 'highlight'
       @highlight value
 
   trimEthnicity: (ethnicity_string) ->
 
       if ethnicity_string.indexOf('Gypsy') isnt -1
-        trimmedStr = 'Gypsy'
+        return trimmedStr = 'Gypsy'
       else if ethnicity_string.indexOf('English') isnt -1
-        trimmedStr = 'British'
-      else  
+        return trimmedStr = 'British'
+      else if ethnicity_string.indexOf('Any other') isnt -1
+        return trimmedStr = 'Any other'
+      else if ethnicity_string.indexOf('Arab') isnt -1
+        return trimmedStr = 'Arab'
+      else if ethnicity_string.indexOf('and') isnt -1
+        str = ethnicity_string.replace ' and ', '/'
+        return trimmedStr = str.substr(str.indexOf(':') + 2, str.length)
+      else if ethnicity_string.indexOf('Other') isnt -1
+        return trimmedStr = 'Other'
+      else
         str = ethnicity_string
-        trimmedStr = str.substr(str.indexOf(':') + 2, str.length)
-      return trimmedStr
+        return trimmedStr = str.substr(str.indexOf(':') + 2, str.length)
 
   render: ->
 
@@ -143,7 +151,7 @@ GenHealthDetailComponent = React.createClass
       </table>###}
       <div className="mb-oxygen">
         <h4><strong>Highlight ethnicities</strong></h4>
-        <div className="mb-grey-box clearfix">
+        <div className="">
           <img src="./images/mb_ajax_loader.gif" 
             className={ 
               if @props.isFetching is yes and @props.isDefault is yes then 'mb-spinner' else 'hide' 
@@ -161,7 +169,7 @@ GenHealthDetailComponent = React.createClass
                       </div>
                     else
                       <div className="checkbox" key={ethnicity}>
-                        <label>
+                        <label className="checkbox-zone">
                           <input 
                             type="checkbox" 
                             value={ ethnicity } 

@@ -6255,3 +6255,22 @@ nav.hidden-xs {
 #general-health-details .mb-spinner {
   display: block;
   margin: 120px auto; }
+
+#general-health-details div.checkbox {
+  width: 110%; }
+
+#general-health-details .checkbox-zone:hover {
+  background-color: #DA4A70;
+  font-weight: 700;
+  color: white; }
+
+#general-health-details .checkbox-zone {
+  background-color: #eee;
+  border: 1px solid #E6E6E6;
+  padding: 2px 40px 2px 25px;
+  border-radius: 5px; }
+
+#general-health-details .highlight {
+  background-color: #DA4A70;
+  font-weight: 700;
+  color: white; }

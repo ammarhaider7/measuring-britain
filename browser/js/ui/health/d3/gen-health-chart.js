@@ -19,10 +19,10 @@ drawGenHealthChart = function(options) {
       });
       return svg.selectAll('.label').transition().duration(250).attr('opacity', function(d) {
         if (highlights.length === 0) {
-          return 0.05;
+          return 0.1;
         }
         if (highlights.indexOf(d.key) === -1) {
-          return 0.05;
+          return 0.1;
         } else {
           return 1;
         }
@@ -112,12 +112,13 @@ drawGenHealthChart = function(options) {
       width: 0,
       x: chart_width
     }).remove();
-    return title_group.append('text').attr({
+    title_group.append('text').attr({
       x: 0,
       y: margin.p,
       opacity: 0,
       'font-size': '12px'
     }).text('Self-proclaimed bad or very bad health').transition().duration(1500).attr('opacity', 1);
+    return attachHoverHandlers();
   };
   my.update = function() {
     var labels, main_group_lines, svg, x_axis_group, y_axis_group;
@@ -135,35 +136,35 @@ drawGenHealthChart = function(options) {
       }
     });
     x_axis_group.transition().duration(1000).delay(500).call(xAxis);
-    return y_axis_group.transition().duration(1000).delay(500).call(yAxis);
+    y_axis_group.transition().duration(1000).delay(500).call(yAxis);
+    return attachHoverHandlers();
   };
   attachHoverHandlers = function() {
-    var labels, main_group_lines, svg;
+    var groups, svg;
     svg = d3.select('.gen-health-svg');
-    main_group_lines = svg.selectAll('.main-group path');
-    labels = svg.selectAll('.label');
-    return main_group_lines.on('mouseover', function(d) {
-      var _d;
-      _d = d;
-      console.log('highlights');
-      console.log(highlights);
-      main_group_lines.attr('opacity', function(d) {
-        if (_d !== d) {
-          return 0.1;
-        } else {
-          return 1;
-        }
-      });
-      return labels.attr('opacity', function(d) {
-        if (_d !== d) {
-          return 0.05;
-        } else {
-          return 1;
-        }
-      });
+    groups = svg.selectAll('.ethnicity');
+    return groups.on('mouseover', function(d) {
+      var _label, _line, g;
+      g = d3.select(this);
+      _line = g.select('.line');
+      _label = g.select('.label');
+      if (_line.attr('opacity') !== '1') {
+        _line.attr('opacity', 0.99);
+      }
+      if (_label.attr('opacity') === '0.1') {
+        return _label.attr('opacity', 0.99);
+      }
     }).on('mouseout', function(d) {
-      main_group_lines.attr('opacity', 1);
-      return labels.attr('opacity', 0.1);
+      var _label, _line, g;
+      g = d3.select(this);
+      _line = g.select('.line');
+      _label = g.select('.label');
+      if (_line.attr('opacity') === '0.99') {
+        _line.attr('opacity', 0.1);
+      }
+      if (_label.attr('opacity') === '0.99') {
+        return _label.attr('opacity', 0.1);
+      }
     });
   };
   my.width = function(value) {

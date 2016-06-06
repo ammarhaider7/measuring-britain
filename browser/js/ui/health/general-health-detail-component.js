@@ -16,27 +16,35 @@ GenHealthDetailComponent = React.createClass({displayName: "GenHealthDetailCompo
     var $el, arr, index, value;
     $el = $(event.target);
     value = event.target.value;
-    if ($el.hasClass('highlight') === true) {
-      $el.removeClass('highlight');
+    if ($el.parent().hasClass('highlight') === true) {
+      $el.parent().removeClass('highlight');
       arr = this.props._highlights;
       index = arr.indexOf(value);
       return this.unHighlight(value, index);
     } else {
-      $el.addClass('highlight');
+      $el.parent().addClass('highlight');
       return this.highlight(value);
     }
   },
   trimEthnicity: function(ethnicity_string) {
     var str, trimmedStr;
     if (ethnicity_string.indexOf('Gypsy') !== -1) {
-      trimmedStr = 'Gypsy';
+      return trimmedStr = 'Gypsy';
     } else if (ethnicity_string.indexOf('English') !== -1) {
-      trimmedStr = 'British';
+      return trimmedStr = 'British';
+    } else if (ethnicity_string.indexOf('Any other') !== -1) {
+      return trimmedStr = 'Any other';
+    } else if (ethnicity_string.indexOf('Arab') !== -1) {
+      return trimmedStr = 'Arab';
+    } else if (ethnicity_string.indexOf('and') !== -1) {
+      str = ethnicity_string.replace(' and ', '/');
+      return trimmedStr = str.substr(str.indexOf(':') + 2, str.length);
+    } else if (ethnicity_string.indexOf('Other') !== -1) {
+      return trimmedStr = 'Other';
     } else {
       str = ethnicity_string;
-      trimmedStr = str.substr(str.indexOf(':') + 2, str.length);
+      return trimmedStr = str.substr(str.indexOf(':') + 2, str.length);
     }
-    return trimmedStr;
   },
   render: function() {
     var ethnicity, group, i, j;
@@ -146,7 +154,7 @@ GenHealthDetailComponent = React.createClass({displayName: "GenHealthDetailCompo
     })()), React.createElement("div", {
       "className": "mb-oxygen"
     }, React.createElement("h4", null, React.createElement("strong", null, "Highlight ethnicities")), React.createElement("div", {
-      "className": "mb-grey-box clearfix"
+      "className": ""
     }, React.createElement("img", {
       "src": "./images/mb_ajax_loader.gif",
       "className": (this.props.isFetching === true && this.props.isDefault === true ? 'mb-spinner' : 'hide')
@@ -175,7 +183,9 @@ GenHealthDetailComponent = React.createClass({displayName: "GenHealthDetailCompo
                 results1.push(React.createElement("div", {
                   "className": "checkbox",
                   "key": ethnicity
-                }, React.createElement("label", null, React.createElement("input", {
+                }, React.createElement("label", {
+                  "className": "checkbox-zone"
+                }, React.createElement("input", {
                   "type": "checkbox",
                   "value": ethnicity,
                   "onChange": this.handleChange
