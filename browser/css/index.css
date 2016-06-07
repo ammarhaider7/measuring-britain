@@ -6245,6 +6245,27 @@ nav.hidden-xs {
   stroke: steelblue;
   stroke-width: 1.75px; }
 
+.gen-health-svg path.domain {
+  display: none; }
+
+.gen-health-svg .x .tick:nth-child(1) line {
+  stroke: #333;
+  stroke-dasharray: none; }
+
+.gen-health-svg .x .tick line {
+  stroke-dasharray: 3, 3;
+  stroke: #EEE; }
+
+.gen-health-svg .y .tick:nth-child(1) line {
+  display: none; }
+
+.gen-health-svg .y .tick line {
+  stroke-dasharray: 3, 3;
+  stroke: #EEE; }
+
+.gen-health-svg .point-label {
+  font-size: 75%; }
+
 #general-health-details .mb-gender-toggles-label {
   font-weight: bold;
   line-height: 30px; }

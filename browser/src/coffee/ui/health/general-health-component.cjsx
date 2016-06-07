@@ -34,15 +34,18 @@ GenHealthChart = React.createClass
         updateHighlights: @props.updateHighlights
       }
 
-      if @props.isDefault is yes then draw.init() else draw.update()
+      return if @props.isDefault is yes then draw.init() else draw.update()
 
     # Update highlights only
     if @props.updateHighlights is yes
 
-      genHealthChart {
+      draw = genHealthChart {
+        data: @props.data
         highlights: @props._highlights
         updateHighlights: @props.updateHighlights
       }
+
+      return draw.highlightDetail()
 
   render: ->
 
@@ -60,9 +63,9 @@ GenHealthChart = React.createClass
           ref="genHealthSvg"
         >
           <g className="title-group mb-oxygen"></g>
-          <g className="main-group"></g>
           <g className="y axis"></g>
           <g className="x axis"></g>
+          <g className="main-group"></g>
         </svg>
       </div>
     </div>  

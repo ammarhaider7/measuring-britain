@@ -79,6 +79,7 @@ parse = function(dataArray) {
       values: ethnicity.values.map(function(age) {
         return {
           key: age.key,
+          ethnicity: ethnicity.key,
           values: {
             good: age.values.good / age.values.sum,
             fair: age.values.fair / age.values.sum,
@@ -158,5 +159,3 @@ parse = function(dataArray) {
 };
 
 module.exports = parse;
-
-//# sourceMappingURL=general-health-parser.map

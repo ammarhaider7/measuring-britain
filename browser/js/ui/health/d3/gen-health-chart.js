@@ -2,42 +2,14 @@
 var drawGenHealthChart;
 
 drawGenHealthChart = function(options) {
-  var activeCategory, activeValue, ages, attachHoverHandlers, chart_height, chart_width, colour, container, d3_array, data, ethnic_groups, format, height, highlights, isDefault, line, margin, max_perc, max_value, my, onInitDone, onMouseOver, percFormat, ref, ref1, updateHighlights, width, x, xAxis, y, yAxis;
+  var activeCategory, activeValue, ages, attachHoverHandlers, chart_height, chart_width, colour, container, d3_array, data, ethnic_groups, format, height, highlights, isDefault, line, margin, max_perc, max_value, my, onInitDone, onMouseOver, percFormat, pointPercFormat, ref, ref1, updateHighlights, width, x, xAxis, y, yAxis;
   container = options.container, data = options.data, isDefault = options.isDefault, onMouseOver = options.onMouseOver, activeCategory = options.activeCategory, activeValue = options.activeValue, onInitDone = options.onInitDone, highlights = options.highlights, updateHighlights = options.updateHighlights;
-  if (updateHighlights === true) {
-    return (function() {
-      var groups, labels, lines, svg;
-      svg = d3.select('.gen-health-svg');
-      groups = svg.selectAll('.ethnicity');
-      lines = svg.selectAll('.line');
-      labels = svg.selectAll('.label');
-      lines.transition().duration(250).attr('opacity', function(d) {
-        if (highlights.length === 0) {
-          return 1;
-        } else if (highlights.indexOf(d.key) === -1) {
-          return 0.1;
-        } else {
-          return 1;
-        }
-      });
-      return labels.transition().duration(250).attr('opacity', function(d) {
-        if (highlights.length === 0) {
-          return 0.1;
-        }
-        if (highlights.indexOf(d.key) === -1) {
-          return 0.1;
-        } else {
-          return 1;
-        }
-      });
-    })();
-  }
   my = {};
   width = (ref = $(container).width()) != null ? ref : 750;
   height = (ref1 = $(container).height()) != null ? ref1 : 500;
   margin = {
-    top: 20,
-    right: 80,
+    top: 30,
+    right: 85,
     bottom: 20,
     left: 45,
     p: 25
@@ -46,6 +18,7 @@ drawGenHealthChart = function(options) {
   chart_height = height - margin.top - margin.bottom;
   format = d3.format('.2s');
   percFormat = d3.format(',.0%');
+  pointPercFormat = d3.format(',.2%');
   d3_array = data.percentages;
   ethnic_groups = data.ethnicities;
   ages = data.ages;
@@ -54,15 +27,15 @@ drawGenHealthChart = function(options) {
   colour = d3.scale.category20().domain(ethnic_groups);
   x = d3.scale.ordinal().domain(ages).rangePoints([0, chart_width]);
   y = d3.scale.linear().domain([0, max_perc]).range([chart_height, 0]);
-  yAxis = d3.svg.axis().scale(y).tickFormat(percFormat).ticks(10).orient('left');
-  xAxis = d3.svg.axis().scale(x).orient('bottom');
+  yAxis = d3.svg.axis().scale(y).tickFormat(percFormat).ticks(10).tickSize(-chart_width).orient('left');
+  xAxis = d3.svg.axis().scale(x).tickSize(-chart_height).orient('bottom');
   line = d3.svg.line().interpolate('cardinal').x(function(d) {
     return x(d.key);
   }).y(function(d) {
     return y(d.values.bad);
   });
   my.init = function() {
-    var ethnicity, main_group, svg, title_group, x_axis_group, y_axis_group;
+    var circles, ethnicity, labels, lines, main_group, point_labels, points, svg, title_group, x_axis_group, y_axis_group;
     svg = d3.select('.gen-health-svg');
     main_group = svg.select('.main-group');
     x_axis_group = svg.select('.x.axis');
@@ -75,7 +48,7 @@ drawGenHealthChart = function(options) {
     x_axis_group.call(xAxis);
     y_axis_group.call(yAxis).append("text").attr("transform", "rotate(-90)").attr("y", 6).attr("dy", ".71em").style("text-anchor", "end").text("% of Population");
     ethnicity = main_group.selectAll('.ethnicity').data(d3_array).enter().append('g').attr('class', 'ethnicity');
-    ethnicity.append('path').attr({
+    lines = ethnicity.append('path').attr({
       "class": 'line',
       d: function(d) {
         return line(d.values);
@@ -84,12 +57,46 @@ drawGenHealthChart = function(options) {
     }).style('stroke', function(d) {
       return colour(d.key);
     });
-    ethnicity.append('text').attr({
+    points = ethnicity.append('g').attr('class', 'point').attr('opacity', 0);
+    circles = points.selectAll('circle').data(function(d) {
+      return d.values;
+    }).enter().append('circle').attr({
+      "class": 'circle',
+      cx: function(d) {
+        return x(d.key);
+      },
+      cy: function(d) {
+        return y(d.values.bad);
+      },
+      r: 3,
+      fill: 'white',
+      stroke: function(d) {
+        return colour(d.ethnicity);
+      }
+    });
+    point_labels = points.selectAll('text').data(function(d) {
+      return d.values;
+    }).enter().append('text').attr({
+      "class": 'point-label',
+      transform: function(d) {
+        return "translate(" + (x(d.key)) + ", " + (y(d.values.bad)) + ")";
+      },
+      y: -10,
+      dy: '.35em',
+      'text-anchor': 'middle',
+      'font-weight': 'bold',
+      fill: function(d) {
+        return colour(d.ethnicity);
+      }
+    }).text(function(d) {
+      return pointPercFormat(d.values.bad);
+    });
+    labels = ethnicity.append('text').attr({
       "class": 'label',
       transform: function(d) {
         return "translate(" + (x(d.values[d.values.length - 1].key)) + ", " + (y(d.values[d.values.length - 1].values.bad)) + ")";
       },
-      x: 3,
+      x: 5,
       dy: '.35em',
       opacity: 0
     }).text(function(d) {
@@ -124,12 +131,16 @@ drawGenHealthChart = function(options) {
     return attachHoverHandlers();
   };
   my.update = function() {
-    var labels, main_group_lines, svg, x_axis_group, y_axis_group;
+    var circles, groups, labels, main_group_lines, point_labels, svg, x_axis_group, y_axis_group;
     svg = d3.select('.gen-health-svg');
+    groups = svg.selectAll('.ethnicity');
     main_group_lines = svg.selectAll('.main-group path');
     labels = svg.selectAll('.label');
+    circles = groups.selectAll('.circle');
+    point_labels = groups.selectAll('.point-label');
     x_axis_group = svg.select('.x.axis');
     y_axis_group = svg.select('.y.axis');
+    groups.data(d3_array);
     main_group_lines.data(d3_array).transition().duration(1000).delay(500).attr('d', function(d) {
       return line(d.values);
     });
@@ -138,9 +149,65 @@ drawGenHealthChart = function(options) {
         return "translate(" + (x(d.values[d.values.length - 1].key)) + ", " + (y(d.values[d.values.length - 1].values.bad)) + ")";
       }
     });
+    circles.data(function(d) {
+      return d.values;
+    }).transition().duration(1000).delay(500).attr({
+      cx: function(d) {
+        return x(d.key);
+      },
+      cy: function(d) {
+        return y(d.values.bad);
+      }
+    });
+    point_labels.data(function(d) {
+      return d.values;
+    }).transition().duration(1000).delay(500).attr({
+      transform: function(d) {
+        return "translate(" + (x(d.key)) + ", " + (y(d.values.bad)) + ")";
+      }
+    }).text(function(d) {
+      return pointPercFormat(d.values.bad);
+    });
     x_axis_group.transition().duration(1000).delay(500).call(xAxis);
     y_axis_group.transition().duration(1000).delay(500).call(yAxis);
     return attachHoverHandlers();
+  };
+  my.highlightDetail = function() {
+    var groups, labels, lines, points, selected_lines, svg;
+    svg = d3.select('.gen-health-svg');
+    groups = svg.selectAll('.ethnicity');
+    points = groups.selectAll('.point');
+    lines = svg.selectAll('.line');
+    labels = svg.selectAll('.label');
+    selected_lines = [];
+    points.transition().duration(250).attr('opacity', function(d) {
+      if (highlights.length === 0) {
+        return 0;
+      } else if (highlights.indexOf(d.key) === -1) {
+        return 0;
+      } else {
+        return 1;
+      }
+    });
+    lines.transition().duration(250).attr('opacity', function(d) {
+      if (highlights.length === 0) {
+        return 1;
+      } else if (highlights.indexOf(d.key) === -1) {
+        return 0.1;
+      } else {
+        return 1;
+      }
+    });
+    return labels.transition().duration(250).attr('opacity', function(d) {
+      if (highlights.length === 0) {
+        return 0.1;
+      }
+      if (highlights.indexOf(d.key) === -1) {
+        return 0.1;
+      } else {
+        return 1;
+      }
+    });
   };
   attachHoverHandlers = function() {
     var groups, svg;
@@ -188,5 +255,3 @@ drawGenHealthChart = function(options) {
 };
 
 module.exports = drawGenHealthChart;
-
-//# sourceMappingURL=gen-health-chart.map

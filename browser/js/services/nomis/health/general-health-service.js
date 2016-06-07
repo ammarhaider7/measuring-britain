@@ -90,5 +90,3 @@ makeGenHealthRequest = function(options) {
 };
 
 module.exports = makeGenHealthRequest;
-
-//# sourceMappingURL=general-health-service.map

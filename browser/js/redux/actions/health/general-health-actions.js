@@ -199,5 +199,3 @@ module.exports = {
   controlsOpened: controlsOpened,
   controlsClosed: controlsClosed
 };
-
-//# sourceMappingURL=general-health-actions.map

@@ -93,8 +93,12 @@ ControlsNew = React.createClass
           }
         />
         <div className={ if @props.isFetching is yes and @props.isDefault is no then 'hide' }>
-          <span className="text-center mb-control-value col-sm-5">{ @props.activeCategory }</span>
-          <span className="col-sm-5 text-center mb-control-value">{ @props.activeValue }</span>
+          <span className="text-center mb-control-value col-sm-5">
+            { if @props.chartName is "genHealthChart" then @props.activeValue else @props.activeCategory }
+          </span>
+          <span className="col-sm-5 text-center mb-control-value">
+            { if @props.chartName is "genHealthChart" then "Gender: #{@props.sex}" else @props.activeValue }
+          </span>
           <span 
             className={ if @props.isControlsOpen is yes then "glyphicon glyphicon-chevron-up mt-medium" else "glyphicon glyphicon-chevron-down mt-medium"}
           >

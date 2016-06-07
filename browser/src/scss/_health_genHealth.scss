@@ -30,13 +30,27 @@
 	  stroke: steelblue;
 	  stroke-width: 1.75px;
 	}
-	// .y .tick:nth-child(1) line {
-	// 	display: none;
-	// }
-	// .y .tick line {
-	// 	stroke-dasharray: 3, 3;
- //    	stroke: #EEE;
-	// }
+	path.domain {
+		display: none;
+	}
+	.x .tick:nth-child(1) line {
+		stroke: #333;
+		stroke-dasharray: none;
+	}
+	.x .tick line {
+		stroke-dasharray: 3, 3;
+    	stroke: #EEE;
+	}
+	.y .tick:nth-child(1) line {
+		display: none;
+	}
+	.y .tick line {
+		stroke-dasharray: 3, 3;
+    	stroke: #EEE;
+	}
+	.point-label {
+		font-size: 75%;
+	}
 }
 #general-health-details {
 	.mb-gender-toggles-label {

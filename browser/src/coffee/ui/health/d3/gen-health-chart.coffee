@@ -2,40 +2,6 @@ drawGenHealthChart = (options) ->
 
 	{ container, data, isDefault, onMouseOver, activeCategory, activeValue, onInitDone, highlights, updateHighlights } = options
 
-	# First check if it is a trivial highlights event
-	if updateHighlights is yes
-
-		return do ->
-
-			svg = d3.select '.gen-health-svg'
-			groups = svg.selectAll '.ethnicity'
-			lines = svg.selectAll '.line'
-			labels = svg.selectAll '.label'
-
-			lines
-				.transition()
-				.duration 250
-				.attr 'opacity', (d) ->
-					if highlights.length is 0
-						return 1
-					else if highlights.indexOf(d.key) is -1
-						return 0.1
-					else
-						return 1
-
-
-
-			labels
-				.transition()
-				.duration 250
-				.attr 'opacity', (d) ->
-					if highlights.length is 0
-						return 0.1
-					if highlights.indexOf(d.key) is -1
-						return 0.1
-					else
-						return 1
-
 	# Actual chart code
 	my = {}
 
@@ -44,8 +10,8 @@ drawGenHealthChart = (options) ->
 
 	# Set margins
 	margin = 
-		top: 20
-		right: 80
+		top: 30
+		right: 85
 		bottom: 20
 		left: 45
 		p: 25
@@ -55,6 +21,7 @@ drawGenHealthChart = (options) ->
 
 	format = d3.format '.2s'
 	percFormat = d3.format ',.0%'
+	pointPercFormat = d3.format ',.2%'
 	d3_array = data.percentages
 	ethnic_groups = data.ethnicities
 	ages = data.ages
@@ -76,12 +43,12 @@ drawGenHealthChart = (options) ->
 		.scale y
 		.tickFormat percFormat
 		.ticks 10
-		# .tickSize -chart_width
+		.tickSize -chart_width
 		.orient 'left'
 
 	xAxis = d3.svg.axis()
 		.scale x
-		# .tickSize -chart_height
+		.tickSize -chart_height
 		.orient 'bottom'
 
 	line = d3.svg.line()
@@ -122,7 +89,7 @@ drawGenHealthChart = (options) ->
 		  .enter().append 'g'
 		  	.attr 'class', 'ethnicity'
 
-		ethnicity.append 'path'
+		lines = ethnicity.append 'path'
 			.attr {
 				class: 'line'
 				d: (d) ->
@@ -132,12 +99,53 @@ drawGenHealthChart = (options) ->
 			.style 'stroke', (d) ->
 				return colour d.key
 
-		ethnicity.append 'text'
+		points = ethnicity.append 'g'
+			.attr 'class', 'point'
+			.attr 'opacity', 0
+
+		# append hidden circles 
+		circles = points.selectAll 'circle'
+			# pass in the data for the points rather than the whole ethnicity
+			.data (d) ->
+				return d.values
+			.enter().append 'circle'
+			.attr {
+				class: 'circle'
+				cx: (d) ->
+					return x d.key
+				cy: (d) ->
+					return y d.values.bad
+				r: 3
+				fill: 'white'
+				stroke: (d) ->
+					return colour d.ethnicity
+			}
+
+		point_labels = points.selectAll 'text'
+			# pass in the data for the points rather than the whole ethnicity
+			.data (d) ->
+				return d.values
+			.enter().append 'text'
+			.attr {
+				class: 'point-label'
+				transform: (d) ->
+					return "translate(#{ x d.key }, #{ y d.values.bad })"
+				y: -10
+				dy: '.35em'
+				'text-anchor': 'middle'
+				'font-weight': 'bold'
+				fill: (d) ->
+					return colour d.ethnicity
+			}
+			.text (d) ->
+				return pointPercFormat d.values.bad
+		
+		labels = ethnicity.append 'text'
 			.attr {
 				class: 'label'
 				transform: (d) ->
-					return "translate(#{ x d.values[d.values.length - 1].key }, #{ y d.values[d.values.length - 1].values.bad })"
-				x: 3
+					return "translate(#{ (x d.values[d.values.length - 1].key) }, #{ y d.values[d.values.length - 1].values.bad })"
+				x: 5
 				dy: '.35em'
 				opacity: 0
 			}
@@ -191,11 +199,15 @@ drawGenHealthChart = (options) ->
 
 		# update the chart here
 		svg = d3.select '.gen-health-svg'
+		groups = svg.selectAll '.ethnicity'
 		main_group_lines = svg.selectAll '.main-group path'
 		labels = svg.selectAll '.label'
+		circles = groups.selectAll '.circle'
+		point_labels = groups.selectAll '.point-label'
 		x_axis_group = svg.select '.x.axis'
 		y_axis_group = svg.select '.y.axis'
-		# detail_text_value = svg.select '.detail-text-value'
+
+		groups.data d3_array
 
 		main_group_lines.data d3_array
 			.transition()
@@ -210,8 +222,34 @@ drawGenHealthChart = (options) ->
 			.delay 500
 			.attr {
 				transform: (d) ->
-					return "translate(#{ x d.values[d.values.length - 1].key }, #{ y d.values[d.values.length - 1].values.bad })"
+					return "translate(#{ (x d.values[d.values.length - 1].key) }, #{ y d.values[d.values.length - 1].values.bad })"
 			}
+
+		circles
+			.data (d) ->
+				return d.values
+			.transition()
+			.duration 1000
+			.delay 500
+			.attr {
+				cx: (d) ->
+					return x d.key
+				cy: (d) ->
+					return y d.values.bad 
+			}
+
+		point_labels
+			.data (d) ->
+				return d.values
+			.transition()
+			.duration 1000
+			.delay 500
+			.attr {
+				transform: (d) ->
+					return "translate(#{ x d.key }, #{ y d.values.bad })"
+			}
+			.text (d) ->
+				return pointPercFormat d.values.bad
 
 		x_axis_group.transition()
 			.duration 1000
@@ -225,6 +263,48 @@ drawGenHealthChart = (options) ->
 
 		# Add mouse over handler
 		attachHoverHandlers() 
+
+	my.highlightDetail = ->
+
+		svg = d3.select '.gen-health-svg'
+		groups = svg.selectAll '.ethnicity'
+		points = groups.selectAll '.point'
+		lines = svg.selectAll '.line'
+		labels = svg.selectAll '.label'
+		selected_lines = []
+
+		points
+			.transition()
+			.duration 250
+			.attr 'opacity', (d) ->
+				if highlights.length is 0
+					return 0
+				else if highlights.indexOf(d.key) is -1
+					return 0
+				else
+					return 1
+
+		lines
+			.transition()
+			.duration 250
+			.attr 'opacity', (d) ->
+				if highlights.length is 0
+					return 1
+				else if highlights.indexOf(d.key) is -1
+					return 0.1
+				else
+					return 1
+
+		labels
+			.transition()
+			.duration 250
+			.attr 'opacity', (d) ->
+				if highlights.length is 0
+					return 0.1
+				if highlights.indexOf(d.key) is -1
+					return 0.1
+				else
+					return 1
 
 	attachHoverHandlers = ->
 

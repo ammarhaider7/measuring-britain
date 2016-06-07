@@ -45,21 +45,28 @@ GenHealthDetailComponent = React.createClass({displayName: "GenHealthDetailCompo
   trimEthnicity: function(ethnicity_string) {
     var str, trimmedStr;
     if (ethnicity_string.indexOf('Gypsy') !== -1) {
-      return trimmedStr = 'Gypsy';
+      trimmedStr = 'Gypsy';
+      return trimmedStr;
     } else if (ethnicity_string.indexOf('English') !== -1) {
-      return trimmedStr = 'British';
+      trimmedStr = 'British';
+      return trimmedStr;
     } else if (ethnicity_string.indexOf('Any other') !== -1) {
-      return trimmedStr = 'Any other';
+      trimmedStr = 'Any other';
+      return trimmedStr;
     } else if (ethnicity_string.indexOf('Arab') !== -1) {
-      return trimmedStr = 'Arab';
+      trimmedStr = 'Arab';
+      return trimmedStr;
     } else if (ethnicity_string.indexOf('and') !== -1) {
       str = ethnicity_string.replace(' and ', '/');
-      return trimmedStr = str.substr(str.indexOf(':') + 2, str.length);
+      trimmedStr = str.substr(str.indexOf(':') + 2, str.length);
+      return trimmedStr;
     } else if (ethnicity_string.indexOf('Other') !== -1) {
-      return trimmedStr = 'Other';
+      trimmedStr = 'Other';
+      return trimmedStr;
     } else {
       str = ethnicity_string;
-      return trimmedStr = str.substr(str.indexOf(':') + 2, str.length);
+      trimmedStr = str.substr(str.indexOf(':') + 2, str.length);
+      return trimmedStr;
     }
   },
   render: function() {
@@ -75,113 +82,19 @@ GenHealthDetailComponent = React.createClass({displayName: "GenHealthDetailCompo
     }, React.createElement("button", {
       "type": "button",
       "className": (this.props.sex === 'All' ? "btn btn-default active" : "btn btn-default"),
-      "data-value": 0.,
+      "data-value": '0',
       "onClick": this.onToggleSex
     }, "All"), React.createElement("button", {
       "type": "button",
       "className": (this.props.sex === 'Female' ? "btn btn-default active" : "btn btn-default"),
-      "data-value": 2.,
+      "data-value": '2',
       "onClick": this.onToggleSex
     }, "Female"), React.createElement("button", {
       "type": "button",
       "className": (this.props.sex === 'Male' ? "btn btn-default active" : "btn btn-default"),
-      "data-value": 1.,
+      "data-value": '1',
       "onClick": this.onToggleSex
-    }, "Male"))), ((function() {
-
-      /*
-      <table className="table table-condensed table-hover table-striped mb-oxygen">
-        <thead>
-            <tr>
-              <th>Age group</th>
-              <th>Total population</th>
-              <th>Total bad health</th>
-              <th>% bad health</th>
-            </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Age 0 to 15:</td>
-            <td><strong>{ 
-              if @props.data.total_item? then format @props.data.total_item.total_age_detail[0].values.total_population
-            }</strong></td>
-            <td><strong>{ 
-              if @props.data.total_item? then format @props.data.total_item.total_age_detail[0].values.bad_health
-            }</strong></td>
-            <td><strong>{ 
-              if @props.data.total_item? then percFormat (@props.data.total_item.total_age_detail[0].values.bad_health / @props.data.total_item.total_age_detail[0].values.total_population)
-            }</strong></td>
-          </tr>
-          <tr>   
-            <td>Age 16 to 24:</td>
-            <td><strong>{ 
-              if @props.data.total_item? then format @props.data.total_item.total_age_detail[1].values.total_population
-            }</strong></td>
-            <td><strong>{ 
-              if @props.data.total_item? then format @props.data.total_item.total_age_detail[1].values.bad_health
-            }</strong></td>
-            <td><strong>{ 
-              if @props.data.total_item? then percFormat (@props.data.total_item.total_age_detail[1].values.bad_health / @props.data.total_item.total_age_detail[1].values.total_population)
-            }</strong></td>
-          </tr>
-          <tr>   
-            <td>Age 25 to 34:</td>
-            <td><strong>{ 
-              if @props.data.total_item? then format @props.data.total_item.total_age_detail[2].values.total_population
-            }</strong></td>
-            <td><strong>{ 
-              if @props.data.total_item? then format @props.data.total_item.total_age_detail[2].values.bad_health
-            }</strong></td>
-            <td><strong>{ 
-              if @props.data.total_item? then percFormat (@props.data.total_item.total_age_detail[2].values.bad_health / @props.data.total_item.total_age_detail[2].values.total_population)
-            }</strong></td>
-          </tr>
-          <tr>   
-            <td>Age 35 to 49:</td>
-            <td><strong>{ 
-              if @props.data.total_item? then format @props.data.total_item.total_age_detail[3].values.total_population
-            }</strong></td>
-            <td><strong>{ 
-              if @props.data.total_item? then format @props.data.total_item.total_age_detail[3].values.bad_health
-            }</strong></td>
-            <td><strong>{ 
-              if @props.data.total_item? then percFormat (@props.data.total_item.total_age_detail[3].values.bad_health / @props.data.total_item.total_age_detail[3].values.total_population)
-            }</strong></td>
-          </tr>
-          <tr>   
-            <td>Age 50 to 64:</td>
-            <td><strong>{ 
-              if @props.data.total_item? then format @props.data.total_item.total_age_detail[4].values.total_population
-            }</strong></td>
-            <td><strong>{ 
-              if @props.data.total_item? then format @props.data.total_item.total_age_detail[4].values.bad_health
-            }</strong></td>
-            <td><strong>{ 
-              if @props.data.total_item? then percFormat (@props.data.total_item.total_age_detail[4].values.bad_health / @props.data.total_item.total_age_detail[4].values.total_population)
-            }</strong></td>        
-          </tr>
-          <tr>   
-            <td>Age 65 and over:</td>
-            <td><strong>{ 
-              if @props.data.total_item? then format @props.data.total_item.total_age_detail[5].values.total_population
-            }</strong></td>
-            <td><strong>{ 
-              if @props.data.total_item? then format @props.data.total_item.total_age_detail[5].values.bad_health
-            }</strong></td>
-            <td><strong>{ 
-              if @props.data.total_item? then percFormat (@props.data.total_item.total_age_detail[5].values.bad_health / @props.data.total_item.total_age_detail[5].values.total_population)
-            }</strong></td>        
-          </tr>
-          <tr>
-            <td>Total population:</td> 
-            <td><strong>{ if @props.data.total_item? then format @props.data.total_item.population else '' }</strong></td>
-            <td><strong>{ if @props.data.total_item? then format @props.data.total_item.number_bad_health else '' }</strong></td> 
-            <td><strong>{ if @props.data.total_item? then percFormat @props.data.total_item.percent_bad_health else '' }</strong></td>   
-          </tr>
-        </tbody>
-      </table>
-       */
-    })()), React.createElement("div", {
+    }, "Male"))), React.createElement("div", {
       "className": "mb-oxygen"
     }, React.createElement("h4", null, React.createElement("strong", null, "Highlight ethnicities")), React.createElement("div", {
       "className": ""
@@ -189,6 +102,8 @@ GenHealthDetailComponent = React.createClass({displayName: "GenHealthDetailCompo
       "src": "./images/mb_ajax_loader.gif",
       "className": (this.props.isFetching === true && this.props.isDefault === true ? 'mb-spinner' : 'hide')
     }), ((function() {
+
+      /* jshint ignore:start */
       var k, len, ref, results;
       if (this.props.data.ethnicities != null) {
         ref = this.props.data.ethnicities_grouped;
@@ -227,10 +142,10 @@ GenHealthDetailComponent = React.createClass({displayName: "GenHealthDetailCompo
         }
         return results;
       }
+
+      /* jshint ignore:end */
     }).call(this)))));
   }
 });
 
 module.exports = GenHealthDetailComponent;
-
-//# sourceMappingURL=general-health-detail-component.map

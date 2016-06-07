@@ -35,16 +35,18 @@ GenHealthChart = React.createClass({displayName: "GenHealthChart",
         updateHighlights: this.props.updateHighlights
       });
       if (this.props.isDefault === true) {
-        draw.init();
+        return draw.init();
       } else {
-        draw.update();
+        return draw.update();
       }
     }
     if (this.props.updateHighlights === true) {
-      return genHealthChart({
+      draw = genHealthChart({
+        data: this.props.data,
         highlights: this.props._highlights,
         updateHighlights: this.props.updateHighlights
       });
+      return draw.highlightDetail();
     }
   },
   render: function() {
@@ -69,15 +71,13 @@ GenHealthChart = React.createClass({displayName: "GenHealthChart",
     }, React.createElement("g", {
       "className": "title-group mb-oxygen"
     }), React.createElement("g", {
-      "className": "main-group"
-    }), React.createElement("g", {
       "className": "y axis"
     }), React.createElement("g", {
       "className": "x axis"
+    }), React.createElement("g", {
+      "className": "main-group"
     }))));
   }
 });
 
 module.exports = GenHealthChart;
-
-//# sourceMappingURL=general-health-component.map

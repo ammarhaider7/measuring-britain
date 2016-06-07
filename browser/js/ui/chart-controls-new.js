@@ -92,9 +92,9 @@ ControlsNew = React.createClass({displayName: "ControlsNew",
       "className": (this.props.isFetching === true && this.props.isDefault === false ? 'hide' : void 0)
     }, React.createElement("span", {
       "className": "text-center mb-control-value col-sm-5"
-    }, this.props.activeCategory), React.createElement("span", {
+    }, (this.props.chartName === "genHealthChart" ? this.props.activeValue : this.props.activeCategory)), React.createElement("span", {
       "className": "col-sm-5 text-center mb-control-value"
-    }, this.props.activeValue), React.createElement("span", {
+    }, (this.props.chartName === "genHealthChart" ? "Gender: " + this.props.sex : this.props.activeValue)), React.createElement("span", {
       "className": (this.props.isControlsOpen === true ? "glyphicon glyphicon-chevron-up mt-medium" : "glyphicon glyphicon-chevron-down mt-medium")
     }))), React.createElement("div", {
       "className": "collapse col-sm-12 mb-collapse",
@@ -199,5 +199,3 @@ ControlsNew = React.createClass({displayName: "ControlsNew",
 });
 
 module.exports = ControlsNew;
-
-//# sourceMappingURL=chart-controls-new.map
