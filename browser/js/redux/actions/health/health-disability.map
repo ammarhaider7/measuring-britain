@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "file": "health-disability.js",
+  "sourceRoot": "..\\..\\..\\..\\..",
+  "sources": [
+    "browser\\src\\coffee\\redux\\actions\\health\\health-disability.coffee"
+  ],
+  "names": [],
+  "mappings": ""
+}

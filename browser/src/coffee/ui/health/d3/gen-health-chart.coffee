@@ -22,6 +22,8 @@ drawGenHealthChart = (options) ->
 	format = d3.format '.2s'
 	percFormat = d3.format ',.0%'
 	pointPercFormat = d3.format ',.2%'
+	means = data.means
+	data.percentages.push means
 	d3_array = data.percentages
 	ethnic_groups = data.ethnicities
 	ages = data.ages
@@ -91,12 +93,15 @@ drawGenHealthChart = (options) ->
 
 		lines = ethnicity.append 'path'
 			.attr {
-				class: 'line'
+				class: (d) ->
+					if d.key is 'Mean' then 'means line' else 'line'
 				d: (d) ->
 					return line d.values
 				opacity: 1
 			}
 			.style 'stroke', (d) ->
+				if d.key is 'Mean'
+					return '#F44336'
 				return colour d.key
 
 		points = ethnicity.append 'g'
@@ -118,6 +123,8 @@ drawGenHealthChart = (options) ->
 				r: 3
 				fill: 'white'
 				stroke: (d) ->
+					if d.ethnicity is 'Mean'
+						return '#F44336'
 					return colour d.ethnicity
 			}
 
@@ -135,6 +142,8 @@ drawGenHealthChart = (options) ->
 				'text-anchor': 'middle'
 				'font-weight': 'bold'
 				fill: (d) ->
+					if d.ethnicity is 'Mean'
+						return '#F44336'
 					return colour d.ethnicity
 			}
 			.text (d) ->
@@ -154,6 +163,8 @@ drawGenHealthChart = (options) ->
 					trimmedStr = 'Gypsy'
 				else if d.key.indexOf('English') isnt -1
 					trimmedStr = 'British'
+				else if d.key.indexOf('Mean') isnt -1
+					trimmedStr = 'Mean'
 				else	
 					str = d.key
 					trimmedStr = str.substr(str.indexOf(':') + 2, str.length)

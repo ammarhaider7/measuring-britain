@@ -71,9 +71,7 @@ GenHealthDetailComponent = React.createClass({displayName: "GenHealthDetailCompo
   },
   render: function() {
     var ethnicity, group, i, j;
-    return React.createElement("div", null, React.createElement("div", {
-      "className": "clearfix"
-    }, React.createElement("span", {
+    return React.createElement("div", null, React.createElement("div", null, React.createElement("span", {
       "className": "mb-oxygen mb-gender-toggles-label"
     }, "Choose gender: "), React.createElement("div", {
       "className": "btn-group mb-gender-toggles mb-oxygen mb-right",
@@ -95,8 +93,18 @@ GenHealthDetailComponent = React.createClass({displayName: "GenHealthDetailCompo
       "data-value": '1',
       "onClick": this.onToggleSex
     }, "Male"))), React.createElement("div", {
-      "className": "mb-oxygen"
-    }, React.createElement("h4", null, React.createElement("strong", null, "Highlight ethnicities")), React.createElement("div", {
+      "className": "mb-oxygen clearfix mt-medium"
+    }, React.createElement("h4", {
+      "className": "mb-left"
+    }, React.createElement("strong", null, "Highlight ethnicities")), React.createElement("div", {
+      "className": "checkbox mb-right"
+    }, React.createElement("label", {
+      "className": "checkbox-zone"
+    }, React.createElement("input", {
+      "type": "checkbox",
+      "value": "Mean",
+      "onChange": this.handleChange
+    }), "Show mean")), React.createElement("div", {
       "className": ""
     }, React.createElement("img", {
       "src": "./images/mb_ajax_loader.gif",
@@ -126,7 +134,7 @@ GenHealthDetailComponent = React.createClass({displayName: "GenHealthDetailCompo
                 }, React.createElement("strong", null, ethnicity.title))));
               } else {
                 results1.push(React.createElement("div", {
-                  "className": "checkbox",
+                  "className": "checkbox ethnicity",
                   "key": ethnicity
                 }, React.createElement("label", {
                   "className": "checkbox-zone"

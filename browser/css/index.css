@@ -6245,6 +6245,10 @@ nav.hidden-xs {
   stroke: steelblue;
   stroke-width: 1.75px; }
 
+.gen-health-svg .means.line {
+  stroke-width: 2px;
+  stroke-dasharray: 8,8; }
+
 .gen-health-svg path.domain {
   display: none; }
 
@@ -6286,7 +6290,7 @@ nav.hidden-xs {
   display: block;
   margin: 120px auto; }
 
-#general-health-details div.checkbox {
+#general-health-details .checkbox.ethnicity {
   width: 110%; }
 
 #general-health-details .checkbox-zone:hover {

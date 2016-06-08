@@ -71,7 +71,7 @@ GenHealthDetailComponent = React.createClass
   render: ->
 
     <div>
-      <div className="clearfix">
+      <div>
         <span className="mb-oxygen mb-gender-toggles-label">Choose gender: </span>
         <div className="btn-group mb-gender-toggles mb-oxygen mb-right" role="group" aria-label="...">
           <button type="button" 
@@ -92,8 +92,18 @@ GenHealthDetailComponent = React.createClass
           >Male</button>
         </div>
       </div>
-      <div className="mb-oxygen">
-        <h4><strong>Highlight ethnicities</strong></h4>
+      <div className="mb-oxygen clearfix mt-medium">
+        <h4 className="mb-left"><strong>Highlight ethnicities</strong></h4>
+        <div className="checkbox mb-right">
+          <label className="checkbox-zone">
+            <input
+              type="checkbox" 
+              value="Mean" 
+              onChange={ @handleChange }
+            />
+            Show mean
+          </label>
+        </div>
         <div className="">
           <img src="./images/mb_ajax_loader.gif" 
             className={ 
@@ -110,7 +120,7 @@ GenHealthDetailComponent = React.createClass
                     <label className="ethnic_title"><strong>{ ethnicity.title }</strong></label>
                   </div>
                 else
-                  <div className="checkbox" key={ethnicity}>
+                  <div className="checkbox ethnicity" key={ethnicity}>
                     <label className="checkbox-zone">
                       <input
                         type="checkbox" 

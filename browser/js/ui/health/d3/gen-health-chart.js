@@ -2,7 +2,7 @@
 var drawGenHealthChart;
 
 drawGenHealthChart = function(options) {
-  var activeCategory, activeValue, ages, attachHoverHandlers, chart_height, chart_width, colour, container, d3_array, data, ethnic_groups, format, height, highlights, isDefault, line, margin, max_perc, max_value, my, onInitDone, onMouseOver, percFormat, pointPercFormat, ref, ref1, updateHighlights, width, x, xAxis, y, yAxis;
+  var activeCategory, activeValue, ages, attachHoverHandlers, chart_height, chart_width, colour, container, d3_array, data, ethnic_groups, format, height, highlights, isDefault, line, margin, max_perc, max_value, means, my, onInitDone, onMouseOver, percFormat, pointPercFormat, ref, ref1, updateHighlights, width, x, xAxis, y, yAxis;
   container = options.container, data = options.data, isDefault = options.isDefault, onMouseOver = options.onMouseOver, activeCategory = options.activeCategory, activeValue = options.activeValue, onInitDone = options.onInitDone, highlights = options.highlights, updateHighlights = options.updateHighlights;
   my = {};
   width = (ref = $(container).width()) != null ? ref : 750;
@@ -19,6 +19,8 @@ drawGenHealthChart = function(options) {
   format = d3.format('.2s');
   percFormat = d3.format(',.0%');
   pointPercFormat = d3.format(',.2%');
+  means = data.means;
+  data.percentages.push(means);
   d3_array = data.percentages;
   ethnic_groups = data.ethnicities;
   ages = data.ages;
@@ -49,12 +51,21 @@ drawGenHealthChart = function(options) {
     y_axis_group.call(yAxis).append("text").attr("transform", "rotate(-90)").attr("y", 6).attr("dy", ".71em").style("text-anchor", "end").text("% of Population");
     ethnicity = main_group.selectAll('.ethnicity').data(d3_array).enter().append('g').attr('class', 'ethnicity');
     lines = ethnicity.append('path').attr({
-      "class": 'line',
+      "class": function(d) {
+        if (d.key === 'Mean') {
+          return 'means line';
+        } else {
+          return 'line';
+        }
+      },
       d: function(d) {
         return line(d.values);
       },
       opacity: 1
     }).style('stroke', function(d) {
+      if (d.key === 'Mean') {
+        return '#F44336';
+      }
       return colour(d.key);
     });
     points = ethnicity.append('g').attr('class', 'point').attr('opacity', 0);
@@ -71,6 +82,9 @@ drawGenHealthChart = function(options) {
       r: 3,
       fill: 'white',
       stroke: function(d) {
+        if (d.ethnicity === 'Mean') {
+          return '#F44336';
+        }
         return colour(d.ethnicity);
       }
     });
@@ -86,6 +100,9 @@ drawGenHealthChart = function(options) {
       'text-anchor': 'middle',
       'font-weight': 'bold',
       fill: function(d) {
+        if (d.ethnicity === 'Mean') {
+          return '#F44336';
+        }
         return colour(d.ethnicity);
       }
     }).text(function(d) {
@@ -105,6 +122,8 @@ drawGenHealthChart = function(options) {
         trimmedStr = 'Gypsy';
       } else if (d.key.indexOf('English') !== -1) {
         trimmedStr = 'British';
+      } else if (d.key.indexOf('Mean') !== -1) {
+        trimmedStr = 'Mean';
       } else {
         str = d.key;
         trimmedStr = str.substr(str.indexOf(':') + 2, str.length);

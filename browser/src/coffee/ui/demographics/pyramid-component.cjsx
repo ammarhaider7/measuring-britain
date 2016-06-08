@@ -1,9 +1,5 @@
-# React = require 'react'
-# d3 = require 'd3'
-# Controls = require '../chart-controls.js'
 PyramidControls = require './chart-controls-pyramid.js'
 data = require './data/pyramid-chart-controls.js'
-# FancySelect = require 'react-select'
 drawPyramid = require './d3/pyramid.js'
 
 value_options = {
@@ -23,7 +19,6 @@ PyramidComponent = React.createClass
 	componentDidUpdate: ->
 
 		if @props.updatePyramid is yes or @props.updateOutline is yes
-			console.log 'updatePyramid'
 			pyramid = drawPyramid({
 				container: @refs.pyramidSvg
 				ages: @props.data.bars.ages

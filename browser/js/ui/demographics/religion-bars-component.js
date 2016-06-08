@@ -84,7 +84,7 @@ BarsComponent = React.createClass({displayName: "BarsComponent",
       "className": "x axis"
     }), React.createElement("g", {
       "className": "detail-group mb-quicksand"
-    }))));
+    }))), React.createElement("hr", null));
   }
 });
 

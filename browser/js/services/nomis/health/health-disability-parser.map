@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "file": "health-disability-parser.js",
+  "sourceRoot": "..\\..\\..\\..\\..",
+  "sources": [
+    "browser\\src\\coffee\\services\\nomis\\health\\health-disability-parser.coffee"
+  ],
+  "names": [],
+  "mappings": ""
+}

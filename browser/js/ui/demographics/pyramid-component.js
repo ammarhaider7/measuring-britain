@@ -22,7 +22,6 @@ PyramidComponent = React.createClass({displayName: "PyramidComponent",
   componentDidUpdate: function() {
     var pyramid, ref, ref1, ref2, ref3, ref4, ref5, ref6, ref7;
     if (this.props.updatePyramid === true || this.props.updateOutline === true) {
-      console.log('updatePyramid');
       pyramid = drawPyramid({
         container: this.refs.pyramidSvg,
         ages: this.props.data.bars.ages,

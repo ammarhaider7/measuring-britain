@@ -1,5 +1,10 @@
 parse = (dataArray) ->
 
+	sumHealth = (arr, health_value) ->
+		d3.sum arr, (d) ->
+			if d.c_health.value is health_value
+				return d.obs_value.value
+
 	# Nest function to get general health figures by age by ethnicity
 	nested_data = d3.nest().key (d) ->
 
@@ -16,20 +21,9 @@ parse = (dataArray) ->
 
 		      return d.obs_value.value
 
-		    good: d3.sum values, (d) ->
-
-		      if d.c_health.value is 1
-		        return d.obs_value.value
-
-		    fair: d3.sum values, (d) ->
-
-		      if d.c_health.value is 2
-		        return d.obs_value.value
-
-		    bad: d3.sum values, (d) ->
-
-		      if d.c_health.value is 3
-		        return d.obs_value.value
+		    good: sumHealth values, 1
+		    fair: sumHealth values, 2
+		    bad: sumHealth values, 3
 
 		}
 	.entries dataArray
@@ -50,9 +44,7 @@ parse = (dataArray) ->
 
 			total_population: d3.sum values, (d) ->
 				return d.obs_value.value
-			bad_health: d3.sum values, (d) ->
-				if d.c_health.value is 3
-					return d.obs_value.value
+			bad_health: sumHealth values, 3
 
 		}
 	.entries dataArray
@@ -62,9 +54,7 @@ parse = (dataArray) ->
 		return d.obs_value.value
 
 	# Total in bad health
-	number_bad_health = d3.sum dataArray, (d) ->
-		if d.c_health.value is 3
-			return d.obs_value.value
+	number_bad_health = sumHealth dataArray, 3
 
 	# Total populations and no. bad health for each age group
 	total_age_detail = d3.nest().key (d) ->
@@ -77,9 +67,7 @@ parse = (dataArray) ->
 
 			total_population: d3.sum values, (d) ->
 				return d.obs_value.value
-			bad_health: d3.sum values, (d) ->
-				if d.c_health.value is 3
-					return d.obs_value.value
+			bad_health: sumHealth values, 3
 		}
 	.entries dataArray
 
@@ -114,6 +102,34 @@ parse = (dataArray) ->
 
 		}
 
+	# Nested by ages
+	nested_by_age = d3.nest().key (d) ->
+
+	  return d.c_age.description
+
+	.rollup (values) ->
+
+		return  {
+			sum_mean: d3.mean values, (d) ->
+				return d.obs_value.value
+			bad_mean: (sumHealth values, 3) / values.length
+ 		}
+	.entries dataArray
+
+	# calculate mean
+	means = {
+		key: 'Mean'
+		values: nested_by_age.map (ob) ->
+			return {
+				key: ob.key
+				ethnicity: 'Mean'
+				values: {
+					bad: ob.values.bad_mean / ob.values.sum_mean
+				}
+			}
+	}
+
+	# Flat max percentages array
 	flatMaxPercsArray = percentages.map (ethnicity) ->
 
 		return {
@@ -181,6 +197,7 @@ parse = (dataArray) ->
 		ethnicities_grouped
 		nested_data
 		percentages
+		means
 		ethnicity_age_detail
 		total_item
 		max_perc

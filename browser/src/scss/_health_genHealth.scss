@@ -30,6 +30,10 @@
 	  stroke: steelblue;
 	  stroke-width: 1.75px;
 	}
+	.means.line {
+		stroke-width: 2px;
+   	 	stroke-dasharray: 8,8;
+	}
 	path.domain {
 		display: none;
 	}
@@ -73,7 +77,7 @@
 		display: block;
   		margin: 120px auto;
 	}
-	div.checkbox {
+	.checkbox.ethnicity {
 		width: 110%;
 	}
 	.checkbox-zone:hover {

@@ -7,6 +7,7 @@ bootstrap_tooltips = require '../../bootstrap-sass/javascripts/bootstrap/tooltip
 EthnicSection = require './ui/demographics/static-components/ethnic-diversity.js'
 ReligiousSection = require './ui/demographics/static-components/religious-diversity.js'
 GeneralHealthSection = require './ui/health/static-components/general-health.js'
+DisabilitySection = require './ui/health/static-components/health-disability.js'
 
 # Establish what page this is
 path = location.pathname.split('/')[1]
@@ -28,6 +29,7 @@ renderHealth = ->
 	render = require './redux/health.js'
 	# Render presentational (stateless) components manually
 	ReactDOM.render <GeneralHealthSection/>, document.getElementById 'mb_general_health'
+	ReactDOM.render <DisabilitySection/>, document.getElementById 'mb_health_disability'
 	# Render container components via redux
 	render()
 

@@ -54,11 +54,7 @@ makeGenHealthRequest = (options) ->
 						return "c_sex=1"
 					else
 						return "c_sex=0"
-				geography: do ->
-					if catLabel.indexOf('Geography') isnt -1 
-						return "geography=#{ valCode }"
-					else
-						return "geography=K04000001"
+				geography: "geography=#{ valCode }"
 			}
 		}
 
