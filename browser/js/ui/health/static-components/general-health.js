@@ -38,10 +38,10 @@ GeneralHealthSection = function() {
   })), React.createElement("div", {
     "className": "col-sm-8"
   }, React.createElement("div", {
-    "id": "general-health-controls"
-  }), React.createElement("div", {
     "id": "general-health-component"
   })));
 };
 
 module.exports = GeneralHealthSection;
+
+//# sourceMappingURL=general-health.map

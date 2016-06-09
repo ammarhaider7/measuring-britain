@@ -77,6 +77,7 @@ drawGenHealthChart = (options) ->
 		y_axis_group.attr 'transform', "translate(#{ margin.left }, #{ margin.top })"
 		title_group.attr 'transform', "translate(#{ chart_width / 2 - margin.left }, 0)"
 
+		# Create axes
 		x_axis_group.call xAxis
 		y_axis_group.call yAxis
 		    .append "text"
@@ -86,6 +87,7 @@ drawGenHealthChart = (options) ->
 		      .style "text-anchor", "end"
 		      .text "% of Population"
 
+		# Create ethnicity groups to house lines, points and labels
 		ethnicity = main_group.selectAll '.ethnicity'
 			.data d3_array
 		  .enter().append 'g'
@@ -262,10 +264,10 @@ drawGenHealthChart = (options) ->
 			.text (d) ->
 				return pointPercFormat d.values.bad
 
-		x_axis_group.transition()
-			.duration 1000
-			.delay 500
-			.call xAxis
+		# x_axis_group.transition()
+		# 	.duration 1000
+		# 	.delay 500
+		# 	.call xAxis
 
 		y_axis_group.transition()
 			.duration 1000

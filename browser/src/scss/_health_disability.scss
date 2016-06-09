@@ -1,0 +1,28 @@
+#health-disability-component {
+	.mb-spinner {
+	    margin: 150px auto 0;
+	    display: block;
+	}
+	.disability-svg {
+		.axis {
+		  text {
+		  	font-size: 11px;
+		  }
+	  		path, line {
+			  fill: none;
+			  stroke: #333;
+			  shape-rendering: crispEdges;
+			}
+		}
+
+		.x.axis path {
+		  fill: none;
+		  stroke: none;
+		}
+
+		.x.axis line {
+		  stroke: #333;
+		  stroke-opacity: .8;
+		}
+	}
+}

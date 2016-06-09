@@ -1,9 +1,14 @@
 parse = (dataArray) ->
 
 	sumHealth = (arr, health_value) ->
-		d3.sum arr, (d) ->
+		return d3.sum arr, (d) ->
 			if d.c_health.value is health_value
 				return d.obs_value.value
+
+	getFilteredArrLength = (arr, health_value) ->
+		return arr.filter (ob) ->
+			return ob.c_health.value is health_value
+		.length
 
 	# Nest function to get general health figures by age by ethnicity
 	nested_data = d3.nest().key (d) ->
@@ -110,9 +115,9 @@ parse = (dataArray) ->
 	.rollup (values) ->
 
 		return  {
-			sum_mean: d3.mean values, (d) ->
+			sum: d3.sum values, (d) ->
 				return d.obs_value.value
-			bad_mean: (sumHealth values, 3) / values.length
+			bad: (sumHealth values, 3)
  		}
 	.entries dataArray
 
@@ -124,7 +129,7 @@ parse = (dataArray) ->
 				key: ob.key
 				ethnicity: 'Mean'
 				values: {
-					bad: ob.values.bad_mean / ob.values.sum_mean
+					bad: ob.values.bad / ob.values.sum
 				}
 			}
 	}

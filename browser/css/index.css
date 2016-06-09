@@ -6308,3 +6308,23 @@ nav.hidden-xs {
   background-color: #DA4A70;
   font-weight: 700;
   color: white; }
+
+#health-disability-component .mb-spinner {
+  margin: 150px auto 0;
+  display: block; }
+
+#health-disability-component .disability-svg .axis text {
+  font-size: 11px; }
+
+#health-disability-component .disability-svg .axis path, #health-disability-component .disability-svg .axis line {
+  fill: none;
+  stroke: #333;
+  shape-rendering: crispEdges; }
+
+#health-disability-component .disability-svg .x.axis path {
+  fill: none;
+  stroke: none; }
+
+#health-disability-component .disability-svg .x.axis line {
+  stroke: #333;
+  stroke-opacity: .8; }

@@ -21,7 +21,6 @@ DisabilitySection = ->
 			<div className="mb-oxygen mb-section-text">
 				<p>The ethnic Disparities in long-term illness and disability chart shows the number and percentage of the population with a long-term illness or disability broken down by age group and ethnicity.</p>    
 			</div>
-			<div className="" id="health-disability-details"></div>
 		</div>
 		<div className="col-sm-12">
 			<div id="health-disability-controls"></div>

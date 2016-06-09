@@ -19,7 +19,7 @@ makeGenHealthRequest = (options) ->
 		dataSet: dataSet
 		queryStringOps: {
 			date: "date=latest"
-			geography: "geography=K04000001"
+			geography: "geography=2092957703"
 			c_ethpuk11: "c_ethpuk11=2...5,7...10,12...16,18...20,22,23"
 			c_health: "c_health=1...3"
 			c_age: "c_age=1...6"

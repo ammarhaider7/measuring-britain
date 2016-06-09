@@ -33,7 +33,7 @@ INIT_GEN_HEALTH = "INIT_GEN_HEALTH";
 
 INIT_GEN_HEALTH_OFF = "INIT_GEN_HEALTH_OFF";
 
-INIT_DONE = "INIT_DONE";
+INIT_DONE = "H_INIT_DONE";
 
 TOGGLE_SEX = "TOGGLE_SEX";
 
@@ -199,3 +199,5 @@ module.exports = {
   controlsOpened: controlsOpened,
   controlsClosed: controlsClosed
 };
+
+//# sourceMappingURL=general-health-actions.map

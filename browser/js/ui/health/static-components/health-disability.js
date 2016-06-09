@@ -32,10 +32,7 @@ DisabilitySection = function() {
     "aria-controls": "disabilityCollapse"
   }, "×"), React.createElement("p", null, React.createElement("strong", null, "Long-term illness or disability by ethnic group and gender")), React.createElement("p", null, "A ", React.createElement("strong", null, "constrictive"), " pyramid has fewer people in the younger age categories, perhaps as baby boom populations shift to more conservative birth rates. An ", React.createElement("strong", null, "expansive"), " pyramid represents greater numbers of people in the younger age categories and is typical of where birth rates are high and life expectancy is short. A ", React.createElement("strong", null, "stationary"), " pyramid shows roughly equal numbers of people in all age categories, with a tapering towards the older age categories.")))), React.createElement("div", {
     "className": "mb-oxygen mb-section-text"
-  }, React.createElement("p", null, "The ethnic Disparities in long-term illness and disability chart shows the number and percentage of the population with a long-term illness or disability broken down by age group and ethnicity.")), React.createElement("div", {
-    "className": "",
-    "id": "health-disability-details"
-  })), React.createElement("div", {
+  }, React.createElement("p", null, "The ethnic Disparities in long-term illness and disability chart shows the number and percentage of the population with a long-term illness or disability broken down by age group and ethnicity."))), React.createElement("div", {
     "className": "col-sm-12"
   }, React.createElement("div", {
     "id": "health-disability-controls"
@@ -45,3 +42,5 @@ DisabilitySection = function() {
 };
 
 module.exports = DisabilitySection;
+
+//# sourceMappingURL=health-disability.map

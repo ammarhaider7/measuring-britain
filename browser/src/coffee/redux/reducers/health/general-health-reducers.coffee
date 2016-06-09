@@ -26,7 +26,7 @@ genHealthInitState = {
     value: 'countries'
     label: 'Geography (Countries)'
   _value:
-    value: 'K04000001'
+    value: '2092957703'
     label: 'England \& Wales'
   activeCategory: 'Geography (Countries)'
   activeValue: 'England \& Wales'

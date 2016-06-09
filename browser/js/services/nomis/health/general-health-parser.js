@@ -2,13 +2,18 @@
 var parse;
 
 parse = function(dataArray) {
-  var ages, breakArrayIntoGroups, ethnicities, ethnicities_grouped, ethnicities_titles, ethnicity_age_detail, flatMaxPercsArray, max_perc, max_value, means, nested_by_age, nested_data, number_bad_health, percentages, sumHealth, total_age_detail, total_item, total_population;
+  var ages, breakArrayIntoGroups, ethnicities, ethnicities_grouped, ethnicities_titles, ethnicity_age_detail, flatMaxPercsArray, getFilteredArrLength, max_perc, max_value, means, nested_by_age, nested_data, number_bad_health, percentages, sumHealth, total_age_detail, total_item, total_population;
   sumHealth = function(arr, health_value) {
     return d3.sum(arr, function(d) {
       if (d.c_health.value === health_value) {
         return d.obs_value.value;
       }
     });
+  };
+  getFilteredArrLength = function(arr, health_value) {
+    return arr.filter(function(ob) {
+      return ob.c_health.value === health_value;
+    }).length;
   };
   nested_data = d3.nest().key(function(d) {
     return d.c_ethpuk11.description;
@@ -76,10 +81,10 @@ parse = function(dataArray) {
     return d.c_age.description;
   }).rollup(function(values) {
     return {
-      sum_mean: d3.mean(values, function(d) {
+      sum: d3.sum(values, function(d) {
         return d.obs_value.value;
       }),
-      bad_mean: (sumHealth(values, 3)) / values.length
+      bad: sumHealth(values, 3)
     };
   }).entries(dataArray);
   means = {
@@ -89,7 +94,7 @@ parse = function(dataArray) {
         key: ob.key,
         ethnicity: 'Mean',
         values: {
-          bad: ob.values.bad_mean / ob.values.sum_mean
+          bad: ob.values.bad / ob.values.sum
         }
       };
     })
@@ -165,3 +170,5 @@ parse = function(dataArray) {
 };
 
 module.exports = parse;
+
+//# sourceMappingURL=general-health-parser.map

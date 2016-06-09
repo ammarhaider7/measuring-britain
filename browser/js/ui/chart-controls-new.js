@@ -53,6 +53,17 @@ ControlsNew = React.createClass({displayName: "ControlsNew",
       fetchChartData = 'fetchSunburstData';
     } else if (this.props.chartName === 'relBars') {
       fetchChartData = 'fetchReligionData';
+    } else if (this.props.chartName === 'disabilityChart') {
+      fetchChartData = 'fetchDisabilityData';
+      return this.props[fetchChartData]({
+        isDefault: false,
+        category: this.props._category,
+        value: this.props._value,
+        sex: {
+          label: this.props.sex,
+          value: +this.props.sex_code
+        }
+      });
     } else if (this.props.chartName === "genHealthChart") {
       fetchChartData = 'fetchGenHealthData';
       return this.props[fetchChartData]({
@@ -199,3 +210,5 @@ ControlsNew = React.createClass({displayName: "ControlsNew",
 });
 
 module.exports = ControlsNew;
+
+//# sourceMappingURL=chart-controls-new.map

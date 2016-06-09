@@ -187,7 +187,6 @@ drawGenHealthChart = function(options) {
     }).text(function(d) {
       return pointPercFormat(d.values.bad);
     });
-    x_axis_group.transition().duration(1000).delay(500).call(xAxis);
     y_axis_group.transition().duration(1000).delay(500).call(yAxis);
     return attachHoverHandlers();
   };
@@ -274,3 +273,5 @@ drawGenHealthChart = function(options) {
 };
 
 module.exports = drawGenHealthChart;
+
+//# sourceMappingURL=gen-health-chart.map

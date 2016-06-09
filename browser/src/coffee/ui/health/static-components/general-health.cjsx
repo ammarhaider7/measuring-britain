@@ -23,7 +23,6 @@ GeneralHealthSection = ->
 			<div className="" id="general-health-details"></div>
 		</div>
 		<div className="col-sm-8">
-			<div id="general-health-controls"></div>
 			<div id="general-health-component"></div>
 		</div>
 	</div>

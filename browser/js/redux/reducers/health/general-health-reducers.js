@@ -15,7 +15,7 @@ genHealthInitState = {
     label: 'Geography (Countries)'
   },
   _value: {
-    value: 'K04000001',
+    value: '2092957703',
     label: 'England \& Wales'
   },
   activeCategory: 'Geography (Countries)',
@@ -173,3 +173,5 @@ GenHealthChart = function(state, action) {
 };
 
 module.exports = GenHealthChart;
+
+//# sourceMappingURL=general-health-reducers.map

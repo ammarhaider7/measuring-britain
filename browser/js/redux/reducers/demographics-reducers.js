@@ -18,3 +18,5 @@ mbReducer = combineReducers({
 });
 
 module.exports = mbReducer;
+
+//# sourceMappingURL=demographics-reducers.map
