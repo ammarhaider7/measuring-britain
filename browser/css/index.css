@@ -6321,9 +6321,15 @@ nav.hidden-xs {
   stroke: #333;
   shape-rendering: crispEdges; }
 
+#health-disability-component .disability-svg .legend-text {
+  font-size: 12px; }
+
 #health-disability-component .disability-svg .x.axis path {
   fill: none;
   stroke: none; }
+
+#health-disability-component .disability-svg .x.axis text {
+  font-weight: bold; }
 
 #health-disability-component .disability-svg .x.axis line {
   stroke: #333;

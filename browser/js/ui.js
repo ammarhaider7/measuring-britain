@@ -61,5 +61,3 @@ switch (path) {
 $(function() {
   return $('[data-toggle="tooltip"]').tooltip();
 });
-
-//# sourceMappingURL=ui.map

@@ -2,29 +2,6 @@ drawDisabilityChart = (options) ->
 
 	{ container, data, isDefault, onMouseOver, activeCategory, activeValue, onInitDone } = options
 
-	trimEthnicity = (ethnicity_string) ->
-
-		if ethnicity_string.indexOf('Gypsy') isnt -1
-			trimmedStr = 'Gypsy'
-			return trimmedStr
-		else if ethnicity_string.indexOf('English') isnt -1
-			trimmedStr = 'British'
-			return trimmedStr
-		else if ethnicity_string.indexOf('Any other') isnt -1
-			trimmedStr = 'Any other'
-			return trimmedStr
-		else if ethnicity_string.indexOf('Arab') isnt -1
-			trimmedStr = 'Arab'
-			return trimmedStr
-		else if ethnicity_string.indexOf('and') isnt -1
-			str = ethnicity_string.replace ' and ', '/'
-			trimmedStr = str.substr(str.indexOf(':') + 2, str.length)
-			return trimmedStr
-		else
-			str = ethnicity_string
-			trimmedStr = str.substr(str.indexOf(':') + 2, str.length)
-			return trimmedStr
-
 	# Actual chart code
 	my = {}
 
@@ -35,7 +12,7 @@ drawDisabilityChart = (options) ->
 	margin = 
 		top: 20
 		right: 20
-		bottom: 30
+		bottom: 45
 		left: 40
 		p: 25
 
@@ -45,8 +22,8 @@ drawDisabilityChart = (options) ->
 	format = d3.format '.2s'
 	percFormat = d3.format ',.0%'
 	pointPercFormat = d3.format ',.2%'
-	d3_array = data.percentages
-	ethnicities = data.ethnicities
+	d3_array = data.sorted_percentages
+	ethnicities = data.sorted_ethnicities
 	ages = data.ages
 	colour = d3.scale.ordinal()
     	.range ["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c"]
@@ -66,7 +43,6 @@ drawDisabilityChart = (options) ->
 		.range [chart_height, 0]
 
 	xAxis = d3.svg.axis()
-		.tickFormat trimEthnicity
 		.scale x0
 		.orient 'bottom'
 
@@ -74,6 +50,37 @@ drawDisabilityChart = (options) ->
 		.scale y
 		.tickFormat percFormat
 		.orient 'left'
+
+	trimEthnicity = (ethnicity_string) ->
+
+		if ethnicity_string.indexOf('Gypsy') isnt -1
+			trimmedStr = 'Gypsy'
+			return trimmedStr
+		else if ethnicity_string.indexOf('White and Black Caribbean') isnt -1
+			trimmedStr = 'White/Carribean'
+			return trimmedStr
+		else if ethnicity_string.indexOf('White and Black African') isnt -1
+			trimmedStr = 'White/African'
+			return trimmedStr
+		else if ethnicity_string.indexOf('English') isnt -1
+			trimmedStr = 'British'
+			return trimmedStr
+		else if ethnicity_string.indexOf('Any other') isnt -1
+			trimmedStr = 'Any other'
+			return trimmedStr
+		else if ethnicity_string.indexOf('Arab') isnt -1
+			trimmedStr = 'Arab'
+			return trimmedStr
+		else if ethnicity_string.indexOf('and') isnt -1
+			str = ethnicity_string.replace ' and ', '/'
+			trimmedStr = str.substr(str.indexOf(':') + 2, str.length)
+			return trimmedStr
+		else
+			str = ethnicity_string
+			trimmedStr = str.substr(str.indexOf(':') + 2, str.length)
+			return trimmedStr
+
+	xAxis.tickFormat trimEthnicity
 
 	my.init = ->
 
@@ -83,12 +90,14 @@ drawDisabilityChart = (options) ->
 		x_axis_group = svg.select '.x.axis'
 		y_axis_group = svg.select '.y.axis'
 		title_group = svg.select '.title-group'
+		legend_group = svg.select '.legend-group'
 
 		# Transforms
 		main_group.attr 'transform', "translate(#{ margin.left }, #{ margin.top })"
 		x_axis_group.attr 'transform', "translate(#{ margin.left }, #{ chart_height + margin.top })"
 		y_axis_group.attr 'transform', "translate(#{ margin.left }, #{ margin.top })"
 		title_group.attr 'transform', "translate(#{ chart_width / 2 + margin.left }, 0)"
+		legend_group.attr 'transform', "translate(#{ chart_width - margin.p }, #{ margin.top })"
 
 		# Create axes
 		x_axis_group.call xAxis
@@ -118,39 +127,105 @@ drawDisabilityChart = (options) ->
 		  		width: x1.rangeBand()
 		  		x: (d) ->
 		  			return x1 d.key
-		  		y: (d) ->
-		  			return y d.values.limited_a_lot
-		  		height: (d) ->
-		  			return chart_height - y d.values.limited_a_lot
+		  		y: chart_height
+		  		height: 0
+		  		rx: 3
 		  		fill: (d) ->
 		  			colour d.key
 		  		class: 'rect'
  		  	}
+ 		  	.transition()
+ 		  	.duration 1500
+ 		  	.attr {
+		  		y: (d) ->
+		  			return y d.values.limited_a_lot
+		  		height: (d) ->
+ 		  			return chart_height - y d.values.limited_a_lot
+ 		  	}
 
-		# labels = ethnicity.append 'text'
-		# 	.attr {
-		# 		class: 'label'
-		# 		transform: (d) ->
-		# 			return "translate(#{ (x d.values[d.values.length - 1].key) }, #{ y d.values[d.values.length - 1].values.bad })"
-		# 		x: 5
-		# 		dy: '.35em'
-		# 		opacity: 0
-		# 	}
-		# 	.text (d) ->
-		# 		if d.key.indexOf('Gypsy') isnt -1
-		# 			trimmedStr = 'Gypsy'
-		# 		else if d.key.indexOf('English') isnt -1
-		# 			trimmedStr = 'British'
-		# 		else if d.key.indexOf('Mean') isnt -1
-		# 			trimmedStr = 'Mean'
-		# 		else	
-		# 			str = d.key
-		# 			trimmedStr = str.substr(str.indexOf(':') + 2, str.length)
-		# 		return trimmedStr
-		# 	.transition()
-		# 	.duration 1750
-		# 	.attr 'opacity', 0.1
+ 		# create tooltip groups
+		tooltip_groups = ethnicity.append 'g'
+ 			.attr 'class', 'tooltip-group'
 
+ 		# tooltip backgrounds
+		tooltip_groups.append 'rect'
+			.attr {
+				class: 'tooltip-bg'
+				width: x0.rangeBand() + margin.p + 5
+				height: '42px'
+				fill: '#333'
+				x: -10
+				y: y 0.3
+				opacity: 0
+				rx: 6
+			}
+
+		# toolip percentage labels
+		tooltip = tooltip_groups.append 'text'
+			.attr {
+				class: 'mb-tooltip'
+				transform: (d) ->
+					return "translate(#{ x0.rangeBand() / 2 }, #{ y 0.3 })"
+				x: 5
+				dy: '.35em'
+				y: margin.p + 5
+				fill: '#FF8C00'
+				opacity: 0
+				'font-size': '75%'
+				'font-weight': 'bold'
+				'text-anchor': 'middle'
+			}
+			.text ''
+
+		# tooltip age labels
+		tooltip_age = tooltip_groups.append 'text'
+			.attr {
+				class: 'mb-tooltip-age'
+				transform: (d) ->
+					return "translate(#{ x0.rangeBand() / 2 }, #{ y 0.3 })"
+				x: 5
+				dy: '.35em'
+				y: margin.p / 2
+				fill: '#FFF'
+				opacity: 0
+				'font-size': '75%'
+				'font-weight': 'bold'
+				'text-anchor': 'middle'
+			}
+			.text ''
+
+		# Chart legend
+		legend = legend_group.selectAll '.legend'
+			.data ages
+		  .enter().append 'g'
+			.attr {
+				class: 'legend'
+				transform: (d, i) ->
+					return "translate(0, #{ i * 20 })"
+			}
+
+		legend.append 'rect'
+			.attr {
+				rx: 3
+				x: 18
+				width: 18
+				height: 18
+				fill: (d) ->
+					return colour d
+			}
+
+		legend.append 'text'
+			.attr {
+				class: 'legend-text'
+				x: 0
+				y: 9
+				dy: '0.35em'
+				'text-anchor': 'end'
+			}
+			.text (d) ->
+				return d
+
+		# chart title
 		title_group.append 'text'
 			.attr {
 				x: 0
@@ -190,14 +265,14 @@ drawDisabilityChart = (options) ->
 		  			return chart_height - y d.values.limited_a_lot
  		  	}
 
-		labels.data d3_array
-			.transition()
-			.duration 1000
-			.delay 500
-			.attr {
-				transform: (d) ->
-					return "translate(#{ (x d.values[d.values.length - 1].key) }, #{ y d.values[d.values.length - 1].values.bad })"
-			}
+		# labels.data d3_array
+		# 	.transition()
+		# 	.duration 1000
+		# 	.delay 500
+		# 	.attr {
+		# 		transform: (d) ->
+		# 			return "translate(#{ (x d.values[d.values.length - 1].key) }, #{ y d.values[d.values.length - 1].values.bad })"
+		# 	}
 
 		# Add mouse over handler
 		attachHoverHandlers() 
@@ -211,15 +286,41 @@ drawDisabilityChart = (options) ->
 		rects.on 'mouseover', (d) ->
 
 			_rect = d3.select @
-
+			$raw_rect_el = $ _rect[0]
+			raw_g_el = $raw_rect_el.parent()[0]
+			_g = d3.select raw_g_el
+			tooltip_group = _g.select '.tooltip-group'
+			tooltip_bg = tooltip_group.select '.tooltip-bg'
+			tooltip = _g.select '.mb-tooltip'
+			tooltip_age= _g.select '.mb-tooltip-age'
 			_rect.attr 'opacity', 0.7
-			console.log d
+
+			tooltip_bg.attr 'opacity', 0.8
+
+			tooltip_age.attr 'opacity', 1
+				.text d.key
+
+			tooltip.attr 'opacity', 1
+				.text percFormat d.values.limited_a_lot
 
 		.on 'mouseout', (d) ->
 
 			_rect = d3.select @
+			$raw_rect_el = $ _rect[0]
+			raw_g_el = $raw_rect_el.parent()[0]
+			_g = d3.select raw_g_el
+			tooltip_group = _g.select '.tooltip-group'
+			tooltip_bg = tooltip_group.select '.tooltip-bg'
+			tooltip_age= _g.select '.mb-tooltip-age'
+			tooltip = _g.select '.mb-tooltip'
 
 			_rect.attr 'opacity', 1
+
+			tooltip_bg.attr 'opacity', 0
+
+			tooltip_age.attr 'opacity', 0
+
+			tooltip.attr 'opacity', 0
 
 	my.width = (value) ->
 		unless arguments.length then return width

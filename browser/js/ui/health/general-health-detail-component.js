@@ -157,5 +157,3 @@ GenHealthDetailComponent = React.createClass({displayName: "GenHealthDetailCompo
 });
 
 module.exports = GenHealthDetailComponent;
-
-//# sourceMappingURL=general-health-detail-component.map

@@ -67,11 +67,9 @@ DisabilityChart = React.createClass({displayName: "DisabilityChart",
     }), React.createElement("g", {
       "className": "main-group"
     }, React.createElement("g", {
-      "className": "tooltip-g"
+      "className": "legend-group"
     })))));
   }
 });
 
 module.exports = DisabilityChart;
-
-//# sourceMappingURL=health-disability-component.map

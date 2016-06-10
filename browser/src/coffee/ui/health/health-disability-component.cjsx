@@ -53,8 +53,8 @@ DisabilityChart = React.createClass
           <g className="y axis"></g>
           <g className="x axis"></g>
           <g className="main-group">
-            <g className="tooltip-g"></g>
-          </g>
+            <g className="legend-group"></g>  
+          </g>        
         </svg>
       </div>
     </div>  

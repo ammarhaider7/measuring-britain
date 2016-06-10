@@ -43,5 +43,3 @@ GeneralHealthSection = function() {
 };
 
 module.exports = GeneralHealthSection;
-
-//# sourceMappingURL=general-health.map

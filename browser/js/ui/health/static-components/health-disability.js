@@ -8,7 +8,7 @@ DisabilitySection = function() {
     "className": "hidden-xs col-sm-12"
   }, React.createElement("h3", {
     "className": "mb-section-header"
-  }, "Ethnic Disparities in long-term illness and disability ", React.createElement("button", {
+  }, "Long-term illness or disability by ethnicity ", React.createElement("button", {
     "className": "btn btn-info btn-xs",
     "type": "button",
     "data-toggle": "collapse",
@@ -42,5 +42,3 @@ DisabilitySection = function() {
 };
 
 module.exports = DisabilitySection;
-
-//# sourceMappingURL=health-disability.map

@@ -72,6 +72,25 @@ parse = (dataArray) ->
 
 		}
 
+	getMaxValueFromArr = (arr, value) ->
+		return d3.max arr, (d) ->
+			return d.values[value]
+
+	sort_arr = []
+	for ethnicity in percentages
+		sort_arr.push {
+			ethnicity: ethnicity.key
+			max_value: getMaxValueFromArr ethnicity.values, 'limited_a_lot'
+		}
+	sort_arr = sort_arr.sort (a, b) ->
+   		return b.max_value - a.max_value
+   	sorted_ethnicities = sort_arr.map (ob) ->
+   		return ob.ethnicity
+
+   	sorted_percentages = sorted_ethnicities.map (ob) ->
+   		for ethnicity in percentages
+   			return ethnicity if ob is ethnicity.key
+
 	# percentages = nested_data.map (ethnicity) ->
 
 	# 	return {
@@ -104,9 +123,12 @@ parse = (dataArray) ->
 
 	return {
 		ethnicities
+		sorted_ethnicities
 		percentages
 		nested_data
 		ages
+		sort_arr
+		sorted_percentages
 	}
 
 module.exports = parse

@@ -127,5 +127,3 @@ DisabilityChart = function(state, action) {
 };
 
 module.exports = DisabilityChart;
-
-//# sourceMappingURL=health-disability-reducers.map

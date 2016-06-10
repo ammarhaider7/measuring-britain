@@ -2,7 +2,7 @@
 var parse;
 
 parse = function(dataArray) {
-  var ages, ethnicities, nested_data, percentages, sumDisability;
+  var ages, ethnicities, ethnicity, getMaxValueFromArr, i, len, nested_data, percentages, sort_arr, sorted_ethnicities, sorted_percentages, sumDisability;
   sumDisability = function(arr, val) {
     return d3.sum(arr, function(d) {
       if (d.c_disability.value === val) {
@@ -40,6 +40,34 @@ parse = function(dataArray) {
       })
     };
   });
+  getMaxValueFromArr = function(arr, value) {
+    return d3.max(arr, function(d) {
+      return d.values[value];
+    });
+  };
+  sort_arr = [];
+  for (i = 0, len = percentages.length; i < len; i++) {
+    ethnicity = percentages[i];
+    sort_arr.push({
+      ethnicity: ethnicity.key,
+      max_value: getMaxValueFromArr(ethnicity.values, 'limited_a_lot')
+    });
+  }
+  sort_arr = sort_arr.sort(function(a, b) {
+    return b.max_value - a.max_value;
+  });
+  sorted_ethnicities = sort_arr.map(function(ob) {
+    return ob.ethnicity;
+  });
+  sorted_percentages = sorted_ethnicities.map(function(ob) {
+    var j, len1;
+    for (j = 0, len1 = percentages.length; j < len1; j++) {
+      ethnicity = percentages[j];
+      if (ob === ethnicity.key) {
+        return ethnicity;
+      }
+    }
+  });
   ethnicities = nested_data.map(function(ethnicity) {
     return ethnicity.key;
   });
@@ -48,12 +76,13 @@ parse = function(dataArray) {
   });
   return {
     ethnicities: ethnicities,
+    sorted_ethnicities: sorted_ethnicities,
     percentages: percentages,
     nested_data: nested_data,
-    ages: ages
+    ages: ages,
+    sort_arr: sort_arr,
+    sorted_percentages: sorted_percentages
   };
 };
 
 module.exports = parse;
-
-//# sourceMappingURL=health-disability-parser.map

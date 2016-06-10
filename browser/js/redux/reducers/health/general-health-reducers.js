@@ -173,5 +173,3 @@ GenHealthChart = function(state, action) {
 };
 
 module.exports = GenHealthChart;
-
-//# sourceMappingURL=general-health-reducers.map
