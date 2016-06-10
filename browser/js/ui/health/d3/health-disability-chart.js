@@ -8,7 +8,7 @@ drawDisabilityChart = function(options) {
   width = (ref = $(container).width()) != null ? ref : 1140;
   height = (ref1 = $(container).height()) != null ? ref1 : 550;
   margin = {
-    top: 20,
+    top: 35,
     right: 20,
     bottom: 45,
     left: 40,
@@ -27,7 +27,7 @@ drawDisabilityChart = function(options) {
   x1 = d3.scale.ordinal().domain(ages).rangeRoundBands([0, x0.rangeBand()]);
   y = d3.scale.linear().domain([0, 0.55]).range([chart_height, 0]);
   xAxis = d3.svg.axis().scale(x0).orient('bottom');
-  yAxis = d3.svg.axis().scale(y).tickFormat(percFormat).orient('left');
+  yAxis = d3.svg.axis().scale(y).tickSize(-chart_width).tickFormat(percFormat).orient('left');
   trimEthnicity = function(ethnicity_string) {
     var str, trimmedStr;
     if (ethnicity_string.indexOf('Gypsy') !== -1) {
@@ -60,7 +60,7 @@ drawDisabilityChart = function(options) {
   };
   xAxis.tickFormat(trimEthnicity);
   my.init = function() {
-    var ethnicity, legend, legend_group, main_group, svg, title_group, tooltip, tooltip_age, tooltip_groups, x_axis_group, y_axis_group;
+    var ethnicity, legend, legend_group, main_group, svg, ticks, title_group, tooltip, tooltip_age, tooltip_groups, x_axis_group, y_axis_group;
     svg = d3.select('.disability-svg');
     main_group = svg.select('.main-group');
     x_axis_group = svg.select('.x.axis');
@@ -171,6 +171,12 @@ drawDisabilityChart = function(options) {
       opacity: 0,
       'font-size': '12px'
     }).style("text-anchor", "middle").text('Long-term illness / disability by ethinicity').transition().duration(1500).attr('opacity', 1);
+    ticks = svg.selectAll('.x .tick text');
+    ticks.each(function(d, i) {
+      if (i % 2 === 0) {
+        return d3.select(this).attr('y', '20');
+      }
+    });
     return attachHoverHandlers();
   };
   my.update = function() {

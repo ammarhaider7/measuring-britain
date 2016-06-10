@@ -6324,6 +6324,10 @@ nav.hidden-xs {
 #health-disability-component .disability-svg .legend-text {
   font-size: 12px; }
 
+#health-disability-component .disability-svg .x .tick:nth-child(1) line {
+  stroke: #333;
+  stroke-dasharray: none; }
+
 #health-disability-component .disability-svg .x.axis path {
   fill: none;
   stroke: none; }
@@ -6334,3 +6338,13 @@ nav.hidden-xs {
 #health-disability-component .disability-svg .x.axis line {
   stroke: #333;
   stroke-opacity: .8; }
+
+#health-disability-component .disability-svg .y .tick:nth-child(1) line {
+  display: none; }
+
+#health-disability-component .disability-svg .y .tick line {
+  stroke-dasharray: 3, 3;
+  stroke: #EEE; }
+
+#health-disability-component .disability-svg path.domain {
+  display: none; }

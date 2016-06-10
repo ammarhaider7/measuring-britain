@@ -10,7 +10,7 @@ drawDisabilityChart = (options) ->
 
 	# Set margins
 	margin = 
-		top: 20
+		top: 35
 		right: 20
 		bottom: 45
 		left: 40
@@ -48,6 +48,7 @@ drawDisabilityChart = (options) ->
 
 	yAxis = d3.svg.axis()
 		.scale y
+		.tickSize -chart_width
 		.tickFormat percFormat
 		.orient 'left'
 
@@ -239,6 +240,12 @@ drawDisabilityChart = (options) ->
 			.duration 1500
 			.attr 'opacity', 1
 
+		# Fix x ticks
+		ticks = svg.selectAll '.x .tick text'
+		ticks.each (d, i) ->
+			if i % 2 is 0
+				d3.select(this).attr 'y', '20'
+
 		# Add mouse over handler
 		attachHoverHandlers()
 
@@ -264,15 +271,6 @@ drawDisabilityChart = (options) ->
 		  		height: (d) ->
 		  			return chart_height - y d.values.limited_a_lot
  		  	}
-
-		# labels.data d3_array
-		# 	.transition()
-		# 	.duration 1000
-		# 	.delay 500
-		# 	.attr {
-		# 		transform: (d) ->
-		# 			return "translate(#{ (x d.values[d.values.length - 1].key) }, #{ y d.values[d.values.length - 1].values.bad })"
-		# 	}
 
 		# Add mouse over handler
 		attachHoverHandlers() 
