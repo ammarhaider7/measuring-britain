@@ -101,7 +101,7 @@ ControlsNew = React.createClass
         className="controls-toggle-link"
         role="button" data-toggle="collapse" data-target={ "#collapse#{ @props.chartName }" } aria-expanded="false" aria-controls={ "collapse#{ @props.chartName }" }
       >
-        <img src="./images/mb_ajax_loader.gif" 
+        <img src="/images/mb_ajax_loader.gif" 
           className={ 
             if @props.isFetching is yes and @props.isDefault is no then 'mb-spinner-controls' else 'hide'
           }

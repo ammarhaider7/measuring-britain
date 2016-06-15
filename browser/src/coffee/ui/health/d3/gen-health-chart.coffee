@@ -75,7 +75,7 @@ drawGenHealthChart = (options) ->
 		main_group.attr 'transform', "translate(#{ margin.left }, #{ margin.top })"
 		x_axis_group.attr 'transform', "translate(#{ margin.left }, #{ chart_height + margin.top })"
 		y_axis_group.attr 'transform', "translate(#{ margin.left }, #{ margin.top })"
-		title_group.attr 'transform', "translate(#{ chart_width / 2 - margin.left }, 0)"
+		title_group.attr 'transform', "translate(#{ chart_width / 3 - margin.left }, 0)"
 
 		# Create axes
 		x_axis_group.call xAxis
@@ -200,7 +200,7 @@ drawGenHealthChart = (options) ->
 				opacity: 0
 				'font-size': '12px'
 			}
-			.text 'Self-proclaimed bad or very bad health'
+			.text 'Self-proclaimed bad or very bad health by ethnicity and age group'
 			.transition()
 			.duration 1500
 			.attr 'opacity', 1

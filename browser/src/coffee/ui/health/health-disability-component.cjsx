@@ -16,7 +16,23 @@ DisabilityChart = React.createClass
 
   componentWillMount: ->
 
-    @props.fetchDisabilityData null
+    # @props.fetchDisabilityData null
+    if @props.isDefault is yes and @props.init_done is no
+
+      @props.fetchDisabilityData null
+      @props.onInitDone()
+      # Only load sunburst once user scrolls to it
+      # $(window).on 'scroll', () =>
+
+      #   docScrollTop = $(document).scrollTop()
+      #   sunburstOffsetTop = ($('#health-disability-component').offset().top)
+      #   docHeight = $(document).height()
+
+      #   if (docHeight - docScrollTop) < sunburstOffsetTop
+      #     # $(window).off 'scroll'
+      #     if @props.init_done is no
+      #       @props.fetchDisabilityData null
+      #     @props.onInitDone()
 
   componentDidUpdate: ->
 
@@ -39,7 +55,7 @@ DisabilityChart = React.createClass
     <div className="col-xs-12 col-sm-12 mb-no-padding">
       <div className="mt-medium">
         <ControlsNew {...@props} omitted_categories={["ethnicities", "districts", "religions"]} categories=category_options values=value_options />
-        <img src="./images/mb_ajax_loader.gif" 
+        <img src="/images/mb_ajax_loader.gif" 
           className={ 
             if @props.isFetching is yes and @props.isDefault is yes then 'mb-spinner' else 'hide' 
           }

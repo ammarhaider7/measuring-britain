@@ -97,7 +97,7 @@ ControlsNew = React.createClass({displayName: "ControlsNew",
       "aria-expanded": "false",
       "aria-controls": "collapse" + this.props.chartName
     }, React.createElement("img", {
-      "src": "./images/mb_ajax_loader.gif",
+      "src": "/images/mb_ajax_loader.gif",
       "className": (this.props.isFetching === true && this.props.isDefault === false ? 'mb-spinner-controls' : 'hide')
     }), React.createElement("div", {
       "className": (this.props.isFetching === true && this.props.isDefault === false ? 'hide' : void 0)
@@ -210,3 +210,5 @@ ControlsNew = React.createClass({displayName: "ControlsNew",
 });
 
 module.exports = ControlsNew;
+
+//# sourceMappingURL=chart-controls-new.map

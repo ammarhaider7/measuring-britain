@@ -16,6 +16,15 @@ value_options = {
 };
 
 PyramidComponent = React.createClass({displayName: "PyramidComponent",
+  getAppropriateHeight: function() {
+    var window_height;
+    window_height = $(window).height();
+    if (window_height > 700) {
+      return 600;
+    } else {
+      return $(window).height() - 120;
+    }
+  },
   componentWillMount: function() {
     return this.props.fetchPyramidData(null);
   },
@@ -56,21 +65,19 @@ PyramidComponent = React.createClass({displayName: "PyramidComponent",
     }
   },
   render: function() {
-    return React.createElement("div", {
-      "className": "col-xs-12 col-sm-8 mt-medium"
-    }, React.createElement(PyramidControls, React.__spread({}, this.props, {
+    return React.createElement("div", null, React.createElement(PyramidControls, React.__spread({}, this.props, {
       "categories": data.category_options,
       "values": value_options
     })), React.createElement("div", {
       "className": "pyramid mt-medium"
     }, React.createElement("img", {
-      "src": "./images/mb_ajax_loader.gif",
+      "src": "/images/mb_ajax_loader.gif",
       "className": (this.props.isFetching === true && this.props.isDefault === true ? 'mb-spinner' : 'hide')
     }), React.createElement("svg", {
       "className": "pyramid-svg",
       "style": {
         width: '100%',
-        height: '550px'
+        height: this.getAppropriateHeight()
       },
       "ref": "pyramidSvg"
     }, React.createElement("g", {
@@ -102,3 +109,5 @@ PyramidComponent = React.createClass({displayName: "PyramidComponent",
 });
 
 module.exports = PyramidComponent;
+
+//# sourceMappingURL=pyramid-component.map

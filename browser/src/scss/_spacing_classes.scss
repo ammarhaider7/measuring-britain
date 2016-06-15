@@ -1,4 +1,12 @@
 //Spacing classes
+.mb-full-width {
+	width: 100%;
+    padding-left: 5%;
+    padding-right: 5%;
+}
+.mt-zero {
+	margin-top: $zero;
+}
 .mt-large {
 	margin-top: $margin-large;
 }

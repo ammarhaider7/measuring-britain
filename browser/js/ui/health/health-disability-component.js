@@ -19,7 +19,10 @@ category_options = data.category_options;
 
 DisabilityChart = React.createClass({displayName: "DisabilityChart",
   componentWillMount: function() {
-    return this.props.fetchDisabilityData(null);
+    if (this.props.isDefault === true && this.props.init_done === false) {
+      this.props.fetchDisabilityData(null);
+      return this.props.onInitDone();
+    }
   },
   componentDidUpdate: function() {
     var draw;
@@ -49,7 +52,7 @@ DisabilityChart = React.createClass({displayName: "DisabilityChart",
       "categories": category_options,
       "values": value_options
     })), React.createElement("img", {
-      "src": "./images/mb_ajax_loader.gif",
+      "src": "/images/mb_ajax_loader.gif",
       "className": (this.props.isFetching === true && this.props.isDefault === true ? 'mb-spinner' : 'hide')
     }), React.createElement("svg", {
       "className": "disability-svg mb-oxygen",
@@ -73,3 +76,5 @@ DisabilityChart = React.createClass({displayName: "DisabilityChart",
 });
 
 module.exports = DisabilityChart;
+
+//# sourceMappingURL=health-disability-component.map

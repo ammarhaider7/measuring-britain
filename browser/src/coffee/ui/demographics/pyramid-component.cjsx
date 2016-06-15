@@ -12,6 +12,14 @@ value_options = {
 
 PyramidComponent = React.createClass
 
+	getAppropriateHeight: ->
+
+		window_height = $(window).height()
+		if window_height > 700
+			return 600
+		else
+			return $(window).height() - 120
+
 	componentWillMount: ->
 
 		@props.fetchPyramidData null
@@ -54,17 +62,17 @@ PyramidComponent = React.createClass
 
 	render: ->
 
-		<div className="col-xs-12 col-sm-8 mt-medium">
+		<div>
 	  		<PyramidControls {...@props} categories=data.category_options values=value_options />
 		  	<div className="pyramid mt-medium">
-		  		<img src="./images/mb_ajax_loader.gif" 
+		  		<img src="/images/mb_ajax_loader.gif" 
 		  			className={ 
 		  				if @props.isFetching is yes and @props.isDefault is yes then 'mb-spinner' else 'hide' 
 		  			}
 		  		/>
 		  		<svg 
 		  			className="pyramid-svg" 
-		  			style={{ width: '100%', height: '550px' }}
+		  			style={{ width: '100%', height: @getAppropriateHeight() }}
 		  			ref="pyramidSvg"
 		  		>
 		  			<g className="title-group"></g>

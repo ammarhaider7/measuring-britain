@@ -59,7 +59,7 @@ GenHealthChart = React.createClass({displayName: "GenHealthChart",
       "categories": category_options,
       "values": value_options
     })), React.createElement("img", {
-      "src": "./images/mb_ajax_loader.gif",
+      "src": "/images/mb_ajax_loader.gif",
       "className": (this.props.isFetching === true && this.props.isDefault === true ? 'mb-spinner' : 'hide')
     }), React.createElement("svg", {
       "className": "gen-health-svg mb-oxygen",
@@ -81,3 +81,5 @@ GenHealthChart = React.createClass({displayName: "GenHealthChart",
 });
 
 module.exports = GenHealthChart;
+
+//# sourceMappingURL=general-health-component.map

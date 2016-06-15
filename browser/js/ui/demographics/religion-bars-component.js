@@ -20,19 +20,7 @@ category_options = data.category_options;
 BarsComponent = React.createClass({displayName: "BarsComponent",
   componentDidMount: function() {
     if (this.props.isDefault === true && this.props.init_done === false) {
-      return $(window).on('scroll', (function(_this) {
-        return function() {
-          var docHeight, docScrollTop, relBarsOffsetTop;
-          docScrollTop = $(document).scrollTop();
-          relBarsOffsetTop = $('.rel-bars').offset().top - 650;
-          docHeight = $(document).height();
-          if ((docHeight - docScrollTop) < relBarsOffsetTop) {
-            console.log('scroll reach relbars');
-            $(window).off('scroll');
-            return _this.props.fetchReligionData(null);
-          }
-        };
-      })(this));
+      return this.props.fetchReligionData(null);
     }
   },
   reactDrawBars: function() {
@@ -67,7 +55,7 @@ BarsComponent = React.createClass({displayName: "BarsComponent",
       "categories": category_options,
       "values": value_options
     })), React.createElement("img", {
-      "src": "./images/mb_ajax_loader.gif",
+      "src": "/images/mb_ajax_loader.gif",
       "className": (this.props.isFetching === true && this.props.isDefault === true ? 'mb-spinner' : 'hide')
     }), React.createElement("svg", {
       "className": "bars-svg mb-oxygen",
@@ -89,3 +77,5 @@ BarsComponent = React.createClass({displayName: "BarsComponent",
 });
 
 module.exports = BarsComponent;
+
+//# sourceMappingURL=religion-bars-component.map

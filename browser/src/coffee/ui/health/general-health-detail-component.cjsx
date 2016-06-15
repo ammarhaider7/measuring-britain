@@ -105,7 +105,7 @@ GenHealthDetailComponent = React.createClass
           </label>
         </div>
         <div className="">
-          <img src="./images/mb_ajax_loader.gif" 
+          <img src="/images/mb_ajax_loader.gif" 
             className={ 
               if @props.isFetching is yes and @props.isDefault is yes then 'mb-spinner' else 'hide' 
             }

@@ -13,22 +13,24 @@ value_options = {
 
 category_options = data.category_options
 
-BarsComponent = React.createClass 
+BarsComponent = React.createClass
 
   componentDidMount: ->
 
     if @props.isDefault is yes and @props.init_done is no
 
-      $(window).on 'scroll', () =>
+      @props.fetchReligionData null
 
-        docScrollTop = $(document).scrollTop()
-        relBarsOffsetTop = ($('.rel-bars').offset().top - 650)
-        docHeight = $(document).height()
+      # $(window).on 'scroll', () =>
 
-        if (docHeight - docScrollTop) < relBarsOffsetTop
-          console.log 'scroll reach relbars'
-          $(window).off 'scroll'
-          @props.fetchReligionData null
+      #   docScrollTop = $(document).scrollTop()
+      #   relBarsOffsetTop = ($('.rel-bars').offset().top - 650)
+      #   docHeight = $(document).height()
+
+      #   if (docHeight - docScrollTop) < relBarsOffsetTop
+      #     console.log 'scroll reach relbars'
+      #     $(window).off 'scroll'
+      #     @props.fetchReligionData null
 
   reactDrawBars: ->
 
@@ -63,7 +65,7 @@ BarsComponent = React.createClass
     <div className="col-xs-12 col-sm-12 mb-no-padding">
       <div className="rel-bars mt-medium">
         <ControlsNew {...@props} omitted_categories={["religions"]} categories=category_options values=value_options />
-        <img src="./images/mb_ajax_loader.gif" 
+        <img src="/images/mb_ajax_loader.gif" 
           className={ 
             if @props.isFetching is yes and @props.isDefault is yes then 'mb-spinner' else 'hide' 
           }

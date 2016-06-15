@@ -1,0 +1,62 @@
+Nav = React.createClass 
+
+	render: ->
+
+		<nav className={if @props.border is 'yes' then "navbar navbar-default navbar-static-top mb-nav-border" else "navbar navbar-default navbar-static-top"}>
+			<div className={if @props.alt_bg is 'yes' then "container mb-alt-bg mb-full-width" else "container"}>
+				<div className="navbar-header">
+					<button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+						<span className="sr-only">Toggle navigation</span>
+						<span className="icon-bar"></span>
+						<span className="icon-bar"></span>
+						<span className="icon-bar"></span>
+					</button>
+					<a className={if @props.alt_bg is 'yes' then "mb-nav-brand-font navbar-brand mb-white-text" else "mb-nav-brand-font navbar-brand"} href="#">MB App</a>
+				</div>
+				<div id="navbar" className="navbar-collapse collapse" aria-expanded="false" style={{height: '1px'}}>
+					<ul className="nav navbar-nav">
+						<li className={ if @props.active is "home" then 'active' else ''}><a className={if @props.alt_bg is 'yes' then 'mb-white-text'} href="/">Home</a></li>
+						<li className={ if @props.active is "census" then 'dropdown active' else 'dropdown'}>
+							<a href="/demographics" className={if @props.alt_bg is 'yes' then 'dropdown-toggle mb-white-text' else "dropdown-toggle"} data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Census <span className="caret"></span></a>
+							<ul className="dropdown-menu">
+								<li><a href="/census">Census Home</a></li>
+								<li role="separator" className="divider"></li>
+								<li className="dropdown-header">Demographics</li>
+								<li><a href="/census/population-pyramid">Population Pyramid (Census)</a></li>
+								<li><a href="/census/ethnic-diversity">Ethnic Diversity (Census)</a></li>
+								<li><a href="/census/religious-diversity">Religious Diversity (Census)</a></li>
+								<li role="separator" className="divider"></li>
+								<li className="dropdown-header">Health</li>
+								<li><a href="/census/ethnic-disparities-general-health">Ethnic Disparities in General Health (Census)</a></li>
+								<li><a href="/census/longterm-illness-disability-by-ethnicity">Long-term illness/disability by ethnicity (Census)</a></li>
+							</ul>
+						</li>
+						<li className={ if @props.active is "demographics" then 'dropdown active' else 'dropdown'}>
+							<a href="/demographics" className={if @props.alt_bg is 'yes' then 'dropdown-toggle mb-white-text' else "dropdown-toggle"} data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Demographics <span className="caret"></span></a>
+							<ul className="dropdown-menu">
+								<li role="separator" className="divider"></li>
+								<li className="dropdown-header">Census</li>
+								<li><a href="/census/population-pyramid">Population Pyramid (Census)</a></li>
+								<li><a href="/census/ethnic-diversity">Ethnic Diversity (Census)</a></li>
+								<li><a href="/census/religious-diversity">Religious Diversity (Census)</a></li>
+							</ul>
+						</li>
+						<li className={ if @props.active is "health" then 'dropdown active' else 'dropdown'}>
+							<a href="/health" className={if @props.alt_bg is 'yes' then 'dropdown-toggle mb-white-text' else "dropdown-toggle"} data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Health <span className="caret"></span></a>
+							<ul className="dropdown-menu">
+								<li role="separator" className="divider"></li>
+								<li className="dropdown-header">Census</li>
+								<li><a href="/census/ethnic-disparities-general-health">Ethnic Disparities in General Health (Census)</a></li>
+								<li><a href="/census/longterm-illness-disability-by-ethnicity">Long-term illness/disability by ethnicity (Census)</a></li>
+							</ul>
+						</li>
+						<li className="labour"><a className={if @props.alt_bg is 'yes' then 'mb-white-text'} href="labour">Labour Market</a></li>
+						<li className="about"><a className={if @props.alt_bg is 'yes' then 'mb-white-text'} href="/about">About</a></li>
+					</ul>
+					<ul className="nav navbar-nav navbar-right">
+					</ul>
+				</div>
+			</div>
+		</nav>
+
+module.exports = Nav

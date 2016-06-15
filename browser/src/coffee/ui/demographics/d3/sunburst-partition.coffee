@@ -91,6 +91,8 @@ drawSunburst = (options) ->
 			return Math.sqrt d.y
 		.outerRadius (d) ->
 			return Math.sqrt d.y + d.dy
+		# smooth edges for segments
+		.cornerRadius 5
 
 	# y scale for key rects
 	y = d3.scale.ordinal()
@@ -188,8 +190,8 @@ drawSunburst = (options) ->
 		center_ethnic_group.attr 'transform', "translate(#{ width / 2 }, #{ half_height + margin.text - margin.top * 2 })"
 		center_percent_group.attr 'transform', "translate(#{ width / 2 }, #{ half_height + (margin.text * 2) - margin.top * 2 })"
 		center_total_value_group.attr 'transform', "translate(#{ width / 2 }, #{ half_height + (margin.text * 3) - margin.top * 2 })"
-		key_group.attr 'transform', "translate(#{ margin.left }, #{ margin.top })"
-		key_text_group.attr 'transform', "translate(#{ margin.left * 2 }, #{ margin.top + 17 })"
+		key_group.attr 'transform', "translate(#{ (width * 0.9) + 20  }, #{ margin.top })"
+		key_text_group.attr 'transform', "translate(#{ width * 0.9 }, #{ margin.top + 17 })"
 
 		paths = main_group.selectAll 'path'
 			.data partition.nodes nested_data
@@ -272,6 +274,7 @@ drawSunburst = (options) ->
 		  		y: (d, i) ->
 		  			return y i
 				x: 10
+				'text-anchor': 'end'
 		  	}
 
 		attachHoverHandlers()

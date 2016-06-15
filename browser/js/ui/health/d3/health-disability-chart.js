@@ -170,7 +170,7 @@ drawDisabilityChart = function(options) {
       y: margin.p,
       opacity: 0,
       'font-size': '12px'
-    }).style("text-anchor", "middle").text('Long-term illness / disability by ethinicity').transition().duration(1500).attr('opacity', 1);
+    }).style("text-anchor", "middle").text('Long-term illness / disability by ethinicity and age group').transition().duration(1500).attr('opacity', 1);
     ticks = svg.selectAll('.x .tick text');
     ticks.each(function(d, i) {
       if (i % 2 === 0) {
@@ -250,3 +250,5 @@ drawDisabilityChart = function(options) {
 };
 
 module.exports = drawDisabilityChart;
+
+//# sourceMappingURL=health-disability-chart.map

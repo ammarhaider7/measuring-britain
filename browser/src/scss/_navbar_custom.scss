@@ -1,3 +1,9 @@
-nav.hidden-xs {
+nav.mb-nav-border {
 	border-bottom: 1px solid #265787;
-}   
+	.navbar-toggle {
+	    height: 33px;
+	}
+}
+.mb-alt-bg {
+	background-image: url(/images/voronoi-bg-wide-nav.PNG);
+}

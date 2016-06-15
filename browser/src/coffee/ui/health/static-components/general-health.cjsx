@@ -20,7 +20,7 @@ GeneralHealthSection = ->
 			<div className="mb-oxygen mb-section-text">
 				<p>The Ethnic Disparities in General Health chart shows the percentage of the population with self-proclaimed bad or very bad health broken down by age group and ethnicity.</p>    
 			</div>
-			<div className="" id="general-health-details"></div>
+			<div id="general-health-details"></div>
 		</div>
 		<div className="col-sm-8">
 			<div id="general-health-component"></div>

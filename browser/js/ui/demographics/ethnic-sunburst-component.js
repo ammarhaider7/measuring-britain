@@ -20,20 +20,7 @@ category_options = data.category_options;
 SunburstComponent = React.createClass({displayName: "SunburstComponent",
   componentDidMount: function() {
     if (this.props.isDefault === true && this.props.init_done === false) {
-      return $(window).on('scroll', (function(_this) {
-        return function() {
-          var docHeight, docScrollTop, sunburstOffsetTop;
-          docScrollTop = $(document).scrollTop();
-          sunburstOffsetTop = $('.sunburst').offset().top + 750;
-          docHeight = $(document).height();
-          if ((docHeight - docScrollTop) < sunburstOffsetTop) {
-            if (_this.props.init_done === false) {
-              _this.props.fetchSunburstData(null);
-            }
-            return _this.props.onInitDone();
-          }
-        };
-      })(this));
+      return this.props.fetchSunburstData(null);
     }
   },
   reactDrawSunburst: function() {
@@ -68,7 +55,7 @@ SunburstComponent = React.createClass({displayName: "SunburstComponent",
       "categories": category_options,
       "values": value_options
     })), React.createElement("img", {
-      "src": "./images/mb_ajax_loader.gif",
+      "src": "/images/mb_ajax_loader.gif",
       "className": (this.props.isFetching === true && this.props.isDefault === true ? 'mb-spinner' : 'hide')
     }), React.createElement("svg", {
       "className": "sunburst-svg",
@@ -96,3 +83,5 @@ SunburstComponent = React.createClass({displayName: "SunburstComponent",
 });
 
 module.exports = SunburstComponent;
+
+//# sourceMappingURL=ethnic-sunburst-component.map

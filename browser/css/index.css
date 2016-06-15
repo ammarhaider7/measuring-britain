@@ -4026,7 +4026,6 @@ tbody.collapse.in {
   .navbar-inverse .navbar-form {
     border-color: #101010; }
   .navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus {
-    background-color: #090909;
     color: #fff; }
   @media (max-width: 767px) {
     .navbar-inverse .navbar-nav .open .dropdown-menu > .dropdown-header {
@@ -5828,10 +5827,18 @@ button.close {
   border-color: #C1103F; }
 
 .mb-white-text {
-  color: #FFF; }
+  color: #FFF !important; }
 
 .mb-ui-body {
   background-color: #FFFFFF; }
+
+.mb-full-width {
+  width: 100%;
+  padding-left: 5%;
+  padding-right: 5%; }
+
+.mt-zero {
+  margin-top: 0px; }
 
 .mt-large {
   margin-top: 30px; }
@@ -5961,7 +5968,8 @@ button.close {
 
 .mb-section-header {
   font-weight: bold;
-  margin-bottom: 30px; }
+  margin-bottom: 20px;
+  margin-top: 30px; }
 
 .mb-responsive-text-size {
   font-size: 11px; }
@@ -6046,7 +6054,7 @@ button.close {
   color: #D9534F; }
 
 .mb-page-header {
-  margin-bottom: 20px;
+  margin-bottom: 5px;
   background-image: url(/images/voronoi-bg-wide-nav.PNG);
   -webkit-box-shadow: 0px 0px 8px 6px rgba(0, 0, 0, 0.34);
   -moz-box-shadow: 0px 0px 8px 6px rgba(0, 0, 0, 0.34);
@@ -6111,8 +6119,13 @@ button.close {
   margin-top: 150px;
   display: block; }
 
-nav.hidden-xs {
+nav.mb-nav-border {
   border-bottom: 1px solid #265787; }
+  nav.mb-nav-border .navbar-toggle {
+    height: 33px; }
+
+.mb-alt-bg {
+  background-image: url(/images/voronoi-bg-wide-nav.PNG); }
 
 .controls-container {
   border-bottom: 1px solid #333; }
@@ -6253,7 +6266,7 @@ nav.hidden-xs {
   display: none; }
 
 .gen-health-svg .x .tick:nth-child(1) line {
-  stroke: #333;
+  stroke: #999;
   stroke-dasharray: none; }
 
 .gen-health-svg .x .tick line {
@@ -6302,7 +6315,8 @@ nav.hidden-xs {
   background-color: #eee;
   border: 1px solid #E6E6E6;
   padding: 2px 40px 2px 25px;
-  border-radius: 5px; }
+  border-radius: 5px;
+  width: 100%; }
 
 #general-health-details .highlight {
   background-color: #DA4A70;
@@ -6348,3 +6362,11 @@ nav.hidden-xs {
 
 #health-disability-component .disability-svg path.domain {
   display: none; }
+
+.row .mb-btn-primary:hover {
+  background-color: #C11844; }
+
+.row .mb-btn-primary {
+  color: #FFF;
+  background-color: #DA4A70;
+  font-weight: 700; }

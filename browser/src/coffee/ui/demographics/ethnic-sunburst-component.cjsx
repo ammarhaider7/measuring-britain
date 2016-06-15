@@ -18,20 +18,21 @@ SunburstComponent = React.createClass
   componentDidMount: ->
 
     if @props.isDefault is yes and @props.init_done is no
-
+      
+      @props.fetchSunburstData null
       # Only load sunburst once user scrolls to it
-      $(window).on 'scroll', () =>
+      # $(window).on 'scroll', () =>
 
-        docScrollTop = $(document).scrollTop()
-        sunburstOffsetTop = ($('.sunburst').offset().top + 750)
-        docHeight = $(document).height()
+      #   docScrollTop = $(document).scrollTop()
+      #   sunburstOffsetTop = ($('.sunburst').offset().top + 750)
+      #   docHeight = $(document).height()
 
-        if (docHeight - docScrollTop) < sunburstOffsetTop
+      #   if (docHeight - docScrollTop) < sunburstOffsetTop
 
-          # $(window).off 'scroll'
-          if @props.init_done is no
-            @props.fetchSunburstData null
-          @props.onInitDone()
+      #     # $(window).off 'scroll'
+      #     if @props.init_done is no
+      #       @props.fetchSunburstData null
+      #     @props.onInitDone()
 
   reactDrawSunburst: ->
 
@@ -68,7 +69,7 @@ SunburstComponent = React.createClass
     <div className="col-xs-12 col-sm-12 mb-no-padding">
       <div className="sunburst mt-medium">
         <ControlsNew {...@props} omitted_categories={[ "ethnicities" ]} categories=category_options values=value_options />
-        <img src="./images/mb_ajax_loader.gif" 
+        <img src="/images/mb_ajax_loader.gif" 
           className={ 
             if @props.isFetching is yes and @props.isDefault is yes then 'mb-spinner' else 'hide' 
           }

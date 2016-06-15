@@ -235,7 +235,7 @@ drawDisabilityChart = (options) ->
 				'font-size': '12px'
 			}
 			.style "text-anchor", "middle"
-			.text 'Long-term illness / disability by ethinicity'
+			.text 'Long-term illness / disability by ethinicity and age group'
 			.transition()
 			.duration 1500
 			.attr 'opacity', 1

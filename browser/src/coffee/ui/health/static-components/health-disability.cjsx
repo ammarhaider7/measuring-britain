@@ -1,7 +1,6 @@
 DisabilitySection = ->
 
 	<div className="row mb-quicksand">
-		<hr/>
 		<div className="hidden-xs col-sm-12">
 			<h3 className="mb-section-header">Long-term illness or disability by ethnicity 
 				<button className="btn btn-info btn-xs" type="button" data-toggle="collapse" data-target="#disabilityCollapse" aria-expanded="false" aria-controls="disabilityCollapse">

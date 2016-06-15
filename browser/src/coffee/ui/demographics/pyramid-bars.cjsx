@@ -3,8 +3,15 @@ drawPyrBars = require './d3/pyramidBars.js'
 
 pyBarsComponent = React.createClass
 
-	componentDidUpdate: ->
+	getAppropriateHeight: ->
 
+		window_height = $(window).height()
+		if window_height > 700
+			return 320
+		else
+			return $(window).height() - 320
+
+	componentDidUpdate: ->
 
 		if @props.updateBars is yes
 			
@@ -24,11 +31,11 @@ pyBarsComponent = React.createClass
 
 		<div className={ unless @props.isFetching is yes and @props.isDefault is yes then 'mb-grey-box' }>
 			{ if @props.isFetching is yes and @props.isDefault is yes
-		  		<img src="./images/mb_ajax_loader.gif" className="mb-spinner"/>
+		  		<img src="/images/mb_ajax_loader.gif" className="mb-spinner"/>
 			}
 			<svg
 				className="pyramid-bars-svg" 
-				style={{ width: '100%', height: '275px' }}
+				style={{ width: '100%', height: @getAppropriateHeight() }}
 				ref="pyramidBarsSvg"
 			>
 				<g className="x axis"></g>

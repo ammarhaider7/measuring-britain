@@ -119,7 +119,7 @@ PyramidControls = React.createClass
         ref="controlsLink"
         role="button" data-toggle="collapse" data-target="#collapsePyramid" aria-expanded="false" aria-controls="collapsePyramid"
       >
-        <img src="./images/mb_ajax_loader.gif" 
+        <img src="/images/mb_ajax_loader.gif" 
           className={ 
             if @props.isFetching is yes and @props.isDefault is no then 'mb-spinner-controls' else 'hide'
           }

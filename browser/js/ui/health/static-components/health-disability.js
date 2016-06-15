@@ -4,7 +4,7 @@ var DisabilitySection;
 DisabilitySection = function() {
   return React.createElement("div", {
     "className": "row mb-quicksand"
-  }, React.createElement("hr", null), React.createElement("div", {
+  }, React.createElement("div", {
     "className": "hidden-xs col-sm-12"
   }, React.createElement("h3", {
     "className": "mb-section-header"
@@ -42,3 +42,5 @@ DisabilitySection = function() {
 };
 
 module.exports = DisabilitySection;
+
+//# sourceMappingURL=health-disability.map

@@ -46,7 +46,7 @@ drawGenHealthChart = function(options) {
     main_group.attr('transform', "translate(" + margin.left + ", " + margin.top + ")");
     x_axis_group.attr('transform', "translate(" + margin.left + ", " + (chart_height + margin.top) + ")");
     y_axis_group.attr('transform', "translate(" + margin.left + ", " + margin.top + ")");
-    title_group.attr('transform', "translate(" + (chart_width / 2 - margin.left) + ", 0)");
+    title_group.attr('transform', "translate(" + (chart_width / 3 - margin.left) + ", 0)");
     x_axis_group.call(xAxis);
     y_axis_group.call(yAxis).append("text").attr("transform", "rotate(-90)").attr("y", 6).attr("dy", ".71em").style("text-anchor", "end").text("% of Population");
     ethnicity = main_group.selectAll('.ethnicity').data(d3_array).enter().append('g').attr('class', 'ethnicity');
@@ -146,7 +146,7 @@ drawGenHealthChart = function(options) {
       y: margin.p,
       opacity: 0,
       'font-size': '12px'
-    }).text('Self-proclaimed bad or very bad health').transition().duration(1500).attr('opacity', 1);
+    }).text('Self-proclaimed bad or very bad health by ethnicity and age group').transition().duration(1500).attr('opacity', 1);
     return attachHoverHandlers();
   };
   my.update = function() {
@@ -273,3 +273,5 @@ drawGenHealthChart = function(options) {
 };
 
 module.exports = drawGenHealthChart;
+
+//# sourceMappingURL=gen-health-chart.map

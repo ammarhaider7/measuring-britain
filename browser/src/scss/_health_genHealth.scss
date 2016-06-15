@@ -38,7 +38,7 @@
 		display: none;
 	}
 	.x .tick:nth-child(1) line {
-		stroke: #333;
+		stroke: #999;
 		stroke-dasharray: none;
 	}
 	.x .tick line {
@@ -90,6 +90,7 @@
 	    border: 1px solid #E6E6E6;
 	    padding: 2px 40px 2px 25px;
 	    border-radius: 5px;
+	    width: 100%;
 	}
 	.highlight {
 		background-color: #DA4A70;

@@ -82,7 +82,7 @@ drawSunburst = function(options) {
     return Math.sqrt(d.y);
   }).outerRadius(function(d) {
     return Math.sqrt(d.y + d.dy);
-  });
+  }).cornerRadius(5);
   y = d3.scale.ordinal().domain(d3.range(ethnic_group_arr.length)).rangeRoundBands([0, height / 3], 0);
   arcTween = function(d) {
     var i;
@@ -163,8 +163,8 @@ drawSunburst = function(options) {
     center_ethnic_group.attr('transform', "translate(" + (width / 2) + ", " + (half_height + margin.text - margin.top * 2) + ")");
     center_percent_group.attr('transform', "translate(" + (width / 2) + ", " + (half_height + (margin.text * 2) - margin.top * 2) + ")");
     center_total_value_group.attr('transform', "translate(" + (width / 2) + ", " + (half_height + (margin.text * 3) - margin.top * 2) + ")");
-    key_group.attr('transform', "translate(" + margin.left + ", " + margin.top + ")");
-    key_text_group.attr('transform', "translate(" + (margin.left * 2) + ", " + (margin.top + 17) + ")");
+    key_group.attr('transform', "translate(" + ((width * 0.9) + 20) + ", " + margin.top + ")");
+    key_text_group.attr('transform', "translate(" + (width * 0.9) + ", " + (margin.top + 17) + ")");
     paths = main_group.selectAll('path').data(partition.nodes(nested_data)).enter().append('path').attr({
       display: function(d) {
         if (d.depth) {
@@ -203,7 +203,8 @@ drawSunburst = function(options) {
       y: function(d, i) {
         return y(i);
       },
-      x: 10
+      x: 10,
+      'text-anchor': 'end'
     });
     attachHoverHandlers();
     return onInitDone();
@@ -242,3 +243,5 @@ drawSunburst = function(options) {
 };
 
 module.exports = drawSunburst;
+
+//# sourceMappingURL=sunburst-partition.map

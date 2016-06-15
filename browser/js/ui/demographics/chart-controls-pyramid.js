@@ -117,7 +117,7 @@ PyramidControls = React.createClass({displayName: "PyramidControls",
       "aria-expanded": "false",
       "aria-controls": "collapsePyramid"
     }, React.createElement("img", {
-      "src": "./images/mb_ajax_loader.gif",
+      "src": "/images/mb_ajax_loader.gif",
       "className": (this.props.isFetching === true && this.props.isDefault === false ? 'mb-spinner-controls' : 'hide')
     }), React.createElement("div", {
       "className": (this.props.isFetching === true && this.props.isDefault === false ? 'hide' : void 0)
@@ -252,3 +252,5 @@ PyramidControls = React.createClass({displayName: "PyramidControls",
 });
 
 module.exports = PyramidControls;
+
+//# sourceMappingURL=chart-controls-pyramid.map

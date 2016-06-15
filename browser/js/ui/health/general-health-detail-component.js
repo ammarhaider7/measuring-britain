@@ -107,7 +107,7 @@ GenHealthDetailComponent = React.createClass({displayName: "GenHealthDetailCompo
     }), "Show mean")), React.createElement("div", {
       "className": ""
     }, React.createElement("img", {
-      "src": "./images/mb_ajax_loader.gif",
+      "src": "/images/mb_ajax_loader.gif",
       "className": (this.props.isFetching === true && this.props.isDefault === true ? 'mb-spinner' : 'hide')
     }), ((function() {
 
@@ -157,3 +157,5 @@ GenHealthDetailComponent = React.createClass({displayName: "GenHealthDetailCompo
 });
 
 module.exports = GenHealthDetailComponent;
+
+//# sourceMappingURL=general-health-detail-component.map

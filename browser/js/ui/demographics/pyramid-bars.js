@@ -4,6 +4,15 @@ var drawPyrBars, pyBarsComponent;
 drawPyrBars = require('./d3/pyramidBars.js');
 
 pyBarsComponent = React.createClass({displayName: "pyBarsComponent",
+  getAppropriateHeight: function() {
+    var window_height;
+    window_height = $(window).height();
+    if (window_height > 700) {
+      return 320;
+    } else {
+      return $(window).height() - 320;
+    }
+  },
   componentDidUpdate: function() {
     var pyrBars;
     if (this.props.updateBars === true) {
@@ -23,13 +32,13 @@ pyBarsComponent = React.createClass({displayName: "pyBarsComponent",
     return React.createElement("div", {
       "className": (!(this.props.isFetching === true && this.props.isDefault === true) ? 'mb-grey-box' : void 0)
     }, (this.props.isFetching === true && this.props.isDefault === true ? React.createElement("img", {
-      "src": "./images/mb_ajax_loader.gif",
+      "src": "/images/mb_ajax_loader.gif",
       "className": "mb-spinner"
     }) : void 0), React.createElement("svg", {
       "className": "pyramid-bars-svg",
       "style": {
         width: '100%',
-        height: '275px'
+        height: this.getAppropriateHeight()
       },
       "ref": "pyramidBarsSvg"
     }, React.createElement("g", {
@@ -45,3 +54,5 @@ pyBarsComponent = React.createClass({displayName: "pyBarsComponent",
 });
 
 module.exports = pyBarsComponent;
+
+//# sourceMappingURL=pyramid-bars.map
