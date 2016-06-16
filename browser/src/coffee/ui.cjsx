@@ -8,6 +8,7 @@ EthnicSection = require './ui/demographics/static-components/ethnic-diversity.js
 ReligiousSection = require './ui/demographics/static-components/religious-diversity.js'
 GeneralHealthSection = require './ui/health/static-components/general-health.js'
 DisabilitySection = require './ui/health/static-components/health-disability.js'
+Footer = require './partials/footer.js'
 
 # Establish what page this is
 path = location.pathname.split('/')[1]
@@ -53,6 +54,7 @@ renderPopulationPyramid = ->
 	ReactDOM.render <Nav active={ _path } border='yes'/>, document.getElementById 'react_nav_container'
 	ReactDOM.render <PageHeader page_header={ 'Population Pyramid - Census' }/>, document.getElementById 'mb_page_header'
 	ReactDOM.render <PopulationPyramid/>, document.getElementById 'react_container'
+	ReactDOM.render <Footer/>, document.getElementById 'mb_footer'
 	# Render container components via redux
 	render()
 
@@ -66,6 +68,7 @@ renderEthnicDiversity = ->
 	ReactDOM.render <Nav active={ _path } border='yes'/>, document.getElementById 'react_nav_container'
 	ReactDOM.render <PageHeader page_header='Ethnic Diversity - Census'/>, document.getElementById 'mb_page_header'
 	ReactDOM.render <EthnicDiversity/>, document.getElementById 'react_container'
+	ReactDOM.render <Footer/>, document.getElementById 'mb_footer'
 	# Render container components via redux
 	render()
 
@@ -79,6 +82,7 @@ renderReligiousDiversity = ->
 	ReactDOM.render <Nav active={ _path } border='yes'/>, document.getElementById 'react_nav_container'
 	ReactDOM.render <PageHeader page_header='Religious Diversity - Census'/>, document.getElementById 'mb_page_header'
 	ReactDOM.render <ReligiousDiversity/>, document.getElementById 'react_container'
+	ReactDOM.render <Footer/>, document.getElementById 'mb_footer'
 	# Render container components via redux
 	render()
 
@@ -92,6 +96,7 @@ renderEthnicGenHealth = ->
 	ReactDOM.render <Nav active={ _path } border='yes'/>, document.getElementById 'react_nav_container'
 	ReactDOM.render <PageHeader page_header="Ethnic Disparities in General Health - Census"/>, document.getElementById 'mb_page_header'
 	ReactDOM.render <EthnicGenHealth/>, document.getElementById 'react_container'
+	ReactDOM.render <Footer/>, document.getElementById 'mb_footer'
 	# Render container components via redux
 	render()
 
@@ -105,6 +110,7 @@ renderHealthDisability = ->
 	ReactDOM.render <Nav active={ _path } border='yes'/>, document.getElementById 'react_nav_container'
 	ReactDOM.render <PageHeader page_header="Long-term illness/disability by ethnicity - Census"/>, document.getElementById 'mb_page_header'
 	ReactDOM.render <HealthDisability/>, document.getElementById 'react_container'
+	ReactDOM.render <Footer/>, document.getElementById 'mb_footer'
 	# Render container components via redux
 	render()
 

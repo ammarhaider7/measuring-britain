@@ -20,3 +20,9 @@
 	.q2-9 { fill: #296298; }
 
 }
+.mb-no-pointer-events {
+	pointer-events: none;
+}
+.mb-all-pointer-events {
+	pointer-events: all;
+}

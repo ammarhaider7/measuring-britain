@@ -5832,6 +5832,9 @@ button.close {
 .mb-ui-body {
   background-color: #FFFFFF; }
 
+.mb-absolute {
+  position: absolute; }
+
 .mb-full-width {
   width: 100%;
   padding-left: 5%;
@@ -5839,6 +5842,9 @@ button.close {
 
 .mt-zero {
   margin-top: 0px; }
+
+.mb-zero {
+  margin-bottom: 0px; }
 
 .mt-large {
   margin-top: 30px; }
@@ -5950,6 +5956,12 @@ button.close {
   .cell-background .q2-9 {
     fill: #296298; }
 
+.mb-no-pointer-events {
+  pointer-events: none; }
+
+.mb-all-pointer-events {
+  pointer-events: all; }
+
 .mb-roboto {
   font-family: 'Roboto', sans-serif; }
 
@@ -5982,6 +5994,9 @@ button.close {
 
 .mb-chart-text {
   font-size: 12px; }
+
+.mb-bold {
+  font-weight: bold; }
 
 .mb-hide {
   display: none; }
@@ -6037,6 +6052,14 @@ button.close {
   background-image: -webkit-linear-gradient(top, #FFFFFF, #D8D5D5);
   background-image: -moz-linear-gradient(top, #FFFFFF, #D8D5D5);
   border: 1px solid #E0E0E0; }
+
+.mb-btn-primary {
+  color: #FFF;
+  background-color: #DA4A70;
+  font-weight: bold;
+  border: none; }
+  .mb-btn-primary:hover {
+    background-color: #C11844; }
 
 .mb-spinner {
   height: 30px; }
@@ -6176,12 +6199,6 @@ nav.mb-nav-border {
     border: 1px solid #D6D6D6;
     border-radius: 6px;
     margin-bottom: 5px; }
-  .controls-container .mb-btn-primary {
-    color: #FFF;
-    background-color: #DA4A70;
-    font-weight: bold; }
-    .controls-container .mb-btn-primary:hover {
-      background-color: #C11844; }
   .controls-container .mb-btn-fetching {
     background-color: #EA87A1; }
     .controls-container .mb-btn-fetching:hover, .controls-container .mb-btn-fetching:active, .controls-container .mb-btn-fetching:focus {
@@ -6370,3 +6387,11 @@ nav.mb-nav-border {
   color: #FFF;
   background-color: #DA4A70;
   font-weight: 700; }
+
+#mb_row .thumbnail img {
+  height: 170px; }
+
+#mb_row .thumbnail:hover {
+  -webkit-box-shadow: 0px 0px 18px 16px rgba(0, 0, 0, 0.34);
+  -moz-box-shadow: 0px 0px 18px 16px rgba(0, 0, 0, 0.34);
+  box-shadow: 0px 0px 18px 16px rgba(0, 0, 0, 0.34); }

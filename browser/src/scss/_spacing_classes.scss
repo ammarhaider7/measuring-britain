@@ -1,4 +1,7 @@
 //Spacing classes
+.mb-absolute {
+	position: absolute;
+}
 .mb-full-width {
 	width: 100%;
     padding-left: 5%;
@@ -6,6 +9,9 @@
 }
 .mt-zero {
 	margin-top: $zero;
+}
+.mb-zero {
+	margin-bottom: $zero;
 }
 .mt-large {
 	margin-top: $margin-large;

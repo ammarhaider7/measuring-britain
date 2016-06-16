@@ -4,3 +4,12 @@
 	background-image: -moz-linear-gradient(top,#FFFFFF,#D8D5D5);
     border: 1px solid #E0E0E0;
 }
+.mb-btn-primary {
+	color: #FFF;
+	background-color: #DA4A70;
+	font-weight: bold;
+	border: none;
+	&:hover {
+		background-color: #C11844;
+	}
+}

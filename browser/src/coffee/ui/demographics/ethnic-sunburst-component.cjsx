@@ -88,7 +88,6 @@ SunburstComponent = React.createClass
           <g className="percentage-group"></g>    
         </svg>
       </div>
-      <hr/>
     </div>
 
 module.exports = SunburstComponent

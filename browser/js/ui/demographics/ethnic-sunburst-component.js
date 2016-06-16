@@ -78,7 +78,7 @@ SunburstComponent = React.createClass({displayName: "SunburstComponent",
       "className": "total-value-group"
     }), React.createElement("g", {
       "className": "percentage-group"
-    }))), React.createElement("hr", null));
+    }))));
   }
 });
 

@@ -81,7 +81,6 @@ BarsComponent = React.createClass
           <g className="detail-group mb-quicksand"></g>
         </svg>
       </div>
-      <hr/>
     </div>  
 
 module.exports = BarsComponent
