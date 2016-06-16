@@ -57,5 +57,3 @@ splash = function() {
 };
 
 module.exports = splash;
-
-//# sourceMappingURL=voronoi.map

@@ -86,5 +86,3 @@ parse = function(dataArray) {
 };
 
 module.exports = parse;
-
-//# sourceMappingURL=health-disability-parser.map

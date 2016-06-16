@@ -83,5 +83,3 @@ SunburstComponent = React.createClass({displayName: "SunburstComponent",
 });
 
 module.exports = SunburstComponent;
-
-//# sourceMappingURL=ethnic-sunburst-component.map

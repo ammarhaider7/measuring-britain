@@ -172,5 +172,3 @@ switch (raw_path) {
 $(function() {
   return $('[data-toggle="tooltip"]').tooltip();
 });
-
-//# sourceMappingURL=ui.map

@@ -77,5 +77,3 @@ BarsComponent = React.createClass({displayName: "BarsComponent",
 });
 
 module.exports = BarsComponent;
-
-//# sourceMappingURL=religion-bars-component.map

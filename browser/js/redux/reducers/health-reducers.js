@@ -15,5 +15,3 @@ mbReducer = combineReducers({
 });
 
 module.exports = mbReducer;
-
-//# sourceMappingURL=health-reducers.map
