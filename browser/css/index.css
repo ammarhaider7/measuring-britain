@@ -8341,9 +8341,9 @@ nav.mb-nav-border {
 .mb-alt-bg {
   background-image: url(/images/voronoi-bg-wide-nav.PNG); }
 
-.fa {
+.navbar-right .fa {
   color: #DA4A70; }
-  .fa:hover {
+  .navbar-right .fa:hover {
     color: #C11844; }
 
 .controls-container {

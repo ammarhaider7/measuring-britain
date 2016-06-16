@@ -26,7 +26,7 @@ Nav = React.createClass({displayName: "Nav",
       "className": "icon-bar"
     })), React.createElement("a", {
       "className": (this.props.alt_bg === 'yes' ? "mb-nav-brand-font navbar-brand mb-white-text" : "mb-nav-brand-font navbar-brand"),
-      "href": "#"
+      "href": "/"
     }, "MB App")), React.createElement("div", {
       "id": "navbar",
       "className": "navbar-collapse collapse",
@@ -41,7 +41,9 @@ Nav = React.createClass({displayName: "Nav",
     }, React.createElement("a", {
       "className": (this.props.alt_bg === 'yes' ? 'mb-white-text' : void 0),
       "href": "/"
-    }, "Home")), React.createElement("li", {
+    }, React.createElement("i", {
+      "className": "fa fa-home fa-lg fa-fw"
+    }))), React.createElement("li", {
       "className": (this.props.active === "census" ? 'dropdown active' : 'dropdown')
     }, React.createElement("a", {
       "href": "/demographics",

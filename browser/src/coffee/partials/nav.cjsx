@@ -11,11 +11,15 @@ Nav = React.createClass
 						<span className="icon-bar"></span>
 						<span className="icon-bar"></span>
 					</button>
-					<a className={if @props.alt_bg is 'yes' then "mb-nav-brand-font navbar-brand mb-white-text" else "mb-nav-brand-font navbar-brand"} href="#">MB App</a>
+					<a className={if @props.alt_bg is 'yes' then "mb-nav-brand-font navbar-brand mb-white-text" else "mb-nav-brand-font navbar-brand"} href="/">MB App</a>
 				</div>
 				<div id="navbar" className="navbar-collapse collapse" aria-expanded="false" style={{height: '1px'}}>
 					<ul className="nav navbar-nav">
-						<li className={ if @props.active is "home" then 'active' else ''}><a className={if @props.alt_bg is 'yes' then 'mb-white-text'} href="/">Home</a></li>
+						<li className={ if @props.active is "home" then 'active' else ''}>
+							<a className={if @props.alt_bg is 'yes' then 'mb-white-text'} href="/">
+								<i className="fa fa-home fa-lg fa-fw"></i>
+							</a>
+						</li>
 						<li className={ if @props.active is "census" then 'dropdown active' else 'dropdown'}>
 							<a href="/demographics" className={if @props.alt_bg is 'yes' then 'dropdown-toggle mb-white-text' else "dropdown-toggle"} data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Census <span className="caret"></span></a>
 							<ul className="dropdown-menu">
