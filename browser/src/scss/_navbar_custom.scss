@@ -7,3 +7,10 @@ nav.mb-nav-border {
 .mb-alt-bg {
 	background-image: url(/images/voronoi-bg-wide-nav.PNG);
 }
+// font-awesome icons
+.fa {
+	color: #DA4A70;
+	&:hover {
+		color: #C11844;
+	}
+}

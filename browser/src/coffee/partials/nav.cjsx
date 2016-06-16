@@ -28,7 +28,7 @@ Nav = React.createClass
 								<li role="separator" className="divider"></li>
 								<li className="dropdown-header">Health</li>
 								<li><a href="/census/ethnic-disparities-general-health">Ethnic Disparities in General Health (Census)</a></li>
-								<li><a href="/census/longterm-illness-disability-by-ethnicity">Long-term illness/disability by ethnicity (Census)</a></li>
+								<li><a href="/census/longterm-illness-disability-by-ethnicity	">Long-term illness/disability by ethnicity (Census)</a></li>
 							</ul>
 						</li>
 						<li className={ if @props.active is "demographics" then 'dropdown active' else 'dropdown'}>
@@ -54,6 +54,18 @@ Nav = React.createClass
 						<li className="about"><a className={if @props.alt_bg is 'yes' then 'mb-white-text'} href="/about">About</a></li>
 					</ul>
 					<ul className="nav navbar-nav navbar-right">
+						<li>
+							<a href="#"><i className="fa fa-facebook fa-lg fa-fw"></i></a>
+						</li>	
+						<li>
+							<a href="#"><i className="fa fa-twitter fa-lg fa-fw"></i></a>
+						</li>
+						<li>
+							<a href="https://github.com/ammarhaider7/measuring-britain" target="_blank"><i className="fa fa-github fa-lg fa-fw"></i></a>
+						</li>	
+						<li>
+							<a href="#"><i className="fa fa-trello fa-lg fa-fw"></i></a>
+						</li>	
 					</ul>
 				</div>
 			</div>

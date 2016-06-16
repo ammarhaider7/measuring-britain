@@ -18,7 +18,7 @@ PyramidComponent = React.createClass
 		if window_height > 700
 			return 600
 		else
-			return $(window).height() - 120
+			return $(window).height() - 80
 
 	componentWillMount: ->
 

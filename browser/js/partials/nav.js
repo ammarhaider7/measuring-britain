@@ -75,7 +75,7 @@ Nav = React.createClass({displayName: "Nav",
     }, "Health"), React.createElement("li", null, React.createElement("a", {
       "href": "/census/ethnic-disparities-general-health"
     }, "Ethnic Disparities in General Health (Census)")), React.createElement("li", null, React.createElement("a", {
-      "href": "/census/longterm-illness-disability-by-ethnicity"
+      "href": "/census/longterm-illness-disability-by-ethnicity	"
     }, "Long-term illness\x2Fdisability by ethnicity (Census)")))), React.createElement("li", {
       "className": (this.props.active === "demographics" ? 'dropdown active' : 'dropdown')
     }, React.createElement("a", {
@@ -134,7 +134,24 @@ Nav = React.createClass({displayName: "Nav",
       "href": "/about"
     }, "About"))), React.createElement("ul", {
       "className": "nav navbar-nav navbar-right"
-    }))));
+    }, React.createElement("li", null, React.createElement("a", {
+      "href": "#"
+    }, React.createElement("i", {
+      "className": "fa fa-facebook fa-lg fa-fw"
+    }))), React.createElement("li", null, React.createElement("a", {
+      "href": "#"
+    }, React.createElement("i", {
+      "className": "fa fa-twitter fa-lg fa-fw"
+    }))), React.createElement("li", null, React.createElement("a", {
+      "href": "https://github.com/ammarhaider7/measuring-britain",
+      "target": "_blank"
+    }, React.createElement("i", {
+      "className": "fa fa-github fa-lg fa-fw"
+    }))), React.createElement("li", null, React.createElement("a", {
+      "href": "#"
+    }, React.createElement("i", {
+      "className": "fa fa-trello fa-lg fa-fw"
+    })))))));
   }
 });
 
