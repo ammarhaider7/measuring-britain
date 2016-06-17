@@ -8576,6 +8576,47 @@ nav.mb-nav-border {
 #health-disability-component .disability-svg path.domain {
   display: none; }
 
+#econ-country-component .mb-spinner {
+  margin: 150px auto 0;
+  display: block; }
+
+#econ-country-component .econ-country-svg .axis text {
+  font-size: 11px; }
+
+#econ-country-component .econ-country-svg .axis path, #econ-country-component .econ-country-svg .axis line {
+  fill: none;
+  stroke: #333;
+  shape-rendering: crispEdges; }
+
+#econ-country-component .econ-country-svg .legend-text {
+  font-size: 12px; }
+
+#econ-country-component .econ-country-svg .x .tick:nth-child(1) line {
+  stroke: #333;
+  stroke-dasharray: none; }
+
+#econ-country-component .econ-country-svg .x.axis path {
+  fill: none;
+  stroke: none; }
+
+#econ-country-component .econ-country-svg .x.axis text {
+  font-weight: bold;
+  visibility: hidden; }
+
+#econ-country-component .econ-country-svg .x.axis line {
+  stroke: #333;
+  stroke-opacity: .8; }
+
+#econ-country-component .econ-country-svg .y .tick:nth-child(1) line {
+  display: none; }
+
+#econ-country-component .econ-country-svg .y .tick line {
+  stroke-dasharray: 3, 3;
+  stroke: #EEE; }
+
+#econ-country-component .econ-country-svg path.domain {
+  display: none; }
+
 .row .mb-btn-primary:hover {
   background-color: #C11844; }
 

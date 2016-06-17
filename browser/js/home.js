@@ -47,3 +47,5 @@ ReactDOM.render(React.createElement(ThumbnailsComponent, {
 }), document.getElementById('labour_row'));
 
 ReactDOM.render(React.createElement(Footer, null), document.getElementById('mb_footer'));
+
+//# sourceMappingURL=home.map

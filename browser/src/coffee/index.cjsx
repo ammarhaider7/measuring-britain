@@ -14,7 +14,7 @@ path = location.pathname.split('/')[1]
 
 # Render presentational (stateless) components manually
 ReactDOM.render <Nav active='home' border="yes"/>, document.getElementById 'react_nav_container'
-ReactDOM.render <Jumbotron/>, document.getElementById 'mb_hero_cell_bg'
+ReactDOM.render <Jumbotron/>, document.getElementById 'mb_hero'
 ReactDOM.render <Row/>, document.getElementById 'mb_row'
 ReactDOM.render <Footer/>, document.getElementById 'mb_footer'
 

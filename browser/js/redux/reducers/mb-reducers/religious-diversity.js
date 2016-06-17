@@ -10,3 +10,5 @@ mbReducer = combineReducers({
 });
 
 module.exports = mbReducer;
+
+//# sourceMappingURL=religious-diversity.map

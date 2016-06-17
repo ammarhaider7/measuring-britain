@@ -55,4 +55,13 @@ router.get('/longterm-illness-disability-by-ethnicity', function(req, res, next)
   });
 });
 
+// employment-status-by-country-of-birth
+router.get('/employment-status-by-country-of-birth', function(req, res, next) {
+  res.render('react-container', { 
+    layout: 'ui2',
+    title: 'MB App | Census | Employment Status by country of birth',
+    page_header: 'Employment Status by country of birth'
+  });
+});
+
 module.exports = router;

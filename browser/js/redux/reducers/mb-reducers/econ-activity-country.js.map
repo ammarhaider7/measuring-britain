@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "file": "econ-activity-country.js",
+  "sourceRoot": "..\\..\\..\\..\\..",
+  "sources": [
+    "browser\\src\\coffee\\redux\\reducers\\mb-reducers\\econ-activity-country.coffee"
+  ],
+  "names": [],
+  "mappings": ";AAAA,IAAA;;AAAE,kBAAoB,OAAA,CAAQ,OAAR,EAApB;;AACF,yBAAA,GAA4B,OAAA,CAAQ,6CAAR;;AAE5B,SAAA,GAAY,eAAA,CAAgB;EAC3B,2BAAA,yBAD2B;CAAhB;;AAIZ,MAAM,CAAC,OAAP,GAAiB"
+}

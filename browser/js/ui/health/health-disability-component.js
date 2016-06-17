@@ -76,3 +76,5 @@ DisabilityChart = React.createClass({displayName: "DisabilityChart",
 });
 
 module.exports = DisabilityChart;
+
+//# sourceMappingURL=health-disability-component.map

@@ -114,6 +114,20 @@ renderHealthDisability = ->
 	# Render container components via redux
 	render()
 
+renderEmploymentStatusByCountry = ->
+
+	render = require './redux/renderers/econ-activity-country.js'
+	PageHeader = require './partials/page-header.js'
+	Nav = require './partials/nav.js'
+	EconByCountry = require './ui/labour/static-components/econ-activity-country.js'
+	# Render presentational (stateless) components manually
+	ReactDOM.render <Nav active={ _path } border='yes'/>, document.getElementById 'react_nav_container'
+	ReactDOM.render <PageHeader page_header="Employment status by country of birth - Census"/>, document.getElementById 'mb_page_header'
+	ReactDOM.render <EconByCountry/>, document.getElementById 'react_container'
+	ReactDOM.render <Footer/>, document.getElementById 'mb_footer'
+	# Render container components via redux
+	render()
+
 # Set the right render method
 switch raw_path
 	when '/demographics' then renderDemographics()
@@ -124,6 +138,7 @@ switch raw_path
 	when '/census/religious-diversity' then renderReligiousDiversity()
 	when '/census/ethnic-disparities-general-health' then renderEthnicGenHealth()
 	when '/census/longterm-illness-disability-by-ethnicity' then renderHealthDisability()
+	when '/census/employment-status-by-country-of-birth' then renderEmploymentStatusByCountry()
 
 # Opt-in tooltip functionality
 $ ->

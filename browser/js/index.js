@@ -28,10 +28,12 @@ ReactDOM.render(React.createElement(Nav, {
   "border": "yes"
 }), document.getElementById('react_nav_container'));
 
-ReactDOM.render(React.createElement(Jumbotron, null), document.getElementById('mb_hero_cell_bg'));
+ReactDOM.render(React.createElement(Jumbotron, null), document.getElementById('mb_hero'));
 
 ReactDOM.render(React.createElement(Row, null), document.getElementById('mb_row'));
 
 ReactDOM.render(React.createElement(Footer, null), document.getElementById('mb_footer'));
 
 voronoi();
+
+//# sourceMappingURL=index.map
