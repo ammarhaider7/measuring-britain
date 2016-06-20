@@ -22,7 +22,7 @@ EconByCountry = React.createClass
 
     # Update chart
     if @props.updateMainChart is yes
-
+      
       draw = econByCountryChart {
         container: @refs.econCountrySvg
         isDefault: @props.isDefault

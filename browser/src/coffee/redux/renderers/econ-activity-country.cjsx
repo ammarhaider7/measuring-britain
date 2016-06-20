@@ -2,7 +2,7 @@
 # { requestPyramidData, fetchPyramidData, mouseOver } = require './actions/demographics/pyramid-actions.js'
 { Provider } = require 'react-redux'
 ReduxThunk = require('redux-thunk').default
-{ EconByCountry } = require '../containers/labour/econ-activity-country-containers.js'
+{ EconByCountry, EconByCountryDetail } = require '../containers/labour/econ-activity-country-containers.js'
 mbReducer = require '../reducers/mb-reducers/econ-activity-country.js'
 
 # creating the store, associating the root reducer and thunk middleware
@@ -20,6 +20,6 @@ unsubscribe = store.subscribe ->
 
 render = ->
 	ReactDOM.render <Provider store={store}><EconByCountry/></Provider>, document.getElementById 'econ-country-component'
-	# ReactDOM.render <Provider store={store}><GenHealthChartDetail/></Provider>, document.getElementById 'general-health-details'
+	ReactDOM.render <Provider store={store}><EconByCountryDetail/></Provider>, document.getElementById 'econ-country-details'
 
 module.exports = render

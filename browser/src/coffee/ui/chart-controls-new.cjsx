@@ -58,6 +58,10 @@ ControlsNew = React.createClass
 
       fetchChartData = 'fetchReligionData'
 
+    else if @props.chartName is 'economicActivityByCountry'
+
+      fetchChartData = 'fetchEconCountryData'
+
     else if @props.chartName is 'disabilityChart'
 
       fetchChartData = 'fetchDisabilityData'

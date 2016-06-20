@@ -1,6 +1,3 @@
-# d3 = require 'd3'
-# flareJson = require '../../../../json/flare.json'
-
 parse = (dataArray) ->
 
 	# Need to remove totals from children

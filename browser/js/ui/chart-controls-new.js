@@ -53,6 +53,8 @@ ControlsNew = React.createClass({displayName: "ControlsNew",
       fetchChartData = 'fetchSunburstData';
     } else if (this.props.chartName === 'relBars') {
       fetchChartData = 'fetchReligionData';
+    } else if (this.props.chartName === 'economicActivityByCountry') {
+      fetchChartData = 'fetchEconCountryData';
     } else if (this.props.chartName === 'disabilityChart') {
       fetchChartData = 'fetchDisabilityData';
       return this.props[fetchChartData]({

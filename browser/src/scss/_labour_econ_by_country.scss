@@ -38,10 +38,20 @@
 		}
 		.y .tick line {
 			stroke-dasharray: 3, 3;
-	    	stroke: #EEE;
+	    	stroke: #DDD;
 		}
 		path.domain {
 			display: none;
+		}
+		.in-work-label, .out-of-work-label {
+			text-anchor: middle;
+			font-size: 30px;
+		}
+		.in-work-label {
+			fill: #3C763D;
+		}
+		.out-of-work-label {
+			fill: #D6616B;
 		}
 	}
 }

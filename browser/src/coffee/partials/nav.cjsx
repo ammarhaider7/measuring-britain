@@ -54,7 +54,14 @@ Nav = React.createClass
 								<li><a href="/census/longterm-illness-disability-by-ethnicity">Long-term illness/disability by ethnicity (Census)</a></li>
 							</ul>
 						</li>
-						<li className="labour"><a className={if @props.alt_bg is 'yes' then 'mb-white-text'} href="labour">Labour Market</a></li>
+						<li className={ if @props.active is "health" then 'dropdown active' else 'dropdown'}>
+							<a href="#" className={if @props.alt_bg is 'yes' then 'dropdown-toggle mb-white-text' else "dropdown-toggle"} data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Labour Market <span className="caret"></span></a>
+							<ul className="dropdown-menu">
+								<li role="separator" className="divider"></li>
+								<li className="dropdown-header">Census</li>
+								<li><a href="/census/employment-status-by-country-of-birth">Employment Status by Country of Birth (Census)</a></li>
+							</ul>
+						</li>
 						<li className="about"><a className={if @props.alt_bg is 'yes' then 'mb-white-text'} href="/about">About</a></li>
 					</ul>
 					<ul className="nav navbar-nav navbar-right">

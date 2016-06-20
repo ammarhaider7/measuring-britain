@@ -1,5 +1,5 @@
 parse = (dataArray) ->
-
+	window.json = dataArray
 	# Economic activity categories
 	# Economically active: In employment: Employee: Total: 3
 	# Economically active: In employment: Self-employed: Total: 6
@@ -14,6 +14,32 @@ parse = (dataArray) ->
 		d3.sum arr, (d) ->
 			if d.c_ecopuk11.value is val
 				return d.obs_value.value
+
+	# total sum
+	total_sum = d3.sum dataArray, (d) ->
+
+		return d.obs_value.value
+
+	# total item
+	total_item_values = d3.nest().key (d) ->
+
+		return d.c_ecopuk11.description
+
+	.rollup (values) ->
+
+		return {
+			sum: d3.sum values, (d) ->
+				return d.obs_value.value
+		}
+	.entries dataArray
+
+	total_item_percs = total_item_values.map (ob) ->
+
+		return {
+			economic_activity: ob.key
+			perc: ob.values.sum / total_sum
+			value: ob.values.sum
+		}
 
 	# nesting data
 	nested_data = d3.nest().key (d) ->
@@ -140,10 +166,16 @@ parse = (dataArray) ->
 				y1: y0 += d.out_of_work[category]
 			}
 
-	# Create array of ethnicities
-	countries = nested_data.map (country) ->
+	# Sort percentages by highest employment rate
+	percentages = percentages.sort (a, b) ->
+		a_in_work = a.in_work.employee + a.in_work.self_employed
+		b_in_work = b.in_work.employee + b.in_work.self_employed
+		return b_in_work - a_in_work
 
-		return country.key
+	# Create array of countries
+	countries = percentages.map (country) ->
+
+		return country.country
 
 	return {
 		nested_data
@@ -151,6 +183,8 @@ parse = (dataArray) ->
 		percentages
 		employment_cats_pretty
 		employment_cats_concat
+		total_item_values
+		total_item_percs
 	}
 
 module.exports = parse

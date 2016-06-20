@@ -12,7 +12,7 @@
   initDone } = require '../../actions/labour/econ-activity-country-actions.js'
 
 EconByCountryChartComponent = require '../../../ui/labour/econ-activity-country-component.js'
-# GenHealthChartDetailComponent = require '../../../ui/labour/econ-activity-country-detail-component.js'
+EconByCountryChartDetailComponent = require '../../../ui/labour/econ-activity-country-details-component.js'
 
 mapStateToProps = (state) ->
 
@@ -43,10 +43,10 @@ mapStateToPropsDetail = (state) ->
 	mouseOverData: state.economicActivityByCountry._mouseOverData
 	updateTable: state.economicActivityByCountry.updateTable
 
-mapDispatchToPropsDetail = (dispatch) ->
+# mapDispatchToPropsDetail = (dispatch) ->
 
-	fetchEconCountryData: (filterOptions) ->
-		dispatch fetchEconCountryData filterOptions
+# 	fetchEconCountryData: (filterOptions) ->
+# 		dispatch fetchEconCountryData filterOptions
 
 mapDispatchToProps = (dispatch) ->
 
@@ -76,12 +76,11 @@ EconByCountry = connect(
 	mapDispatchToProps
 )(EconByCountryChartComponent)
 
-# GenHealthChartDetail = connect(
-# 	mapStateToPropsDetail,
-# 	mapDispatchToPropsDetail
-# )(GenHealthChartDetailComponent)
+EconByCountryDetail = connect(
+	mapStateToPropsDetail
+)(EconByCountryChartDetailComponent)
 
 module.exports = {
 	EconByCountry
-	# GenHealthChartDetail
+	EconByCountryDetail
 }

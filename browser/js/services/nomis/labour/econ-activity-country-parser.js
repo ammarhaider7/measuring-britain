@@ -2,7 +2,8 @@
 var parse;
 
 parse = function(dataArray) {
-  var countries, employment_cats_concat, employment_cats_pretty, in_employment_cats, nested_data, out_employment_cats, percentages, sumEconCat;
+  var countries, employment_cats_concat, employment_cats_pretty, in_employment_cats, nested_data, out_employment_cats, percentages, sumEconCat, total_item_percs, total_item_values, total_sum;
+  window.json = dataArray;
   sumEconCat = function(arr, val) {
     return d3.sum(arr, function(d) {
       if (d.c_ecopuk11.value === val) {
@@ -10,6 +11,25 @@ parse = function(dataArray) {
       }
     });
   };
+  total_sum = d3.sum(dataArray, function(d) {
+    return d.obs_value.value;
+  });
+  total_item_values = d3.nest().key(function(d) {
+    return d.c_ecopuk11.description;
+  }).rollup(function(values) {
+    return {
+      sum: d3.sum(values, function(d) {
+        return d.obs_value.value;
+      })
+    };
+  }).entries(dataArray);
+  total_item_percs = total_item_values.map(function(ob) {
+    return {
+      economic_activity: ob.key,
+      perc: ob.values.sum / total_sum,
+      value: ob.values.sum
+    };
+  });
   nested_data = d3.nest().key(function(d) {
     return d.c_cob.description;
   }).rollup(function(values) {
@@ -90,15 +110,23 @@ parse = function(dataArray) {
       };
     });
   });
-  countries = nested_data.map(function(country) {
-    return country.key;
+  percentages = percentages.sort(function(a, b) {
+    var a_in_work, b_in_work;
+    a_in_work = a.in_work.employee + a.in_work.self_employed;
+    b_in_work = b.in_work.employee + b.in_work.self_employed;
+    return b_in_work - a_in_work;
+  });
+  countries = percentages.map(function(country) {
+    return country.country;
   });
   return {
     nested_data: nested_data,
     countries: countries,
     percentages: percentages,
     employment_cats_pretty: employment_cats_pretty,
-    employment_cats_concat: employment_cats_concat
+    employment_cats_concat: employment_cats_concat,
+    total_item_values: total_item_values,
+    total_item_percs: total_item_percs
   };
 };
 

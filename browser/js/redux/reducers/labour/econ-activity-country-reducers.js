@@ -16,10 +16,10 @@ econCountryInitState = {
   },
   _value: {
     value: '2092957703',
-    label: 'England \& Wales'
+    label: 'England & Wales'
   },
   activeCategory: 'Geography (Countries)',
-  activeValue: 'England \& Wales',
+  activeValue: 'England & Wales',
   data: {},
   error: false,
   updateTable: false,

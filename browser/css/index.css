@@ -8612,10 +8612,20 @@ nav.mb-nav-border {
 
 #econ-country-component .econ-country-svg .y .tick line {
   stroke-dasharray: 3, 3;
-  stroke: #EEE; }
+  stroke: #DDD; }
 
 #econ-country-component .econ-country-svg path.domain {
   display: none; }
+
+#econ-country-component .econ-country-svg .in-work-label, #econ-country-component .econ-country-svg .out-of-work-label {
+  text-anchor: middle;
+  font-size: 30px; }
+
+#econ-country-component .econ-country-svg .in-work-label {
+  fill: #3C763D; }
+
+#econ-country-component .econ-country-svg .out-of-work-label {
+  fill: #D6616B; }
 
 .row .mb-btn-primary:hover {
   background-color: #C11844; }

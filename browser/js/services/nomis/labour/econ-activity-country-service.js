@@ -26,7 +26,7 @@ makeEconCountryRequest = function(options) {
       date: "date=latest",
       geography: "geography=2092957703",
       c_ecopuk11: "c_ecopuk11=3,6,11,14...18",
-      c_cob: "c_cob=2,11,14,15,20,26,29,30",
+      c_cob: "c_cob=2,11,14,15,20,26,29",
       c_age: "c_age=0",
       measures: "measures=20100",
       c_sex: "c_sex=0"
@@ -42,8 +42,9 @@ makeEconCountryRequest = function(options) {
     return {
       queryStringOps: {
         date: "date=latest",
+        c_sex: "c_sex=0",
         c_ecopuk11: "c_ecopuk11=3,6,11,14...18",
-        c_cob: "c_cob=2,11,14,15,20,26,29,30",
+        c_cob: "c_cob=2,11,14,15,20,26,29",
         c_age: "c_age=0",
         measures: "measures=20100",
         geography: "geography=" + valCode

@@ -290,11 +290,26 @@ Nav = React.createClass({displayName: "Nav",
     }, "Ethnic Disparities in General Health (Census)")), React.createElement("li", null, React.createElement("a", {
       "href": "/census/longterm-illness-disability-by-ethnicity"
     }, "Long-term illness\x2Fdisability by ethnicity (Census)")))), React.createElement("li", {
-      "className": "labour"
+      "className": (this.props.active === "health" ? 'dropdown active' : 'dropdown')
     }, React.createElement("a", {
-      "className": (this.props.alt_bg === 'yes' ? 'mb-white-text' : void 0),
-      "href": "labour"
-    }, "Labour Market")), React.createElement("li", {
+      "href": "#",
+      "className": (this.props.alt_bg === 'yes' ? 'dropdown-toggle mb-white-text' : "dropdown-toggle"),
+      "data-toggle": "dropdown",
+      "role": "button",
+      "aria-haspopup": "true",
+      "aria-expanded": "false"
+    }, "Labour Market ", React.createElement("span", {
+      "className": "caret"
+    })), React.createElement("ul", {
+      "className": "dropdown-menu"
+    }, React.createElement("li", {
+      "role": "separator",
+      "className": "divider"
+    }), React.createElement("li", {
+      "className": "dropdown-header"
+    }, "Census"), React.createElement("li", null, React.createElement("a", {
+      "href": "/census/employment-status-by-country-of-birth"
+    }, "Employment Status by Country of Birth (Census)")))), React.createElement("li", {
       "className": "about"
     }, React.createElement("a", {
       "className": (this.props.alt_bg === 'yes' ? 'mb-white-text' : void 0),
