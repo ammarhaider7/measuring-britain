@@ -2,7 +2,7 @@
 var drawEconByCountryChart;
 
 drawEconByCountryChart = function(options) {
-  var activeCategory, activeValue, attachHoverHandlers, chart_height, chart_width, container, countries, d3_array, data, employment_cats, employment_cats_concat, format, height, in_work_colours, in_work_colours_domain, in_work_colours_range, isDefault, key, margin, my, onInitDone, onMouseOver, out_of_work_colours, out_of_work_colours_domains, out_of_work_range, percFormat, pointPercFormat, ref, ref1, trimCountryString, width, x, xAxis, y, y0, yAxisBottom, yAxisTop;
+  var activeCategory, activeValue, attachHoverHandlers, chart_height, chart_width, container, countries, d3_array, data, employment_cats, employment_cats_concat, format, height, in_work_colours, in_work_colours_domain, in_work_colours_range, isDefault, key, margin, my, onInitDone, onMouseOver, out_of_work_colours, out_of_work_colours_domains, out_of_work_range, percFormat, pointPercFormat, ref, ref1, trimCountryString, trimEmploymentStatus, width, x, xAxis, y, y0, yAxisBottom, yAxisTop;
   container = options.container, data = options.data, isDefault = options.isDefault, onMouseOver = options.onMouseOver, activeCategory = options.activeCategory, activeValue = options.activeValue, onInitDone = options.onInitDone;
   my = {};
   width = (ref = $(container).width()) != null ? ref : 800;
@@ -13,7 +13,8 @@ drawEconByCountryChart = function(options) {
     bottom: 45,
     left: 40,
     p: 25,
-    label: 60
+    label: 60,
+    tooltip_height: 42
   };
   chart_width = width - margin.left - margin.right;
   chart_height = height - margin.top - margin.bottom;
@@ -33,31 +34,53 @@ drawEconByCountryChart = function(options) {
   out_of_work_colours_domains = ["unemployed", "retired", "student", "other", "looking_after_home_family", "long_term_sick_disabled"];
   out_of_work_range = ['#C54E58', '#D6616B', '#B33742', '#E47982', '#F38F97', '#FDABB1'];
   out_of_work_colours = d3.scale.ordinal().domain(out_of_work_colours_domains).range(out_of_work_range);
-  trimCountryString = function(str) {
-    if (str.indexOf('Antarctica') > -1) {
-      return 'Oceanian countries';
-    } else if (str.indexOf('EU countries') > -1) {
-      return 'EU countries';
-    } else if (str.indexOf('Africa') > -1) {
-      return 'African countries';
-    } else if (str.indexOf('Rest of Europe') > -1) {
-      return 'Non-EU European countries';
-    } else if (str.indexOf('United Kingdom') > -1) {
-      return 'United Kingdom';
-    } else if (str.indexOf('Americas') > -1) {
-      return 'Americas & Carribean';
-    } else if (str.indexOf('Middle') > -1) {
-      return 'Asia & Middle East';
+  trimEmploymentStatus = function(str) {
+    switch (str) {
+      case 'employee':
+        return 'Employee';
+      case 'self_employed':
+        return 'Self employed';
+      case 'unemployed':
+        return 'Unemployed';
+      case 'retired':
+        return 'Retired';
+      case 'student':
+        return 'Student';
+      case 'employee':
+        return 'Employee';
+      case 'other':
+        return 'Other';
+      case 'looking_after_home_family':
+        return 'Looking after home/family';
+      case 'long_term_sick_disabled':
+        return 'Long-term sick/disabled';
     }
   };
-  x = d3.scale.ordinal().domain(countries).rangeRoundBands([0, chart_width], 0.35);
+  trimCountryString = function(str) {
+    if (str.indexOf('Antarctica') > -1) {
+      return 'Oceania';
+    } else if (str.indexOf('EU countries') > -1) {
+      return 'EU';
+    } else if (str.indexOf('Africa') > -1) {
+      return 'Africa';
+    } else if (str.indexOf('Rest of Europe') > -1) {
+      return 'Non-EU';
+    } else if (str.indexOf('United Kingdom') > -1) {
+      return 'UK';
+    } else if (str.indexOf('Americas') > -1) {
+      return 'Americas';
+    } else if (str.indexOf('Middle') > -1) {
+      return 'Asia';
+    }
+  };
+  x = d3.scale.ordinal().domain(countries).rangeRoundBands([0, chart_width], 0.3);
   y = d3.scale.linear().domain([0, 1]).range([0.5 * chart_height, 0]);
   y0 = d3.scale.linear().domain([0, 1]).range([0, 0.5 * chart_height]);
   xAxis = d3.svg.axis().scale(x).orient('bottom');
   yAxisTop = d3.svg.axis().scale(y).ticks(5).tickSize(-chart_width).tickFormat(percFormat).orient('left');
   yAxisBottom = d3.svg.axis().scale(y0).ticks(5).tickSize(-chart_width).tickFormat(percFormat).orient('left');
   my.init = function() {
-    var bottom_countries, bottom_rect_group, legend_group, main_bottom_group, main_top_group, svg, title_group, top_countries, top_rect_group, x_axis_divider_group, x_axis_group, y_axis_bottom_group, y_axis_top_group;
+    var bottom_countries, bottom_rect_group, legend_group, main_bottom_group, main_top_group, svg, title_group, tooltip_group_bottom, tooltip_group_top, top_countries, top_rect_group, x_axis_divider_group, x_axis_group, y_axis_bottom_group, y_axis_top_group;
     svg = d3.select('.econ-country-svg');
     main_top_group = svg.select('.main-group-top');
     main_bottom_group = svg.select('.main-group-bottom');
@@ -118,10 +141,12 @@ drawEconByCountryChart = function(options) {
     top_countries.append('text').text(function(d) {
       return trimCountryString(d.country);
     }).attr({
-      x: -(chart_height * 0.5) + 3,
-      y: -3,
-      transform: "rotate(-90)",
+      transform: function(d) {
+        return "translate(" + (0.5 * x.rangeBand()) + ", " + (y(d.in_work.sum_perc) - 5) + ")";
+      },
       'font-size': '80%',
+      'font-weight': 'bold',
+      'text-anchor': 'middle',
       "class": 'country-label',
       opacity: 0
     }).transition().duration(1500).attr('opacity', 1);
@@ -161,6 +186,72 @@ drawEconByCountryChart = function(options) {
         return (y0(d.y1)) - (y0(d.y0));
       }
     });
+    tooltip_group_top = main_top_group.append('g').attr('class', 'tooltip-group top').attr('opacity', 0);
+    tooltip_group_bottom = main_bottom_group.append('g').attr('class', 'tooltip-group bottom').attr('transform', "translate(0, " + (chart_width * 0.5) + ")").attr('opacity', 0);
+    tooltip_group_top.append('rect').attr({
+      "class": 'tooltip-bg top',
+      width: x.rangeBand() + margin.p,
+      height: margin.tooltip_height,
+      fill: '#333',
+      x: -10,
+      y: 0,
+      opacity: 0.7,
+      rx: 6
+    });
+    tooltip_group_top.append('text').attr({
+      "class": 'mb-tooltip top',
+      x: x.rangeBand() * 0.5,
+      dy: '.35em',
+      y: margin.p + 5,
+      fill: '#FF8C00',
+      opacity: 1,
+      'font-size': '85%',
+      'font-weight': 'bold',
+      'text-anchor': 'middle'
+    }).text('');
+    tooltip_group_top.append('text').attr({
+      "class": 'mb-tooltip-country top',
+      x: x.rangeBand() * 0.5,
+      dy: '.35em',
+      y: 10,
+      fill: '#fff',
+      opacity: 1,
+      'font-size': '85%',
+      'font-weight': 'bold',
+      'text-anchor': 'middle'
+    }).text('');
+    tooltip_group_bottom.append('rect').attr({
+      "class": 'tooltip-bg bottom',
+      width: x.rangeBand() + margin.p * 3,
+      height: margin.tooltip_height,
+      fill: '#333',
+      x: -margin.p * 1.5,
+      y: 0,
+      opacity: 0.7,
+      rx: 6
+    });
+    tooltip_group_bottom.append('text').attr({
+      "class": 'mb-tooltip bottom',
+      x: x.rangeBand() * 0.5,
+      dy: '.35em',
+      y: margin.p + 5,
+      fill: '#FF8C00',
+      opacity: 1,
+      'font-size': '85%',
+      'font-weight': 'bold',
+      'text-anchor': 'middle'
+    }).text('');
+    tooltip_group_bottom.append('text').attr({
+      "class": 'mb-tooltip-country top',
+      x: x.rangeBand() * 0.5,
+      dy: '.35em',
+      y: 10,
+      fill: '#fff',
+      opacity: 1,
+      'font-size': '85%',
+      'font-weight': 'bold',
+      'text-anchor': 'middle'
+    }).text('');
     x_axis_divider_group.append('line').attr({
       stroke: 'black',
       'stroke-width': 1,
@@ -178,6 +269,9 @@ drawEconByCountryChart = function(options) {
     main_top_group = svg.select('.main-group-top');
     main_bottom_group = svg.select('.main-group-bottom');
     top_countries = main_top_group.selectAll('.country-g').data(d3_array, key);
+    top_countries.selectAll('.country-label').data(d3_array, key).transition().duration(1000).attr('transform', function(d) {
+      return "translate(" + (0.5 * x.rangeBand()) + ", " + (y(d.in_work.sum_perc) - 5) + ")";
+    });
     top_countries.transition().duration(1000).attr('transform', function(d) {
       return "translate(" + (x(d.country)) + ", 0)";
     });
@@ -185,7 +279,7 @@ drawEconByCountryChart = function(options) {
     bottom_countries.transition().duration(1000).attr('transform', function(d) {
       return "translate(" + (x(d.country)) + ", 0)";
     });
-    top_countries.selectAll('rect').data(function(d) {
+    top_countries.selectAll('.rect').data(function(d) {
       return d.in_work_categories;
     }).transition().duration(1000).attr({
       y: function(d) {
@@ -195,7 +289,7 @@ drawEconByCountryChart = function(options) {
         return (y(d.y0)) - (y(d.y1));
       }
     });
-    bottom_countries.selectAll('rect').data(function(d) {
+    bottom_countries.selectAll('.rect').data(function(d) {
       return d.out_of_work_categories;
     }).transition().duration(1000).attr({
       y: function(d) {
@@ -208,8 +302,9 @@ drawEconByCountryChart = function(options) {
     return attachHoverHandlers();
   };
   attachHoverHandlers = function() {
-    var bottom_rects, hover_colour, main_bottom_group, main_top_group, svg, top_rects;
-    hover_colour = '#03A9F4';
+    var bottom_rects, hover_colour, main_bottom_group, main_top_group, rect_opacity, svg, top_rects;
+    hover_colour = '#ddd';
+    rect_opacity = 0.7;
     svg = d3.select('.econ-country-svg');
     countries = svg.selectAll('.country-g');
     main_top_group = svg.select('.main-group-top');
@@ -217,28 +312,39 @@ drawEconByCountryChart = function(options) {
     top_rects = main_top_group.selectAll('.rect');
     bottom_rects = main_bottom_group.selectAll('.rect');
     top_rects.on('mouseover', function(d) {
-      var $this;
-      console.log(d);
+      var $this, _d, tooltip_group;
+      _d = d;
       $this = d3.select(this);
-      return $this.attr('fill', hover_colour);
+      $this.attr('fill', hover_colour);
+      tooltip_group = main_top_group.select('.tooltip-group').attr('transform', "translate(" + (x(_d.country)) + "," + (y(_d.sum_perc) - (margin.tooltip_height + margin.p)) + ")");
+      tooltip_group.attr('opacity', 1);
+      tooltip_group.select('.mb-tooltip').text((percFormat(_d.value)) + " - " + (format(_d.value * _d.sum)));
+      return tooltip_group.select('.mb-tooltip-country').text(trimEmploymentStatus(_d.name));
     }).on('mouseout', function(d) {
-      var $this;
+      var $this, tooltip_group;
       $this = d3.select(this);
-      return $this.attr('fill', function(d) {
+      $this.attr('fill', function(d) {
         return in_work_colours(d.name);
       });
+      tooltip_group = main_top_group.select('.tooltip-group');
+      return tooltip_group.attr('opacity', 0);
     });
     return bottom_rects.on('mouseover', function(d) {
-      var $this;
-      console.log(d);
+      var $this, _d, tooltip_group;
+      _d = d;
       $this = d3.select(this);
-      return $this.attr('fill', hover_colour);
+      $this.attr('fill', hover_colour);
+      tooltip_group = main_bottom_group.select('.tooltip-group').attr('transform', "translate(" + (x(d.country) - 3) + "," + (y0(_d.sum_perc) + margin.p * 0.5) + ")").attr('opacity', 1);
+      tooltip_group.select('.mb-tooltip').text((percFormat(_d.value)) + " - " + (format(_d.value * _d.sum)));
+      return tooltip_group.select('.mb-tooltip-country').text(trimEmploymentStatus(_d.name));
     }).on('mouseout', function(d) {
-      var $this;
+      var $this, tooltip_group;
       $this = d3.select(this);
-      return $this.attr('fill', function(d) {
+      $this.attr('fill', function(d) {
         return out_of_work_colours(d.name);
       });
+      tooltip_group = main_bottom_group.select('.tooltip-group');
+      return tooltip_group.attr('opacity', 0);
     });
   };
   my.width = function(value) {

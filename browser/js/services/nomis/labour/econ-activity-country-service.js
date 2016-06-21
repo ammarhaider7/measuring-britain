@@ -70,6 +70,7 @@ makeEconCountryRequest = function(options) {
     }
     return '?' + queryStringArr.join('\&');
   };
+  console.log('makeEconCountryRequest');
   return $.getJSON(nomisEndPoint + dataSet + generateQueryString(getOptions, queryStringArr));
 };
 

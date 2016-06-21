@@ -46,9 +46,16 @@ ControlsNew = React.createClass({displayName: "ControlsNew",
     query = e.target.value;
     return this.props.onDistrictSearch(query);
   },
+  manualControlsLinkClick: function() {
+    var targetId;
+    targetId = this.refs.controlsLink.getAttribute('data-target');
+    console.log('targetId');
+    console.log(targetId);
+    $(targetId).collapse('toggle');
+    return this.onControlsOpen();
+  },
   fetchData: function() {
     var fetchChartData;
-    this.refs.controlsLink.click();
     if (this.props.chartName === 'sunburst') {
       fetchChartData = 'fetchSunburstData';
     } else if (this.props.chartName === 'relBars') {
@@ -57,32 +64,43 @@ ControlsNew = React.createClass({displayName: "ControlsNew",
       fetchChartData = 'fetchEconCountryData';
     } else if (this.props.chartName === 'disabilityChart') {
       fetchChartData = 'fetchDisabilityData';
-      return this.props[fetchChartData]({
-        isDefault: false,
-        category: this.props._category,
-        value: this.props._value,
-        sex: {
-          label: this.props.sex,
-          value: +this.props.sex_code
-        }
-      });
+      return (function(_this) {
+        return function() {
+          _this.props[fetchChartData]({
+            isDefault: false,
+            category: _this.props._category,
+            value: _this.props._value,
+            sex: {
+              label: _this.props.sex,
+              value: +_this.props.sex_code
+            }
+          });
+          return _this.manualControlsLinkClick();
+        };
+      })(this)();
     } else if (this.props.chartName === "genHealthChart") {
       fetchChartData = 'fetchGenHealthData';
-      return this.props[fetchChartData]({
-        isDefault: false,
-        category: this.props._category,
-        value: this.props._value,
-        sex: {
-          label: this.props.sex,
-          value: +this.props.sex_code
-        }
-      });
+      return (function(_this) {
+        return function() {
+          _this.props[fetchChartData]({
+            isDefault: false,
+            category: _this.props._category,
+            value: _this.props._value,
+            sex: {
+              label: _this.props.sex,
+              value: +_this.props.sex_code
+            }
+          });
+          return _this.manualControlsLinkClick();
+        };
+      })(this)();
     }
-    return this.props[fetchChartData]({
+    this.props[fetchChartData]({
       isDefault: false,
       category: this.props._category,
       value: this.props._value
     });
+    return this.manualControlsLinkClick();
   },
   render: function() {
     var category, district, i, query, value;

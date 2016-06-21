@@ -11,25 +11,28 @@ EconByCountryDetailComponent = React.createClass({displayName: "EconByCountryDet
       return $(window).height() - 320;
     }
   },
-  componentDidUpdate: function() {},
+  sum: function(arr) {
+    return d3.sum(arr, function(d) {
+      return d.value;
+    });
+  },
+  format: function(val) {
+    return d3.format('.2s')(val);
+  },
+  percFormat: function(val) {
+    return d3.format(',.2%')(val);
+  },
   render: function() {
     return React.createElement("div", {
-      "className": (!(this.props.isFetching === true && this.props.isDefault === true) ? 'mb-grey-box' : void 0)
+      "className": "mb-oxygen"
     }, (this.props.isFetching === true && this.props.isDefault === true ? React.createElement("img", {
       "src": "/images/mb_ajax_loader.gif",
       "className": "mb-spinner"
-    }) : void 0), React.createElement("svg", {
-      "className": "econ-country-donut-svg",
-      "style": {
-        width: '100%',
-        height: this.getAppropriateHeight()
-      },
-      "ref": "econByCountrySvg"
-    }, React.createElement("g", {
-      "className": "labels-group"
-    }), React.createElement("g", {
-      "className": "main-group"
-    })));
+    }) : void 0), React.createElement("table", {
+      "className": "table table-condensed table-striped mb-oxygen"
+    }, React.createElement("tbody", null, React.createElement("tr", null, React.createElement("td", null, (this.props.activeCategory === 'default' ? 'Geography:' : this.props.activeCategory + ':')), React.createElement("td", null, React.createElement("strong", null, (this.props.activeValue === 'default' ? 'England \& Wales' : this.props.activeValue)))))), React.createElement("table", {
+      "className": "table table-condensed table-hover table-striped mb-oxygen"
+    }, React.createElement("thead", null, React.createElement("tr", null, React.createElement("td", null, React.createElement("strong", null, "Employment Status")), React.createElement("td", null, React.createElement("strong", null, "No.")), React.createElement("td", null, React.createElement("strong", null, "%")))), React.createElement("tbody", null, React.createElement("tr", null, React.createElement("td", null, "Employee:"), React.createElement("td", null, React.createElement("strong", null, (this.props.data.total_item_percs != null ? this.format(this.props.data.total_item_percs[0].value) : ''))), React.createElement("td", null, React.createElement("strong", null, (this.props.data.total_item_percs != null ? this.percFormat(this.props.data.total_item_percs[0].perc) : '')))), React.createElement("tr", null, React.createElement("td", null, "Self employed:"), React.createElement("td", null, React.createElement("strong", null, (this.props.data.total_item_percs != null ? this.format(this.props.data.total_item_percs[1].value) : ''))), React.createElement("td", null, React.createElement("strong", null, (this.props.data.total_item_percs != null ? this.percFormat(this.props.data.total_item_percs[1].perc) : '')))), React.createElement("tr", null, React.createElement("td", null, "Unemployed:"), React.createElement("td", null, React.createElement("strong", null, (this.props.data.total_item_percs != null ? this.format(this.props.data.total_item_percs[2].value) : ''))), React.createElement("td", null, React.createElement("strong", null, (this.props.data.total_item_percs != null ? this.percFormat(this.props.data.total_item_percs[2].perc) : '')))), React.createElement("tr", null, React.createElement("td", null, "Retired:"), React.createElement("td", null, React.createElement("strong", null, (this.props.data.total_item_percs != null ? this.format(this.props.data.total_item_percs[3].value) : ''))), React.createElement("td", null, React.createElement("strong", null, (this.props.data.total_item_percs != null ? this.percFormat(this.props.data.total_item_percs[3].perc) : '')))), React.createElement("tr", null, React.createElement("td", null, "Student:"), React.createElement("td", null, React.createElement("strong", null, (this.props.data.total_item_percs != null ? this.format(this.props.data.total_item_percs[4].value) : ''))), React.createElement("td", null, React.createElement("strong", null, (this.props.data.total_item_percs != null ? this.percFormat(this.props.data.total_item_percs[4].perc) : '')))), React.createElement("tr", null, React.createElement("td", null, "Looking after home\x2Ffamily:"), React.createElement("td", null, React.createElement("strong", null, (this.props.data.total_item_percs != null ? this.format(this.props.data.total_item_percs[5].value) : ''))), React.createElement("td", null, React.createElement("strong", null, (this.props.data.total_item_percs != null ? this.percFormat(this.props.data.total_item_percs[5].perc) : '')))), React.createElement("tr", null, React.createElement("td", null, "Long-term sick\x2Fdisabled:"), React.createElement("td", null, React.createElement("strong", null, (this.props.data.total_item_percs != null ? this.format(this.props.data.total_item_percs[6].value) : ''))), React.createElement("td", null, React.createElement("strong", null, (this.props.data.total_item_percs != null ? this.percFormat(this.props.data.total_item_percs[6].perc) : '')))), React.createElement("tr", null, React.createElement("td", null, "Other:"), React.createElement("td", null, React.createElement("strong", null, (this.props.data.total_item_percs != null ? this.format(this.props.data.total_item_percs[7].value) : ''))), React.createElement("td", null, React.createElement("strong", null, (this.props.data.total_item_percs != null ? this.percFormat(this.props.data.total_item_percs[7].perc) : '')))))));
   }
 });
 

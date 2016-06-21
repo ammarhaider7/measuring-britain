@@ -30,8 +30,9 @@
 		    visibility: hidden;
 		}
 		.x.axis line {
-		  stroke: #333;
-		  stroke-opacity: .8;
+		  // stroke: #333;
+		  // stroke-opacity: .8;
+		  display: none;
 		}
 		.y .tick:nth-child(1) line {
 			display: none;

@@ -45,10 +45,16 @@ ControlsNew = React.createClass
     query = e.target.value
     @props.onDistrictSearch query
 
-  fetchData: ->
+  manualControlsLinkClick: ->
 
     # Manually trigger click on controls link
-    @refs.controlsLink.click()
+    targetId = @refs.controlsLink.getAttribute 'data-target'
+    console.log 'targetId'
+    console.log targetId
+    $(targetId).collapse 'toggle'
+    @onControlsOpen()
+
+  fetchData: ->
 
     if @props.chartName is 'sunburst' 
 
@@ -66,35 +72,41 @@ ControlsNew = React.createClass
 
       fetchChartData = 'fetchDisabilityData'
       # Need to add extra 'sex' prop so return straight away
-      return @props[fetchChartData] {
-        isDefault: no
-        category: @props._category
-        value: @props._value
-        sex: {
-          label: @props.sex
-          value: +@props.sex_code
+      return do =>
+        @props[fetchChartData] {
+          isDefault: no
+          category: @props._category
+          value: @props._value
+          sex: {
+            label: @props.sex
+            value: +@props.sex_code
+          }
         }
-      }
+        @manualControlsLinkClick()
 
     else if @props.chartName is "genHealthChart"
 
       fetchChartData = 'fetchGenHealthData'
       # Need to add extra 'sex' prop so return straight away
-      return @props[fetchChartData] {
-        isDefault: no
-        category: @props._category
-        value: @props._value
-        sex: {
-          label: @props.sex
-          value: +@props.sex_code
+      return do =>
+        @props[fetchChartData] {
+          isDefault: no
+          category: @props._category
+          value: @props._value
+          sex: {
+            label: @props.sex
+            value: +@props.sex_code
+          }
         }
-      }
+        @manualControlsLinkClick()
 
     @props[fetchChartData] {
       isDefault: no
       category: @props._category
       value: @props._value
     }
+
+    @manualControlsLinkClick()
 
   render: -> 
 

@@ -63,8 +63,7 @@ PyramidControls = React.createClass({displayName: "PyramidControls",
     return this.props.onDistrictSearch(query);
   },
   fetchData: function() {
-    this.refs.controlsLink.click();
-    return this.props.fetchPyramidData({
+    this.props.fetchPyramidData({
       outlineRequested: this.props.outlineFilter === true ? true : false,
       isDefault: false,
       bars: {
@@ -78,6 +77,13 @@ PyramidControls = React.createClass({displayName: "PyramidControls",
         value: this.props._outlineValue
       }
     });
+    return this.manualControlsLinkClick();
+  },
+  manualControlsLinkClick: function() {
+    var targetId;
+    targetId = this.refs.controlsLink.getAttribute('data-target');
+    $(targetId).collapse('toggle');
+    return this.onControlsOpen();
   },
   onToggleFilteringOption: function(e) {
     var activeCat, activeVal, cat, el, option, val;

@@ -3,7 +3,6 @@ var parse;
 
 parse = function(dataArray) {
   var countries, employment_cats_concat, employment_cats_pretty, in_employment_cats, nested_data, out_employment_cats, percentages, sumEconCat, total_item_percs, total_item_values, total_sum;
-  window.json = dataArray;
   sumEconCat = function(arr, val) {
     return d3.sum(arr, function(d) {
       if (d.c_ecopuk11.value === val) {
@@ -71,6 +70,7 @@ parse = function(dataArray) {
       in_work: {
         employee: in_work_employee / sum,
         self_employed: in_work_self_employed / sum,
+        sum_perc: sum_in_work / sum,
         sum: sum_in_work
       },
       out_of_work: {
@@ -80,6 +80,7 @@ parse = function(dataArray) {
         looking_after_home_family: out_of_work_looking_after_home_family / sum,
         long_term_sick_disabled: out_of_work_longterm_sick_disabled / sum,
         other: out_of_work_other / sum,
+        sum_perc: sum_out_of_work / sum,
         sum: sum_out_of_work
       }
     };
@@ -93,7 +94,11 @@ parse = function(dataArray) {
     y0 = 0;
     return d.in_work_categories = in_employment_cats.map(function(category) {
       return {
+        country: d.country,
+        sum_perc: d.in_work.sum_perc,
         name: category,
+        sum: d.in_work.sum,
+        value: d.in_work[category],
         y0: y0,
         y1: y0 += d.in_work[category]
       };
@@ -104,7 +109,11 @@ parse = function(dataArray) {
     y0 = 0;
     return d.out_of_work_categories = out_employment_cats.map(function(category) {
       return {
+        country: d.country,
+        sum_perc: d.out_of_work.sum_perc,
+        sum: d.out_of_work.sum,
         name: category,
+        value: d.out_of_work[category],
         y0: y0,
         y1: y0 += d.out_of_work[category]
       };

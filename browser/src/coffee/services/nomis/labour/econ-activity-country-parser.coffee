@@ -1,5 +1,5 @@
 parse = (dataArray) ->
-	window.json = dataArray
+
 	# Economic activity categories
 	# Economically active: In employment: Employee: Total: 3
 	# Economically active: In employment: Self-employed: Total: 6
@@ -97,6 +97,7 @@ parse = (dataArray) ->
 			in_work: {
 				employee: in_work_employee / sum
 				self_employed: in_work_self_employed / sum
+				sum_perc: sum_in_work / sum
 				sum: sum_in_work
 			}
 			# Out of work
@@ -107,6 +108,7 @@ parse = (dataArray) ->
 				looking_after_home_family: out_of_work_looking_after_home_family / sum
 				long_term_sick_disabled: out_of_work_longterm_sick_disabled / sum
 				other: out_of_work_other / sum
+				sum_perc: sum_out_of_work / sum
 				sum: sum_out_of_work
 			}
 
@@ -148,7 +150,11 @@ parse = (dataArray) ->
 		d.in_work_categories = in_employment_cats.map (category) ->
 
 			return {
+				country: d.country
+				sum_perc: d.in_work.sum_perc
 				name: category
+				sum: d.in_work.sum
+				value: d.in_work[category]
 				y0: y0
 				y1: y0 += d.in_work[category]
 			}
@@ -161,7 +167,11 @@ parse = (dataArray) ->
 		d.out_of_work_categories = out_employment_cats.map (category) ->
 
 			return {
+				country: d.country
+				sum_perc: d.out_of_work.sum_perc
+				sum: d.out_of_work.sum
 				name: category
+				value: d.out_of_work[category]
 				y0: y0
 				y1: y0 += d.out_of_work[category]
 			}

@@ -8604,8 +8604,7 @@ nav.mb-nav-border {
   visibility: hidden; }
 
 #econ-country-component .econ-country-svg .x.axis line {
-  stroke: #333;
-  stroke-opacity: .8; }
+  display: none; }
 
 #econ-country-component .econ-country-svg .y .tick:nth-child(1) line {
   display: none; }

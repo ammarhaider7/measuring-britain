@@ -16,6 +16,7 @@ drawEconByCountryChart = (options) ->
 		left: 40
 		p: 25
 		label: 60
+		tooltip_height: 42
 
 	chart_width = width - margin.left - margin.right
 	chart_height = height - margin.top - margin.bottom
@@ -42,27 +43,40 @@ drawEconByCountryChart = (options) ->
 		.domain out_of_work_colours_domains
 		.range out_of_work_range
 
+	trimEmploymentStatus = (str) ->
+
+		switch str
+			when 'employee' then return 'Employee'
+			when 'self_employed' then return 'Self employed'
+			when 'unemployed' then return 'Unemployed'
+			when 'retired' then return 'Retired'
+			when 'student' then return 'Student'
+			when 'employee' then return 'Employee'
+			when 'other' then return 'Other'
+			when 'looking_after_home_family' then return 'Looking after home/family'
+			when 'long_term_sick_disabled' then return 'Long-term sick/disabled'
+
 	trimCountryString = (str) ->
 
 		if str.indexOf('Antarctica') > -1
-			return 'Oceanian countries'
+			return 'Oceania'
 		else if str.indexOf('EU countries') > -1
-			return 'EU countries'
+			return 'EU'
 		else if str.indexOf('Africa') > -1
-			return 'African countries'
+			return 'Africa'
 		else if str.indexOf('Rest of Europe') > -1
-			return 'Non-EU European countries'
+			return 'Non-EU'
 		else if str.indexOf('United Kingdom') > -1
-			return 'United Kingdom'
+			return 'UK'
 		else if str.indexOf('Americas') > -1
-			return 'Americas & Carribean'
+			return 'Americas'
 		else if str.indexOf('Middle') > -1
-			return 'Asia & Middle East'
+			return 'Asia'
 
 	# Scales, axes and layouts
 	x = d3.scale.ordinal()
 		.domain countries
-		.rangeRoundBands [0, chart_width], 0.35
+		.rangeRoundBands [0, chart_width], 0.3
 
 	# y scale for in work 
 	y = d3.scale.linear()
@@ -212,10 +226,11 @@ drawEconByCountryChart = (options) ->
 			.text (d) ->
 				return trimCountryString d.country
 			.attr {
-				x: -(chart_height*0.5) + 3
-				y: -3
-				transform: "rotate(-90)"
+				transform: (d) ->
+					return "translate(#{ 0.5 * x.rangeBand() }, #{ y(d.in_work.sum_perc) - 5 })"
 				'font-size': '80%'
+				'font-weight': 'bold'
+				'text-anchor': 'middle'
 				class: 'country-label'
 				opacity: 0
 			}
@@ -270,6 +285,103 @@ drawEconByCountryChart = (options) ->
 					# d.y1 is the actual % value of the data point
 					return (y0 d.y1) - (y0 d.y0) 
 			}
+		
+ 		# create tooltip groups
+		tooltip_group_top = main_top_group.append 'g'
+ 			.attr 'class', 'tooltip-group top'
+ 			.attr 'opacity', 0
+
+		tooltip_group_bottom = main_bottom_group.append 'g'
+ 			.attr 'class', 'tooltip-group bottom'
+ 			.attr 'transform', "translate(0, #{ chart_width*0.5 })"
+ 			.attr 'opacity', 0
+
+ 		# Add single tooltip for each half of chart, this will be moved to its correct position
+ 		# when user mouses over on a rect
+
+ 		# top rect
+		tooltip_group_top.append 'rect'
+			.attr {
+				class: 'tooltip-bg top'
+				width: x.rangeBand() + margin.p
+				height: margin.tooltip_height
+				fill: '#333'
+				x: -10
+				y: 0
+				opacity: 0.7
+				rx: 6
+			}
+
+		# top text label
+		tooltip_group_top.append 'text'
+			.attr {
+				class: 'mb-tooltip top'
+				x: x.rangeBand()*0.5
+				dy: '.35em'
+				y: margin.p + 5
+				fill: '#FF8C00'
+				opacity: 1
+				'font-size': '85%'
+				'font-weight': 'bold'
+				'text-anchor': 'middle'
+			}
+			.text ''
+
+		tooltip_group_top.append 'text'
+			.attr {
+				class: 'mb-tooltip-country top'
+				x: x.rangeBand()*0.5
+				dy: '.35em'
+				y: 10
+				fill: '#fff'
+				opacity: 1
+				'font-size': '85%'
+				'font-weight': 'bold'
+				'text-anchor': 'middle'
+			}
+			.text ''
+
+		# bottom rect
+		tooltip_group_bottom.append 'rect'
+			.attr {
+				class: 'tooltip-bg bottom'
+				width: x.rangeBand() + margin.p*3
+				height: margin.tooltip_height
+				fill: '#333'
+				x: -margin.p*1.5
+				y: 0
+				opacity: 0.7
+				rx: 6
+			}
+
+		# bottom text labels
+		tooltip_group_bottom.append 'text'
+			.attr {
+				class: 'mb-tooltip bottom'
+				x: x.rangeBand()*0.5
+				dy: '.35em'
+				y: margin.p + 5
+				fill: '#FF8C00'
+				opacity: 1
+				'font-size': '85%'
+				'font-weight': 'bold'
+				'text-anchor': 'middle'
+			}
+			.text ''
+
+		tooltip_group_bottom.append 'text'
+			.attr {
+				class: 'mb-tooltip-country top'
+				x: x.rangeBand()*0.5
+				dy: '.35em'
+				y: 10
+				fill: '#fff'
+				opacity: 1
+				'font-size': '85%'
+				'font-weight': 'bold'
+				'text-anchor': 'middle'
+			}
+			.text ''
 
 		# Draw line to divide both sets of bars
 		x_axis_divider_group.append 'line'
@@ -300,6 +412,14 @@ drawEconByCountryChart = (options) ->
 		top_countries = main_top_group.selectAll '.country-g'
 			.data d3_array, key
 
+		# country labels
+		top_countries.selectAll '.country-label'
+			.data d3_array, key
+			.transition()
+			.duration 1000
+			.attr 'transform', (d) ->
+				return "translate(#{ 0.5 * x.rangeBand() }, #{ y(d.in_work.sum_perc) - 5 })"
+
 		# Performing transform to move country to new position
 		top_countries
 			.transition()
@@ -319,7 +439,7 @@ drawEconByCountryChart = (options) ->
 				return "translate(#{ x d.country }, 0)"
 
 		# Transitioning top rects to new values
-		top_countries.selectAll 'rect'
+		top_countries.selectAll '.rect'
 			.data (d) ->
 				return d.in_work_categories
 			.transition()
@@ -332,7 +452,7 @@ drawEconByCountryChart = (options) ->
 			}		
 
 		# Transitioning top rects to new values
-		bottom_countries.selectAll 'rect'
+		bottom_countries.selectAll '.rect'
 			.data (d) ->
 				return d.out_of_work_categories
 			.transition()
@@ -349,7 +469,8 @@ drawEconByCountryChart = (options) ->
 
 	attachHoverHandlers = ->
 
-		hover_colour = '#03A9F4'
+		hover_colour = '#ddd'
+		rect_opacity = 0.7
 
 		# update the chart here
 		svg = d3.select '.econ-country-svg'
@@ -359,23 +480,56 @@ drawEconByCountryChart = (options) ->
 		top_rects = main_top_group.selectAll '.rect'
 		bottom_rects = main_bottom_group.selectAll '.rect'
 
+		# Top rects mouseover
 		top_rects.on 'mouseover', (d) ->
-			console.log d
+			# console.log d
+			_d = d
 			$this = d3.select this
 			$this.attr 'fill', hover_colour
+			# update tooltip
+			tooltip_group = main_top_group.select '.tooltip-group'
+				.attr 'transform', "translate(#{ x(_d.country) },#{ y(_d.sum_perc) - (margin.tooltip_height + margin.p) })"
+
+			tooltip_group.attr 'opacity', 1
+
+			tooltip_group.select '.mb-tooltip'
+				.text "#{ percFormat _d.value } - #{ format(_d.value * _d.sum) }"
+
+			tooltip_group.select '.mb-tooltip-country'	
+				.text trimEmploymentStatus _d.name
+
 		.on 'mouseout', (d) ->
 			$this = d3.select this
 			$this.attr 'fill', (d) ->
 				return in_work_colours d.name
+			# update tooltip
+			tooltip_group = main_top_group.select '.tooltip-group'
+			tooltip_group.attr 'opacity', 0
 
+		# Bottom rects mouseover
 		bottom_rects.on 'mouseover', (d) ->
-			console.log d
+			# console.log d
+			_d = d
 			$this = d3.select this
 			$this.attr 'fill', hover_colour
+			# update tooltip
+			tooltip_group = main_bottom_group.select '.tooltip-group'
+				.attr 'transform', "translate(#{ x(d.country) - 3 },#{ y0(_d.sum_perc) + margin.p*0.5 })"
+				.attr 'opacity', 1
+
+			tooltip_group.select '.mb-tooltip'
+				.text "#{ percFormat _d.value } - #{ format(_d.value * _d.sum) }"
+
+			tooltip_group.select '.mb-tooltip-country'	
+				.text trimEmploymentStatus _d.name
+
 		.on 'mouseout', (d) ->
 			$this = d3.select this
 			$this.attr 'fill', (d) ->
 				return out_of_work_colours d.name
+			# update tooltip
+			tooltip_group = main_bottom_group.select '.tooltip-group'
+			tooltip_group.attr 'opacity', 0
 
 	my.width = (value) ->
 		unless arguments.length then return width

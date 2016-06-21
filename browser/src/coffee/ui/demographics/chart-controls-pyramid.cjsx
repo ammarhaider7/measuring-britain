@@ -70,9 +70,6 @@ PyramidControls = React.createClass
 
   fetchData: ->
 
-    # Manually trigger click on controls link
-    @refs.controlsLink.click()
-
     @props.fetchPyramidData {
       outlineRequested: if @props.outlineFilter is on then yes else no
       isDefault: no
@@ -87,6 +84,15 @@ PyramidControls = React.createClass
         value: @props._outlineValue
       }
     } 
+
+    @manualControlsLinkClick()
+
+  manualControlsLinkClick: ->
+
+    # Manually trigger click on controls link
+    targetId = @refs.controlsLink.getAttribute 'data-target'
+    $(targetId).collapse 'toggle'
+    @onControlsOpen()
 
   onToggleFilteringOption: (e) ->
 

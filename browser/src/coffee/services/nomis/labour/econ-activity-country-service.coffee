@@ -67,6 +67,7 @@ makeEconCountryRequest = (options) ->
 				queryStringArr.push value
 		return '?' + queryStringArr.join '\&'
 
+	console.log 'makeEconCountryRequest'
 	# make call using jQuery and return the promise object
 	$.getJSON nomisEndPoint + dataSet + generateQueryString getOptions, queryStringArr
 	
