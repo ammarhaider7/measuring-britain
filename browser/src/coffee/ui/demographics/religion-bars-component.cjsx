@@ -2,6 +2,7 @@
 ControlsNew = require '../chart-controls-new.js'
 data = require './data/pyramid-chart-controls.js'
 drawRelBars = require './d3/bar-chart.js'
+OnsAttr = require '../../partials/chart-ons-attribution.js'
 
 value_options = {
   districts: data.districts
@@ -80,6 +81,7 @@ BarsComponent = React.createClass
           <g className="x axis"></g>
           <g className="detail-group mb-quicksand"></g>
         </svg>
+        <OnsAttr/>
       </div>
     </div>  
 

@@ -17,5 +17,3 @@ PageHeader = React.createClass({displayName: "PageHeader",
 });
 
 module.exports = PageHeader;
-
-//# sourceMappingURL=page-header.map

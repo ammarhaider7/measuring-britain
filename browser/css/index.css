@@ -8189,6 +8189,10 @@ button.close {
 .mb-bold {
   font-weight: bold; }
 
+.mb-mini {
+  font-size: 70%;
+  color: grey; }
+
 .mb-hide {
   display: none; }
 
@@ -8277,7 +8281,13 @@ button.close {
   .mb-page-header h1 {
     margin-top: 30px;
     margin-bottom: 30px;
-    font-size: 46px; }
+    font-size: 24px; }
+    @media (min-width: 767px) {
+      .mb-page-header h1 {
+        font-size: 34px; } }
+    @media (min-width: 992px) {
+      .mb-page-header h1 {
+        font-size: 40px; } }
 
 .pyramid-svg .males-outline {
   fill: none;
@@ -8322,6 +8332,25 @@ button.close {
 
 .pyramid-bars-svg .tick line, .pyramid-bars-svg path.domain {
   display: none; }
+
+.pyramid-bars-svg .male-number, .pyramid-bars-svg .female-number {
+  font-size: 16px;
+  font-weight: bold; }
+  @media (min-width: 992px) {
+    .pyramid-bars-svg .male-number, .pyramid-bars-svg .female-number {
+      font-size: 22px;
+      font-weight: normal; } }
+  @media (min-width: 1200px) {
+    .pyramid-bars-svg .male-number, .pyramid-bars-svg .female-number {
+      font-size: 28px;
+      font-weight: normal; } }
+
+.pyramid-bars-svg .mb-pyr-label {
+  font-size: 14px;
+  font-weight: bold; }
+  @media (min-width: 992px) {
+    .pyramid-bars-svg .mb-pyr-label {
+      font-size: 18px; } }
 
 .pyramid-bars-svg .mb-icon-man {
   fill: #1F77B4; }
@@ -8541,7 +8570,10 @@ nav.mb-nav-border {
   display: block; }
 
 #health-disability-component .disability-svg .axis text {
-  font-size: 11px; }
+  font-size: 9px; }
+  @media (min-width: 767px) {
+    #health-disability-component .disability-svg .axis text {
+      font-size: 11px; } }
 
 #health-disability-component .disability-svg .axis path, #health-disability-component .disability-svg .axis line {
   fill: none;
@@ -8633,6 +8665,9 @@ nav.mb-nav-border {
   color: #FFF;
   background-color: #DA4A70;
   font-weight: 700; }
+
+.row .thumbnail img {
+  height: 170px; }
 
 #mb_row .thumbnail img {
   height: 170px; }

@@ -133,11 +133,15 @@ PyramidControls = React.createClass
         <div className={ if @props.isFetching is yes and @props.isDefault is no then 'hide' }>
           <span 
             className={ unless @props.activeLineValue is 'default' then "col-sm-4 text-center mb-control-value" else "col-sm-11 text-center mb-control-value" }
-          >{ "#{ @props.activeBarsValue }" }</span>
+          >{ "#{ @props.activeBarsValue }" }
+            <span className="mb-mini"> Bars</span>
+          </span>
           { unless @props.activeLineValue is 'default'
               <div>
                 <span className="col-sm-3 text-center mb-control-value">compared to</span>
-                <span className="col-sm-4 text-center mb-control-value">{ "#{ @props.activeLineValue }" }</span>
+                <span className="col-sm-4 text-center mb-control-value">{ "#{ @props.activeLineValue }" }
+                  <span className="mb-mini"> Line</span>
+                </span>
               </div>
           }
           <span 
@@ -182,8 +186,21 @@ PyramidControls = React.createClass
             <label className="pr-medium">Filter by</label>
             <div className="btn-group">
               {
+                ###
                 for category, i in @props.categories
                   # unless category.value is @props.omitted_category
+                  <button 
+                    key={i} 
+                    type="button" 
+                    className={ if @props[@props.filteringOption.cat].value is category.value then "btn btn-default active" else "btn btn-default" }
+                    onClick={ @onCategoryChange }
+                    data-value={ category.value }
+                  >
+                  { category.label }
+                  </button>
+                ###
+                @props.categories.map (category, i) =>
+
                   <button 
                     key={i} 
                     type="button" 
@@ -198,19 +215,33 @@ PyramidControls = React.createClass
           </div>
           <div className="form-group row"> {
             if @props[@props.filteringOption.cat].value isnt 'districts' and @props[@props.filteringOption.cat].value isnt 'default'
-              <ul className="nav nav-pills pt-small pb-small pl-small"> {
+              <ul className="nav nav-pills pt-small pb-small pl-small"> 
+              {
+                ###
+                for value, i in @props.values[@props[@props.filteringOption.cat].value]
+                  <li role="presentation" key={value.value}>
+                    <a
+                      data-value={ value.value }
+                      href="#" 
+                      className={ if @props[@props.filteringOption.val].label is value.label then "mb-pill active" else "mb-pill" }
+                      onClick={ @onValueChange }
+                    >
+                    { value.label }
+                    </a>
+                  </li>
+                ###
+                @props.values[@props[@props.filteringOption.cat].value].map (value, i) =>
 
-                    for value, i in @props.values[@props[@props.filteringOption.cat].value]
-                      <li role="presentation" key={value.value}>
-                        <a
-                          data-value={ value.value }
-                          href="#" 
-                          className={ if @props[@props.filteringOption.val].label is value.label then "mb-pill active" else "mb-pill" }
-                          onClick={ @onValueChange }
-                        >
-                        { value.label }
-                        </a>
-                      </li>
+                  <li role="presentation" key={value.value}>
+                    <a
+                      data-value={ value.value }
+                      href="#" 
+                      className={ if @props[@props.filteringOption.val].label is value.label then "mb-pill active" else "mb-pill" }
+                      onClick={ @onValueChange }
+                    >
+                    { value.label }
+                    </a>
+                  </li>
 
               }
               </ul>
@@ -240,6 +271,7 @@ PyramidControls = React.createClass
                 if query isnt '' and query.length > 1 and query isnt 'default'
                   <ul className="nav nav-pills pl-small pt-small pb-small"> 
                     {
+                      ###
                       for district, i in @props.values.districts
                         if district.label.toLowerCase().indexOf(query) isnt -1
                           <li role="presentation" key={district.value}>
@@ -252,7 +284,20 @@ PyramidControls = React.createClass
                             { district.label }
                             </a>
                           </li>
-                      }
+                      ###
+                      @props.values.districts.map (district, i) =>
+                        if district.label.toLowerCase().indexOf(query) > -1
+                          <li role="presentation" key={district.value}>
+                            <a 
+                              data-value={ district.value }
+                              href="#" 
+                              className={ if @props[@props.filteringOption.val].label is district.label then "mb-pill active" else "mb-pill" }
+                              onClick={ @onValueChange }
+                            >
+                            { district.label }
+                            </a>
+                          </li>
+                    }
                     </ul>
                 }
             </div>

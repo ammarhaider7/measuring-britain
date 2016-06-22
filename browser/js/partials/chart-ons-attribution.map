@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "file": "chart-ons-attribution.js",
+  "sourceRoot": "..\\..\\..",
+  "sources": [
+    "browser\\src\\coffee\\partials\\chart-ons-attribution.cjsx"
+  ],
+  "names": [],
+  "mappings": ";AAAA,IAAA;;AAAA,OAAA,GAAU,SAAA;SACT,KAAK,CAAC,aAAN,CAAoB,GAApB,EAAyB;IAAC,WAAA,EAAa,qCAAd;GAAzB,EAA+E,wCAA/E;AADS;;AAGV,MAAM,CAAC,OAAP,GAAiB"
+}

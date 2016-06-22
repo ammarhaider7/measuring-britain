@@ -1,6 +1,3 @@
-# d3 = require 'd3'
-# man_svg = require '../icons/man.js'
-
 drawPyrBars = (options) ->
 
 	{ container, age, females, males, initial, isDefault, activeBarsValue } = options
@@ -101,41 +98,37 @@ drawPyrBars = (options) ->
 		agesGroup.append 'text'
 			.text category_value
 			.style 'text-anchor', 'middle'
-			.style 'font-size', 18
 			.style 'font-weight', 'bold'
 			.attr 'x', margin.left / 2
-			.attr 'class', 'category-value-label'
+			.attr 'class', 'category-value-label mb-pyr-label'
 
 		agesGroup.append 'text'
 			.text 'Ages'
 			.style 'text-anchor', 'middle'
-			.style 'font-size', 20
 			.attr 'x', margin.left / 2
 			.attr 'y', 30
+			.attr 'class', 'mb-pyr-label'
 
 		agesGroup.append 'text'
 			.text age
 			.style 'text-anchor', 'middle'
-			.style 'font-size', 26
 			.style 'font-weight', 'bold'
 			.attr {
 				x: margin.left / 2
 				y: 70
-				class: 'age-band-label'
+				class: 'age-band-label mb-pyr-label'
 			} 
 
 		# Number labels
 		labelsGroup.append 'text'
 			.text format males
 			.style 'text-anchor', 'middle'
-			.style 'font-size', 28
 			.attr 'x', x 'male'
 			.attr 'class', 'male-number'
 
 		labelsGroup.append 'text'
 			.text format females
 			.style 'text-anchor', 'middle'
-			.style 'font-size', 28
 			.attr 'x', x 'female'
 			.attr 'class', 'female-number'
 

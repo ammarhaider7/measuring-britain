@@ -158,6 +158,8 @@ parse = (dataArray) ->
 				y0: y0
 				y1: y0 += d.in_work[category]
 			}
+		# return to prevent conditional assignment err in jshint	
+		return
 
 	# add stacking values for out of work
 	percentages.forEach (d) ->
@@ -175,6 +177,8 @@ parse = (dataArray) ->
 				y0: y0
 				y1: y0 += d.out_of_work[category]
 			}
+		# return to prevent conditional assignment err in jshint
+		return
 
 	# Sort percentages by highest employment rate
 	percentages = percentages.sort (a, b) ->

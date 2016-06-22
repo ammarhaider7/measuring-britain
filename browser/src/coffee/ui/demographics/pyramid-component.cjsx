@@ -1,6 +1,7 @@
 PyramidControls = require './chart-controls-pyramid.js'
 data = require './data/pyramid-chart-controls.js'
 drawPyramid = require './d3/pyramid.js'
+OnsAttr = require '../../partials/chart-ons-attribution.js'
 
 value_options = {
 	districts: data.districts
@@ -18,7 +19,7 @@ PyramidComponent = React.createClass
 		if window_height > 700
 			return 600
 		else
-			return $(window).height() - 80
+			return window_height * 1.3
 
 	componentWillMount: ->
 
@@ -91,6 +92,7 @@ PyramidComponent = React.createClass
 		  				<g className="x axis right"></g>
 		  			</g>
 		  		</svg>
+		  		<OnsAttr/>
 		  	</div>
 		</div>
 

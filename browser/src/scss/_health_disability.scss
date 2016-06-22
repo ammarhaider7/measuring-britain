@@ -6,7 +6,10 @@
 	.disability-svg {
 		.axis {
 		  text {
-		  	font-size: 11px;
+		  	font-size: 9px;
+		  	@include bp(sm) {
+		  		font-size: 11px;		
+		  	}
 		  }
 	  		path, line {
 			  fill: none;

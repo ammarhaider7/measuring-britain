@@ -92,7 +92,7 @@ parse = function(dataArray) {
   percentages.forEach(function(d) {
     var y0;
     y0 = 0;
-    return d.in_work_categories = in_employment_cats.map(function(category) {
+    d.in_work_categories = in_employment_cats.map(function(category) {
       return {
         country: d.country,
         sum_perc: d.in_work.sum_perc,
@@ -107,7 +107,7 @@ parse = function(dataArray) {
   percentages.forEach(function(d) {
     var y0;
     y0 = 0;
-    return d.out_of_work_categories = out_employment_cats.map(function(category) {
+    d.out_of_work_categories = out_employment_cats.map(function(category) {
       return {
         country: d.country,
         sum_perc: d.out_of_work.sum_perc,
@@ -140,5 +140,3 @@ parse = function(dataArray) {
 };
 
 module.exports = parse;
-
-//# sourceMappingURL=econ-activity-country-parser.map

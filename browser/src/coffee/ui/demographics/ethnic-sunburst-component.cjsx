@@ -2,6 +2,7 @@
 ControlsNew = require '../chart-controls-new.js'
 data = require './data/pyramid-chart-controls.js'
 drawSunburst = require './d3/sunburst-partition.js'
+OnsAttr = require '../../partials/chart-ons-attribution.js'
 
 value_options = {
   districts: data.districts
@@ -87,6 +88,7 @@ SunburstComponent = React.createClass
           <g className="total-value-group"></g>  
           <g className="percentage-group"></g>    
         </svg>
+        <OnsAttr/>
       </div>
     </div>
 

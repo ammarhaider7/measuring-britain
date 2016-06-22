@@ -75,15 +75,15 @@ drawPyrBars = function(options) {
         return bars_height - y(d.value);
       }
     });
-    agesGroup.append('text').text(category_value).style('text-anchor', 'middle').style('font-size', 18).style('font-weight', 'bold').attr('x', margin.left / 2).attr('class', 'category-value-label');
-    agesGroup.append('text').text('Ages').style('text-anchor', 'middle').style('font-size', 20).attr('x', margin.left / 2).attr('y', 30);
-    agesGroup.append('text').text(age).style('text-anchor', 'middle').style('font-size', 26).style('font-weight', 'bold').attr({
+    agesGroup.append('text').text(category_value).style('text-anchor', 'middle').style('font-weight', 'bold').attr('x', margin.left / 2).attr('class', 'category-value-label mb-pyr-label');
+    agesGroup.append('text').text('Ages').style('text-anchor', 'middle').attr('x', margin.left / 2).attr('y', 30).attr('class', 'mb-pyr-label');
+    agesGroup.append('text').text(age).style('text-anchor', 'middle').style('font-weight', 'bold').attr({
       x: margin.left / 2,
       y: 70,
-      "class": 'age-band-label'
+      "class": 'age-band-label mb-pyr-label'
     });
-    labelsGroup.append('text').text(format(males)).style('text-anchor', 'middle').style('font-size', 28).attr('x', x('male')).attr('class', 'male-number');
-    labelsGroup.append('text').text(format(females)).style('text-anchor', 'middle').style('font-size', 28).attr('x', x('female')).attr('class', 'female-number');
+    labelsGroup.append('text').text(format(males)).style('text-anchor', 'middle').attr('x', x('male')).attr('class', 'male-number');
+    labelsGroup.append('text').text(format(females)).style('text-anchor', 'middle').attr('x', x('female')).attr('class', 'female-number');
     return xAxisGroup.call(xAxis);
   };
   update = function() {
@@ -125,5 +125,3 @@ drawPyrBars = function(options) {
 };
 
 module.exports = drawPyrBars;
-
-//# sourceMappingURL=pyramidBars.map

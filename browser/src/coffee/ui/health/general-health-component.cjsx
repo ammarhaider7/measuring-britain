@@ -1,6 +1,7 @@
 ControlsNew = require '../chart-controls-new.js'
 data = require '../demographics/data/pyramid-chart-controls.js'
 genHealthChart = require './d3/gen-health-chart.js'
+OnsAttr = require '../../partials/chart-ons-attribution.js'
 
 value_options = {
   districts: data.districts
@@ -67,6 +68,7 @@ GenHealthChart = React.createClass
           <g className="x axis"></g>
           <g className="main-group"></g>
         </svg>
+        <OnsAttr/>
       </div>
     </div>  
 

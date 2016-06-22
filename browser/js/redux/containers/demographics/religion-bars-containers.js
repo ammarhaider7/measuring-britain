@@ -66,5 +66,3 @@ ReligionBars = connect(mapStateToProps, mapDispatchToProps)(ReligionBarsComponen
 module.exports = {
   ReligionBars: ReligionBars
 };
-
-//# sourceMappingURL=religion-bars-containers.map

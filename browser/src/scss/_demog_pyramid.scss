@@ -29,7 +29,7 @@
   }
   .overlay-rect:hover {
     fill: rgba(0,0,0,0.15);
-  }  
+  }
 }
 
 // Pyramid Bars CSS
@@ -49,7 +49,25 @@
   .tick line, path.domain {
     display: none;
   }
-
+  .male-number, .female-number {
+    font-size: 16px;
+    font-weight: bold;
+    @include bp(md) {
+      font-size: 22px;
+      font-weight: normal;
+    }
+    @include bp(lg) {
+      font-size: 28px;
+      font-weight: normal;
+    }
+  }
+  .mb-pyr-label {
+    font-size: 14px;
+    font-weight: bold;
+    @include bp(md) {
+      font-size: 18px;
+    }
+  }
   // Icons
   .mb-icon-man {
     fill: #1F77B4;

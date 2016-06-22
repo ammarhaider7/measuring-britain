@@ -1,6 +1,7 @@
 ControlsNew = require '../chart-controls-new.js'
 data = require '../demographics/data/pyramid-chart-controls.js'
 disabilityChart = require './d3/health-disability-chart.js'
+OnsAttr = require '../../partials/chart-ons-attribution.js'
 
 value_options = {
   districts: data.districts
@@ -72,6 +73,7 @@ DisabilityChart = React.createClass
             <g className="legend-group"></g>  
           </g>        
         </svg>
+        <OnsAttr/>
       </div>
     </div>  
 

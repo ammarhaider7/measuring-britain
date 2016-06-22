@@ -12,7 +12,7 @@ drawEconByCountryChart = (options) ->
 	margin = 
 		top: 35
 		right: 20
-		bottom: 45
+		bottom: 10
 		left: 40
 		p: 25
 		label: 60

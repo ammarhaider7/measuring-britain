@@ -103,7 +103,7 @@ ControlsNew = React.createClass({displayName: "ControlsNew",
     return this.manualControlsLinkClick();
   },
   render: function() {
-    var category, district, i, query, value;
+    var query;
     return React.createElement("div", {
       "className": "controls-container clearfix closed mb-oxygen",
       "ref": "controlsContainer"
@@ -138,47 +138,68 @@ ControlsNew = React.createClass({displayName: "ControlsNew",
       "className": "pr-medium"
     }, "Filter by"), React.createElement("div", {
       "className": "btn-group"
-    }, (function() {
-      var j, len, ref, results;
-      ref = this.props.categories;
-      results = [];
-      for (i = j = 0, len = ref.length; j < len; i = ++j) {
-        category = ref[i];
-        if ($.inArray(category.value, this.props.omitted_categories) === -1) {
-          results.push(React.createElement("button", {
-            "key": i,
-            "type": "button",
-            "className": (this.props._category.value === category.value ? "btn btn-default active" : "btn btn-default"),
-            "onClick": this.onCategoryChange,
-            "data-value": category.value
-          }, category.label));
-        } else {
-          results.push(void 0);
-        }
-      }
-      return results;
-    }).call(this))), React.createElement("div", {
+    }, ((function() {
+
+      /*
+      for category, i in @props.categories
+         * unless category.value is @props.omitted_category
+        unless $.inArray(category.value, @props.omitted_categories) isnt -1
+          <button 
+            key={i} 
+            type="button" 
+            className={ if @props._category.value is category.value then "btn btn-default active" else "btn btn-default" }
+            onClick={ @onCategoryChange }
+            data-value={ category.value }
+          >
+          { category.label }
+          </button>
+       */
+      return this.props.categories.map((function(_this) {
+        return function(category, i) {
+          if ($.inArray(category.value, _this.props.omitted_categories) === -1) {
+            return React.createElement("button", {
+              "key": i,
+              "type": "button",
+              "className": (_this.props._category.value === category.value ? "btn btn-default active" : "btn btn-default"),
+              "onClick": _this.onCategoryChange,
+              "data-value": category.value
+            }, category.label);
+          }
+        };
+      })(this));
+    }).call(this)))), React.createElement("div", {
       "className": "form-group row"
     }, " ", (this.props._category.value !== 'districts' ? React.createElement("ul", {
       "className": "nav nav-pills pt-small pb-small pl-small"
-    }, " ", (function() {
-      var j, len, ref, results;
-      ref = this.props.values[this.props._category.value];
-      results = [];
-      for (i = j = 0, len = ref.length; j < len; i = ++j) {
-        value = ref[i];
-        results.push(React.createElement("li", {
-          "role": "presentation",
-          "key": value.value
-        }, React.createElement("a", {
-          "data-value": value.value,
-          "href": "#",
-          "className": (this.props._value.label === value.label ? "mb-pill active" : "mb-pill"),
-          "onClick": this.onValueChange
-        }, value.label)));
-      }
-      return results;
-    }).call(this)) : React.createElement("div", null, React.createElement("div", {
+    }, ((function() {
+
+      /*
+      for value, i in @props.values[@props._category.value]
+        <li role="presentation" key={value.value}>
+          <a 
+            data-value={ value.value }
+            href="#" 
+            className={ if @props._value.label is value.label then "mb-pill active" else "mb-pill" }
+            onClick={ @onValueChange }
+          >
+          { value.label }
+          </a>
+        </li>
+       */
+      return this.props.values[this.props._category.value].map((function(_this) {
+        return function(value, i) {
+          return React.createElement("li", {
+            "role": "presentation",
+            "key": value.value
+          }, React.createElement("a", {
+            "data-value": value.value,
+            "href": "#",
+            "className": (_this.props._value.label === value.label ? "mb-pill active" : "mb-pill"),
+            "onClick": _this.onValueChange
+          }, value.label));
+        };
+      })(this));
+    }).call(this))) : React.createElement("div", null, React.createElement("div", {
       "className": "col-sm-6"
     }, React.createElement("div", {
       "className": "input-group"
@@ -199,28 +220,38 @@ ControlsNew = React.createClass({displayName: "ControlsNew",
       "className": "form-group row"
     }, (query = this.props.district_query, query !== '' && query.length > 1 && query !== 'default' ? React.createElement("ul", {
       "className": "nav nav-pills pl-small pt-small pb-small"
-    }, (function() {
-      var j, len, ref, results;
-      ref = this.props.values.districts;
-      results = [];
-      for (i = j = 0, len = ref.length; j < len; i = ++j) {
-        district = ref[i];
-        if (district.label.toLowerCase().indexOf(query) !== -1) {
-          results.push(React.createElement("li", {
-            "role": "presentation",
-            "key": district.value
-          }, React.createElement("a", {
-            "data-value": district.value,
-            "href": "#",
-            "className": (this.props.activeValue === district.label ? "mb-pill active" : "mb-pill"),
-            "onClick": this.onValueChange
-          }, district.label)));
-        } else {
-          results.push(void 0);
-        }
-      }
-      return results;
-    }).call(this)) : void 0)) : void 0), React.createElement("div", {
+    }, ((function() {
+
+      /*
+      for district, i in @props.values.districts
+        if district.label.toLowerCase().indexOf(query) isnt -1
+          <li role="presentation" key={district.value}>
+            <a 
+              data-value={ district.value }
+              href="#" 
+              className={ if @props.activeValue is district.label then "mb-pill active" else "mb-pill" }
+              onClick={ @onValueChange }
+            >
+            { district.label }
+            </a>
+          </li>
+       */
+      return this.props.values.districts.map((function(_this) {
+        return function(district, i) {
+          if (district.label.toLowerCase().indexOf(query) > -1) {
+            return React.createElement("li", {
+              "role": "presentation",
+              "key": district.value
+            }, React.createElement("a", {
+              "data-value": district.value,
+              "href": "#",
+              "className": (_this.props.activeValue === district.label ? "mb-pill active" : "mb-pill"),
+              "onClick": _this.onValueChange
+            }, district.label));
+          }
+        };
+      })(this));
+    }).call(this))) : void 0)) : void 0), React.createElement("div", {
       "className": "row mb-medium"
     }, React.createElement("button", {
       "className": (this.props.isFetching === true ? "btn btn-default mb-btn-primary mb-btn-fetching" : "btn btn-default mb-btn-primary"),
@@ -230,5 +261,3 @@ ControlsNew = React.createClass({displayName: "ControlsNew",
 });
 
 module.exports = ControlsNew;
-
-//# sourceMappingURL=chart-controls-new.map

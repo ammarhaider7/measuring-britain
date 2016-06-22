@@ -7,64 +7,29 @@ ThumbnailsComponent = React.createClass({displayName: "ThumbnailsComponent",
       "className": "row mb-oxygen"
     }, React.createElement("h2", {
       "className": "col-sm-12"
-    }, this.props.section), React.createElement("div", {
-      "className": "col-sm-6 col-md-4"
-    }, React.createElement("div", {
-      "className": ""
-    }, React.createElement("a", {
-      "href": "#",
-      "className": "thumbnail"
-    }, React.createElement("img", {
-      "src": "./images/mob_screenshot.PNG",
-      "alt": "..."
-    })), React.createElement("div", {
-      "className": "caption"
-    }, React.createElement("h3", {
-      "className": "mt-zero"
-    }, "Chart name"), React.createElement("p", null, "Lorem ipsum dolor sit amet, consectetur adipiscing elit."), React.createElement("p", null, React.createElement("a", {
-      "href": "#",
-      "className": "btn btn-default mb-btn-primary",
-      "role": "button"
-    }, "Explore"))))), React.createElement("div", {
-      "className": "col-sm-6 col-md-4"
-    }, React.createElement("div", {
-      "className": ""
-    }, React.createElement("a", {
-      "href": "#",
-      "className": "thumbnail"
-    }, React.createElement("img", {
-      "src": "./images/mob_screenshot.PNG",
-      "alt": "..."
-    })), React.createElement("div", {
-      "className": "caption"
-    }, React.createElement("h3", {
-      "className": "mt-zero"
-    }, "Chart name"), React.createElement("p", null, "Lorem ipsum dolor sit amet, consectetur adipiscing elit."), React.createElement("p", null, React.createElement("a", {
-      "href": "#",
-      "className": "btn btn-default mb-btn-primary",
-      "role": "button"
-    }, "Explore"))))), React.createElement("div", {
-      "className": "col-sm-6 col-md-4"
-    }, React.createElement("div", {
-      "className": ""
-    }, React.createElement("a", {
-      "href": "#",
-      "className": "thumbnail"
-    }, React.createElement("img", {
-      "src": "./images/mob_screenshot.PNG",
-      "alt": "..."
-    })), React.createElement("div", {
-      "className": "caption"
-    }, React.createElement("h3", {
-      "className": "mt-zero"
-    }, "Chart name"), React.createElement("p", null, "Lorem ipsum dolor sit amet, consectetur adipiscing elit."), React.createElement("p", null, React.createElement("a", {
-      "href": "#",
-      "className": "btn btn-default mb-btn-primary",
-      "role": "button"
-    }, "Explore"))))));
+    }, this.props.section), this.props.data.map(function(ob, i) {
+      return React.createElement("div", {
+        "className": "col-sm-6 col-md-4",
+        "key": i
+      }, React.createElement("div", {
+        "className": ""
+      }, React.createElement("a", {
+        "href": ob.href,
+        "className": "thumbnail"
+      }, React.createElement("img", {
+        "src": ob.img,
+        "alt": "..."
+      })), React.createElement("div", {
+        "className": "caption"
+      }, React.createElement("h3", {
+        "className": "mt-zero"
+      }, ob.chart_name), React.createElement("p", null, ob.description), React.createElement("p", null, React.createElement("a", {
+        "href": ob.href,
+        "className": "btn btn-default mb-btn-primary",
+        "role": "button"
+      }, "Explore")))));
+    }));
   }
 });
 
 module.exports = ThumbnailsComponent;
-
-//# sourceMappingURL=thumbnails-component.map

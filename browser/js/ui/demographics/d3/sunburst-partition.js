@@ -243,5 +243,3 @@ drawSunburst = function(options) {
 };
 
 module.exports = drawSunburst;
-
-//# sourceMappingURL=sunburst-partition.map

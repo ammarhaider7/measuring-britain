@@ -153,5 +153,3 @@ drawBarChart = function(options) {
 };
 
 module.exports = drawBarChart;
-
-//# sourceMappingURL=bar-chart.map

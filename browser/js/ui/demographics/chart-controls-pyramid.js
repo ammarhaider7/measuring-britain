@@ -106,7 +106,7 @@ PyramidControls = React.createClass({displayName: "PyramidControls",
     });
   },
   render: function() {
-    var category, district, i, query, value;
+    var query;
     return React.createElement("div", {
       "className": "controls-container clearfix closed mb-oxygen",
       "ref": "controlsContainer",
@@ -129,11 +129,15 @@ PyramidControls = React.createClass({displayName: "PyramidControls",
       "className": (this.props.isFetching === true && this.props.isDefault === false ? 'hide' : void 0)
     }, React.createElement("span", {
       "className": (this.props.activeLineValue !== 'default' ? "col-sm-4 text-center mb-control-value" : "col-sm-11 text-center mb-control-value")
-    }, "" + this.props.activeBarsValue), (this.props.activeLineValue !== 'default' ? React.createElement("div", null, React.createElement("span", {
+    }, "" + this.props.activeBarsValue, React.createElement("span", {
+      "className": "mb-mini"
+    }, " Bars")), (this.props.activeLineValue !== 'default' ? React.createElement("div", null, React.createElement("span", {
       "className": "col-sm-3 text-center mb-control-value"
     }, "compared to"), React.createElement("span", {
       "className": "col-sm-4 text-center mb-control-value"
-    }, "" + this.props.activeLineValue)) : void 0), React.createElement("span", {
+    }, "" + this.props.activeLineValue, React.createElement("span", {
+      "className": "mb-mini"
+    }, " Line"))) : void 0), React.createElement("span", {
       "className": (this.props.isControlsOpen === true ? "glyphicon glyphicon-chevron-up mt-medium" : "glyphicon glyphicon-chevron-down mt-medium")
     }))), React.createElement("div", {
       "className": "collapse col-sm-12 mb-collapse",
@@ -170,43 +174,65 @@ PyramidControls = React.createClass({displayName: "PyramidControls",
       "className": "pr-medium"
     }, "Filter by"), React.createElement("div", {
       "className": "btn-group"
-    }, (function() {
-      var j, len, ref, results;
-      ref = this.props.categories;
-      results = [];
-      for (i = j = 0, len = ref.length; j < len; i = ++j) {
-        category = ref[i];
-        results.push(React.createElement("button", {
-          "key": i,
-          "type": "button",
-          "className": (this.props[this.props.filteringOption.cat].value === category.value ? "btn btn-default active" : "btn btn-default"),
-          "onClick": this.onCategoryChange,
-          "data-value": category.value
-        }, category.label));
-      }
-      return results;
-    }).call(this))), React.createElement("div", {
+    }, ((function() {
+
+      /*
+      for category, i in @props.categories
+         * unless category.value is @props.omitted_category
+        <button 
+          key={i} 
+          type="button" 
+          className={ if @props[@props.filteringOption.cat].value is category.value then "btn btn-default active" else "btn btn-default" }
+          onClick={ @onCategoryChange }
+          data-value={ category.value }
+        >
+        { category.label }
+        </button>
+       */
+      return this.props.categories.map((function(_this) {
+        return function(category, i) {
+          return React.createElement("button", {
+            "key": i,
+            "type": "button",
+            "className": (_this.props[_this.props.filteringOption.cat].value === category.value ? "btn btn-default active" : "btn btn-default"),
+            "onClick": _this.onCategoryChange,
+            "data-value": category.value
+          }, category.label);
+        };
+      })(this));
+    }).call(this)))), React.createElement("div", {
       "className": "form-group row"
     }, " ", (this.props[this.props.filteringOption.cat].value !== 'districts' && this.props[this.props.filteringOption.cat].value !== 'default' ? React.createElement("ul", {
       "className": "nav nav-pills pt-small pb-small pl-small"
-    }, " ", (function() {
-      var j, len, ref, results;
-      ref = this.props.values[this.props[this.props.filteringOption.cat].value];
-      results = [];
-      for (i = j = 0, len = ref.length; j < len; i = ++j) {
-        value = ref[i];
-        results.push(React.createElement("li", {
-          "role": "presentation",
-          "key": value.value
-        }, React.createElement("a", {
-          "data-value": value.value,
-          "href": "#",
-          "className": (this.props[this.props.filteringOption.val].label === value.label ? "mb-pill active" : "mb-pill"),
-          "onClick": this.onValueChange
-        }, value.label)));
-      }
-      return results;
-    }).call(this)) : this.props[this.props.filteringOption.cat].value === 'districts' ? React.createElement("div", null, React.createElement("div", {
+    }, ((function() {
+
+      /*
+      for value, i in @props.values[@props[@props.filteringOption.cat].value]
+        <li role="presentation" key={value.value}>
+          <a
+            data-value={ value.value }
+            href="#" 
+            className={ if @props[@props.filteringOption.val].label is value.label then "mb-pill active" else "mb-pill" }
+            onClick={ @onValueChange }
+          >
+          { value.label }
+          </a>
+        </li>
+       */
+      return this.props.values[this.props[this.props.filteringOption.cat].value].map((function(_this) {
+        return function(value, i) {
+          return React.createElement("li", {
+            "role": "presentation",
+            "key": value.value
+          }, React.createElement("a", {
+            "data-value": value.value,
+            "href": "#",
+            "className": (_this.props[_this.props.filteringOption.val].label === value.label ? "mb-pill active" : "mb-pill"),
+            "onClick": _this.onValueChange
+          }, value.label));
+        };
+      })(this));
+    }).call(this))) : this.props[this.props.filteringOption.cat].value === 'districts' ? React.createElement("div", null, React.createElement("div", {
       "className": "col-sm-6"
     }, React.createElement("div", {
       "className": "input-group"
@@ -227,28 +253,38 @@ PyramidControls = React.createClass({displayName: "PyramidControls",
       "className": "form-group row"
     }, (query = this.props.district_query, query !== '' && query.length > 1 && query !== 'default' ? React.createElement("ul", {
       "className": "nav nav-pills pl-small pt-small pb-small"
-    }, (function() {
-      var j, len, ref, results;
-      ref = this.props.values.districts;
-      results = [];
-      for (i = j = 0, len = ref.length; j < len; i = ++j) {
-        district = ref[i];
-        if (district.label.toLowerCase().indexOf(query) !== -1) {
-          results.push(React.createElement("li", {
-            "role": "presentation",
-            "key": district.value
-          }, React.createElement("a", {
-            "data-value": district.value,
-            "href": "#",
-            "className": (this.props[this.props.filteringOption.val].label === district.label ? "mb-pill active" : "mb-pill"),
-            "onClick": this.onValueChange
-          }, district.label)));
-        } else {
-          results.push(void 0);
-        }
-      }
-      return results;
-    }).call(this)) : void 0)) : void 0), React.createElement("div", {
+    }, ((function() {
+
+      /*
+      for district, i in @props.values.districts
+        if district.label.toLowerCase().indexOf(query) isnt -1
+          <li role="presentation" key={district.value}>
+            <a 
+              data-value={ district.value }
+              href="#" 
+              className={ if @props[@props.filteringOption.val].label is district.label then "mb-pill active" else "mb-pill" }
+              onClick={ @onValueChange }
+            >
+            { district.label }
+            </a>
+          </li>
+       */
+      return this.props.values.districts.map((function(_this) {
+        return function(district, i) {
+          if (district.label.toLowerCase().indexOf(query) > -1) {
+            return React.createElement("li", {
+              "role": "presentation",
+              "key": district.value
+            }, React.createElement("a", {
+              "data-value": district.value,
+              "href": "#",
+              "className": (_this.props[_this.props.filteringOption.val].label === district.label ? "mb-pill active" : "mb-pill"),
+              "onClick": _this.onValueChange
+            }, district.label));
+          }
+        };
+      })(this));
+    }).call(this))) : void 0)) : void 0), React.createElement("div", {
       "className": "row mb-medium"
     }, React.createElement("button", {
       "className": (this.props.isFetching === true ? "btn btn-default mb-btn-primary mb-btn-fetching" : "btn btn-default mb-btn-primary"),
@@ -258,5 +294,3 @@ PyramidControls = React.createClass({displayName: "PyramidControls",
 });
 
 module.exports = PyramidControls;
-
-//# sourceMappingURL=chart-controls-pyramid.map

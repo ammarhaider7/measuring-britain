@@ -32,5 +32,3 @@ render = function() {
 };
 
 module.exports = render;
-
-//# sourceMappingURL=econ-activity-country.map
