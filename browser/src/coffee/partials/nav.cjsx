@@ -26,40 +26,43 @@ Nav = React.createClass
 								<li><a href="/census">Census Home</a></li>
 								<li role="separator" className="divider"></li>
 								<li className="dropdown-header">Demographics</li>
-								<li><a href="/census/population-pyramid">Population Pyramid (Census)</a></li>
-								<li><a href="/census/ethnic-diversity">Ethnic Diversity (Census)</a></li>
-								<li><a href="/census/religious-diversity">Religious Diversity (Census)</a></li>
+								<li><a href="/census/population-pyramid">Population Pyramid</a></li>
+								<li><a href="/census/ethnic-diversity">Ethnic Diversity</a></li>
+								<li><a href="/census/religious-diversity">Religious Diversity</a></li>
 								<li role="separator" className="divider"></li>
 								<li className="dropdown-header">Health</li>
-								<li><a href="/census/ethnic-disparities-general-health">Ethnic Disparities in General Health (Census)</a></li>
-								<li><a href="/census/longterm-illness-disability-by-ethnicity	">Long-term illness/disability by ethnicity (Census)</a></li>
+								<li><a href="/census/ethnic-disparities-general-health">Ethnic Disparities in General Health</a></li>
+								<li><a href="/census/longterm-illness-disability-by-ethnicity	">Long-term illness/disability by ethnicity</a></li>
+								<li role="separator" className="divider"></li>
+								<li className="dropdown-header">Labour market</li>
+								<li><a href="/census/employment-status-by-country-of-birth">Employment status by country of birth</a></li>
 							</ul>
 						</li>
 						<li className={ if @props.active is "demographics" then 'dropdown active' else 'dropdown'}>
 							<a href="/demographics" className={if @props.alt_bg is 'yes' then 'dropdown-toggle mb-white-text' else "dropdown-toggle"} data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Demographics <span className="caret"></span></a>
 							<ul className="dropdown-menu">
-								<li role="separator" className="divider"></li>
+								{###<li role="separator" className="divider"></li>###}
 								<li className="dropdown-header">Census</li>
-								<li><a href="/census/population-pyramid">Population Pyramid (Census)</a></li>
-								<li><a href="/census/ethnic-diversity">Ethnic Diversity (Census)</a></li>
-								<li><a href="/census/religious-diversity">Religious Diversity (Census)</a></li>
+								<li><a href="/census/population-pyramid">Population Pyramid</a></li>
+								<li><a href="/census/ethnic-diversity">Ethnic Diversity</a></li>
+								<li><a href="/census/religious-diversity">Religious Diversity</a></li>
 							</ul>
 						</li>
 						<li className={ if @props.active is "health" then 'dropdown active' else 'dropdown'}>
 							<a href="/health" className={if @props.alt_bg is 'yes' then 'dropdown-toggle mb-white-text' else "dropdown-toggle"} data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Health <span className="caret"></span></a>
 							<ul className="dropdown-menu">
-								<li role="separator" className="divider"></li>
+								{###<li role="separator" className="divider"></li>###}
 								<li className="dropdown-header">Census</li>
-								<li><a href="/census/ethnic-disparities-general-health">Ethnic Disparities in General Health (Census)</a></li>
-								<li><a href="/census/longterm-illness-disability-by-ethnicity">Long-term illness/disability by ethnicity (Census)</a></li>
+								<li><a href="/census/ethnic-disparities-general-health">Ethnic Disparities in General Health</a></li>
+								<li><a href="/census/longterm-illness-disability-by-ethnicity">Long-term illness/disability by ethnicity</a></li>
 							</ul>
 						</li>
 						<li className={ if @props.active is "health" then 'dropdown active' else 'dropdown'}>
 							<a href="#" className={if @props.alt_bg is 'yes' then 'dropdown-toggle mb-white-text' else "dropdown-toggle"} data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Labour Market <span className="caret"></span></a>
 							<ul className="dropdown-menu">
-								<li role="separator" className="divider"></li>
+								{###<li role="separator" className="divider"></li>###}
 								<li className="dropdown-header">Census</li>
-								<li><a href="/census/employment-status-by-country-of-birth">Employment Status by Country of Birth (Census)</a></li>
+								<li><a href="/census/employment-status-by-country-of-birth">Employment Status by Country of Birth</a></li>
 							</ul>
 						</li>
 						<li className="about"><a className={if @props.alt_bg is 'yes' then 'mb-white-text'} href="/about">About</a></li>

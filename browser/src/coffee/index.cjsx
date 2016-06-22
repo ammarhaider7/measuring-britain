@@ -7,7 +7,7 @@ bootstrap = require '../../bootstrap-sass/javascripts/bootstrap.min.js'
 Nav = require './partials/nav.js'
 Jumbotron = require './index/jumbotron.js'
 Row = require './index/row.js'
-Footer = require './partials/footer.js'
+NomisAttr = require './partials/nomis-attribution.js'
 
 # Establish what page this is
 path = location.pathname.split('/')[1]
@@ -16,7 +16,7 @@ path = location.pathname.split('/')[1]
 ReactDOM.render <Nav active='home' border="yes"/>, document.getElementById 'react_nav_container'
 ReactDOM.render <Jumbotron/>, document.getElementById 'mb_hero'
 ReactDOM.render <Row/>, document.getElementById 'mb_row'
-ReactDOM.render <Footer/>, document.getElementById 'mb_footer'
+ReactDOM.render <NomisAttr/>, document.getElementById 'mb_footer'
 
 # Run d3 voronoi splash js
 voronoi()

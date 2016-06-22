@@ -3782,14 +3782,10 @@ tbody.collapse.in {
 .navbar-toggle {
   position: relative;
   float: right;
-  margin-right: 15px;
   padding: 9px 10px;
-  margin-top: -2px;
-  margin-bottom: -2px;
   background-color: transparent;
   background-image: none;
-  border: 1px solid transparent;
-  border-radius: 4px; }
+  border: 1px solid transparent; }
   .navbar-toggle:focus {
     outline: 0; }
   .navbar-toggle .icon-bar {
@@ -3951,8 +3947,9 @@ tbody.collapse.in {
     color: #777; }
   .navbar-default .navbar-nav > li > a {
     color: #333; }
-    .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
-      border-bottom: 3px solid #DA4A70; }
+    @media (min-width: 767px) {
+      .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+        border-bottom: 3px solid #DA4A70; } }
   .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
     color: #DA4A70;
     border-bottom: 3px solid #DA4A70;
@@ -8281,10 +8278,7 @@ button.close {
   .mb-page-header h1 {
     margin-top: 30px;
     margin-bottom: 30px;
-    font-size: 24px; }
-    @media (min-width: 767px) {
-      .mb-page-header h1 {
-        font-size: 34px; } }
+    font-size: 34px; }
     @media (min-width: 992px) {
       .mb-page-header h1 {
         font-size: 40px; } }
@@ -8366,6 +8360,14 @@ nav.mb-nav-border {
   border-bottom: 1px solid #265787; }
   nav.mb-nav-border .navbar-toggle {
     height: 33px; }
+  nav.mb-nav-border li > a {
+    font-size: 14px; }
+    @media (min-width: 767px) {
+      nav.mb-nav-border li > a {
+        font-size: 9.7px; } }
+    @media (min-width: 992px) {
+      nav.mb-nav-border li > a {
+        font-size: 14px; } }
 
 .mb-alt-bg {
   background-image: url(/images/voronoi-bg-wide-nav.PNG); }
@@ -8676,3 +8678,8 @@ nav.mb-nav-border {
   -webkit-box-shadow: 0px 0px 18px 16px rgba(0, 0, 0, 0.34);
   -moz-box-shadow: 0px 0px 18px 16px rgba(0, 0, 0, 0.34);
   box-shadow: 0px 0px 18px 16px rgba(0, 0, 0, 0.34); }
+
+.nomis-attr {
+  color: grey;
+  font-size: 100%;
+  text-decoration: none; }

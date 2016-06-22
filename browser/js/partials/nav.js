@@ -65,20 +65,27 @@ Nav = React.createClass({displayName: "Nav",
       "className": "dropdown-header"
     }, "Demographics"), React.createElement("li", null, React.createElement("a", {
       "href": "/census/population-pyramid"
-    }, "Population Pyramid (Census)")), React.createElement("li", null, React.createElement("a", {
+    }, "Population Pyramid")), React.createElement("li", null, React.createElement("a", {
       "href": "/census/ethnic-diversity"
-    }, "Ethnic Diversity (Census)")), React.createElement("li", null, React.createElement("a", {
+    }, "Ethnic Diversity")), React.createElement("li", null, React.createElement("a", {
       "href": "/census/religious-diversity"
-    }, "Religious Diversity (Census)")), React.createElement("li", {
+    }, "Religious Diversity")), React.createElement("li", {
       "role": "separator",
       "className": "divider"
     }), React.createElement("li", {
       "className": "dropdown-header"
     }, "Health"), React.createElement("li", null, React.createElement("a", {
       "href": "/census/ethnic-disparities-general-health"
-    }, "Ethnic Disparities in General Health (Census)")), React.createElement("li", null, React.createElement("a", {
+    }, "Ethnic Disparities in General Health")), React.createElement("li", null, React.createElement("a", {
       "href": "/census/longterm-illness-disability-by-ethnicity	"
-    }, "Long-term illness\x2Fdisability by ethnicity (Census)")))), React.createElement("li", {
+    }, "Long-term illness\x2Fdisability by ethnicity")), React.createElement("li", {
+      "role": "separator",
+      "className": "divider"
+    }), React.createElement("li", {
+      "className": "dropdown-header"
+    }, "Labour market"), React.createElement("li", null, React.createElement("a", {
+      "href": "/census/employment-status-by-country-of-birth"
+    }, "Employment status by country of birth")))), React.createElement("li", {
       "className": (this.props.active === "demographics" ? 'dropdown active' : 'dropdown')
     }, React.createElement("a", {
       "href": "/demographics",
@@ -92,17 +99,14 @@ Nav = React.createClass({displayName: "Nav",
     })), React.createElement("ul", {
       "className": "dropdown-menu"
     }, React.createElement("li", {
-      "role": "separator",
-      "className": "divider"
-    }), React.createElement("li", {
       "className": "dropdown-header"
     }, "Census"), React.createElement("li", null, React.createElement("a", {
       "href": "/census/population-pyramid"
-    }, "Population Pyramid (Census)")), React.createElement("li", null, React.createElement("a", {
+    }, "Population Pyramid")), React.createElement("li", null, React.createElement("a", {
       "href": "/census/ethnic-diversity"
-    }, "Ethnic Diversity (Census)")), React.createElement("li", null, React.createElement("a", {
+    }, "Ethnic Diversity")), React.createElement("li", null, React.createElement("a", {
       "href": "/census/religious-diversity"
-    }, "Religious Diversity (Census)")))), React.createElement("li", {
+    }, "Religious Diversity")))), React.createElement("li", {
       "className": (this.props.active === "health" ? 'dropdown active' : 'dropdown')
     }, React.createElement("a", {
       "href": "/health",
@@ -116,15 +120,12 @@ Nav = React.createClass({displayName: "Nav",
     })), React.createElement("ul", {
       "className": "dropdown-menu"
     }, React.createElement("li", {
-      "role": "separator",
-      "className": "divider"
-    }), React.createElement("li", {
       "className": "dropdown-header"
     }, "Census"), React.createElement("li", null, React.createElement("a", {
       "href": "/census/ethnic-disparities-general-health"
-    }, "Ethnic Disparities in General Health (Census)")), React.createElement("li", null, React.createElement("a", {
+    }, "Ethnic Disparities in General Health")), React.createElement("li", null, React.createElement("a", {
       "href": "/census/longterm-illness-disability-by-ethnicity"
-    }, "Long-term illness\x2Fdisability by ethnicity (Census)")))), React.createElement("li", {
+    }, "Long-term illness\x2Fdisability by ethnicity")))), React.createElement("li", {
       "className": (this.props.active === "health" ? 'dropdown active' : 'dropdown')
     }, React.createElement("a", {
       "href": "#",
@@ -138,13 +139,10 @@ Nav = React.createClass({displayName: "Nav",
     })), React.createElement("ul", {
       "className": "dropdown-menu"
     }, React.createElement("li", {
-      "role": "separator",
-      "className": "divider"
-    }), React.createElement("li", {
       "className": "dropdown-header"
     }, "Census"), React.createElement("li", null, React.createElement("a", {
       "href": "/census/employment-status-by-country-of-birth"
-    }, "Employment Status by Country of Birth (Census)")))), React.createElement("li", {
+    }, "Employment Status by Country of Birth")))), React.createElement("li", {
       "className": "about"
     }, React.createElement("a", {
       "className": (this.props.alt_bg === 'yes' ? 'mb-white-text' : void 0),
@@ -173,3 +171,5 @@ Nav = React.createClass({displayName: "Nav",
 });
 
 module.exports = Nav;
+
+//# sourceMappingURL=nav.map

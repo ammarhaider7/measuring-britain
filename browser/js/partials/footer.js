@@ -8,3 +8,5 @@ Footer = function() {
 };
 
 module.exports = Footer;
+
+//# sourceMappingURL=footer.map

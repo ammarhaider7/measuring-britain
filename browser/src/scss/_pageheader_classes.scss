@@ -10,10 +10,7 @@
 		@extend .mb-roboto-strong;
 		margin-top: $margin-large;
 		margin-bottom: $margin-large;
-		font-size: 24px;
-		@include bp(sm) {
-			font-size: 34px;
-		}
+		font-size: 34px;
 		@include bp(md) {
 			font-size: 40px;
 		}

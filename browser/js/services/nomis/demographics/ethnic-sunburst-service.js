@@ -76,3 +76,5 @@ makeSunburstRequest = function(options) {
 };
 
 module.exports = makeSunburstRequest;
+
+//# sourceMappingURL=ethnic-sunburst-service.map

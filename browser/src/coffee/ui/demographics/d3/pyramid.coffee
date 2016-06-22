@@ -1,5 +1,3 @@
-# window.d3 = require 'd3'
-
 drawPyramid = (options) ->
 
 	{ container
@@ -202,7 +200,6 @@ drawPyramid = (options) ->
 					return x(bar_males_perc)(d)
 			}
 
-
 		# Build left-side bars
 		leftGroup.selectAll 'rect'
 			.data bar_females_perc
@@ -353,8 +350,6 @@ drawPyramid = (options) ->
 
 	drawOutline = ->
 
-		# removeOutline()
-
 		malesLine = d3.svg.line()
 			.interpolate 'step-before'
 			.x (d) ->
@@ -423,14 +418,6 @@ drawPyramid = (options) ->
 			onFirstLineDrawn()
 
 		return
-
-	removeOutline = ->
-		# Remove any existing outlines
-		maleOutline = d3.selectAll '.males-outline'
-		femalesOutline = d3.selectAll '.females-outline'
-
-		maleOutline.remove()
-		femalesOutline.remove()
 
 	my.width = (value) ->
 		unless arguments.length then return width

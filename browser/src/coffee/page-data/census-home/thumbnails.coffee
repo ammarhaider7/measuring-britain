@@ -33,7 +33,7 @@ data = {
 		}
 		{
 			href: '/census/longterm-illness-disability-by-ethnicity'
-			img: ''
+			img: '/images/health-disability.PNG'
 			chart_name: 'Long-term illness or disability by ethnicity'
 			description: 'The ethnic Disparities in long-term illness and disability chart shows the number and percentage of the population with a long-term illness or disability broken down by age group and ethnicity.'
 		}
@@ -44,7 +44,7 @@ data = {
 
 		{
 			href: '/census/employment-status-by-country-of-birth'
-			img: ''
+			img: '/images/econ-by-country.PNG'
 			chart_name: 'Employment status by country of birth'
 			description: 'This chart shows the proportion of people in work and out of work. This is further broken down by the type/reason of their employment status.'
 		}

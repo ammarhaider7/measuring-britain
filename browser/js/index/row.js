@@ -8,9 +8,13 @@ thumbnailsData = require('../page-data/index/featured-thumbnails.js');
 Row = function() {
   return React.createElement("div", {
     "className": "container mb-white-text mb-roboto mb-no-pointer-events"
+  }, React.createElement("div", {
+    "className": "col-xs-12 mt-zero"
   }, React.createElement(ThumbnailsRowComponent, {
     "data": thumbnailsData
-  }));
+  })));
 };
 
 module.exports = Row;
+
+//# sourceMappingURL=row.map

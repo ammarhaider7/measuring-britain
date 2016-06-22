@@ -38,13 +38,13 @@ parse = (dataArray) ->
 			total	
 		getValues: (array) ->
 			array.map (ob) ->
-				ob.obs_value.value
+				return ob.obs_value.value
 		percArray: (array, sum) ->
 			array.map (num) ->
-				num / sum * 100
+				return num / sum * 100
 		percArrayFormat: (array, sum) ->
 			array.map (num) ->
-				num / sum
+				return num / sum
 		combine: (m, f, a) ->
 			arr = []
 			i = 0
