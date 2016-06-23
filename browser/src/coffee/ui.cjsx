@@ -9,6 +9,7 @@ ReligiousSection = require './ui/demographics/static-components/religious-divers
 GeneralHealthSection = require './ui/health/static-components/general-health.js'
 DisabilitySection = require './ui/health/static-components/health-disability.js'
 Footer = require './partials/footer.js'
+MobilePortraitRotate = require './partials/mobile-portrait-rotate.js'
 
 # Establish what page this is
 path = location.pathname.split('/')[1]
@@ -16,6 +17,10 @@ _path = path
 raw_path = location.pathname
 # Set the active nav item
 $(".#{ path }").addClass 'active'
+# Is the user on mobile portrait?
+isMobilePortrait = do ->
+	window_width = $(window).width()
+	return yes if window_width < 420
 
 # render functions
 renderDemographics = ->
@@ -51,6 +56,9 @@ renderPopulationPyramid = ->
 	Nav = require './partials/nav.js'
 	PopulationPyramid = require './ui/demographics/static-components/population-pyramid.js'
 	# Render presentational (stateless) components manually
+	if isMobilePortrait is yes
+		ReactDOM.render <MobilePortraitRotate/>, document.getElementById 'mobile-portrait-container'
+
 	ReactDOM.render <Nav active={ _path } border='yes'/>, document.getElementById 'react_nav_container'
 	ReactDOM.render <PageHeader page_header={ 'Population Pyramid - Census' }/>, document.getElementById 'mb_page_header'
 	ReactDOM.render <PopulationPyramid/>, document.getElementById 'react_container'
@@ -65,6 +73,8 @@ renderEthnicDiversity = ->
 	Nav = require './partials/nav.js'
 	EthnicDiversity = require './ui/demographics/static-components/ethnic-diversity.js'
 	# Render presentational (stateless) components manually
+	if isMobilePortrait is yes
+		ReactDOM.render <MobilePortraitRotate/>, document.getElementById 'mobile-portrait-container'
 	ReactDOM.render <Nav active={ _path } border='yes'/>, document.getElementById 'react_nav_container'
 	ReactDOM.render <PageHeader page_header='Ethnic Diversity - Census'/>, document.getElementById 'mb_page_header'
 	ReactDOM.render <EthnicDiversity/>, document.getElementById 'react_container'
@@ -79,6 +89,8 @@ renderReligiousDiversity = ->
 	Nav = require './partials/nav.js'
 	ReligiousDiversity = require './ui/demographics/static-components/religious-diversity.js'
 	# Render presentational (stateless) components manually
+	if isMobilePortrait is yes
+		ReactDOM.render <MobilePortraitRotate/>, document.getElementById 'mobile-portrait-container'
 	ReactDOM.render <Nav active={ _path } border='yes'/>, document.getElementById 'react_nav_container'
 	ReactDOM.render <PageHeader page_header='Religious Diversity - Census'/>, document.getElementById 'mb_page_header'
 	ReactDOM.render <ReligiousDiversity/>, document.getElementById 'react_container'
@@ -93,6 +105,8 @@ renderEthnicGenHealth = ->
 	Nav = require './partials/nav.js'
 	EthnicGenHealth = require './ui/health/static-components/general-health.js'
 	# Render presentational (stateless) components manually
+	if isMobilePortrait is yes
+		ReactDOM.render <MobilePortraitRotate/>, document.getElementById 'mobile-portrait-container'
 	ReactDOM.render <Nav active={ _path } border='yes'/>, document.getElementById 'react_nav_container'
 	ReactDOM.render <PageHeader page_header="Ethnic Disparities in General Health - Census"/>, document.getElementById 'mb_page_header'
 	ReactDOM.render <EthnicGenHealth/>, document.getElementById 'react_container'
@@ -107,6 +121,8 @@ renderHealthDisability = ->
 	Nav = require './partials/nav.js'
 	HealthDisability = require './ui/health/static-components/health-disability.js'
 	# Render presentational (stateless) components manually
+	if isMobilePortrait is yes
+		ReactDOM.render <MobilePortraitRotate/>, document.getElementById 'mobile-portrait-container'
 	ReactDOM.render <Nav active={ _path } border='yes'/>, document.getElementById 'react_nav_container'
 	ReactDOM.render <PageHeader page_header="Long-term illness/disability by ethnicity - Census"/>, document.getElementById 'mb_page_header'
 	ReactDOM.render <HealthDisability/>, document.getElementById 'react_container'
@@ -121,6 +137,8 @@ renderEmploymentStatusByCountry = ->
 	Nav = require './partials/nav.js'
 	EconByCountry = require './ui/labour/static-components/econ-activity-country.js'
 	# Render presentational (stateless) components manually
+	if isMobilePortrait is yes
+		ReactDOM.render <MobilePortraitRotate/>, document.getElementById 'mobile-portrait-container'
 	ReactDOM.render <Nav active={ _path } border='yes'/>, document.getElementById 'react_nav_container'
 	ReactDOM.render <PageHeader page_header="Employment status by country of birth - Census"/>, document.getElementById 'mb_page_header'
 	ReactDOM.render <EconByCountry/>, document.getElementById 'react_container'

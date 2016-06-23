@@ -217,7 +217,6 @@ drawGenHealthChart = (options) ->
 		labels = svg.selectAll '.label'
 		circles = groups.selectAll '.circle'
 		point_labels = groups.selectAll '.point-label'
-		x_axis_group = svg.select '.x.axis'
 		y_axis_group = svg.select '.y.axis'
 
 		groups.data d3_array
@@ -264,11 +263,6 @@ drawGenHealthChart = (options) ->
 			.text (d) ->
 				return pointPercFormat d.values.bad
 
-		# x_axis_group.transition()
-		# 	.duration 1000
-		# 	.delay 500
-		# 	.call xAxis
-
 		y_axis_group.transition()
 			.duration 1000
 			.delay 500
@@ -276,6 +270,48 @@ drawGenHealthChart = (options) ->
 
 		# Add mouse over handler
 		attachHoverHandlers() 
+
+	my.resize = ->
+
+		# update the chart here
+		svg = d3.select '.gen-health-svg'
+		groups = svg.selectAll '.ethnicity'
+		main_group_lines = svg.selectAll '.main-group path'
+		labels = svg.selectAll '.label'
+		circles = groups.selectAll '.circle'
+		point_labels = groups.selectAll '.point-label'
+		y_axis_group = svg.select '.y.axis'
+		x_axis_group = svg.select '.x.axis'
+		title_group = svg.select '.title-group'
+
+		title_group.attr 'transform', "translate(#{ chart_width / 3 - margin.left }, 0)"
+
+		main_group_lines
+			.attr 'd', (d) ->
+				return line d.values
+
+		labels
+			.attr {
+				transform: (d) ->
+					return "translate(#{ (x d.values[d.values.length - 1].key) }, #{ y d.values[d.values.length - 1].values.bad })"
+			}
+
+		circles
+			.attr {
+				cx: (d) ->
+					return x d.key
+				cy: (d) ->
+					return y d.values.bad 
+			}
+
+		point_labels
+			.attr {
+				transform: (d) ->
+					return "translate(#{ x d.key }, #{ y d.values.bad })"
+			}
+
+		y_axis_group.call yAxis
+		x_axis_group.call xAxis
 
 	my.highlightDetail = ->
 

@@ -171,20 +171,21 @@ drawDisabilityChart = function(options) {
       opacity: 0,
       'font-size': '12px'
     }).style("text-anchor", "middle").text('Long-term illness / disability by ethinicity and age group').transition().duration(1500).attr('opacity', 1);
-    ticks = svg.selectAll('.x .tick text');
+    ticks = svg.selectAll('.x .tick');
     ticks.each(function(d, i) {
+      var $this;
       if (i % 2 === 0) {
-        return d3.select(this).attr('y', '20');
+        $this = d3.select(this);
+        $this.select('text').attr('y', margin.p);
+        return $this.select('line').attr('y2', 15);
       }
     });
     return attachHoverHandlers();
   };
   my.update = function() {
-    var groups, svg, x_axis_group, y_axis_group;
+    var groups, svg;
     svg = d3.select('.disability-svg');
     groups = svg.selectAll('.ethnicity');
-    x_axis_group = svg.select('.x.axis');
-    y_axis_group = svg.select('.y.axis');
     groups.data(d3_array);
     groups.selectAll('rect').data(function(d) {
       return d.values;
@@ -197,6 +198,49 @@ drawDisabilityChart = function(options) {
       }
     });
     return attachHoverHandlers();
+  };
+  my.resize = function() {
+    var groups, legend_group, svg, ticks, title_group, tooltip_groups, x_axis_group, y_axis_group;
+    svg = d3.select('.disability-svg');
+    groups = svg.selectAll('.ethnicity');
+    x_axis_group = svg.select('.x.axis');
+    y_axis_group = svg.select('.y.axis');
+    title_group = svg.select('.title-group');
+    legend_group = svg.select('.legend-group');
+    ticks = svg.selectAll('.x .tick');
+    title_group.attr('transform', "translate(" + (chart_width / 2 + margin.left) + ", 0)");
+    legend_group.attr('transform', "translate(" + (chart_width - margin.p) + ", " + margin.top + ")");
+    groups.attr({
+      transform: function(d) {
+        return "translate(" + (x0(d.key)) + ", 0)";
+      }
+    });
+    groups.selectAll('rect').attr({
+      width: x1.rangeBand(),
+      x: function(d) {
+        return x1(d.key);
+      }
+    });
+    x_axis_group.call(xAxis);
+    y_axis_group.call(yAxis);
+    ticks.each(function(d, i) {
+      var $this;
+      if (i % 2 === 0) {
+        $this = d3.select(this);
+        $this.select('text').attr('y', margin.p);
+        return $this.select('line').attr('y2', 15);
+      }
+    });
+    tooltip_groups = groups.select('.tooltip-group');
+    tooltip_groups.select('rect').attr({
+      width: x0.rangeBand() + margin.p + 5,
+      y: y(0.3)
+    });
+    return tooltip_groups.selectAll('text').attr({
+      transform: function(d) {
+        return "translate(" + (x0.rangeBand() / 2) + ", " + (y(0.3)) + ")";
+      }
+    });
   };
   attachHoverHandlers = function() {
     var rects, svg;

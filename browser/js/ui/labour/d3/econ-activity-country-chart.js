@@ -138,18 +138,6 @@ drawEconByCountryChart = function(options) {
     bottom_countries = main_bottom_group.selectAll('.country-g').data(d3_array, key).enter().append('g').attr('transform', function(d) {
       return "translate(" + (x(d.country)) + ", 0)";
     }).attr('class', 'country-g');
-    top_countries.append('text').text(function(d) {
-      return trimCountryString(d.country);
-    }).attr({
-      transform: function(d) {
-        return "translate(" + (0.5 * x.rangeBand()) + ", " + (y(d.in_work.sum_perc) - 5) + ")";
-      },
-      'font-size': '80%',
-      'font-weight': 'bold',
-      'text-anchor': 'middle',
-      "class": 'country-label',
-      opacity: 0
-    }).transition().duration(1500).attr('opacity', 1);
     top_countries.selectAll('rect').data(function(d) {
       return d.in_work_categories;
     }).enter().append('rect').attr({
@@ -186,6 +174,18 @@ drawEconByCountryChart = function(options) {
         return (y0(d.y1)) - (y0(d.y0));
       }
     });
+    top_countries.append('text').text(function(d) {
+      return trimCountryString(d.country);
+    }).attr({
+      transform: function(d) {
+        return "translate(" + (0.5 * x.rangeBand()) + ", " + (y(d.in_work.sum_perc) - 5) + ")";
+      },
+      'font-size': '100%',
+      'font-weight': 'bold',
+      'text-anchor': 'middle',
+      "class": 'country-label',
+      opacity: 0
+    }).transition().duration(1500).attr('opacity', 1);
     tooltip_group_top = main_top_group.append('g').attr('class', 'tooltip-group top').attr('opacity', 0);
     tooltip_group_bottom = main_bottom_group.append('g').attr('class', 'tooltip-group bottom').attr('transform', "translate(0, " + (chart_width * 0.5) + ")").attr('opacity', 0);
     tooltip_group_top.append('rect').attr({
@@ -298,6 +298,53 @@ drawEconByCountryChart = function(options) {
       height: function(d) {
         return (y0(d.y1)) - (y0(d.y0));
       }
+    });
+    return attachHoverHandlers();
+  };
+  my.resize = function() {
+    var bottom_countries, bottom_rect_group, main_bottom_group, main_top_group, svg, top_countries, top_rect_group, x_axis_divider_group, y_axis_bottom_group, y_axis_top_group;
+    svg = d3.select('.econ-country-svg');
+    main_top_group = svg.select('.main-group-top');
+    main_bottom_group = svg.select('.main-group-bottom');
+    top_rect_group = svg.select('.top-group-rect');
+    bottom_rect_group = svg.select('.bottom-group-rect');
+    top_countries = main_top_group.selectAll('.country-g');
+    bottom_countries = main_bottom_group.selectAll('.country-g');
+    y_axis_top_group = svg.select('.y.y-top.axis');
+    y_axis_bottom_group = svg.select('.y.y-bottom.axis');
+    x_axis_divider_group = svg.select('.x-axis-divider');
+    top_rect_group.select('rect').attr({
+      width: chart_width
+    });
+    main_top_group.select('text').attr({
+      x: chart_width * 0.5
+    });
+    bottom_rect_group.select('rect').attr({
+      width: chart_width
+    });
+    main_bottom_group.select('text').attr({
+      x: chart_width * 0.5,
+      y: chart_height * 0.5 - margin.label
+    });
+    top_countries.selectAll('rect').attr({
+      width: x.rangeBand()
+    });
+    top_countries.selectAll('.country-label').attr('transform', function(d) {
+      return "translate(" + (0.5 * x.rangeBand()) + ", " + (y(d.in_work.sum_perc) - 5) + ")";
+    });
+    top_countries.attr('transform', function(d) {
+      return "translate(" + (x(d.country)) + ", 0)";
+    });
+    bottom_countries.attr('transform', function(d) {
+      return "translate(" + (x(d.country)) + ", 0)";
+    });
+    bottom_countries.selectAll('rect').attr({
+      width: x.rangeBand()
+    });
+    y_axis_top_group.call(yAxisTop);
+    y_axis_bottom_group.call(yAxisBottom);
+    x_axis_divider_group.select('line').attr({
+      x2: chart_width
     });
     return attachHoverHandlers();
   };

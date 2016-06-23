@@ -1,6 +1,6 @@
 drawPyrBars = (options) ->
 
-	{ container, age, females, males, initial, isDefault, activeBarsValue } = options
+	{ container, age, females, males, initial, isDefault, activeBarsValue, resize } = options
 
 	width = $(container).width() ? 358
 	height = $(container).height() ? 275
@@ -46,6 +46,11 @@ drawPyrBars = (options) ->
 	category_value = if activeBarsValue is 'default' then 'England \& Wales' else activeBarsValue
 
 	my = ->
+
+		# Catch and handle resize immediately
+		if resize is yes
+			
+			return resizePyramidBars()
 
 		# generate chart here, using the options
 		if initial is yes and isDefault is yes
@@ -132,21 +137,6 @@ drawPyrBars = (options) ->
 			.attr 'x', x 'female'
 			.attr 'class', 'female-number'
 
-		# x axis
-		# manGroup = xAxisGroup.append('g')
-		# 	.data dataArr
-		# 	.attr 'class', 'mb-icon-man'
-		# 	.attr "transform", "translate(#{ x('males') }, 0)"
-		# man_circle = manGroup.append 'circle'
-
-		# for attr in man_svg[0].attrs
-		# 	man_circle.attr attr.name, attr.value
-
-		# man_path = manGroup.append 'path'
-		# man_path.attr {
-		# 	d: man_svg[1].d
-		# } 
-
 		xAxisGroup.call xAxis
 
 	update = ->
@@ -177,6 +167,39 @@ drawPyrBars = (options) ->
 		# Update age band and category label
 		ageBand.text age
 		categoryValue.text category_value
+
+	resizePyramidBars = ->
+
+		# Create svg and g vars
+		svg = d3.select '.pyramid-bars-svg'
+		main_group = svg.select '.main-group'
+		labelsGroup = svg.select '.labels-group'
+		agesGroup = svg.select '.ages-group'
+		xAxisGroup = svg.select '.x.axis'
+		
+		# Transforms
+		main_group.attr 'transform', "translate(#{ margin.left }, #{ margin.top })"
+		labelsGroup.attr 'transform', "translate(#{ margin.left + x.rangeBand() / 2 }, #{ margin.top - 15 })"
+		xAxisGroup.attr "transform", "translate(#{ margin.left }, #{ height - margin.bottom })"
+		agesGroup.attr "transform", "translate(20, #{ height / 2 - 30 })"		
+
+		# Bars
+		main_group.selectAll '.bar'
+			.data dataArr
+		  .enter().append('rect')
+		  	.attr {
+		  		x: (d) ->
+		  			x d.sex
+		  		height: bars_height - y 0
+		  		ry: 3
+		  		width: x.rangeBand()
+		  		y: (d) ->
+		  			return y d.value
+		  		height: (d) ->
+		  			return bars_height - y d.value
+		  	}
+
+		xAxisGroup.call xAxis
 
 	my.width = (value) ->
 		unless arguments.length then return width

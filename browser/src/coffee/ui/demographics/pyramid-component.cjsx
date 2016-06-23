@@ -16,7 +16,7 @@ PyramidComponent = React.createClass
 	getAppropriateHeight: ->
 
 		window_height = $(window).height()
-		if window_height > 700
+		if window_height > 550
 			return 600
 		else
 			return window_height * 1.3
@@ -25,10 +25,52 @@ PyramidComponent = React.createClass
 
 		@props.fetchPyramidData null
 
+	componentDidMount: ->
+
+		$(window).resize () =>
+			@onResize()
+
+	onResize: ->
+
+		resizeChart = drawPyramid {
+			resize: yes
+			container: @refs.pyramidSvg
+			ages: @props.data.bars.ages
+			bar_males: @props.data.bars.males
+			bar_females: @props.data.bars.females
+			bar_males_perc: @props.data.bars.malesPerc
+			bar_males_perc_format: @props.data.bars.malesPercFormat
+			bar_males_sum: @props.data.bars.malesSum
+			bar_females_perc: @props.data.bars.femalesPerc
+			bar_females_perc_format: @props.data.bars.femalesPercFormat
+			bar_females_sum: @props.data.bars.femalesSum
+			outline_males: @props.data.outline.males ? null
+			outline_females: @props.data.outline.females ? null
+			outline_males_perc: @props.data.outline.malesPerc ? null
+			outline_males_perc_format: @props.data.outline.malesPercFormat ? null
+			outline_males_sum: @props.data.outline.malesSum ? null
+			outline_females_perc: @props.data.outline.femalesPerc ? null
+			outline_females_perc_format: @props.data.outline.femalesPercFormat ? null
+			outline_females_sum: @props.data.outline.femalesSum ? null
+			overlay_data: @props.data.bars.overlayData
+			onMouseOver: @props.onMouseOver
+			onFirstLineDrawn: @props.onFirstLineDrawn
+			isDefault: @props.isDefault
+			outlineFilter: @props.outlineFilter
+			updatePyramid: @props.updatePyramid
+			updateOutline: @props.updateOutline
+			activeLineCategory: @props.activeLineCategory
+			activeLineValue: @props.activeLineValue
+			isFirstLine: @props.isFirstLine
+		}
+
+		resizeChart()
+
 	componentDidUpdate: ->
 
 		if @props.updatePyramid is yes or @props.updateOutline is yes
-			pyramid = drawPyramid({
+			pyramid = drawPyramid {
+				resize: no
 				container: @refs.pyramidSvg
 				ages: @props.data.bars.ages
 				bar_males: @props.data.bars.males
@@ -57,7 +99,7 @@ PyramidComponent = React.createClass
 				activeLineCategory: @props.activeLineCategory
 				activeLineValue: @props.activeLineValue
 				isFirstLine: @props.isFirstLine
-			})
+			}
 
 			pyramid() 
 

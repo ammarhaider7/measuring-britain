@@ -41,7 +41,7 @@ drawBarChart = function(options) {
     main_group.attr('transform', "translate(" + margin.left + ", " + margin.top + ")");
     labels_group.attr('transform', "translate(" + (margin.left - 10) + ", " + (margin.top + 22) + ")");
     x_axis_group.attr('transform', "translate(" + margin.left + ", " + margin.top + ")");
-    detail_group.attr('transform', "translate(" + ((chart_width / 3) * 2) + ", " + ((chart_height / 2) + margin.top) + ")");
+    detail_group.attr('transform', "translate(" + (chart_width * 0.8) + ", " + ((chart_height / 2) + margin.top) + ")");
     bar = main_group.selectAll('rect').data(d3_array, key);
     barsEnter = bar.enter().append('rect').attr({
       width: 0,
@@ -63,7 +63,7 @@ drawBarChart = function(options) {
       return y(d.name);
     }).attr('class', 'rel-label').transition().duration(1500).attr('opacity', 1);
     x_axis_group.transition().duration(1500).call(xAxis);
-    detail_width = chart_width - ((chart_width / 3) * 2);
+    detail_width = chart_width - (chart_width * 0.7);
     detail_height = (chart_height / 2) - margin.top;
     detail_group.append('rect').attr({
       width: detail_width,
@@ -109,6 +109,27 @@ drawBarChart = function(options) {
     x_axis_group.transition().duration(1000).delay(500).call(xAxis);
     detail_text_value.text(format(data.sum));
     return attachHoverHandlers();
+  };
+  my.resize = function() {
+    var detail_group, detail_height, detail_width, main_group_bars, svg, x_axis_group;
+    svg = d3.select('.bars-svg');
+    main_group_bars = svg.selectAll('.main-group .bar');
+    x_axis_group = svg.select('.x.axis');
+    detail_group = svg.select('.detail-group');
+    detail_group.attr('transform', "translate(" + (chart_width * 0.8) + ", " + ((chart_height / 2) + margin.top) + ")");
+    detail_width = chart_width - (chart_width * 0.7);
+    detail_height = (chart_height / 2) - margin.top;
+    detail_group.select('rect').attr({
+      width: detail_width,
+      height: detail_height
+    });
+    detail_group.selectAll('text').attr('x', detail_width / 2);
+    main_group_bars.attr('width', function(d) {
+      return x(d.value);
+    }).attr('y', function(d, i) {
+      return y(d.name);
+    });
+    return x_axis_group.call(xAxis);
   };
   attachHoverHandlers = function() {
     var detail_text_percent, detail_text_religion, detail_text_value, main_group_bars, svg;

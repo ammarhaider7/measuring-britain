@@ -20,14 +20,32 @@ value_options = {
 category_options = data.category_options;
 
 SunburstComponent = React.createClass({displayName: "SunburstComponent",
-  componentDidMount: function() {
-    if (this.props.isDefault === true && this.props.init_done === false) {
-      return this.props.fetchSunburstData(null);
+  getAppropriateHeight: function() {
+    var window_height, window_width;
+    window_width = $(window).width();
+    window_height = $(window).height();
+    if (window_height > 550 && window_width > 740) {
+      return 550;
+    } else {
+      return 400;
     }
   },
-  reactDrawSunburst: function() {
+  componentDidMount: function() {
+    if (this.props.isDefault === true && this.props.init_done === false) {
+      this.props.fetchSunburstData(null);
+    }
+    return $(window).resize((function(_this) {
+      return function() {
+        return _this.reactDrawSunburst({
+          resize: true
+        });
+      };
+    })(this));
+  },
+  reactDrawSunburst: function(resize_flag) {
     var sunburst;
     sunburst = drawSunburst({
+      resize: resize_flag.resize,
       container: this.refs.sunburstSvg,
       data: this.props.data,
       isDefault: this.props.isDefault,
@@ -36,6 +54,9 @@ SunburstComponent = React.createClass({displayName: "SunburstComponent",
       activeValue: this.props.activeValue,
       onInitDone: this.props.onInitDone
     });
+    if (resize_flag.resize === true) {
+      return sunburst.resize();
+    }
     if (this.props.isDefault === true && this.props.updateSunburst === true) {
       return sunburst.init();
     } else {
@@ -44,7 +65,9 @@ SunburstComponent = React.createClass({displayName: "SunburstComponent",
   },
   componentDidUpdate: function() {
     if (this.props.updateSunburst === true) {
-      return this.reactDrawSunburst();
+      return this.reactDrawSunburst({
+        resize: false
+      });
     }
   },
   render: function() {
@@ -63,7 +86,7 @@ SunburstComponent = React.createClass({displayName: "SunburstComponent",
       "className": "sunburst-svg",
       "style": {
         width: '100%',
-        height: '550px'
+        height: this.getAppropriateHeight()
       },
       "ref": "sunburstSvg"
     }, React.createElement("g", {

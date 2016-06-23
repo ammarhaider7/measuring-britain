@@ -2,7 +2,7 @@
 var drawSunburst;
 
 drawSunburst = function(options) {
-  var activeCategory, activeValue, arc, arcTween, attachHoverHandlers, container, data, ethnic_group_arr, format, getColour, getSubColour, height, initTween, isDefault, margin, my, nested_data, nested_data_init, onInitDone, onMouseOver, partition, percFormat, radius, ref, ref1, stash, total_item, total_item_value, width, y;
+  var activeCategory, activeValue, arc, arcTween, attachHoverHandlers, container, data, ethnic_group_arr, format, getColour, getSubColour, height, initTween, isDefault, margin, mobile_portrait_width, my, nested_data, nested_data_init, onInitDone, onMouseOver, partition, percFormat, radius, ref, ref1, stash, total_item, total_item_value, width, y;
   container = options.container, data = options.data, isDefault = options.isDefault, onMouseOver = options.onMouseOver, activeCategory = options.activeCategory, activeValue = options.activeValue, onInitDone = options.onInitDone;
   nested_data = data.d3_nested_data;
   total_item = data.total_item;
@@ -59,6 +59,7 @@ drawSunburst = function(options) {
   };
   width = (ref = $(container).width()) != null ? ref : 1140;
   height = (ref1 = $(container).height()) != null ? ref1 : 500;
+  mobile_portrait_width = 740;
   margin = {
     top: 25,
     right: 0,
@@ -162,7 +163,7 @@ drawSunburst = function(options) {
     center_group.attr('transform', "translate(" + (width / 2) + ", " + (half_height + margin.middle - margin.top * 2) + ")");
     center_ethnic_group.attr('transform', "translate(" + (width / 2) + ", " + (half_height + margin.text - margin.top * 2) + ")");
     center_percent_group.attr('transform', "translate(" + (width / 2) + ", " + (half_height + (margin.text * 2) - margin.top * 2) + ")");
-    center_total_value_group.attr('transform', "translate(" + (width / 2) + ", " + (half_height + (margin.text * 3) - margin.top * 2) + ")");
+    center_total_value_group.attr('transform', "translate(" + (width / 2) + ", " + (half_height + (margin.text * 2.7) - margin.top * 2) + ")");
     key_group.attr('transform', "translate(" + ((width * 0.9) + 20) + ", " + margin.top + ")");
     key_text_group.attr('transform', "translate(" + (width * 0.9) + ", " + (margin.top + 17) + ")");
     paths = main_group.selectAll('path').data(partition.nodes(nested_data)).enter().append('path').attr({
@@ -224,6 +225,26 @@ drawSunburst = function(options) {
     total_value_text.transition().duration(500).attr('opacity', 0).transition().duration(1000).delay(500).text(format(total_item.obs_value.value)).attr('opacity', 1);
     newSegments = main_group.selectAll('path.sunburst-path').data(partition.nodes(nested_data)).transition().duration(1500).delay(500).attrTween('d', arcTween);
     attachHoverHandlers();
+  };
+  my.resize = function() {
+    var center_ethnic_group, center_group, center_percent_group, center_total_value_group, half_height, key_group, key_text_group, main_group, paths, svg;
+    svg = d3.select('.sunburst-svg');
+    main_group = svg.select('.main-group');
+    center_group = svg.select('.center-text-group');
+    center_total_value_group = svg.select('.total-value-group');
+    center_ethnic_group = svg.select('.ethnic-group-text');
+    center_percent_group = svg.select('.percentage-group');
+    key_group = svg.select('.key-group');
+    key_text_group = svg.select('.key-text-group');
+    half_height = height * 0.52;
+    main_group.attr('transform', "translate(" + (width / 2) + ", " + half_height + ")");
+    center_group.attr('transform', "translate(" + (width / 2) + ", " + (half_height + margin.middle - margin.top * 2) + ")");
+    center_ethnic_group.attr('transform', "translate(" + (width / 2) + ", " + (half_height + margin.text - margin.top * 2) + ")");
+    center_percent_group.attr('transform', "translate(" + (width / 2) + ", " + (half_height + (margin.text * 2) - margin.top * 2) + ")");
+    center_total_value_group.attr('transform', "translate(" + (width / 2) + ", " + (half_height + (margin.text * 3) - margin.top * 2) + ")");
+    key_group.attr('transform', "translate(" + ((width * 0.9) + 20) + ", " + margin.top + ")");
+    key_text_group.attr('transform', "translate(" + (width * 0.9) + ", " + (margin.top + 17) + ")");
+    return paths = main_group.selectAll('path').data(partition.nodes(nested_data)).attr('d', arc);
   };
   my.width = function(value) {
     if (!arguments.length) {

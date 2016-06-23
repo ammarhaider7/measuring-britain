@@ -28,6 +28,7 @@ drawPyramid = (options) ->
 	  activeLineValue
 	  activeLineCategory
 	  isFirstLine
+	  resize
 	 } = options
 
 	width = $(container).width() ? 750
@@ -93,13 +94,20 @@ drawPyramid = (options) ->
 	femaleKeyGroup = keyGroup.select '.female-key-group'
 
 	my = ->
-		# generate chart here
 
+		# Catch and handle resize immediately
+		if resize is yes
+			
+			return resizePyramid()
+
+		# generate chart here
 		if isDefault is yes
 
 			init()
 
 			if isOutline is yes and updateOutline is yes then drawOutline()
+
+			return
 
 		else if isDefault is no
 
@@ -109,6 +117,8 @@ drawPyramid = (options) ->
 
 			# if isOutline is yes and updateOutline is yes then drawOutline()
 			if isOutline is yes and outlineDataReceived is yes then drawOutline()
+
+			return
 
 	init = ->
 
@@ -417,7 +427,58 @@ drawPyramid = (options) ->
 			# Dispatch action to let state know first line has been drawn..
 			onFirstLineDrawn()
 
-		return
+		return		
+
+	resizePyramid = ->
+
+		svg = d3.select '.pyramid-svg'
+		leftBars = svg.selectAll '.pyramid-bar.left'
+		rightBars = svg.selectAll '.pyramid-bar.right'
+		overlayBars = svg.selectAll '.overlay-rect'
+		xAxisGroupLeft = svg.select '.x.axis.left'
+		xAxisGroupRight = svg.select '.x.axis.right'
+
+		# Perform transforms on g elements
+		g.attr "transform", "translate(0, #{ margin.top })"
+		overlayGroup.attr "transform", "translate(0, #{ margin.top })"
+		leftGroup.attr "transform", "translate(0, #{ margin.top })"
+		rightGroup.attr "transform", "translate(#{ (width / 2) + margin.middle }, #{ margin.top })"
+		ticksGroup.attr "transform", "translate(#{ (width / 2) }, #{ margin.bottom - 5 })"
+		xAxisGroupLeft.attr "transform", "translate(#{ -(width / 2) }, #{ height - (margin.bottom + 15) })"
+		xAxisGroupRight.attr "transform", "translate(#{ margin.middle }, #{ height - (margin.bottom + 15) })"
+		titleGroup.attr "transform", "translate(#{ 0.25 * width }, #{ margin.top - 10 })"
+		keyGroup.attr "transform", "translate(#{ width - margin.right * 3 }, #{  margin.top })"
+		maleKeyGroup.attr "transform", "translate(70, 0)"
+
+		svg = d3.select '.pyramid-svg'
+		leftBars = svg.selectAll '.pyramid-bar.left'
+		rightBars = svg.selectAll '.pyramid-bar.right'
+		overlayBars = svg.selectAll '.overlay-rect'
+		xAxisGroupLeft = svg.select '.x.axis.left'
+		xAxisGroupRight = svg.select '.x.axis.right'
+
+		# Update bars
+		leftBars.data bar_females_perc
+		  	.attr {
+				width: (d) ->
+					return x(bar_females_perc)(d)
+				x: (d) ->
+					return xLeft(bar_females_perc)(d)
+		  	}
+
+		rightBars.data bar_males_perc
+			.attr {
+				width: (d) ->
+					return x(bar_males_perc)(d)
+			}
+
+		# Update data associated with overlay rects
+		overlayBars.data overlay_data
+
+		# Update the axes
+		xAxisGroupLeft.call xAxisLeft bar_females_perc_format
+
+		xAxisGroupRight.call xAxis(bar_males_perc_format)
 
 	my.width = (value) ->
 		unless arguments.length then return width

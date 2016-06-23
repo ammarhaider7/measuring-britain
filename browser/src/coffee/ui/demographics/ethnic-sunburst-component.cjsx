@@ -16,29 +16,32 @@ category_options = data.category_options
 
 SunburstComponent = React.createClass 
 
+  getAppropriateHeight: ->
+
+    window_width = $(window).width()
+    window_height = $(window).height()
+    # if screen is not mobile default to 550
+    if window_height > 550 and window_width > 740
+      return 550
+    # otherwise 350
+    else
+      return 400
+
   componentDidMount: ->
 
     if @props.isDefault is yes and @props.init_done is no
       
       @props.fetchSunburstData null
-      # Only load sunburst once user scrolls to it
-      # $(window).on 'scroll', () =>
 
-      #   docScrollTop = $(document).scrollTop()
-      #   sunburstOffsetTop = ($('.sunburst').offset().top + 750)
-      #   docHeight = $(document).height()
+    $(window).resize () =>
+      @reactDrawSunburst {
+        resize: yes
+      }
 
-      #   if (docHeight - docScrollTop) < sunburstOffsetTop
-
-      #     # $(window).off 'scroll'
-      #     if @props.init_done is no
-      #       @props.fetchSunburstData null
-      #     @props.onInitDone()
-
-  reactDrawSunburst: ->
+  reactDrawSunburst: (resize_flag) ->
 
     sunburst = drawSunburst {
-
+      resize: resize_flag.resize
       container: @refs.sunburstSvg
       data: @props.data
       isDefault: @props.isDefault
@@ -48,22 +51,26 @@ SunburstComponent = React.createClass
       onInitDone: @props.onInitDone
     }
 
-    # sunburst()
+    if resize_flag.resize is yes
+
+      return sunburst.resize()
 
     if @props.isDefault is yes and @props.updateSunburst is yes
 
-      sunburst.init()
+      return sunburst.init()
 
     else
 
-      sunburst.update()
+      return sunburst.update()
 
   componentDidUpdate: ->
 
     # if @props.updateSunburst is yes and @props.init_done is yes
     if @props.updateSunburst is yes
 
-      @reactDrawSunburst()
+      @reactDrawSunburst {
+        resize: no
+      }
 
   render: ->
 
@@ -77,7 +84,7 @@ SunburstComponent = React.createClass
         />
         <svg
           className="sunburst-svg"  
-          style={{ width: '100%', height: '550px' }}
+          style={{ width: '100%', height: @getAppropriateHeight() }}
           ref="sunburstSvg"
         >
           <g className="main-group"></g>

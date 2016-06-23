@@ -7,7 +7,7 @@ PageHeader = React.createClass({displayName: "PageHeader",
   },
   render: function() {
     return React.createElement("div", {
-      "className": "mb-page-header"
+      "className": "mb-page-header mb-hidden-mp"
     }, React.createElement("div", {
       "className": "container"
     }, React.createElement("h1", {

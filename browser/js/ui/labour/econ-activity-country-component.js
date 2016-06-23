@@ -23,10 +23,31 @@ EconByCountry = React.createClass({displayName: "EconByCountry",
   componentWillMount: function() {
     return this.props.fetchEconCountryData(null);
   },
+  componentDidMount: function() {
+    return $(window).resize((function(_this) {
+      return function() {
+        return _this.onResize();
+      };
+    })(this));
+  },
+  onResize: function() {
+    var draw;
+    draw = econByCountryChart({
+      resize: true,
+      container: this.refs.econCountrySvg,
+      isDefault: this.props.isDefault,
+      data: this.props.data,
+      activeCategory: this.props.activeCategory,
+      activeValue: this.props.activeValue,
+      onMouseOver: this.props.onMouseOver
+    });
+    return draw.resize();
+  },
   componentDidUpdate: function() {
     var draw;
     if (this.props.updateMainChart === true) {
       draw = econByCountryChart({
+        resize: false,
         container: this.refs.econCountrySvg,
         isDefault: this.props.isDefault,
         data: this.props.data,

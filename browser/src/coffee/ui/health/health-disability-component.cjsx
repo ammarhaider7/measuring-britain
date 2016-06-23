@@ -22,18 +22,25 @@ DisabilityChart = React.createClass
 
       @props.fetchDisabilityData null
       @props.onInitDone()
-      # Only load sunburst once user scrolls to it
-      # $(window).on 'scroll', () =>
 
-      #   docScrollTop = $(document).scrollTop()
-      #   sunburstOffsetTop = ($('#health-disability-component').offset().top)
-      #   docHeight = $(document).height()
+  componentDidMount: ->
 
-      #   if (docHeight - docScrollTop) < sunburstOffsetTop
-      #     # $(window).off 'scroll'
-      #     if @props.init_done is no
-      #       @props.fetchDisabilityData null
-      #     @props.onInitDone()
+    $(window).resize () =>
+      @onResize()
+
+  onResize: ->
+
+    draw = disabilityChart {
+      resize: yes
+      container: @refs.disabilitySvg
+      isDefault: @props.isDefault
+      data: @props.data
+      activeCategory: @props.activeCategory
+      activeValue: @props.activeValue
+      onMouseOver: @props.onMouseOver
+    }
+
+    draw.resize()
 
   componentDidUpdate: ->
 
@@ -41,6 +48,7 @@ DisabilityChart = React.createClass
     if @props.updateDisability is yes
 
       draw = disabilityChart {
+        resize: no
         container: @refs.disabilitySvg
         isDefault: @props.isDefault
         data: @props.data

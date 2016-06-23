@@ -1,6 +1,6 @@
 Footer = ->
 
-	<div className="footer container">
+	<div className="footer container mb-hidden-mp">
 	    <hr/>
 	    <footer>
 	      <p>© 2016 MB</p>

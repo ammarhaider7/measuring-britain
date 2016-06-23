@@ -2,8 +2,8 @@
 var drawPyrBars;
 
 drawPyrBars = function(options) {
-  var activeBarsValue, age, bars_height, bars_width, category_value, container, dataArr, females, format, height, init, initial, isDefault, males, margin, my, ref, ref1, update, width, x, xAxis, y;
-  container = options.container, age = options.age, females = options.females, males = options.males, initial = options.initial, isDefault = options.isDefault, activeBarsValue = options.activeBarsValue;
+  var activeBarsValue, age, bars_height, bars_width, category_value, container, dataArr, females, format, height, init, initial, isDefault, males, margin, my, ref, ref1, resize, resizePyramidBars, update, width, x, xAxis, y;
+  container = options.container, age = options.age, females = options.females, males = options.males, initial = options.initial, isDefault = options.isDefault, activeBarsValue = options.activeBarsValue, resize = options.resize;
   width = (ref = $(container).width()) != null ? ref : 358;
   height = (ref1 = $(container).height()) != null ? ref1 : 275;
   dataArr = [
@@ -35,6 +35,9 @@ drawPyrBars = function(options) {
   ]);
   category_value = activeBarsValue === 'default' ? 'England \& Wales' : activeBarsValue;
   my = function() {
+    if (resize === true) {
+      return resizePyramidBars();
+    }
     if (initial === true && isDefault === true) {
       return init();
     } else if (!((initial != null) && isDefault === false)) {
@@ -106,6 +109,33 @@ drawPyrBars = function(options) {
     femaleVal.text(format(females));
     ageBand.text(age);
     return categoryValue.text(category_value);
+  };
+  resizePyramidBars = function() {
+    var agesGroup, labelsGroup, main_group, svg, xAxisGroup;
+    svg = d3.select('.pyramid-bars-svg');
+    main_group = svg.select('.main-group');
+    labelsGroup = svg.select('.labels-group');
+    agesGroup = svg.select('.ages-group');
+    xAxisGroup = svg.select('.x.axis');
+    main_group.attr('transform', "translate(" + margin.left + ", " + margin.top + ")");
+    labelsGroup.attr('transform', "translate(" + (margin.left + x.rangeBand() / 2) + ", " + (margin.top - 15) + ")");
+    xAxisGroup.attr("transform", "translate(" + margin.left + ", " + (height - margin.bottom) + ")");
+    agesGroup.attr("transform", "translate(20, " + (height / 2 - 30) + ")");
+    main_group.selectAll('.bar').data(dataArr).enter().append('rect').attr({
+      x: function(d) {
+        return x(d.sex);
+      },
+      height: bars_height - y(0),
+      ry: 3,
+      width: x.rangeBand(),
+      y: function(d) {
+        return y(d.value);
+      },
+      height: function(d) {
+        return bars_height - y(d.value);
+      }
+    });
+    return xAxisGroup.call(xAxis);
   };
   my.width = function(value) {
     if (!arguments.length) {

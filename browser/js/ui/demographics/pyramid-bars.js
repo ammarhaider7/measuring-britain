@@ -13,10 +13,32 @@ pyBarsComponent = React.createClass({displayName: "pyBarsComponent",
       return $(window).height() - 320;
     }
   },
+  componentDidMount: function() {
+    return $(window).resize((function(_this) {
+      return function() {
+        return _this.onResize();
+      };
+    })(this));
+  },
+  onResize: function() {
+    var resizeChart;
+    resizeChart = drawPyrBars({
+      resize: true,
+      container: this.refs.pyramidBarsSvg,
+      age: this.props._mouseOverData.age,
+      females: this.props._mouseOverData.females,
+      males: this.props._mouseOverData.males,
+      initial: this.props._mouseOverData.initial,
+      isDefault: this.props.isDefault,
+      activeBarsValue: this.props.activeBarsValue
+    });
+    return resizeChart();
+  },
   componentDidUpdate: function() {
     var pyrBars;
     if (this.props.updateBars === true) {
       pyrBars = drawPyrBars({
+        resize: false,
         container: this.refs.pyramidBarsSvg,
         age: this.props._mouseOverData.age,
         females: this.props._mouseOverData.females,

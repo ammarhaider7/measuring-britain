@@ -23,10 +23,33 @@ GenHealthChart = React.createClass({displayName: "GenHealthChart",
   componentWillMount: function() {
     return this.props.fetchGenHealthData(null);
   },
+  componentDidMount: function() {
+    return $(window).resize((function(_this) {
+      return function() {
+        return _this.onResize();
+      };
+    })(this));
+  },
+  onResize: function() {
+    var draw;
+    draw = genHealthChart({
+      resize: true,
+      container: this.refs.genHealthSvg,
+      isDefault: this.props.isDefault,
+      data: this.props.data,
+      activeCategory: this.props.activeCategory,
+      activeValue: this.props.activeValue,
+      onMouseOver: this.props.onMouseOver,
+      highlights: this.props._highlights,
+      updateHighlights: this.props.updateHighlights
+    });
+    return draw.resize();
+  },
   componentDidUpdate: function() {
     var draw;
     if (this.props.updateGenHealth === true) {
       draw = genHealthChart({
+        resize: false,
         container: this.refs.genHealthSvg,
         isDefault: this.props.isDefault,
         data: this.props.data,

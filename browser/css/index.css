@@ -8020,6 +8020,9 @@ button.close {
 .mb-ui-body {
   background-color: #FFFFFF; }
 
+.mt-60-percent {
+  margin-top: 60%; }
+
 .mb-absolute {
   position: absolute; }
 
@@ -8192,6 +8195,10 @@ button.close {
 
 .mb-hide {
   display: none; }
+
+@media (max-width: 414px) {
+  .mb-hidden-mp {
+    display: none; } }
 
 .mb-form {
   background-color: #F3F3F3;
@@ -8432,11 +8439,17 @@ nav.mb-nav-border {
       background-color: #EA87A1; }
 
 .percent-text {
-  font-size: 36px;
+  font-size: 32px;
   font-weight: bold; }
+  @media (min-width: 992px) {
+    .percent-text {
+      font-size: 36px; } }
 
 .active-value-text, .ethnicity-text, .total-value-text {
-  font-size: 26px; }
+  font-size: 18px; }
+  @media (min-width: 992px) {
+    .active-value-text, .ethnicity-text, .total-value-text {
+      font-size: 26px; } }
 
 .sunburst .mb-spinner {
   margin: 150px auto 0;
@@ -8463,15 +8476,24 @@ nav.mb-nav-border {
 
 .bars-svg .detail-text-religion {
   text-anchor: middle;
-  font-size: 30px; }
+  font-size: 20px; }
+  @media (min-width: 992px) {
+    .bars-svg .detail-text-religion {
+      font-size: 30px; } }
 
 .bars-svg .detail-text-value {
   text-anchor: middle;
-  font-size: 45px; }
+  font-size: 28px; }
+  @media (min-width: 992px) {
+    .bars-svg .detail-text-value {
+      font-size: 45px; } }
 
 .bars-svg .detail-text-percent {
   text-anchor: middle;
-  font-size: 20px; }
+  font-size: 14px; }
+  @media (min-width: 992px) {
+    .bars-svg .detail-text-percent {
+      font-size: 20px; } }
 
 .rel-bars .mb-spinner {
   margin: 150px auto 0;
@@ -8586,7 +8608,7 @@ nav.mb-nav-border {
   font-size: 12px; }
 
 #health-disability-component .disability-svg .x .tick:nth-child(1) line {
-  stroke: #333;
+  stroke: #999;
   stroke-dasharray: none; }
 
 #health-disability-component .disability-svg .x.axis path {
@@ -8597,7 +8619,7 @@ nav.mb-nav-border {
   font-weight: bold; }
 
 #health-disability-component .disability-svg .x.axis line {
-  stroke: #333;
+  stroke: #999;
   stroke-opacity: .8; }
 
 #health-disability-component .disability-svg .y .tick:nth-child(1) line {
@@ -8683,3 +8705,21 @@ nav.mb-nav-border {
   color: grey;
   font-size: 100%;
   text-decoration: none; }
+
+.mb-mobile-rotate {
+  position: absolute;
+  background-color: rgba(128, 128, 128, 0.92); }
+  @media (min-width: 415px) {
+    .mb-mobile-rotate {
+      display: none; } }
+  @media (min-width: 767px) {
+    .mb-mobile-rotate {
+      display: none; } }
+  @media (min-width: 992px) {
+    .mb-mobile-rotate {
+      display: none; } }
+  @media (min-width: 1200px) {
+    .mb-mobile-rotate {
+      display: none; } }
+  .mb-mobile-rotate p {
+    font-size: 20px; }

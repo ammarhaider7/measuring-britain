@@ -20,14 +20,24 @@ value_options = {
 category_options = data.category_options;
 
 BarsComponent = React.createClass({displayName: "BarsComponent",
-  componentDidMount: function() {
+  componentWillMount: function() {
     if (this.props.isDefault === true && this.props.init_done === false) {
       return this.props.fetchReligionData(null);
     }
   },
-  reactDrawBars: function() {
+  componentDidMount: function() {
+    return $(window).resize((function(_this) {
+      return function() {
+        return _this.reactDrawBars({
+          resize: true
+        });
+      };
+    })(this));
+  },
+  reactDrawBars: function(resize_flag) {
     var bars;
     bars = drawRelBars({
+      resize: resize_flag.resize,
       container: this.refs.barsSvg,
       data: this.props.data,
       isDefault: this.props.isDefault,
@@ -36,6 +46,9 @@ BarsComponent = React.createClass({displayName: "BarsComponent",
       activeValue: this.props.activeValue,
       onInitDone: this.props.onInitDone
     });
+    if (resize_flag.resize === true) {
+      return bars.resize();
+    }
     if (this.props.isDefault === true && this.props.updateRelBars === true) {
       return bars.init();
     } else {
@@ -44,7 +57,9 @@ BarsComponent = React.createClass({displayName: "BarsComponent",
   },
   componentDidUpdate: function() {
     if (this.props.updateRelBars === true) {
-      return this.reactDrawBars();
+      return this.reactDrawBars({
+        resize: false
+      });
     }
   },
   render: function() {

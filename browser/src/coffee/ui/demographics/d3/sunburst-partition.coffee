@@ -59,6 +59,7 @@ drawSunburst = (options) ->
 
 	width = $(container).width() ? 1140
 	height = $(container).height() ? 500
+	mobile_portrait_width = 740
 
 	# Set margins
 	margin = 
@@ -71,7 +72,6 @@ drawSunburst = (options) ->
 		p: 5
 
 	radius = Math.min width, (height - margin.bottom - margin.top) / 2
-	# colour = d3.scale.category10()
 	format = d3.format '.3s'
 	percFormat = d3.format ',.1%'
 
@@ -189,7 +189,7 @@ drawSunburst = (options) ->
 		center_group.attr 'transform', "translate(#{ width / 2 }, #{ half_height + margin.middle - margin.top * 2 })"
 		center_ethnic_group.attr 'transform', "translate(#{ width / 2 }, #{ half_height + margin.text - margin.top * 2 })"
 		center_percent_group.attr 'transform', "translate(#{ width / 2 }, #{ half_height + (margin.text * 2) - margin.top * 2 })"
-		center_total_value_group.attr 'transform', "translate(#{ width / 2 }, #{ half_height + (margin.text * 3) - margin.top * 2 })"
+		center_total_value_group.attr 'transform', "translate(#{ width / 2 }, #{ half_height + (margin.text * 2.7) - margin.top * 2 })"
 		key_group.attr 'transform', "translate(#{ (width * 0.9) + 20  }, #{ margin.top })"
 		key_text_group.attr 'transform', "translate(#{ width * 0.9 }, #{ margin.top + 17 })"
 
@@ -353,6 +353,34 @@ drawSunburst = (options) ->
 		attachHoverHandlers()
 
 		return
+
+	my.resize = ->
+
+		# Create svg and g vars
+		svg = d3.select '.sunburst-svg'
+		main_group = svg.select '.main-group'
+		center_group = svg.select '.center-text-group'
+		center_total_value_group = svg.select '.total-value-group'
+		center_ethnic_group = svg.select '.ethnic-group-text'
+		center_percent_group = svg.select '.percentage-group'
+		key_group = svg.select '.key-group'
+		key_text_group = svg.select '.key-text-group'
+
+		# halved height for use below
+		half_height = height * 0.52
+
+		# Transforms
+		main_group.attr 'transform', "translate(#{ width / 2 }, #{ half_height })"
+		center_group.attr 'transform', "translate(#{ width / 2 }, #{ half_height + margin.middle - margin.top * 2 })"
+		center_ethnic_group.attr 'transform', "translate(#{ width / 2 }, #{ half_height + margin.text - margin.top * 2 })"
+		center_percent_group.attr 'transform', "translate(#{ width / 2 }, #{ half_height + (margin.text * 2) - margin.top * 2 })"
+		center_total_value_group.attr 'transform', "translate(#{ width / 2 }, #{ half_height + (margin.text * 3) - margin.top * 2 })"
+		key_group.attr 'transform', "translate(#{ (width * 0.9) + 20  }, #{ margin.top })"
+		key_text_group.attr 'transform', "translate(#{ width * 0.9 }, #{ margin.top + 17 })"
+
+		paths = main_group.selectAll 'path'
+			.data partition.nodes nested_data
+		  	.attr 'd', arc
 
 	my.width = (value) ->
 		unless arguments.length then return width

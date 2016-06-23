@@ -7,7 +7,7 @@
 var jQuery = require('jquery');
 if("undefined"==typeof jQuery)throw new Error("Bootstrap's JavaScript requires jQuery");+function(a){"use strict";var b=a.fn.jquery.split(" ")[0].split(".");if(b[0]<2&&b[1]<9||1==b[0]&&9==b[1]&&b[2]<1||b[0]>2)throw new Error("Bootstrap's JavaScript requires jQuery version 1.9.1 or higher, but lower than version 3")}(jQuery),+function(a){"use strict";function b(){var a=document.createElement("bootstrap"),b={WebkitTransition:"webkitTransitionEnd",MozTransition:"transitionend",OTransition:"oTransitionEnd otransitionend",transition:"transitionend"};for(var c in b)if(void 0!==a.style[c])return{end:b[c]};return!1}a.fn.emulateTransitionEnd=function(b){var c=!1,d=this;a(this).one("bsTransitionEnd",function(){c=!0});var e=function(){c||a(d).trigger(a.support.transition.end)};return setTimeout(e,b),this},a(function(){a.support.transition=b(),a.support.transition&&(a.event.special.bsTransitionEnd={bindType:a.support.transition.end,delegateType:a.support.transition.end,handle:function(b){return a(b.target).is(this)?b.handleObj.handler.apply(this,arguments):void 0}})})}(jQuery),+function(a){"use strict";function b(b){return this.each(function(){var c=a(this),e=c.data("bs.alert");e||c.data("bs.alert",e=new d(this)),"string"==typeof b&&e[b].call(c)})}var c='[data-dismiss="alert"]',d=function(b){a(b).on("click",c,this.close)};d.VERSION="3.3.6",d.TRANSITION_DURATION=150,d.prototype.close=function(b){function c(){g.detach().trigger("closed.bs.alert").remove()}var e=a(this),f=e.attr("data-target");f||(f=e.attr("href"),f=f&&f.replace(/.*(?=#[^\s]*$)/,""));var g=a(f);b&&b.preventDefault(),g.length||(g=e.closest(".alert")),g.trigger(b=a.Event("close.bs.alert")),b.isDefaultPrevented()||(g.removeClass("in"),a.support.transition&&g.hasClass("fade")?g.one("bsTransitionEnd",c).emulateTransitionEnd(d.TRANSITION_DURATION):c())};var e=a.fn.alert;a.fn.alert=b,a.fn.alert.Constructor=d,a.fn.alert.noConflict=function(){return a.fn.alert=e,this},a(document).on("click.bs.alert.data-api",c,d.prototype.close)}(jQuery),+function(a){"use strict";function b(b){return this.each(function(){var d=a(this),e=d.data("bs.button"),f="object"==typeof b&&b;e||d.data("bs.button",e=new c(this,f)),"toggle"==b?e.toggle():b&&e.setState(b)})}var c=function(b,d){this.$element=a(b),this.options=a.extend({},c.DEFAULTS,d),this.isLoading=!1};c.VERSION="3.3.6",c.DEFAULTS={loadingText:"loading..."},c.prototype.setState=function(b){var c="disabled",d=this.$element,e=d.is("input")?"val":"html",f=d.data();b+="Text",null==f.resetText&&d.data("resetText",d[e]()),setTimeout(a.proxy(function(){d[e](null==f[b]?this.options[b]:f[b]),"loadingText"==b?(this.isLoading=!0,d.addClass(c).attr(c,c)):this.isLoading&&(this.isLoading=!1,d.removeClass(c).removeAttr(c))},this),0)},c.prototype.toggle=function(){var a=!0,b=this.$element.closest('[data-toggle="buttons"]');if(b.length){var c=this.$element.find("input");"radio"==c.prop("type")?(c.prop("checked")&&(a=!1),b.find(".active").removeClass("active"),this.$element.addClass("active")):"checkbox"==c.prop("type")&&(c.prop("checked")!==this.$element.hasClass("active")&&(a=!1),this.$element.toggleClass("active")),c.prop("checked",this.$element.hasClass("active")),a&&c.trigger("change")}else this.$element.attr("aria-pressed",!this.$element.hasClass("active")),this.$element.toggleClass("active")};var d=a.fn.button;a.fn.button=b,a.fn.button.Constructor=c,a.fn.button.noConflict=function(){return a.fn.button=d,this},a(document).on("click.bs.button.data-api",'[data-toggle^="button"]',function(c){var d=a(c.target);d.hasClass("btn")||(d=d.closest(".btn")),b.call(d,"toggle"),a(c.target).is('input[type="radio"]')||a(c.target).is('input[type="checkbox"]')||c.preventDefault()}).on("focus.bs.button.data-api blur.bs.button.data-api",'[data-toggle^="button"]',function(b){a(b.target).closest(".btn").toggleClass("focus",/^focus(in)?$/.test(b.type))})}(jQuery),+function(a){"use strict";function b(b){return this.each(function(){var d=a(this),e=d.data("bs.carousel"),f=a.extend({},c.DEFAULTS,d.data(),"object"==typeof b&&b),g="string"==typeof b?b:f.slide;e||d.data("bs.carousel",e=new c(this,f)),"number"==typeof b?e.to(b):g?e[g]():f.interval&&e.pause().cycle()})}var c=function(b,c){this.$element=a(b),this.$indicators=this.$element.find(".carousel-indicators"),this.options=c,this.paused=null,this.sliding=null,this.interval=null,this.$active=null,this.$items=null,this.options.keyboard&&this.$element.on("keydown.bs.carousel",a.proxy(this.keydown,this)),"hover"==this.options.pause&&!("ontouchstart"in document.documentElement)&&this.$element.on("mouseenter.bs.carousel",a.proxy(this.pause,this)).on("mouseleave.bs.carousel",a.proxy(this.cycle,this))};c.VERSION="3.3.6",c.TRANSITION_DURATION=600,c.DEFAULTS={interval:5e3,pause:"hover",wrap:!0,keyboard:!0},c.prototype.keydown=function(a){if(!/input|textarea/i.test(a.target.tagName)){switch(a.which){case 37:this.prev();break;case 39:this.next();break;default:return}a.preventDefault()}},c.prototype.cycle=function(b){return b||(this.paused=!1),this.interval&&clearInterval(this.interval),this.options.interval&&!this.paused&&(this.interval=setInterval(a.proxy(this.next,this),this.options.interval)),this},c.prototype.getItemIndex=function(a){return this.$items=a.parent().children(".item"),this.$items.index(a||this.$active)},c.prototype.getItemForDirection=function(a,b){var c=this.getItemIndex(b),d="prev"==a&&0===c||"next"==a&&c==this.$items.length-1;if(d&&!this.options.wrap)return b;var e="prev"==a?-1:1,f=(c+e)%this.$items.length;return this.$items.eq(f)},c.prototype.to=function(a){var b=this,c=this.getItemIndex(this.$active=this.$element.find(".item.active"));return a>this.$items.length-1||0>a?void 0:this.sliding?this.$element.one("slid.bs.carousel",function(){b.to(a)}):c==a?this.pause().cycle():this.slide(a>c?"next":"prev",this.$items.eq(a))},c.prototype.pause=function(b){return b||(this.paused=!0),this.$element.find(".next, .prev").length&&a.support.transition&&(this.$element.trigger(a.support.transition.end),this.cycle(!0)),this.interval=clearInterval(this.interval),this},c.prototype.next=function(){return this.sliding?void 0:this.slide("next")},c.prototype.prev=function(){return this.sliding?void 0:this.slide("prev")},c.prototype.slide=function(b,d){var e=this.$element.find(".item.active"),f=d||this.getItemForDirection(b,e),g=this.interval,h="next"==b?"left":"right",i=this;if(f.hasClass("active"))return this.sliding=!1;var j=f[0],k=a.Event("slide.bs.carousel",{relatedTarget:j,direction:h});if(this.$element.trigger(k),!k.isDefaultPrevented()){if(this.sliding=!0,g&&this.pause(),this.$indicators.length){this.$indicators.find(".active").removeClass("active");var l=a(this.$indicators.children()[this.getItemIndex(f)]);l&&l.addClass("active")}var m=a.Event("slid.bs.carousel",{relatedTarget:j,direction:h});return a.support.transition&&this.$element.hasClass("slide")?(f.addClass(b),f[0].offsetWidth,e.addClass(h),f.addClass(h),e.one("bsTransitionEnd",function(){f.removeClass([b,h].join(" ")).addClass("active"),e.removeClass(["active",h].join(" ")),i.sliding=!1,setTimeout(function(){i.$element.trigger(m)},0)}).emulateTransitionEnd(c.TRANSITION_DURATION)):(e.removeClass("active"),f.addClass("active"),this.sliding=!1,this.$element.trigger(m)),g&&this.cycle(),this}};var d=a.fn.carousel;a.fn.carousel=b,a.fn.carousel.Constructor=c,a.fn.carousel.noConflict=function(){return a.fn.carousel=d,this};var e=function(c){var d,e=a(this),f=a(e.attr("data-target")||(d=e.attr("href"))&&d.replace(/.*(?=#[^\s]+$)/,""));if(f.hasClass("carousel")){var g=a.extend({},f.data(),e.data()),h=e.attr("data-slide-to");h&&(g.interval=!1),b.call(f,g),h&&f.data("bs.carousel").to(h),c.preventDefault()}};a(document).on("click.bs.carousel.data-api","[data-slide]",e).on("click.bs.carousel.data-api","[data-slide-to]",e),a(window).on("load",function(){a('[data-ride="carousel"]').each(function(){var c=a(this);b.call(c,c.data())})})}(jQuery),+function(a){"use strict";function b(b){var c,d=b.attr("data-target")||(c=b.attr("href"))&&c.replace(/.*(?=#[^\s]+$)/,"");return a(d)}function c(b){return this.each(function(){var c=a(this),e=c.data("bs.collapse"),f=a.extend({},d.DEFAULTS,c.data(),"object"==typeof b&&b);!e&&f.toggle&&/show|hide/.test(b)&&(f.toggle=!1),e||c.data("bs.collapse",e=new d(this,f)),"string"==typeof b&&e[b]()})}var d=function(b,c){this.$element=a(b),this.options=a.extend({},d.DEFAULTS,c),this.$trigger=a('[data-toggle="collapse"][href="#'+b.id+'"],[data-toggle="collapse"][data-target="#'+b.id+'"]'),this.transitioning=null,this.options.parent?this.$parent=this.getParent():this.addAriaAndCollapsedClass(this.$element,this.$trigger),this.options.toggle&&this.toggle()};d.VERSION="3.3.6",d.TRANSITION_DURATION=350,d.DEFAULTS={toggle:!0},d.prototype.dimension=function(){var a=this.$element.hasClass("width");return a?"width":"height"},d.prototype.show=function(){if(!this.transitioning&&!this.$element.hasClass("in")){var b,e=this.$parent&&this.$parent.children(".panel").children(".in, .collapsing");if(!(e&&e.length&&(b=e.data("bs.collapse"),b&&b.transitioning))){var f=a.Event("show.bs.collapse");if(this.$element.trigger(f),!f.isDefaultPrevented()){e&&e.length&&(c.call(e,"hide"),b||e.data("bs.collapse",null));var g=this.dimension();this.$element.removeClass("collapse").addClass("collapsing")[g](0).attr("aria-expanded",!0),this.$trigger.removeClass("collapsed").attr("aria-expanded",!0),this.transitioning=1;var h=function(){this.$element.removeClass("collapsing").addClass("collapse in")[g](""),this.transitioning=0,this.$element.trigger("shown.bs.collapse")};if(!a.support.transition)return h.call(this);var i=a.camelCase(["scroll",g].join("-"));this.$element.one("bsTransitionEnd",a.proxy(h,this)).emulateTransitionEnd(d.TRANSITION_DURATION)[g](this.$element[0][i])}}}},d.prototype.hide=function(){if(!this.transitioning&&this.$element.hasClass("in")){var b=a.Event("hide.bs.collapse");if(this.$element.trigger(b),!b.isDefaultPrevented()){var c=this.dimension();this.$element[c](this.$element[c]())[0].offsetHeight,this.$element.addClass("collapsing").removeClass("collapse in").attr("aria-expanded",!1),this.$trigger.addClass("collapsed").attr("aria-expanded",!1),this.transitioning=1;var e=function(){this.transitioning=0,this.$element.removeClass("collapsing").addClass("collapse").trigger("hidden.bs.collapse")};return a.support.transition?void this.$element[c](0).one("bsTransitionEnd",a.proxy(e,this)).emulateTransitionEnd(d.TRANSITION_DURATION):e.call(this)}}},d.prototype.toggle=function(){this[this.$element.hasClass("in")?"hide":"show"]()},d.prototype.getParent=function(){return a(this.options.parent).find('[data-toggle="collapse"][data-parent="'+this.options.parent+'"]').each(a.proxy(function(c,d){var e=a(d);this.addAriaAndCollapsedClass(b(e),e)},this)).end()},d.prototype.addAriaAndCollapsedClass=function(a,b){var c=a.hasClass("in");a.attr("aria-expanded",c),b.toggleClass("collapsed",!c).attr("aria-expanded",c)};var e=a.fn.collapse;a.fn.collapse=c,a.fn.collapse.Constructor=d,a.fn.collapse.noConflict=function(){return a.fn.collapse=e,this},a(document).on("click.bs.collapse.data-api",'[data-toggle="collapse"]',function(d){var e=a(this);e.attr("data-target")||d.preventDefault();var f=b(e),g=f.data("bs.collapse"),h=g?"toggle":e.data();c.call(f,h)})}(jQuery),+function(a){"use strict";function b(b){var c=b.attr("data-target");c||(c=b.attr("href"),c=c&&/#[A-Za-z]/.test(c)&&c.replace(/.*(?=#[^\s]*$)/,""));var d=c&&a(c);return d&&d.length?d:b.parent()}function c(c){c&&3===c.which||(a(e).remove(),a(f).each(function(){var d=a(this),e=b(d),f={relatedTarget:this};e.hasClass("open")&&(c&&"click"==c.type&&/input|textarea/i.test(c.target.tagName)&&a.contains(e[0],c.target)||(e.trigger(c=a.Event("hide.bs.dropdown",f)),c.isDefaultPrevented()||(d.attr("aria-expanded","false"),e.removeClass("open").trigger(a.Event("hidden.bs.dropdown",f)))))}))}function d(b){return this.each(function(){var c=a(this),d=c.data("bs.dropdown");d||c.data("bs.dropdown",d=new g(this)),"string"==typeof b&&d[b].call(c)})}var e=".dropdown-backdrop",f='[data-toggle="dropdown"]',g=function(b){a(b).on("click.bs.dropdown",this.toggle)};g.VERSION="3.3.6",g.prototype.toggle=function(d){var e=a(this);if(!e.is(".disabled, :disabled")){var f=b(e),g=f.hasClass("open");if(c(),!g){"ontouchstart"in document.documentElement&&!f.closest(".navbar-nav").length&&a(document.createElement("div")).addClass("dropdown-backdrop").insertAfter(a(this)).on("click",c);var h={relatedTarget:this};if(f.trigger(d=a.Event("show.bs.dropdown",h)),d.isDefaultPrevented())return;e.trigger("focus").attr("aria-expanded","true"),f.toggleClass("open").trigger(a.Event("shown.bs.dropdown",h))}return!1}},g.prototype.keydown=function(c){if(/(38|40|27|32)/.test(c.which)&&!/input|textarea/i.test(c.target.tagName)){var d=a(this);if(c.preventDefault(),c.stopPropagation(),!d.is(".disabled, :disabled")){var e=b(d),g=e.hasClass("open");if(!g&&27!=c.which||g&&27==c.which)return 27==c.which&&e.find(f).trigger("focus"),d.trigger("click");var h=" li:not(.disabled):visible a",i=e.find(".dropdown-menu"+h);if(i.length){var j=i.index(c.target);38==c.which&&j>0&&j--,40==c.which&&j<i.length-1&&j++,~j||(j=0),i.eq(j).trigger("focus")}}}};var h=a.fn.dropdown;a.fn.dropdown=d,a.fn.dropdown.Constructor=g,a.fn.dropdown.noConflict=function(){return a.fn.dropdown=h,this},a(document).on("click.bs.dropdown.data-api",c).on("click.bs.dropdown.data-api",".dropdown form",function(a){a.stopPropagation()}).on("click.bs.dropdown.data-api",f,g.prototype.toggle).on("keydown.bs.dropdown.data-api",f,g.prototype.keydown).on("keydown.bs.dropdown.data-api",".dropdown-menu",g.prototype.keydown)}(jQuery),+function(a){"use strict";function b(b,d){return this.each(function(){var e=a(this),f=e.data("bs.modal"),g=a.extend({},c.DEFAULTS,e.data(),"object"==typeof b&&b);f||e.data("bs.modal",f=new c(this,g)),"string"==typeof b?f[b](d):g.show&&f.show(d)})}var c=function(b,c){this.options=c,this.$body=a(document.body),this.$element=a(b),this.$dialog=this.$element.find(".modal-dialog"),this.$backdrop=null,this.isShown=null,this.originalBodyPad=null,this.scrollbarWidth=0,this.ignoreBackdropClick=!1,this.options.remote&&this.$element.find(".modal-content").load(this.options.remote,a.proxy(function(){this.$element.trigger("loaded.bs.modal")},this))};c.VERSION="3.3.6",c.TRANSITION_DURATION=300,c.BACKDROP_TRANSITION_DURATION=150,c.DEFAULTS={backdrop:!0,keyboard:!0,show:!0},c.prototype.toggle=function(a){return this.isShown?this.hide():this.show(a)},c.prototype.show=function(b){var d=this,e=a.Event("show.bs.modal",{relatedTarget:b});this.$element.trigger(e),this.isShown||e.isDefaultPrevented()||(this.isShown=!0,this.checkScrollbar(),this.setScrollbar(),this.$body.addClass("modal-open"),this.escape(),this.resize(),this.$element.on("click.dismiss.bs.modal",'[data-dismiss="modal"]',a.proxy(this.hide,this)),this.$dialog.on("mousedown.dismiss.bs.modal",function(){d.$element.one("mouseup.dismiss.bs.modal",function(b){a(b.target).is(d.$element)&&(d.ignoreBackdropClick=!0)})}),this.backdrop(function(){var e=a.support.transition&&d.$element.hasClass("fade");d.$element.parent().length||d.$element.appendTo(d.$body),d.$element.show().scrollTop(0),d.adjustDialog(),e&&d.$element[0].offsetWidth,d.$element.addClass("in"),d.enforceFocus();var f=a.Event("shown.bs.modal",{relatedTarget:b});e?d.$dialog.one("bsTransitionEnd",function(){d.$element.trigger("focus").trigger(f)}).emulateTransitionEnd(c.TRANSITION_DURATION):d.$element.trigger("focus").trigger(f)}))},c.prototype.hide=function(b){b&&b.preventDefault(),b=a.Event("hide.bs.modal"),this.$element.trigger(b),this.isShown&&!b.isDefaultPrevented()&&(this.isShown=!1,this.escape(),this.resize(),a(document).off("focusin.bs.modal"),this.$element.removeClass("in").off("click.dismiss.bs.modal").off("mouseup.dismiss.bs.modal"),this.$dialog.off("mousedown.dismiss.bs.modal"),a.support.transition&&this.$element.hasClass("fade")?this.$element.one("bsTransitionEnd",a.proxy(this.hideModal,this)).emulateTransitionEnd(c.TRANSITION_DURATION):this.hideModal())},c.prototype.enforceFocus=function(){a(document).off("focusin.bs.modal").on("focusin.bs.modal",a.proxy(function(a){this.$element[0]===a.target||this.$element.has(a.target).length||this.$element.trigger("focus")},this))},c.prototype.escape=function(){this.isShown&&this.options.keyboard?this.$element.on("keydown.dismiss.bs.modal",a.proxy(function(a){27==a.which&&this.hide()},this)):this.isShown||this.$element.off("keydown.dismiss.bs.modal")},c.prototype.resize=function(){this.isShown?a(window).on("resize.bs.modal",a.proxy(this.handleUpdate,this)):a(window).off("resize.bs.modal")},c.prototype.hideModal=function(){var a=this;this.$element.hide(),this.backdrop(function(){a.$body.removeClass("modal-open"),a.resetAdjustments(),a.resetScrollbar(),a.$element.trigger("hidden.bs.modal")})},c.prototype.removeBackdrop=function(){this.$backdrop&&this.$backdrop.remove(),this.$backdrop=null},c.prototype.backdrop=function(b){var d=this,e=this.$element.hasClass("fade")?"fade":"";if(this.isShown&&this.options.backdrop){var f=a.support.transition&&e;if(this.$backdrop=a(document.createElement("div")).addClass("modal-backdrop "+e).appendTo(this.$body),this.$element.on("click.dismiss.bs.modal",a.proxy(function(a){return this.ignoreBackdropClick?void(this.ignoreBackdropClick=!1):void(a.target===a.currentTarget&&("static"==this.options.backdrop?this.$element[0].focus():this.hide()))},this)),f&&this.$backdrop[0].offsetWidth,this.$backdrop.addClass("in"),!b)return;f?this.$backdrop.one("bsTransitionEnd",b).emulateTransitionEnd(c.BACKDROP_TRANSITION_DURATION):b()}else if(!this.isShown&&this.$backdrop){this.$backdrop.removeClass("in");var g=function(){d.removeBackdrop(),b&&b()};a.support.transition&&this.$element.hasClass("fade")?this.$backdrop.one("bsTransitionEnd",g).emulateTransitionEnd(c.BACKDROP_TRANSITION_DURATION):g()}else b&&b()},c.prototype.handleUpdate=function(){this.adjustDialog()},c.prototype.adjustDialog=function(){var a=this.$element[0].scrollHeight>document.documentElement.clientHeight;this.$element.css({paddingLeft:!this.bodyIsOverflowing&&a?this.scrollbarWidth:"",paddingRight:this.bodyIsOverflowing&&!a?this.scrollbarWidth:""})},c.prototype.resetAdjustments=function(){this.$element.css({paddingLeft:"",paddingRight:""})},c.prototype.checkScrollbar=function(){var a=window.innerWidth;if(!a){var b=document.documentElement.getBoundingClientRect();a=b.right-Math.abs(b.left)}this.bodyIsOverflowing=document.body.clientWidth<a,this.scrollbarWidth=this.measureScrollbar()},c.prototype.setScrollbar=function(){var a=parseInt(this.$body.css("padding-right")||0,10);this.originalBodyPad=document.body.style.paddingRight||"",this.bodyIsOverflowing&&this.$body.css("padding-right",a+this.scrollbarWidth)},c.prototype.resetScrollbar=function(){this.$body.css("padding-right",this.originalBodyPad)},c.prototype.measureScrollbar=function(){var a=document.createElement("div");a.className="modal-scrollbar-measure",this.$body.append(a);var b=a.offsetWidth-a.clientWidth;return this.$body[0].removeChild(a),b};var d=a.fn.modal;a.fn.modal=b,a.fn.modal.Constructor=c,a.fn.modal.noConflict=function(){return a.fn.modal=d,this},a(document).on("click.bs.modal.data-api",'[data-toggle="modal"]',function(c){var d=a(this),e=d.attr("href"),f=a(d.attr("data-target")||e&&e.replace(/.*(?=#[^\s]+$)/,"")),g=f.data("bs.modal")?"toggle":a.extend({remote:!/#/.test(e)&&e},f.data(),d.data());d.is("a")&&c.preventDefault(),f.one("show.bs.modal",function(a){a.isDefaultPrevented()||f.one("hidden.bs.modal",function(){d.is(":visible")&&d.trigger("focus")})}),b.call(f,g,this)})}(jQuery),+function(a){"use strict";function b(b){return this.each(function(){var d=a(this),e=d.data("bs.tooltip"),f="object"==typeof b&&b;(e||!/destroy|hide/.test(b))&&(e||d.data("bs.tooltip",e=new c(this,f)),"string"==typeof b&&e[b]())})}var c=function(a,b){this.type=null,this.options=null,this.enabled=null,this.timeout=null,this.hoverState=null,this.$element=null,this.inState=null,this.init("tooltip",a,b)};c.VERSION="3.3.6",c.TRANSITION_DURATION=150,c.DEFAULTS={animation:!0,placement:"top",selector:!1,template:'<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>',trigger:"hover focus",title:"",delay:0,html:!1,container:!1,viewport:{selector:"body",padding:0}},c.prototype.init=function(b,c,d){if(this.enabled=!0,this.type=b,this.$element=a(c),this.options=this.getOptions(d),this.$viewport=this.options.viewport&&a(a.isFunction(this.options.viewport)?this.options.viewport.call(this,this.$element):this.options.viewport.selector||this.options.viewport),this.inState={click:!1,hover:!1,focus:!1},this.$element[0]instanceof document.constructor&&!this.options.selector)throw new Error("`selector` option must be specified when initializing "+this.type+" on the window.document object!");for(var e=this.options.trigger.split(" "),f=e.length;f--;){var g=e[f];if("click"==g)this.$element.on("click."+this.type,this.options.selector,a.proxy(this.toggle,this));else if("manual"!=g){var h="hover"==g?"mouseenter":"focusin",i="hover"==g?"mouseleave":"focusout";this.$element.on(h+"."+this.type,this.options.selector,a.proxy(this.enter,this)),this.$element.on(i+"."+this.type,this.options.selector,a.proxy(this.leave,this))}}this.options.selector?this._options=a.extend({},this.options,{trigger:"manual",selector:""}):this.fixTitle()},c.prototype.getDefaults=function(){return c.DEFAULTS},c.prototype.getOptions=function(b){return b=a.extend({},this.getDefaults(),this.$element.data(),b),b.delay&&"number"==typeof b.delay&&(b.delay={show:b.delay,hide:b.delay}),b},c.prototype.getDelegateOptions=function(){var b={},c=this.getDefaults();return this._options&&a.each(this._options,function(a,d){c[a]!=d&&(b[a]=d)}),b},c.prototype.enter=function(b){var c=b instanceof this.constructor?b:a(b.currentTarget).data("bs."+this.type);return c||(c=new this.constructor(b.currentTarget,this.getDelegateOptions()),a(b.currentTarget).data("bs."+this.type,c)),b instanceof a.Event&&(c.inState["focusin"==b.type?"focus":"hover"]=!0),c.tip().hasClass("in")||"in"==c.hoverState?void(c.hoverState="in"):(clearTimeout(c.timeout),c.hoverState="in",c.options.delay&&c.options.delay.show?void(c.timeout=setTimeout(function(){"in"==c.hoverState&&c.show()},c.options.delay.show)):c.show())},c.prototype.isInStateTrue=function(){for(var a in this.inState)if(this.inState[a])return!0;return!1},c.prototype.leave=function(b){var c=b instanceof this.constructor?b:a(b.currentTarget).data("bs."+this.type);return c||(c=new this.constructor(b.currentTarget,this.getDelegateOptions()),a(b.currentTarget).data("bs."+this.type,c)),b instanceof a.Event&&(c.inState["focusout"==b.type?"focus":"hover"]=!1),c.isInStateTrue()?void 0:(clearTimeout(c.timeout),c.hoverState="out",c.options.delay&&c.options.delay.hide?void(c.timeout=setTimeout(function(){"out"==c.hoverState&&c.hide()},c.options.delay.hide)):c.hide())},c.prototype.show=function(){var b=a.Event("show.bs."+this.type);if(this.hasContent()&&this.enabled){this.$element.trigger(b);var d=a.contains(this.$element[0].ownerDocument.documentElement,this.$element[0]);if(b.isDefaultPrevented()||!d)return;var e=this,f=this.tip(),g=this.getUID(this.type);this.setContent(),f.attr("id",g),this.$element.attr("aria-describedby",g),this.options.animation&&f.addClass("fade");var h="function"==typeof this.options.placement?this.options.placement.call(this,f[0],this.$element[0]):this.options.placement,i=/\s?auto?\s?/i,j=i.test(h);j&&(h=h.replace(i,"")||"top"),f.detach().css({top:0,left:0,display:"block"}).addClass(h).data("bs."+this.type,this),this.options.container?f.appendTo(this.options.container):f.insertAfter(this.$element),this.$element.trigger("inserted.bs."+this.type);var k=this.getPosition(),l=f[0].offsetWidth,m=f[0].offsetHeight;if(j){var n=h,o=this.getPosition(this.$viewport);h="bottom"==h&&k.bottom+m>o.bottom?"top":"top"==h&&k.top-m<o.top?"bottom":"right"==h&&k.right+l>o.width?"left":"left"==h&&k.left-l<o.left?"right":h,f.removeClass(n).addClass(h)}var p=this.getCalculatedOffset(h,k,l,m);this.applyPlacement(p,h);var q=function(){var a=e.hoverState;e.$element.trigger("shown.bs."+e.type),e.hoverState=null,"out"==a&&e.leave(e)};a.support.transition&&this.$tip.hasClass("fade")?f.one("bsTransitionEnd",q).emulateTransitionEnd(c.TRANSITION_DURATION):q()}},c.prototype.applyPlacement=function(b,c){var d=this.tip(),e=d[0].offsetWidth,f=d[0].offsetHeight,g=parseInt(d.css("margin-top"),10),h=parseInt(d.css("margin-left"),10);isNaN(g)&&(g=0),isNaN(h)&&(h=0),b.top+=g,b.left+=h,a.offset.setOffset(d[0],a.extend({using:function(a){d.css({top:Math.round(a.top),left:Math.round(a.left)})}},b),0),d.addClass("in");var i=d[0].offsetWidth,j=d[0].offsetHeight;"top"==c&&j!=f&&(b.top=b.top+f-j);var k=this.getViewportAdjustedDelta(c,b,i,j);k.left?b.left+=k.left:b.top+=k.top;var l=/top|bottom/.test(c),m=l?2*k.left-e+i:2*k.top-f+j,n=l?"offsetWidth":"offsetHeight";d.offset(b),this.replaceArrow(m,d[0][n],l)},c.prototype.replaceArrow=function(a,b,c){this.arrow().css(c?"left":"top",50*(1-a/b)+"%").css(c?"top":"left","")},c.prototype.setContent=function(){var a=this.tip(),b=this.getTitle();a.find(".tooltip-inner")[this.options.html?"html":"text"](b),a.removeClass("fade in top bottom left right")},c.prototype.hide=function(b){function d(){"in"!=e.hoverState&&f.detach(),e.$element.removeAttr("aria-describedby").trigger("hidden.bs."+e.type),b&&b()}var e=this,f=a(this.$tip),g=a.Event("hide.bs."+this.type);return this.$element.trigger(g),g.isDefaultPrevented()?void 0:(f.removeClass("in"),a.support.transition&&f.hasClass("fade")?f.one("bsTransitionEnd",d).emulateTransitionEnd(c.TRANSITION_DURATION):d(),this.hoverState=null,this)},c.prototype.fixTitle=function(){var a=this.$element;(a.attr("title")||"string"!=typeof a.attr("data-original-title"))&&a.attr("data-original-title",a.attr("title")||"").attr("title","")},c.prototype.hasContent=function(){return this.getTitle()},c.prototype.getPosition=function(b){b=b||this.$element;var c=b[0],d="BODY"==c.tagName,e=c.getBoundingClientRect();null==e.width&&(e=a.extend({},e,{width:e.right-e.left,height:e.bottom-e.top}));var f=d?{top:0,left:0}:b.offset(),g={scroll:d?document.documentElement.scrollTop||document.body.scrollTop:b.scrollTop()},h=d?{width:a(window).width(),height:a(window).height()}:null;return a.extend({},e,g,h,f)},c.prototype.getCalculatedOffset=function(a,b,c,d){return"bottom"==a?{top:b.top+b.height,left:b.left+b.width/2-c/2}:"top"==a?{top:b.top-d,left:b.left+b.width/2-c/2}:"left"==a?{top:b.top+b.height/2-d/2,left:b.left-c}:{top:b.top+b.height/2-d/2,left:b.left+b.width}},c.prototype.getViewportAdjustedDelta=function(a,b,c,d){var e={top:0,left:0};if(!this.$viewport)return e;var f=this.options.viewport&&this.options.viewport.padding||0,g=this.getPosition(this.$viewport);if(/right|left/.test(a)){var h=b.top-f-g.scroll,i=b.top+f-g.scroll+d;h<g.top?e.top=g.top-h:i>g.top+g.height&&(e.top=g.top+g.height-i)}else{var j=b.left-f,k=b.left+f+c;j<g.left?e.left=g.left-j:k>g.right&&(e.left=g.left+g.width-k)}return e},c.prototype.getTitle=function(){var a,b=this.$element,c=this.options;return a=b.attr("data-original-title")||("function"==typeof c.title?c.title.call(b[0]):c.title)},c.prototype.getUID=function(a){do a+=~~(1e6*Math.random());while(document.getElementById(a));return a},c.prototype.tip=function(){if(!this.$tip&&(this.$tip=a(this.options.template),1!=this.$tip.length))throw new Error(this.type+" `template` option must consist of exactly 1 top-level element!");return this.$tip},c.prototype.arrow=function(){return this.$arrow=this.$arrow||this.tip().find(".tooltip-arrow")},c.prototype.enable=function(){this.enabled=!0},c.prototype.disable=function(){this.enabled=!1},c.prototype.toggleEnabled=function(){this.enabled=!this.enabled},c.prototype.toggle=function(b){var c=this;b&&(c=a(b.currentTarget).data("bs."+this.type),c||(c=new this.constructor(b.currentTarget,this.getDelegateOptions()),a(b.currentTarget).data("bs."+this.type,c))),b?(c.inState.click=!c.inState.click,c.isInStateTrue()?c.enter(c):c.leave(c)):c.tip().hasClass("in")?c.leave(c):c.enter(c)},c.prototype.destroy=function(){var a=this;clearTimeout(this.timeout),this.hide(function(){a.$element.off("."+a.type).removeData("bs."+a.type),a.$tip&&a.$tip.detach(),a.$tip=null,a.$arrow=null,a.$viewport=null})};var d=a.fn.tooltip;a.fn.tooltip=b,a.fn.tooltip.Constructor=c,a.fn.tooltip.noConflict=function(){return a.fn.tooltip=d,this}}(jQuery),+function(a){"use strict";function b(b){return this.each(function(){var d=a(this),e=d.data("bs.popover"),f="object"==typeof b&&b;(e||!/destroy|hide/.test(b))&&(e||d.data("bs.popover",e=new c(this,f)),"string"==typeof b&&e[b]())})}var c=function(a,b){this.init("popover",a,b)};if(!a.fn.tooltip)throw new Error("Popover requires tooltip.js");c.VERSION="3.3.6",c.DEFAULTS=a.extend({},a.fn.tooltip.Constructor.DEFAULTS,{placement:"right",trigger:"click",content:"",template:'<div class="popover" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>'}),c.prototype=a.extend({},a.fn.tooltip.Constructor.prototype),c.prototype.constructor=c,c.prototype.getDefaults=function(){return c.DEFAULTS},c.prototype.setContent=function(){var a=this.tip(),b=this.getTitle(),c=this.getContent();a.find(".popover-title")[this.options.html?"html":"text"](b),a.find(".popover-content").children().detach().end()[this.options.html?"string"==typeof c?"html":"append":"text"](c),a.removeClass("fade top bottom left right in"),a.find(".popover-title").html()||a.find(".popover-title").hide()},c.prototype.hasContent=function(){return this.getTitle()||this.getContent()},c.prototype.getContent=function(){var a=this.$element,b=this.options;return a.attr("data-content")||("function"==typeof b.content?b.content.call(a[0]):b.content)},c.prototype.arrow=function(){return this.$arrow=this.$arrow||this.tip().find(".arrow")};var d=a.fn.popover;a.fn.popover=b,a.fn.popover.Constructor=c,a.fn.popover.noConflict=function(){return a.fn.popover=d,this}}(jQuery),+function(a){"use strict";function b(c,d){this.$body=a(document.body),this.$scrollElement=a(a(c).is(document.body)?window:c),this.options=a.extend({},b.DEFAULTS,d),this.selector=(this.options.target||"")+" .nav li > a",this.offsets=[],this.targets=[],this.activeTarget=null,this.scrollHeight=0,this.$scrollElement.on("scroll.bs.scrollspy",a.proxy(this.process,this)),this.refresh(),this.process()}function c(c){return this.each(function(){var d=a(this),e=d.data("bs.scrollspy"),f="object"==typeof c&&c;e||d.data("bs.scrollspy",e=new b(this,f)),"string"==typeof c&&e[c]()})}b.VERSION="3.3.6",b.DEFAULTS={offset:10},b.prototype.getScrollHeight=function(){return this.$scrollElement[0].scrollHeight||Math.max(this.$body[0].scrollHeight,document.documentElement.scrollHeight)},b.prototype.refresh=function(){var b=this,c="offset",d=0;this.offsets=[],this.targets=[],this.scrollHeight=this.getScrollHeight(),a.isWindow(this.$scrollElement[0])||(c="position",d=this.$scrollElement.scrollTop()),this.$body.find(this.selector).map(function(){var b=a(this),e=b.data("target")||b.attr("href"),f=/^#./.test(e)&&a(e);return f&&f.length&&f.is(":visible")&&[[f[c]().top+d,e]]||null}).sort(function(a,b){return a[0]-b[0]}).each(function(){b.offsets.push(this[0]),b.targets.push(this[1])})},b.prototype.process=function(){var a,b=this.$scrollElement.scrollTop()+this.options.offset,c=this.getScrollHeight(),d=this.options.offset+c-this.$scrollElement.height(),e=this.offsets,f=this.targets,g=this.activeTarget;if(this.scrollHeight!=c&&this.refresh(),b>=d)return g!=(a=f[f.length-1])&&this.activate(a);if(g&&b<e[0])return this.activeTarget=null,this.clear();for(a=e.length;a--;)g!=f[a]&&b>=e[a]&&(void 0===e[a+1]||b<e[a+1])&&this.activate(f[a])},b.prototype.activate=function(b){this.activeTarget=b,this.clear();var c=this.selector+'[data-target="'+b+'"],'+this.selector+'[href="'+b+'"]',d=a(c).parents("li").addClass("active");
 d.parent(".dropdown-menu").length&&(d=d.closest("li.dropdown").addClass("active")),d.trigger("activate.bs.scrollspy")},b.prototype.clear=function(){a(this.selector).parentsUntil(this.options.target,".active").removeClass("active")};var d=a.fn.scrollspy;a.fn.scrollspy=c,a.fn.scrollspy.Constructor=b,a.fn.scrollspy.noConflict=function(){return a.fn.scrollspy=d,this},a(window).on("load.bs.scrollspy.data-api",function(){a('[data-spy="scroll"]').each(function(){var b=a(this);c.call(b,b.data())})})}(jQuery),+function(a){"use strict";function b(b){return this.each(function(){var d=a(this),e=d.data("bs.tab");e||d.data("bs.tab",e=new c(this)),"string"==typeof b&&e[b]()})}var c=function(b){this.element=a(b)};c.VERSION="3.3.6",c.TRANSITION_DURATION=150,c.prototype.show=function(){var b=this.element,c=b.closest("ul:not(.dropdown-menu)"),d=b.data("target");if(d||(d=b.attr("href"),d=d&&d.replace(/.*(?=#[^\s]*$)/,"")),!b.parent("li").hasClass("active")){var e=c.find(".active:last a"),f=a.Event("hide.bs.tab",{relatedTarget:b[0]}),g=a.Event("show.bs.tab",{relatedTarget:e[0]});if(e.trigger(f),b.trigger(g),!g.isDefaultPrevented()&&!f.isDefaultPrevented()){var h=a(d);this.activate(b.closest("li"),c),this.activate(h,h.parent(),function(){e.trigger({type:"hidden.bs.tab",relatedTarget:b[0]}),b.trigger({type:"shown.bs.tab",relatedTarget:e[0]})})}}},c.prototype.activate=function(b,d,e){function f(){g.removeClass("active").find("> .dropdown-menu > .active").removeClass("active").end().find('[data-toggle="tab"]').attr("aria-expanded",!1),b.addClass("active").find('[data-toggle="tab"]').attr("aria-expanded",!0),h?(b[0].offsetWidth,b.addClass("in")):b.removeClass("fade"),b.parent(".dropdown-menu").length&&b.closest("li.dropdown").addClass("active").end().find('[data-toggle="tab"]').attr("aria-expanded",!0),e&&e()}var g=d.find("> .active"),h=e&&a.support.transition&&(g.length&&g.hasClass("fade")||!!d.find("> .fade").length);g.length&&h?g.one("bsTransitionEnd",f).emulateTransitionEnd(c.TRANSITION_DURATION):f(),g.removeClass("in")};var d=a.fn.tab;a.fn.tab=b,a.fn.tab.Constructor=c,a.fn.tab.noConflict=function(){return a.fn.tab=d,this};var e=function(c){c.preventDefault(),b.call(a(this),"show")};a(document).on("click.bs.tab.data-api",'[data-toggle="tab"]',e).on("click.bs.tab.data-api",'[data-toggle="pill"]',e)}(jQuery),+function(a){"use strict";function b(b){return this.each(function(){var d=a(this),e=d.data("bs.affix"),f="object"==typeof b&&b;e||d.data("bs.affix",e=new c(this,f)),"string"==typeof b&&e[b]()})}var c=function(b,d){this.options=a.extend({},c.DEFAULTS,d),this.$target=a(this.options.target).on("scroll.bs.affix.data-api",a.proxy(this.checkPosition,this)).on("click.bs.affix.data-api",a.proxy(this.checkPositionWithEventLoop,this)),this.$element=a(b),this.affixed=null,this.unpin=null,this.pinnedOffset=null,this.checkPosition()};c.VERSION="3.3.6",c.RESET="affix affix-top affix-bottom",c.DEFAULTS={offset:0,target:window},c.prototype.getState=function(a,b,c,d){var e=this.$target.scrollTop(),f=this.$element.offset(),g=this.$target.height();if(null!=c&&"top"==this.affixed)return c>e?"top":!1;if("bottom"==this.affixed)return null!=c?e+this.unpin<=f.top?!1:"bottom":a-d>=e+g?!1:"bottom";var h=null==this.affixed,i=h?e:f.top,j=h?g:b;return null!=c&&c>=e?"top":null!=d&&i+j>=a-d?"bottom":!1},c.prototype.getPinnedOffset=function(){if(this.pinnedOffset)return this.pinnedOffset;this.$element.removeClass(c.RESET).addClass("affix");var a=this.$target.scrollTop(),b=this.$element.offset();return this.pinnedOffset=b.top-a},c.prototype.checkPositionWithEventLoop=function(){setTimeout(a.proxy(this.checkPosition,this),1)},c.prototype.checkPosition=function(){if(this.$element.is(":visible")){var b=this.$element.height(),d=this.options.offset,e=d.top,f=d.bottom,g=Math.max(a(document).height(),a(document.body).height());"object"!=typeof d&&(f=e=d),"function"==typeof e&&(e=d.top(this.$element)),"function"==typeof f&&(f=d.bottom(this.$element));var h=this.getState(g,b,e,f);if(this.affixed!=h){null!=this.unpin&&this.$element.css("top","");var i="affix"+(h?"-"+h:""),j=a.Event(i+".bs.affix");if(this.$element.trigger(j),j.isDefaultPrevented())return;this.affixed=h,this.unpin="bottom"==h?this.getPinnedOffset():null,this.$element.removeClass(c.RESET).addClass(i).trigger(i.replace("affix","affixed")+".bs.affix")}"bottom"==h&&this.$element.offset({top:g-b-f})}};var d=a.fn.affix;a.fn.affix=b,a.fn.affix.Constructor=c,a.fn.affix.noConflict=function(){return a.fn.affix=d,this},a(window).on("load",function(){a('[data-spy="affix"]').each(function(){var c=a(this),d=c.data();d.offset=d.offset||{},null!=d.offsetBottom&&(d.offset.bottom=d.offsetBottom),null!=d.offsetTop&&(d.offset.top=d.offsetTop),b.call(c,d)})})}(jQuery);
-},{"jquery":83}],2:[function(require,module,exports){
+},{"jquery":84}],2:[function(require,module,exports){
 /* ========================================================================
  * Bootstrap: tooltip.js v3.3.6
  * http://getbootstrap.com/javascript/#tooltip
@@ -522,7 +522,7 @@ var jQuery = require('jquery');
 
 }(jQuery);
 
-},{"jquery":83}],3:[function(require,module,exports){
+},{"jquery":84}],3:[function(require,module,exports){
 // Generated by CoffeeScript 1.10.0
 var onsAttr;
 
@@ -542,7 +542,7 @@ var Footer;
 
 Footer = function() {
   return React.createElement("div", {
-    "className": "footer container"
+    "className": "footer container mb-hidden-mp"
   }, React.createElement("hr", null), React.createElement("footer", null, React.createElement("p", null, "© 2016 MB")));
 };
 
@@ -551,6 +551,29 @@ module.exports = Footer;
 
 
 },{}],5:[function(require,module,exports){
+// Generated by CoffeeScript 1.10.0
+var MobileRotate;
+
+MobileRotate = function() {
+  return React.createElement("div", {
+    "className": "mb-mobile-rotate",
+    "style": {
+      width: '100%',
+      height: $(window).height()
+    }
+  }, React.createElement("div", {
+    "className": "text-center mt-60-percent"
+  }, React.createElement("i", {
+    "className": "fa fa-repeat fa-4x",
+    "aria-hidden": "true"
+  }), React.createElement("p", null, "Please rotate your mobile phone")));
+};
+
+module.exports = MobileRotate;
+
+
+
+},{}],6:[function(require,module,exports){
 // Generated by CoffeeScript 1.10.0
 var Nav;
 
@@ -727,7 +750,7 @@ module.exports = Nav;
 
 
 
-},{}],6:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 // Generated by CoffeeScript 1.10.0
 var PageHeader;
 
@@ -737,7 +760,7 @@ PageHeader = React.createClass({displayName: "PageHeader",
   },
   render: function() {
     return React.createElement("div", {
-      "className": "mb-page-header"
+      "className": "mb-page-header mb-hidden-mp"
     }, React.createElement("div", {
       "className": "container"
     }, React.createElement("h1", {
@@ -750,7 +773,7 @@ module.exports = PageHeader;
 
 
 
-},{}],7:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 // Generated by CoffeeScript 1.10.0
 var CONTROLS_CLOSED, CONTROLS_OPENED, DISTRICT_SEARCH, ERROR_RECEIVE_ETHNIC_DATA, FILTER_USED, INIT_DONE, INIT_SUNBURST, INIT_SUNBURST_OFF, MOUSE_OVER, RECEIVE_ETHNIC_DATA, REQUEST_ETHNIC_DATA, TOGGLE_CATEGORY, TOGGLE_VALUE, controlsClosed, controlsOpened, districtSearch, errorReceivingeEthnicData, fetchSunburstData, filterUsed, initDone, initSunburst, initSunburstOff, mouseOver, receiveEthnicData, requestEthnicData, sunBurstService, sunburstDataParser, toggleCategory, toggleValue;
 
@@ -920,7 +943,7 @@ module.exports = {
 
 
 
-},{"../../../services/nomis/demographics/ethnic-sunburst-parser.js":41,"../../../services/nomis/demographics/ethnic-sunburst-service.js":42}],8:[function(require,module,exports){
+},{"../../../services/nomis/demographics/ethnic-sunburst-parser.js":42,"../../../services/nomis/demographics/ethnic-sunburst-service.js":43}],9:[function(require,module,exports){
 // Generated by CoffeeScript 1.10.0
 var ADD_FILTER, CONTROLS_CLOSED, CONTROLS_OPENED, DISTRICT_SEARCH, ERROR_RECEIVE_PYRAMID_DATA_BARS, ERROR_RECEIVE_PYRAMID_DATA_OUTLINE, FILTER_USED, FIRST_LINE_DRAWN, MOUSE_OVER, RECEIVE_PYRAMID_DATA_BARS, RECEIVE_PYRAMID_DATA_OUTLINE, REMOVE_FILTER, REQUEST_PYRAMID_DATA, TOGGLE_CATEGORY, TOGGLE_FILTERING_OPTION, TOGGLE_OUTLINE_CATEGORY, TOGGLE_OUTLINE_VALUE, TOGGLE_VALUE, addFilter, controlsClosed, controlsOpened, districtSearch, errorReceivingPyramidDataBars, errorReceivingPyramidDataOutline, fetchPyramidData, filterUsed, firstLineDrawn, mouseOver, pyramidDataParser, pyramidService, receivePyramidDataBars, receivePyramidDataOutline, removeFilter, requestPyramidData, toggleCategory, toggleFilteringOption, toggleOutlineCategory, toggleOutlineValue, toggleValue;
 
@@ -1167,7 +1190,7 @@ module.exports = {
 
 
 
-},{"../../../services/nomis/demographics/pyramid-parser.js":43,"../../../services/nomis/demographics/pyramid-service.js":44}],9:[function(require,module,exports){
+},{"../../../services/nomis/demographics/pyramid-parser.js":44,"../../../services/nomis/demographics/pyramid-service.js":45}],10:[function(require,module,exports){
 // Generated by CoffeeScript 1.10.0
 var CONTROLS_CLOSED, CONTROLS_OPENED, DISTRICT_SEARCH, ERROR_RECEIVE_RELIGION_DATA, FILTER_USED, INIT_BARS, INIT_BARS_OFF, INIT_DONE, MOUSE_OVER, RECEIVE_RELIGION_DATA, REQUEST_RELIGION_DATA, TOGGLE_CATEGORY, TOGGLE_VALUE, controlsClosed, controlsOpened, districtSearch, errorReceivingeReligionData, fetchReligionData, filterUsed, initBars, initBarsOff, initDone, mouseOver, receiveReligionData, relBarsDataParser, relBarsService, requestReligionData, toggleCategory, toggleValue;
 
@@ -1337,7 +1360,7 @@ module.exports = {
 
 
 
-},{"../../../services/nomis/demographics/rel-bars-parser.js":45,"../../../services/nomis/demographics/rel-bars-service.js":46}],10:[function(require,module,exports){
+},{"../../../services/nomis/demographics/rel-bars-parser.js":46,"../../../services/nomis/demographics/rel-bars-service.js":47}],11:[function(require,module,exports){
 // Generated by CoffeeScript 1.10.0
 var CONTROLS_CLOSED, CONTROLS_OPENED, DISTRICT_SEARCH, ERROR_RECEIVE_GEN_HEALTH_DATA, FILTER_USED, HIGHLIGHT_LINE, INIT_DONE, INIT_GEN_HEALTH, INIT_GEN_HEALTH_OFF, MOUSE_OVER, RECEIVE_GEN_HEALTH_DATA, REQUEST_GEN_HEALTH_DATA, TOGGLE_CATEGORY, TOGGLE_SEX, TOGGLE_VALUE, UNHIGHLIGHT_LINE, controlsClosed, controlsOpened, districtSearch, errorReceivingeGenHealthData, fetchGenHealthData, filterUsed, genHealthDataParser, genHealthService, highlightLine, initDone, initGenHealth, initGenHealthOff, mouseOver, receiveGenHealthData, requestGenHealthData, toggleCategory, toggleSex, toggleValue, unHighlightLine;
 
@@ -1542,7 +1565,7 @@ module.exports = {
 
 
 
-},{"../../../services/nomis/health/general-health-parser.js":47,"../../../services/nomis/health/general-health-service.js":48}],11:[function(require,module,exports){
+},{"../../../services/nomis/health/general-health-parser.js":48,"../../../services/nomis/health/general-health-service.js":49}],12:[function(require,module,exports){
 // Generated by CoffeeScript 1.10.0
 var CONTROLS_CLOSED, CONTROLS_OPENED, DISTRICT_SEARCH, ERROR_RECEIVE_DISABILITY_DATA, FILTER_USED, INIT_DISABILITY, INIT_DISABILITY_OFF, INIT_DONE, MOUSE_OVER, RECEIVE_DISABILITY_DATA, REQUEST_DISABILITY_DATA, TOGGLE_CATEGORY, TOGGLE_SEX, TOGGLE_VALUE, controlsClosed, controlsOpened, disabilityDataParser, disabilityService, districtSearch, errorReceivingeDisabilityData, fetchDisabilityData, filterUsed, initDisability, initDisabilityOff, initDone, mouseOver, receiveDisabilityData, requestDisabilityData, toggleCategory, toggleSex, toggleValue;
 
@@ -1724,7 +1747,7 @@ module.exports = {
 
 
 
-},{"../../../services/nomis/health/health-disability-parser.js":49,"../../../services/nomis/health/health-disability-service.js":50}],12:[function(require,module,exports){
+},{"../../../services/nomis/health/health-disability-parser.js":50,"../../../services/nomis/health/health-disability-service.js":51}],13:[function(require,module,exports){
 // Generated by CoffeeScript 1.10.0
 var CONTROLS_CLOSED, CONTROLS_OPENED, DISTRICT_SEARCH, ERROR_RECEIVE_ECON_COUNTRY_DATA, FILTER_USED, INIT_DONE, INIT_ECON_COUNTRY, INIT_ECON_COUNTRY_OFF, MOUSE_OVER, RECEIVE_ECON_COUNTRY_DATA, REQUEST_ECON_COUNTRY_DATA, TOGGLE_CATEGORY, TOGGLE_VALUE, controlsClosed, controlsOpened, districtSearch, econActCountryParser, econActCountryService, errorReceivingEconCountryData, fetchEconCountryData, filterUsed, initDone, initEconCountry, initEconCountryOff, mouseOver, receiveEconCountryData, requestEconCountryData, toggleCategory, toggleValue;
 
@@ -1894,7 +1917,7 @@ module.exports = {
 
 
 
-},{"../../../services/nomis/labour/econ-activity-country-parser.js":51,"../../../services/nomis/labour/econ-activity-country-service.js":52}],13:[function(require,module,exports){
+},{"../../../services/nomis/labour/econ-activity-country-parser.js":52,"../../../services/nomis/labour/econ-activity-country-service.js":53}],14:[function(require,module,exports){
 // Generated by CoffeeScript 1.10.0
 var Sunburst, SunburstComponent, connect, controlsClosed, controlsOpened, districtSearch, fetchSunburstData, initDone, initSunburst, initSunburstOff, mapDispatchToProps, mapStateToProps, mouseOver, ref, requestSunburstData, toggleCategory, toggleValue;
 
@@ -1966,7 +1989,7 @@ module.exports = {
 
 
 
-},{"../../../ui/demographics/ethnic-sunburst-component.js":61,"../../actions/demographics/ethnic-sunburst-actions.js":7,"react-redux":88}],14:[function(require,module,exports){
+},{"../../../ui/demographics/ethnic-sunburst-component.js":62,"../../actions/demographics/ethnic-sunburst-actions.js":8,"react-redux":89}],15:[function(require,module,exports){
 // Generated by CoffeeScript 1.10.0
 var Bars, Pyramid, PyramidComponent, Table, TableComponent, addFilter, connect, controlsClosed, controlsOpened, districtSearch, fetchPyramidData, firstLineDrawn, mapDispatchToProps, mapStateToProps, mapStateToPropsPyrBars, mapStateToPropsPyrTable, mouseOver, pyBarsComponent, ref, removeFilter, requestPyramidData, toggleCategory, toggleFilteringOption, toggleOutlineCategory, toggleOutlineValue, toggleValue;
 
@@ -2084,7 +2107,7 @@ module.exports = {
 
 
 
-},{"../../../ui/demographics/pyramid-bars.js":62,"../../../ui/demographics/pyramid-component.js":63,"../../../ui/demographics/pyramid-table.js":64,"../../actions/demographics/pyramid-actions.js":8,"react-redux":88}],15:[function(require,module,exports){
+},{"../../../ui/demographics/pyramid-bars.js":63,"../../../ui/demographics/pyramid-component.js":64,"../../../ui/demographics/pyramid-table.js":65,"../../actions/demographics/pyramid-actions.js":9,"react-redux":89}],16:[function(require,module,exports){
 // Generated by CoffeeScript 1.10.0
 var ReligionBars, ReligionBarsComponent, connect, controlsClosed, controlsOpened, districtSearch, fetchReligionData, initBars, initBarsOff, initDone, mapDispatchToProps, mapStateToProps, mouseOver, ref, requestReligionData, toggleCategory, toggleValue;
 
@@ -2156,7 +2179,7 @@ module.exports = {
 
 
 
-},{"../../../ui/demographics/religion-bars-component.js":65,"../../actions/demographics/religion-bars-actions.js":9,"react-redux":88}],16:[function(require,module,exports){
+},{"../../../ui/demographics/religion-bars-component.js":66,"../../actions/demographics/religion-bars-actions.js":10,"react-redux":89}],17:[function(require,module,exports){
 // Generated by CoffeeScript 1.10.0
 var GenHealthChart, GenHealthChartComponent, GenHealthChartDetail, GenHealthChartDetailComponent, connect, controlsClosed, controlsOpened, districtSearch, fetchGenHealthData, highlightLine, initDone, initGenHealth, initGenHealthOff, mapDispatchToProps, mapDispatchToPropsDetail, mapStateToProps, mapStateToPropsDetail, mouseOver, ref, requestGenHealthData, toggleCategory, toggleSex, toggleValue, unHighlightLine;
 
@@ -2271,7 +2294,7 @@ module.exports = {
 
 
 
-},{"../../../ui/health/general-health-component.js":71,"../../../ui/health/general-health-detail-component.js":72,"../../actions/health/general-health-actions.js":10,"react-redux":88}],17:[function(require,module,exports){
+},{"../../../ui/health/general-health-component.js":72,"../../../ui/health/general-health-detail-component.js":73,"../../actions/health/general-health-actions.js":11,"react-redux":89}],18:[function(require,module,exports){
 // Generated by CoffeeScript 1.10.0
 var DisabilityChart, DisabilityChartComponent, connect, controlsClosed, controlsOpened, districtSearch, fetchDisabilityData, initDisability, initDisabilityOff, initDone, mapDispatchToProps, mapStateToProps, mouseOver, ref, requestDisabilityData, toggleCategory, toggleSex, toggleValue;
 
@@ -2345,7 +2368,7 @@ module.exports = {
 
 
 
-},{"../../../ui/health/health-disability-component.js":73,"../../actions/health/health-disability-actions.js":11,"react-redux":88}],18:[function(require,module,exports){
+},{"../../../ui/health/health-disability-component.js":74,"../../actions/health/health-disability-actions.js":12,"react-redux":89}],19:[function(require,module,exports){
 // Generated by CoffeeScript 1.10.0
 var EconByCountry, EconByCountryChartComponent, EconByCountryChartDetailComponent, EconByCountryDetail, connect, controlsClosed, controlsOpened, districtSearch, fetchEconCountryData, initDone, initEconCountry, initEconCountryOff, mapDispatchToProps, mapStateToProps, mapStateToPropsDetail, mouseOver, ref, requestEconCountryData, toggleCategory, toggleValue;
 
@@ -2436,7 +2459,7 @@ module.exports = {
 
 
 
-},{"../../../ui/labour/econ-activity-country-component.js":77,"../../../ui/labour/econ-activity-country-details-component.js":78,"../../actions/labour/econ-activity-country-actions.js":12,"react-redux":88}],19:[function(require,module,exports){
+},{"../../../ui/labour/econ-activity-country-component.js":78,"../../../ui/labour/econ-activity-country-details-component.js":79,"../../actions/labour/econ-activity-country-actions.js":13,"react-redux":89}],20:[function(require,module,exports){
 // Generated by CoffeeScript 1.10.0
 var Bars, Provider, Pyramid, ReduxThunk, ReligionBars, Sunburst, SunburstTable, Table, applyMiddleware, createStore, mbReducer, ref, ref1, ref2, render, store, unsubscribe;
 
@@ -2487,7 +2510,7 @@ module.exports = render;
 
 
 
-},{"./containers/demographics/ethnic-sunburst-containers.js":13,"./containers/demographics/pyramid-containers.js":14,"./containers/demographics/religion-bars-containers.js":15,"./reducers/demographics-reducers.js":22,"react-redux":88,"redux":261,"redux-thunk":255}],20:[function(require,module,exports){
+},{"./containers/demographics/ethnic-sunburst-containers.js":14,"./containers/demographics/pyramid-containers.js":15,"./containers/demographics/religion-bars-containers.js":16,"./reducers/demographics-reducers.js":23,"react-redux":89,"redux":262,"redux-thunk":256}],21:[function(require,module,exports){
 // Generated by CoffeeScript 1.10.0
 var DisabilityChart, GenHealthChart, GenHealthChartDetail, Provider, ReduxThunk, applyMiddleware, createStore, mbReducer, ref, ref1, render, store, unsubscribe;
 
@@ -2530,13 +2553,13 @@ module.exports = render;
 
 
 
-},{"./containers/health/general-health-containers.js":16,"./containers/health/health-disability-containers.js":17,"./reducers/health-reducers.js":26,"react-redux":88,"redux":261,"redux-thunk":255}],21:[function(require,module,exports){
+},{"./containers/health/general-health-containers.js":17,"./containers/health/health-disability-containers.js":18,"./reducers/health-reducers.js":27,"react-redux":89,"redux":262,"redux-thunk":256}],22:[function(require,module,exports){
 // Generated by CoffeeScript 1.10.0
 
 
 
 
-},{}],22:[function(require,module,exports){
+},{}],23:[function(require,module,exports){
 // Generated by CoffeeScript 1.10.0
 var combineReducers, ethnicSunburst, mbReducer, objectAssign, pyramidChart, relBarChart;
 
@@ -2560,7 +2583,7 @@ module.exports = mbReducer;
 
 
 
-},{"./demographics/ethnic-sunburst-reducers.js":23,"./demographics/pyramid-reducers.js":24,"./demographics/religion-bars-reducers.js":25,"object-assign":84,"redux":261}],23:[function(require,module,exports){
+},{"./demographics/ethnic-sunburst-reducers.js":24,"./demographics/pyramid-reducers.js":25,"./demographics/religion-bars-reducers.js":26,"object-assign":85,"redux":262}],24:[function(require,module,exports){
 // Generated by CoffeeScript 1.10.0
 var CONTROLS_CLOSED, CONTROLS_OPENED, DISTRICT_SEARCH, ERROR_RECEIVE_ETHNIC_DATA, FILTER_USED, INIT_DONE, INIT_SUNBURST, INIT_SUNBURST_OFF, MOUSE_OVER, RECEIVE_ETHNIC_DATA, REQUEST_ETHNIC_DATA, TOGGLE_CATEGORY, TOGGLE_VALUE, objectAssign, ref, sunburstChart, sunburstInitialState;
 
@@ -2684,7 +2707,7 @@ module.exports = sunburstChart;
 
 
 
-},{"../../actions/demographics/ethnic-sunburst-actions.js":7,"object-assign":84}],24:[function(require,module,exports){
+},{"../../actions/demographics/ethnic-sunburst-actions.js":8,"object-assign":85}],25:[function(require,module,exports){
 // Generated by CoffeeScript 1.10.0
 var ADD_FILTER, CONTROLS_CLOSED, CONTROLS_OPENED, DISTRICT_SEARCH, ERROR_RECEIVE_PYRAMID_DATA_BARS, ERROR_RECEIVE_PYRAMID_DATA_OUTLINE, FILTER_USED, FIRST_LINE_DRAWN, MOUSE_OVER, RECEIVE_PYRAMID_DATA_BARS, RECEIVE_PYRAMID_DATA_OUTLINE, REMOVE_FILTER, REQUEST_PYRAMID_DATA, TOGGLE_CATEGORY, TOGGLE_FILTERING_OPTION, TOGGLE_OUTLINE_CATEGORY, TOGGLE_OUTLINE_VALUE, TOGGLE_VALUE, objectAssign, pyramidChart, pyramidInitialState, ref;
 
@@ -2892,7 +2915,7 @@ module.exports = pyramidChart;
 
 
 
-},{"../../actions/demographics/pyramid-actions.js":8,"object-assign":84}],25:[function(require,module,exports){
+},{"../../actions/demographics/pyramid-actions.js":9,"object-assign":85}],26:[function(require,module,exports){
 // Generated by CoffeeScript 1.10.0
 var CONTROLS_CLOSED, CONTROLS_OPENED, DISTRICT_SEARCH, ERROR_RECEIVE_RELIGION_DATA, FILTER_USED, INIT_BARS, INIT_BARS_OFF, INIT_DONE, MOUSE_OVER, RECEIVE_RELIGION_DATA, REQUEST_RELIGION_DATA, TOGGLE_CATEGORY, TOGGLE_VALUE, barChart, barsInitialState, objectAssign, ref;
 
@@ -3016,7 +3039,7 @@ module.exports = barChart;
 
 
 
-},{"../../actions/demographics/religion-bars-actions.js":9,"object-assign":84}],26:[function(require,module,exports){
+},{"../../actions/demographics/religion-bars-actions.js":10,"object-assign":85}],27:[function(require,module,exports){
 // Generated by CoffeeScript 1.10.0
 var combineReducers, disabilityChart, genHealthChart, mbReducer, objectAssign;
 
@@ -3037,7 +3060,7 @@ module.exports = mbReducer;
 
 
 
-},{"./health/general-health-reducers.js":27,"./health/health-disability-reducers.js":28,"object-assign":84,"redux":261}],27:[function(require,module,exports){
+},{"./health/general-health-reducers.js":28,"./health/health-disability-reducers.js":29,"object-assign":85,"redux":262}],28:[function(require,module,exports){
 // Generated by CoffeeScript 1.10.0
 var CONTROLS_CLOSED, CONTROLS_OPENED, DISTRICT_SEARCH, ERROR_RECEIVE_GEN_HEALTH_DATA, FILTER_USED, GenHealthChart, HIGHLIGHT_LINE, INIT_DONE, INIT_GEN_HEALTH, INIT_GEN_HEALTH_OFF, MOUSE_OVER, RECEIVE_GEN_HEALTH_DATA, REQUEST_GEN_HEALTH_DATA, TOGGLE_CATEGORY, TOGGLE_SEX, TOGGLE_VALUE, UNHIGHLIGHT_LINE, genHealthInitState, objectAssign, ref;
 
@@ -3216,7 +3239,7 @@ module.exports = GenHealthChart;
 
 
 
-},{"../../actions/health/general-health-actions.js":10,"object-assign":84}],28:[function(require,module,exports){
+},{"../../actions/health/general-health-actions.js":11,"object-assign":85}],29:[function(require,module,exports){
 // Generated by CoffeeScript 1.10.0
 var CONTROLS_CLOSED, CONTROLS_OPENED, DISTRICT_SEARCH, DisabilityChart, ERROR_RECEIVE_DISABILITY_DATA, FILTER_USED, INIT_DISABILITY, INIT_DISABILITY_OFF, INIT_DONE, MOUSE_OVER, RECEIVE_DISABILITY_DATA, REQUEST_DISABILITY_DATA, TOGGLE_CATEGORY, TOGGLE_SEX, TOGGLE_VALUE, disabilityInitState, objectAssign, ref;
 
@@ -3349,7 +3372,7 @@ module.exports = DisabilityChart;
 
 
 
-},{"../../actions/health/health-disability-actions.js":11,"object-assign":84}],29:[function(require,module,exports){
+},{"../../actions/health/health-disability-actions.js":12,"object-assign":85}],30:[function(require,module,exports){
 // Generated by CoffeeScript 1.10.0
 var CONTROLS_CLOSED, CONTROLS_OPENED, DISTRICT_SEARCH, ERROR_RECEIVE_ECON_COUNTRY_DATA, EconCountryChart, FILTER_USED, INIT_DONE, INIT_ECON_COUNTRY, INIT_ECON_COUNTRY_OFF, MOUSE_OVER, RECEIVE_ECON_COUNTRY_DATA, REQUEST_ECON_COUNTRY_DATA, TOGGLE_CATEGORY, TOGGLE_VALUE, econCountryInitState, objectAssign, ref;
 
@@ -3486,7 +3509,7 @@ module.exports = EconCountryChart;
 
 
 
-},{"../../actions/labour/econ-activity-country-actions.js":12,"object-assign":84}],30:[function(require,module,exports){
+},{"../../actions/labour/econ-activity-country-actions.js":13,"object-assign":85}],31:[function(require,module,exports){
 // Generated by CoffeeScript 1.10.0
 var combineReducers, economicActivityByCountry, mbReducer;
 
@@ -3502,7 +3525,7 @@ module.exports = mbReducer;
 
 
 
-},{"../labour/econ-activity-country-reducers.js":29,"redux":261}],31:[function(require,module,exports){
+},{"../labour/econ-activity-country-reducers.js":30,"redux":262}],32:[function(require,module,exports){
 // Generated by CoffeeScript 1.10.0
 var combineReducers, ethnicSunburst, mbReducer;
 
@@ -3518,7 +3541,7 @@ module.exports = mbReducer;
 
 
 
-},{"../demographics/ethnic-sunburst-reducers.js":23,"redux":261}],32:[function(require,module,exports){
+},{"../demographics/ethnic-sunburst-reducers.js":24,"redux":262}],33:[function(require,module,exports){
 // Generated by CoffeeScript 1.10.0
 var combineReducers, genHealthChart, mbReducer;
 
@@ -3534,7 +3557,7 @@ module.exports = mbReducer;
 
 
 
-},{"../health/general-health-reducers.js":27,"redux":261}],33:[function(require,module,exports){
+},{"../health/general-health-reducers.js":28,"redux":262}],34:[function(require,module,exports){
 // Generated by CoffeeScript 1.10.0
 var combineReducers, mbReducer, pyramidChart;
 
@@ -3550,7 +3573,7 @@ module.exports = mbReducer;
 
 
 
-},{"../demographics/pyramid-reducers.js":24,"redux":261}],34:[function(require,module,exports){
+},{"../demographics/pyramid-reducers.js":25,"redux":262}],35:[function(require,module,exports){
 // Generated by CoffeeScript 1.10.0
 var combineReducers, mbReducer, relBarChart;
 
@@ -3566,7 +3589,7 @@ module.exports = mbReducer;
 
 
 
-},{"../demographics/religion-bars-reducers.js":25,"redux":261}],35:[function(require,module,exports){
+},{"../demographics/religion-bars-reducers.js":26,"redux":262}],36:[function(require,module,exports){
 // Generated by CoffeeScript 1.10.0
 var EconByCountry, EconByCountryDetail, Provider, ReduxThunk, applyMiddleware, createStore, mbReducer, ref, ref1, render, store, unsubscribe;
 
@@ -3604,7 +3627,7 @@ module.exports = render;
 
 
 
-},{"../containers/labour/econ-activity-country-containers.js":18,"../reducers/mb-reducers/econ-activity-country.js":30,"react-redux":88,"redux":261,"redux-thunk":255}],36:[function(require,module,exports){
+},{"../containers/labour/econ-activity-country-containers.js":19,"../reducers/mb-reducers/econ-activity-country.js":31,"react-redux":89,"redux":262,"redux-thunk":256}],37:[function(require,module,exports){
 // Generated by CoffeeScript 1.10.0
 var Provider, ReduxThunk, Sunburst, SunburstTable, applyMiddleware, createStore, mbReducer, ref, ref1, render, store, unsubscribe;
 
@@ -3639,7 +3662,7 @@ module.exports = render;
 
 
 
-},{"../containers/demographics/ethnic-sunburst-containers.js":13,"../reducers/mb-reducers/ethnic-diversity.js":31,"react-redux":88,"redux":261,"redux-thunk":255}],37:[function(require,module,exports){
+},{"../containers/demographics/ethnic-sunburst-containers.js":14,"../reducers/mb-reducers/ethnic-diversity.js":32,"react-redux":89,"redux":262,"redux-thunk":256}],38:[function(require,module,exports){
 // Generated by CoffeeScript 1.10.0
 var GenHealthChart, GenHealthChartDetail, Provider, ReduxThunk, applyMiddleware, createStore, mbReducer, ref, ref1, render, store, unsubscribe;
 
@@ -3677,7 +3700,7 @@ module.exports = render;
 
 
 
-},{"../containers/health/general-health-containers.js":16,"../reducers/mb-reducers/ethnic-general-health.js":32,"react-redux":88,"redux":261,"redux-thunk":255}],38:[function(require,module,exports){
+},{"../containers/health/general-health-containers.js":17,"../reducers/mb-reducers/ethnic-general-health.js":33,"react-redux":89,"redux":262,"redux-thunk":256}],39:[function(require,module,exports){
 // Generated by CoffeeScript 1.10.0
 var DisabilityChart, Provider, ReduxThunk, applyMiddleware, createStore, mbReducer, ref, render, store, unsubscribe;
 
@@ -3712,7 +3735,7 @@ module.exports = render;
 
 
 
-},{"../containers/health/health-disability-containers.js":17,"../reducers/health-reducers.js":26,"react-redux":88,"redux":261,"redux-thunk":255}],39:[function(require,module,exports){
+},{"../containers/health/health-disability-containers.js":18,"../reducers/health-reducers.js":27,"react-redux":89,"redux":262,"redux-thunk":256}],40:[function(require,module,exports){
 // Generated by CoffeeScript 1.10.0
 var Bars, Provider, Pyramid, ReduxThunk, Table, applyMiddleware, createStore, mbReducer, ref, ref1, render, store, unsubscribe;
 
@@ -3753,7 +3776,7 @@ module.exports = render;
 
 
 
-},{"../containers/demographics/pyramid-containers.js":14,"../reducers/mb-reducers/population-pyramid.js":33,"react-redux":88,"redux":261,"redux-thunk":255}],40:[function(require,module,exports){
+},{"../containers/demographics/pyramid-containers.js":15,"../reducers/mb-reducers/population-pyramid.js":34,"react-redux":89,"redux":262,"redux-thunk":256}],41:[function(require,module,exports){
 // Generated by CoffeeScript 1.10.0
 var Provider, ReduxThunk, ReligionBars, applyMiddleware, createStore, mbReducer, ref, render, store, unsubscribe;
 
@@ -3788,7 +3811,7 @@ module.exports = render;
 
 
 
-},{"../containers/demographics/religion-bars-containers.js":15,"../reducers/mb-reducers/religious-diversity.js":34,"react-redux":88,"redux":261,"redux-thunk":255}],41:[function(require,module,exports){
+},{"../containers/demographics/religion-bars-containers.js":16,"../reducers/mb-reducers/religious-diversity.js":35,"react-redux":89,"redux":262,"redux-thunk":256}],42:[function(require,module,exports){
 // Generated by CoffeeScript 1.10.0
 var parse;
 
@@ -3858,7 +3881,7 @@ module.exports = parse;
 
 
 
-},{}],42:[function(require,module,exports){
+},{}],43:[function(require,module,exports){
 // Generated by CoffeeScript 1.10.0
 var dataSet, defaultOptions, makeSunburstRequest, nomisEndPoint,
   hasProp = {}.hasOwnProperty;
@@ -3940,7 +3963,7 @@ module.exports = makeSunburstRequest;
 
 
 
-},{}],43:[function(require,module,exports){
+},{}],44:[function(require,module,exports){
 // Generated by CoffeeScript 1.10.0
 var _, parse;
 
@@ -4030,7 +4053,7 @@ module.exports = parse;
 
 
 
-},{"underscore":267}],44:[function(require,module,exports){
+},{"underscore":268}],45:[function(require,module,exports){
 // Generated by CoffeeScript 1.10.0
 var defaultOptions, ethDataSet, makePyramidRequest, nomisEndPoint, relDataSet,
   hasProp = {}.hasOwnProperty;
@@ -4150,7 +4173,7 @@ module.exports = makePyramidRequest;
 
 
 
-},{}],45:[function(require,module,exports){
+},{}],46:[function(require,module,exports){
 // Generated by CoffeeScript 1.10.0
 var parse;
 
@@ -4188,7 +4211,7 @@ module.exports = parse;
 
 
 
-},{}],46:[function(require,module,exports){
+},{}],47:[function(require,module,exports){
 // Generated by CoffeeScript 1.10.0
 var dataSet, defaultOptions, makeRelBarsRequest, nomisEndPoint,
   hasProp = {}.hasOwnProperty;
@@ -4270,7 +4293,7 @@ module.exports = makeRelBarsRequest;
 
 
 
-},{}],47:[function(require,module,exports){
+},{}],48:[function(require,module,exports){
 // Generated by CoffeeScript 1.10.0
 var parse;
 
@@ -4446,7 +4469,7 @@ module.exports = parse;
 
 
 
-},{}],48:[function(require,module,exports){
+},{}],49:[function(require,module,exports){
 // Generated by CoffeeScript 1.10.0
 var dataSet, defaultOptions, makeGenHealthRequest, nomisEndPoint,
   hasProp = {}.hasOwnProperty;
@@ -4536,7 +4559,7 @@ module.exports = makeGenHealthRequest;
 
 
 
-},{}],49:[function(require,module,exports){
+},{}],50:[function(require,module,exports){
 // Generated by CoffeeScript 1.10.0
 var parse;
 
@@ -4628,7 +4651,7 @@ module.exports = parse;
 
 
 
-},{}],50:[function(require,module,exports){
+},{}],51:[function(require,module,exports){
 // Generated by CoffeeScript 1.10.0
 var dataSet, defaultOptions, makeDisabilityRequest, nomisEndPoint,
   hasProp = {}.hasOwnProperty;
@@ -4718,7 +4741,7 @@ module.exports = makeDisabilityRequest;
 
 
 
-},{}],51:[function(require,module,exports){
+},{}],52:[function(require,module,exports){
 // Generated by CoffeeScript 1.10.0
 var parse;
 
@@ -4864,7 +4887,7 @@ module.exports = parse;
 
 
 
-},{}],52:[function(require,module,exports){
+},{}],53:[function(require,module,exports){
 // Generated by CoffeeScript 1.10.0
 var dataSet, defaultOptions, makeEconCountryRequest, nomisEndPoint,
   hasProp = {}.hasOwnProperty;
@@ -4945,9 +4968,9 @@ module.exports = makeEconCountryRequest;
 
 
 
-},{}],53:[function(require,module,exports){
+},{}],54:[function(require,module,exports){
 // Generated by CoffeeScript 1.10.0
-var DisabilitySection, EthnicSection, Footer, GeneralHealthSection, ReligiousSection, _path, bootstrap, bootstrap_tooltips, path, raw_path, renderDemographics, renderEmploymentStatusByCountry, renderEthnicDiversity, renderEthnicGenHealth, renderHealth, renderHealthDisability, renderLabour, renderPopulationPyramid, renderReligiousDiversity;
+var DisabilitySection, EthnicSection, Footer, GeneralHealthSection, MobilePortraitRotate, ReligiousSection, _path, bootstrap, bootstrap_tooltips, isMobilePortrait, path, raw_path, renderDemographics, renderEmploymentStatusByCountry, renderEthnicDiversity, renderEthnicGenHealth, renderHealth, renderHealthDisability, renderLabour, renderPopulationPyramid, renderReligiousDiversity;
 
 window.React = require('react');
 
@@ -4971,6 +4994,8 @@ DisabilitySection = require('./ui/health/static-components/health-disability.js'
 
 Footer = require('./partials/footer.js');
 
+MobilePortraitRotate = require('./partials/mobile-portrait-rotate.js');
+
 path = location.pathname.split('/')[1];
 
 _path = path;
@@ -4978,6 +5003,14 @@ _path = path;
 raw_path = location.pathname;
 
 $("." + path).addClass('active');
+
+isMobilePortrait = (function() {
+  var window_width;
+  window_width = $(window).width();
+  if (window_width < 420) {
+    return true;
+  }
+})();
 
 renderDemographics = function() {
   var render;
@@ -5007,6 +5040,9 @@ renderPopulationPyramid = function() {
   PageHeader = require('./partials/page-header.js');
   Nav = require('./partials/nav.js');
   PopulationPyramid = require('./ui/demographics/static-components/population-pyramid.js');
+  if (isMobilePortrait === true) {
+    ReactDOM.render(React.createElement(MobilePortraitRotate, null), document.getElementById('mobile-portrait-container'));
+  }
   ReactDOM.render(React.createElement(Nav, {
     "active": _path,
     "border": 'yes'
@@ -5025,6 +5061,9 @@ renderEthnicDiversity = function() {
   PageHeader = require('./partials/page-header.js');
   Nav = require('./partials/nav.js');
   EthnicDiversity = require('./ui/demographics/static-components/ethnic-diversity.js');
+  if (isMobilePortrait === true) {
+    ReactDOM.render(React.createElement(MobilePortraitRotate, null), document.getElementById('mobile-portrait-container'));
+  }
   ReactDOM.render(React.createElement(Nav, {
     "active": _path,
     "border": 'yes'
@@ -5043,6 +5082,9 @@ renderReligiousDiversity = function() {
   PageHeader = require('./partials/page-header.js');
   Nav = require('./partials/nav.js');
   ReligiousDiversity = require('./ui/demographics/static-components/religious-diversity.js');
+  if (isMobilePortrait === true) {
+    ReactDOM.render(React.createElement(MobilePortraitRotate, null), document.getElementById('mobile-portrait-container'));
+  }
   ReactDOM.render(React.createElement(Nav, {
     "active": _path,
     "border": 'yes'
@@ -5061,6 +5103,9 @@ renderEthnicGenHealth = function() {
   PageHeader = require('./partials/page-header.js');
   Nav = require('./partials/nav.js');
   EthnicGenHealth = require('./ui/health/static-components/general-health.js');
+  if (isMobilePortrait === true) {
+    ReactDOM.render(React.createElement(MobilePortraitRotate, null), document.getElementById('mobile-portrait-container'));
+  }
   ReactDOM.render(React.createElement(Nav, {
     "active": _path,
     "border": 'yes'
@@ -5079,6 +5124,9 @@ renderHealthDisability = function() {
   PageHeader = require('./partials/page-header.js');
   Nav = require('./partials/nav.js');
   HealthDisability = require('./ui/health/static-components/health-disability.js');
+  if (isMobilePortrait === true) {
+    ReactDOM.render(React.createElement(MobilePortraitRotate, null), document.getElementById('mobile-portrait-container'));
+  }
   ReactDOM.render(React.createElement(Nav, {
     "active": _path,
     "border": 'yes'
@@ -5097,6 +5145,9 @@ renderEmploymentStatusByCountry = function() {
   PageHeader = require('./partials/page-header.js');
   Nav = require('./partials/nav.js');
   EconByCountry = require('./ui/labour/static-components/econ-activity-country.js');
+  if (isMobilePortrait === true) {
+    ReactDOM.render(React.createElement(MobilePortraitRotate, null), document.getElementById('mobile-portrait-container'));
+  }
   ReactDOM.render(React.createElement(Nav, {
     "active": _path,
     "border": 'yes'
@@ -5144,7 +5195,7 @@ $(function() {
 
 
 
-},{"../../bootstrap-sass/javascripts/bootstrap.min.js":1,"../../bootstrap-sass/javascripts/bootstrap/tooltip.js":2,"./partials/footer.js":4,"./partials/nav.js":5,"./partials/page-header.js":6,"./redux/demographics.js":19,"./redux/health.js":20,"./redux/labour.js":21,"./redux/renderers/econ-activity-country.js":35,"./redux/renderers/ethnic-diversity.js":36,"./redux/renderers/ethnic-general-health.js":37,"./redux/renderers/health-disability.js":38,"./redux/renderers/population-pyramid.js":39,"./redux/renderers/religious-diversity.js":40,"./ui/demographics/static-components/ethnic-diversity.js":66,"./ui/demographics/static-components/population-pyramid.js":67,"./ui/demographics/static-components/religious-diversity.js":68,"./ui/health/static-components/general-health.js":74,"./ui/health/static-components/health-disability.js":75,"./ui/labour/static-components/econ-activity-country.js":79,"d3":82,"jquery":83,"react":254,"react-dom":85}],54:[function(require,module,exports){
+},{"../../bootstrap-sass/javascripts/bootstrap.min.js":1,"../../bootstrap-sass/javascripts/bootstrap/tooltip.js":2,"./partials/footer.js":4,"./partials/mobile-portrait-rotate.js":5,"./partials/nav.js":6,"./partials/page-header.js":7,"./redux/demographics.js":20,"./redux/health.js":21,"./redux/labour.js":22,"./redux/renderers/econ-activity-country.js":36,"./redux/renderers/ethnic-diversity.js":37,"./redux/renderers/ethnic-general-health.js":38,"./redux/renderers/health-disability.js":39,"./redux/renderers/population-pyramid.js":40,"./redux/renderers/religious-diversity.js":41,"./ui/demographics/static-components/ethnic-diversity.js":67,"./ui/demographics/static-components/population-pyramid.js":68,"./ui/demographics/static-components/religious-diversity.js":69,"./ui/health/static-components/general-health.js":75,"./ui/health/static-components/health-disability.js":76,"./ui/labour/static-components/econ-activity-country.js":80,"d3":83,"jquery":84,"react":255,"react-dom":86}],55:[function(require,module,exports){
 // Generated by CoffeeScript 1.10.0
 var ControlsNew;
 
@@ -5411,7 +5462,7 @@ module.exports = ControlsNew;
 
 
 
-},{}],55:[function(require,module,exports){
+},{}],56:[function(require,module,exports){
 // Generated by CoffeeScript 1.10.0
 var PyramidControls;
 
@@ -5711,7 +5762,7 @@ module.exports = PyramidControls;
 
 
 
-},{}],56:[function(require,module,exports){
+},{}],57:[function(require,module,exports){
 // Generated by CoffeeScript 1.10.0
 var drawBarChart;
 
@@ -5755,7 +5806,7 @@ drawBarChart = function(options) {
     main_group.attr('transform', "translate(" + margin.left + ", " + margin.top + ")");
     labels_group.attr('transform', "translate(" + (margin.left - 10) + ", " + (margin.top + 22) + ")");
     x_axis_group.attr('transform', "translate(" + margin.left + ", " + margin.top + ")");
-    detail_group.attr('transform', "translate(" + ((chart_width / 3) * 2) + ", " + ((chart_height / 2) + margin.top) + ")");
+    detail_group.attr('transform', "translate(" + (chart_width * 0.8) + ", " + ((chart_height / 2) + margin.top) + ")");
     bar = main_group.selectAll('rect').data(d3_array, key);
     barsEnter = bar.enter().append('rect').attr({
       width: 0,
@@ -5777,7 +5828,7 @@ drawBarChart = function(options) {
       return y(d.name);
     }).attr('class', 'rel-label').transition().duration(1500).attr('opacity', 1);
     x_axis_group.transition().duration(1500).call(xAxis);
-    detail_width = chart_width - ((chart_width / 3) * 2);
+    detail_width = chart_width - (chart_width * 0.7);
     detail_height = (chart_height / 2) - margin.top;
     detail_group.append('rect').attr({
       width: detail_width,
@@ -5823,6 +5874,27 @@ drawBarChart = function(options) {
     x_axis_group.transition().duration(1000).delay(500).call(xAxis);
     detail_text_value.text(format(data.sum));
     return attachHoverHandlers();
+  };
+  my.resize = function() {
+    var detail_group, detail_height, detail_width, main_group_bars, svg, x_axis_group;
+    svg = d3.select('.bars-svg');
+    main_group_bars = svg.selectAll('.main-group .bar');
+    x_axis_group = svg.select('.x.axis');
+    detail_group = svg.select('.detail-group');
+    detail_group.attr('transform', "translate(" + (chart_width * 0.8) + ", " + ((chart_height / 2) + margin.top) + ")");
+    detail_width = chart_width - (chart_width * 0.7);
+    detail_height = (chart_height / 2) - margin.top;
+    detail_group.select('rect').attr({
+      width: detail_width,
+      height: detail_height
+    });
+    detail_group.selectAll('text').attr('x', detail_width / 2);
+    main_group_bars.attr('width', function(d) {
+      return x(d.value);
+    }).attr('y', function(d, i) {
+      return y(d.name);
+    });
+    return x_axis_group.call(xAxis);
   };
   attachHoverHandlers = function() {
     var detail_text_percent, detail_text_religion, detail_text_value, main_group_bars, svg;
@@ -5870,13 +5942,13 @@ module.exports = drawBarChart;
 
 
 
-},{}],57:[function(require,module,exports){
+},{}],58:[function(require,module,exports){
 // Generated by CoffeeScript 1.10.0
 var drawPyramid;
 
 drawPyramid = function(options) {
-  var activeLineCategory, activeLineValue, ages, bar_females, bar_females_perc, bar_females_perc_format, bar_females_sum, bar_males, bar_males_perc, bar_males_perc_format, bar_males_sum, container, drawOutline, femaleKeyGroup, g, height, init, isDefault, isFirstLine, isOutline, keyGroup, leftGroup, maleKeyGroup, margin, my, onFirstLineDrawn, onMouseOver, outlineFilter, outline_females, outline_females_perc, outline_females_perc_format, outline_females_sum, outline_males, outline_males_perc, outline_males_perc_format, outline_males_sum, overlayGroup, overlay_data, ref, ref1, rightGroup, svg, ticksGroup, titleGroup, update, updateOutline, updatePyramid, width, x, xAxis, xAxisGroupLeft, xAxisGroupRight, xAxisLeft, xLeft, y;
-  container = options.container, ages = options.ages, bar_males = options.bar_males, bar_males_perc = options.bar_males_perc, bar_males_perc_format = options.bar_males_perc_format, bar_males_sum = options.bar_males_sum, bar_females = options.bar_females, bar_females_perc = options.bar_females_perc, bar_females_perc_format = options.bar_females_perc_format, bar_females_sum = options.bar_females_sum, outline_males = options.outline_males, outline_females = options.outline_females, outline_males_perc = options.outline_males_perc, outline_males_perc_format = options.outline_males_perc_format, outline_males_sum = options.outline_males_sum, outline_females_perc = options.outline_females_perc, outline_females_perc_format = options.outline_females_perc_format, outline_females_sum = options.outline_females_sum, overlay_data = options.overlay_data, onMouseOver = options.onMouseOver, onFirstLineDrawn = options.onFirstLineDrawn, isDefault = options.isDefault, outlineFilter = options.outlineFilter, updatePyramid = options.updatePyramid, updateOutline = options.updateOutline, activeLineValue = options.activeLineValue, activeLineCategory = options.activeLineCategory, isFirstLine = options.isFirstLine;
+  var activeLineCategory, activeLineValue, ages, bar_females, bar_females_perc, bar_females_perc_format, bar_females_sum, bar_males, bar_males_perc, bar_males_perc_format, bar_males_sum, container, drawOutline, femaleKeyGroup, g, height, init, isDefault, isFirstLine, isOutline, keyGroup, leftGroup, maleKeyGroup, margin, my, onFirstLineDrawn, onMouseOver, outlineFilter, outline_females, outline_females_perc, outline_females_perc_format, outline_females_sum, outline_males, outline_males_perc, outline_males_perc_format, outline_males_sum, overlayGroup, overlay_data, ref, ref1, resize, resizePyramid, rightGroup, svg, ticksGroup, titleGroup, update, updateOutline, updatePyramid, width, x, xAxis, xAxisGroupLeft, xAxisGroupRight, xAxisLeft, xLeft, y;
+  container = options.container, ages = options.ages, bar_males = options.bar_males, bar_males_perc = options.bar_males_perc, bar_males_perc_format = options.bar_males_perc_format, bar_males_sum = options.bar_males_sum, bar_females = options.bar_females, bar_females_perc = options.bar_females_perc, bar_females_perc_format = options.bar_females_perc_format, bar_females_sum = options.bar_females_sum, outline_males = options.outline_males, outline_females = options.outline_females, outline_males_perc = options.outline_males_perc, outline_males_perc_format = options.outline_males_perc_format, outline_males_sum = options.outline_males_sum, outline_females_perc = options.outline_females_perc, outline_females_perc_format = options.outline_females_perc_format, outline_females_sum = options.outline_females_sum, overlay_data = options.overlay_data, onMouseOver = options.onMouseOver, onFirstLineDrawn = options.onFirstLineDrawn, isDefault = options.isDefault, outlineFilter = options.outlineFilter, updatePyramid = options.updatePyramid, updateOutline = options.updateOutline, activeLineValue = options.activeLineValue, activeLineCategory = options.activeLineCategory, isFirstLine = options.isFirstLine, resize = options.resize;
   width = (ref = $(container).width()) != null ? ref : 750;
   height = (ref1 = $(container).height()) != null ? ref1 : 550;
   isOutline = outlineFilter;
@@ -5924,16 +5996,19 @@ drawPyramid = function(options) {
   femaleKeyGroup = keyGroup.select('.female-key-group');
   my = function() {
     var outlineDataReceived;
+    if (resize === true) {
+      return resizePyramid();
+    }
     if (isDefault === true) {
       init();
       if (isOutline === true && updateOutline === true) {
-        return drawOutline();
+        drawOutline();
       }
     } else if (isDefault === false) {
       update();
       outlineDataReceived = outline_males_perc != null;
       if (isOutline === true && outlineDataReceived === true) {
-        return drawOutline();
+        drawOutline();
       }
     }
   };
@@ -6137,6 +6212,47 @@ drawPyramid = function(options) {
       onFirstLineDrawn();
     }
   };
+  resizePyramid = function() {
+    var leftBars, overlayBars, rightBars;
+    svg = d3.select('.pyramid-svg');
+    leftBars = svg.selectAll('.pyramid-bar.left');
+    rightBars = svg.selectAll('.pyramid-bar.right');
+    overlayBars = svg.selectAll('.overlay-rect');
+    xAxisGroupLeft = svg.select('.x.axis.left');
+    xAxisGroupRight = svg.select('.x.axis.right');
+    g.attr("transform", "translate(0, " + margin.top + ")");
+    overlayGroup.attr("transform", "translate(0, " + margin.top + ")");
+    leftGroup.attr("transform", "translate(0, " + margin.top + ")");
+    rightGroup.attr("transform", "translate(" + ((width / 2) + margin.middle) + ", " + margin.top + ")");
+    ticksGroup.attr("transform", "translate(" + (width / 2) + ", " + (margin.bottom - 5) + ")");
+    xAxisGroupLeft.attr("transform", "translate(" + (-(width / 2)) + ", " + (height - (margin.bottom + 15)) + ")");
+    xAxisGroupRight.attr("transform", "translate(" + margin.middle + ", " + (height - (margin.bottom + 15)) + ")");
+    titleGroup.attr("transform", "translate(" + (0.25 * width) + ", " + (margin.top - 10) + ")");
+    keyGroup.attr("transform", "translate(" + (width - margin.right * 3) + ", " + margin.top + ")");
+    maleKeyGroup.attr("transform", "translate(70, 0)");
+    svg = d3.select('.pyramid-svg');
+    leftBars = svg.selectAll('.pyramid-bar.left');
+    rightBars = svg.selectAll('.pyramid-bar.right');
+    overlayBars = svg.selectAll('.overlay-rect');
+    xAxisGroupLeft = svg.select('.x.axis.left');
+    xAxisGroupRight = svg.select('.x.axis.right');
+    leftBars.data(bar_females_perc).attr({
+      width: function(d) {
+        return x(bar_females_perc)(d);
+      },
+      x: function(d) {
+        return xLeft(bar_females_perc)(d);
+      }
+    });
+    rightBars.data(bar_males_perc).attr({
+      width: function(d) {
+        return x(bar_males_perc)(d);
+      }
+    });
+    overlayBars.data(overlay_data);
+    xAxisGroupLeft.call(xAxisLeft(bar_females_perc_format));
+    return xAxisGroupRight.call(xAxis(bar_males_perc_format));
+  };
   my.width = function(value) {
     if (!arguments.length) {
       return width;
@@ -6158,13 +6274,13 @@ module.exports = drawPyramid;
 
 
 
-},{}],58:[function(require,module,exports){
+},{}],59:[function(require,module,exports){
 // Generated by CoffeeScript 1.10.0
 var drawPyrBars;
 
 drawPyrBars = function(options) {
-  var activeBarsValue, age, bars_height, bars_width, category_value, container, dataArr, females, format, height, init, initial, isDefault, males, margin, my, ref, ref1, update, width, x, xAxis, y;
-  container = options.container, age = options.age, females = options.females, males = options.males, initial = options.initial, isDefault = options.isDefault, activeBarsValue = options.activeBarsValue;
+  var activeBarsValue, age, bars_height, bars_width, category_value, container, dataArr, females, format, height, init, initial, isDefault, males, margin, my, ref, ref1, resize, resizePyramidBars, update, width, x, xAxis, y;
+  container = options.container, age = options.age, females = options.females, males = options.males, initial = options.initial, isDefault = options.isDefault, activeBarsValue = options.activeBarsValue, resize = options.resize;
   width = (ref = $(container).width()) != null ? ref : 358;
   height = (ref1 = $(container).height()) != null ? ref1 : 275;
   dataArr = [
@@ -6196,6 +6312,9 @@ drawPyrBars = function(options) {
   ]);
   category_value = activeBarsValue === 'default' ? 'England \& Wales' : activeBarsValue;
   my = function() {
+    if (resize === true) {
+      return resizePyramidBars();
+    }
     if (initial === true && isDefault === true) {
       return init();
     } else if (!((initial != null) && isDefault === false)) {
@@ -6268,6 +6387,33 @@ drawPyrBars = function(options) {
     ageBand.text(age);
     return categoryValue.text(category_value);
   };
+  resizePyramidBars = function() {
+    var agesGroup, labelsGroup, main_group, svg, xAxisGroup;
+    svg = d3.select('.pyramid-bars-svg');
+    main_group = svg.select('.main-group');
+    labelsGroup = svg.select('.labels-group');
+    agesGroup = svg.select('.ages-group');
+    xAxisGroup = svg.select('.x.axis');
+    main_group.attr('transform', "translate(" + margin.left + ", " + margin.top + ")");
+    labelsGroup.attr('transform', "translate(" + (margin.left + x.rangeBand() / 2) + ", " + (margin.top - 15) + ")");
+    xAxisGroup.attr("transform", "translate(" + margin.left + ", " + (height - margin.bottom) + ")");
+    agesGroup.attr("transform", "translate(20, " + (height / 2 - 30) + ")");
+    main_group.selectAll('.bar').data(dataArr).enter().append('rect').attr({
+      x: function(d) {
+        return x(d.sex);
+      },
+      height: bars_height - y(0),
+      ry: 3,
+      width: x.rangeBand(),
+      y: function(d) {
+        return y(d.value);
+      },
+      height: function(d) {
+        return bars_height - y(d.value);
+      }
+    });
+    return xAxisGroup.call(xAxis);
+  };
   my.width = function(value) {
     if (!arguments.length) {
       return width;
@@ -6289,12 +6435,12 @@ module.exports = drawPyrBars;
 
 
 
-},{}],59:[function(require,module,exports){
+},{}],60:[function(require,module,exports){
 // Generated by CoffeeScript 1.10.0
 var drawSunburst;
 
 drawSunburst = function(options) {
-  var activeCategory, activeValue, arc, arcTween, attachHoverHandlers, container, data, ethnic_group_arr, format, getColour, getSubColour, height, initTween, isDefault, margin, my, nested_data, nested_data_init, onInitDone, onMouseOver, partition, percFormat, radius, ref, ref1, stash, total_item, total_item_value, width, y;
+  var activeCategory, activeValue, arc, arcTween, attachHoverHandlers, container, data, ethnic_group_arr, format, getColour, getSubColour, height, initTween, isDefault, margin, mobile_portrait_width, my, nested_data, nested_data_init, onInitDone, onMouseOver, partition, percFormat, radius, ref, ref1, stash, total_item, total_item_value, width, y;
   container = options.container, data = options.data, isDefault = options.isDefault, onMouseOver = options.onMouseOver, activeCategory = options.activeCategory, activeValue = options.activeValue, onInitDone = options.onInitDone;
   nested_data = data.d3_nested_data;
   total_item = data.total_item;
@@ -6351,6 +6497,7 @@ drawSunburst = function(options) {
   };
   width = (ref = $(container).width()) != null ? ref : 1140;
   height = (ref1 = $(container).height()) != null ? ref1 : 500;
+  mobile_portrait_width = 740;
   margin = {
     top: 25,
     right: 0,
@@ -6454,7 +6601,7 @@ drawSunburst = function(options) {
     center_group.attr('transform', "translate(" + (width / 2) + ", " + (half_height + margin.middle - margin.top * 2) + ")");
     center_ethnic_group.attr('transform', "translate(" + (width / 2) + ", " + (half_height + margin.text - margin.top * 2) + ")");
     center_percent_group.attr('transform', "translate(" + (width / 2) + ", " + (half_height + (margin.text * 2) - margin.top * 2) + ")");
-    center_total_value_group.attr('transform', "translate(" + (width / 2) + ", " + (half_height + (margin.text * 3) - margin.top * 2) + ")");
+    center_total_value_group.attr('transform', "translate(" + (width / 2) + ", " + (half_height + (margin.text * 2.7) - margin.top * 2) + ")");
     key_group.attr('transform', "translate(" + ((width * 0.9) + 20) + ", " + margin.top + ")");
     key_text_group.attr('transform', "translate(" + (width * 0.9) + ", " + (margin.top + 17) + ")");
     paths = main_group.selectAll('path').data(partition.nodes(nested_data)).enter().append('path').attr({
@@ -6517,6 +6664,26 @@ drawSunburst = function(options) {
     newSegments = main_group.selectAll('path.sunburst-path').data(partition.nodes(nested_data)).transition().duration(1500).delay(500).attrTween('d', arcTween);
     attachHoverHandlers();
   };
+  my.resize = function() {
+    var center_ethnic_group, center_group, center_percent_group, center_total_value_group, half_height, key_group, key_text_group, main_group, paths, svg;
+    svg = d3.select('.sunburst-svg');
+    main_group = svg.select('.main-group');
+    center_group = svg.select('.center-text-group');
+    center_total_value_group = svg.select('.total-value-group');
+    center_ethnic_group = svg.select('.ethnic-group-text');
+    center_percent_group = svg.select('.percentage-group');
+    key_group = svg.select('.key-group');
+    key_text_group = svg.select('.key-text-group');
+    half_height = height * 0.52;
+    main_group.attr('transform', "translate(" + (width / 2) + ", " + half_height + ")");
+    center_group.attr('transform', "translate(" + (width / 2) + ", " + (half_height + margin.middle - margin.top * 2) + ")");
+    center_ethnic_group.attr('transform', "translate(" + (width / 2) + ", " + (half_height + margin.text - margin.top * 2) + ")");
+    center_percent_group.attr('transform', "translate(" + (width / 2) + ", " + (half_height + (margin.text * 2) - margin.top * 2) + ")");
+    center_total_value_group.attr('transform', "translate(" + (width / 2) + ", " + (half_height + (margin.text * 3) - margin.top * 2) + ")");
+    key_group.attr('transform', "translate(" + ((width * 0.9) + 20) + ", " + margin.top + ")");
+    key_text_group.attr('transform', "translate(" + (width * 0.9) + ", " + (margin.top + 17) + ")");
+    return paths = main_group.selectAll('path').data(partition.nodes(nested_data)).attr('d', arc);
+  };
   my.width = function(value) {
     if (!arguments.length) {
       return width;
@@ -6538,7 +6705,7 @@ module.exports = drawSunburst;
 
 
 
-},{}],60:[function(require,module,exports){
+},{}],61:[function(require,module,exports){
 // Generated by CoffeeScript 1.10.0
 var districts;
 
@@ -6664,7 +6831,7 @@ module.exports = {
 
 
 
-},{"../../../../json/geography/districts.json":80}],61:[function(require,module,exports){
+},{"../../../../json/geography/districts.json":81}],62:[function(require,module,exports){
 // Generated by CoffeeScript 1.10.0
 var ControlsNew, OnsAttr, SunburstComponent, category_options, data, drawSunburst, value_options;
 
@@ -6687,14 +6854,32 @@ value_options = {
 category_options = data.category_options;
 
 SunburstComponent = React.createClass({displayName: "SunburstComponent",
-  componentDidMount: function() {
-    if (this.props.isDefault === true && this.props.init_done === false) {
-      return this.props.fetchSunburstData(null);
+  getAppropriateHeight: function() {
+    var window_height, window_width;
+    window_width = $(window).width();
+    window_height = $(window).height();
+    if (window_height > 550 && window_width > 740) {
+      return 550;
+    } else {
+      return 400;
     }
   },
-  reactDrawSunburst: function() {
+  componentDidMount: function() {
+    if (this.props.isDefault === true && this.props.init_done === false) {
+      this.props.fetchSunburstData(null);
+    }
+    return $(window).resize((function(_this) {
+      return function() {
+        return _this.reactDrawSunburst({
+          resize: true
+        });
+      };
+    })(this));
+  },
+  reactDrawSunburst: function(resize_flag) {
     var sunburst;
     sunburst = drawSunburst({
+      resize: resize_flag.resize,
       container: this.refs.sunburstSvg,
       data: this.props.data,
       isDefault: this.props.isDefault,
@@ -6703,6 +6888,9 @@ SunburstComponent = React.createClass({displayName: "SunburstComponent",
       activeValue: this.props.activeValue,
       onInitDone: this.props.onInitDone
     });
+    if (resize_flag.resize === true) {
+      return sunburst.resize();
+    }
     if (this.props.isDefault === true && this.props.updateSunburst === true) {
       return sunburst.init();
     } else {
@@ -6711,7 +6899,9 @@ SunburstComponent = React.createClass({displayName: "SunburstComponent",
   },
   componentDidUpdate: function() {
     if (this.props.updateSunburst === true) {
-      return this.reactDrawSunburst();
+      return this.reactDrawSunburst({
+        resize: false
+      });
     }
   },
   render: function() {
@@ -6730,7 +6920,7 @@ SunburstComponent = React.createClass({displayName: "SunburstComponent",
       "className": "sunburst-svg",
       "style": {
         width: '100%',
-        height: '550px'
+        height: this.getAppropriateHeight()
       },
       "ref": "sunburstSvg"
     }, React.createElement("g", {
@@ -6755,7 +6945,7 @@ module.exports = SunburstComponent;
 
 
 
-},{"../../partials/chart-ons-attribution.js":3,"../chart-controls-new.js":54,"./d3/sunburst-partition.js":59,"./data/pyramid-chart-controls.js":60}],62:[function(require,module,exports){
+},{"../../partials/chart-ons-attribution.js":3,"../chart-controls-new.js":55,"./d3/sunburst-partition.js":60,"./data/pyramid-chart-controls.js":61}],63:[function(require,module,exports){
 // Generated by CoffeeScript 1.10.0
 var drawPyrBars, pyBarsComponent;
 
@@ -6771,10 +6961,32 @@ pyBarsComponent = React.createClass({displayName: "pyBarsComponent",
       return $(window).height() - 320;
     }
   },
+  componentDidMount: function() {
+    return $(window).resize((function(_this) {
+      return function() {
+        return _this.onResize();
+      };
+    })(this));
+  },
+  onResize: function() {
+    var resizeChart;
+    resizeChart = drawPyrBars({
+      resize: true,
+      container: this.refs.pyramidBarsSvg,
+      age: this.props._mouseOverData.age,
+      females: this.props._mouseOverData.females,
+      males: this.props._mouseOverData.males,
+      initial: this.props._mouseOverData.initial,
+      isDefault: this.props.isDefault,
+      activeBarsValue: this.props.activeBarsValue
+    });
+    return resizeChart();
+  },
   componentDidUpdate: function() {
     var pyrBars;
     if (this.props.updateBars === true) {
       pyrBars = drawPyrBars({
+        resize: false,
         container: this.refs.pyramidBarsSvg,
         age: this.props._mouseOverData.age,
         females: this.props._mouseOverData.females,
@@ -6815,7 +7027,7 @@ module.exports = pyBarsComponent;
 
 
 
-},{"./d3/pyramidBars.js":58}],63:[function(require,module,exports){
+},{"./d3/pyramidBars.js":59}],64:[function(require,module,exports){
 // Generated by CoffeeScript 1.10.0
 var OnsAttr, PyramidComponent, PyramidControls, data, drawPyramid, value_options;
 
@@ -6839,7 +7051,7 @@ PyramidComponent = React.createClass({displayName: "PyramidComponent",
   getAppropriateHeight: function() {
     var window_height;
     window_height = $(window).height();
-    if (window_height > 700) {
+    if (window_height > 550) {
       return 600;
     } else {
       return window_height * 1.3;
@@ -6848,10 +7060,53 @@ PyramidComponent = React.createClass({displayName: "PyramidComponent",
   componentWillMount: function() {
     return this.props.fetchPyramidData(null);
   },
+  componentDidMount: function() {
+    return $(window).resize((function(_this) {
+      return function() {
+        return _this.onResize();
+      };
+    })(this));
+  },
+  onResize: function() {
+    var ref, ref1, ref2, ref3, ref4, ref5, ref6, ref7, resizeChart;
+    resizeChart = drawPyramid({
+      resize: true,
+      container: this.refs.pyramidSvg,
+      ages: this.props.data.bars.ages,
+      bar_males: this.props.data.bars.males,
+      bar_females: this.props.data.bars.females,
+      bar_males_perc: this.props.data.bars.malesPerc,
+      bar_males_perc_format: this.props.data.bars.malesPercFormat,
+      bar_males_sum: this.props.data.bars.malesSum,
+      bar_females_perc: this.props.data.bars.femalesPerc,
+      bar_females_perc_format: this.props.data.bars.femalesPercFormat,
+      bar_females_sum: this.props.data.bars.femalesSum,
+      outline_males: (ref = this.props.data.outline.males) != null ? ref : null,
+      outline_females: (ref1 = this.props.data.outline.females) != null ? ref1 : null,
+      outline_males_perc: (ref2 = this.props.data.outline.malesPerc) != null ? ref2 : null,
+      outline_males_perc_format: (ref3 = this.props.data.outline.malesPercFormat) != null ? ref3 : null,
+      outline_males_sum: (ref4 = this.props.data.outline.malesSum) != null ? ref4 : null,
+      outline_females_perc: (ref5 = this.props.data.outline.femalesPerc) != null ? ref5 : null,
+      outline_females_perc_format: (ref6 = this.props.data.outline.femalesPercFormat) != null ? ref6 : null,
+      outline_females_sum: (ref7 = this.props.data.outline.femalesSum) != null ? ref7 : null,
+      overlay_data: this.props.data.bars.overlayData,
+      onMouseOver: this.props.onMouseOver,
+      onFirstLineDrawn: this.props.onFirstLineDrawn,
+      isDefault: this.props.isDefault,
+      outlineFilter: this.props.outlineFilter,
+      updatePyramid: this.props.updatePyramid,
+      updateOutline: this.props.updateOutline,
+      activeLineCategory: this.props.activeLineCategory,
+      activeLineValue: this.props.activeLineValue,
+      isFirstLine: this.props.isFirstLine
+    });
+    return resizeChart();
+  },
   componentDidUpdate: function() {
     var pyramid, ref, ref1, ref2, ref3, ref4, ref5, ref6, ref7;
     if (this.props.updatePyramid === true || this.props.updateOutline === true) {
       pyramid = drawPyramid({
+        resize: false,
         container: this.refs.pyramidSvg,
         ages: this.props.data.bars.ages,
         bar_males: this.props.data.bars.males,
@@ -6932,7 +7187,7 @@ module.exports = PyramidComponent;
 
 
 
-},{"../../partials/chart-ons-attribution.js":3,"./chart-controls-pyramid.js":55,"./d3/pyramid.js":57,"./data/pyramid-chart-controls.js":60}],64:[function(require,module,exports){
+},{"../../partials/chart-ons-attribution.js":3,"./chart-controls-pyramid.js":56,"./d3/pyramid.js":58,"./data/pyramid-chart-controls.js":61}],65:[function(require,module,exports){
 // Generated by CoffeeScript 1.10.0
 var TableComponent, format;
 
@@ -6950,7 +7205,7 @@ module.exports = TableComponent;
 
 
 
-},{}],65:[function(require,module,exports){
+},{}],66:[function(require,module,exports){
 // Generated by CoffeeScript 1.10.0
 var BarsComponent, ControlsNew, OnsAttr, category_options, data, drawRelBars, value_options;
 
@@ -6973,14 +7228,24 @@ value_options = {
 category_options = data.category_options;
 
 BarsComponent = React.createClass({displayName: "BarsComponent",
-  componentDidMount: function() {
+  componentWillMount: function() {
     if (this.props.isDefault === true && this.props.init_done === false) {
       return this.props.fetchReligionData(null);
     }
   },
-  reactDrawBars: function() {
+  componentDidMount: function() {
+    return $(window).resize((function(_this) {
+      return function() {
+        return _this.reactDrawBars({
+          resize: true
+        });
+      };
+    })(this));
+  },
+  reactDrawBars: function(resize_flag) {
     var bars;
     bars = drawRelBars({
+      resize: resize_flag.resize,
       container: this.refs.barsSvg,
       data: this.props.data,
       isDefault: this.props.isDefault,
@@ -6989,6 +7254,9 @@ BarsComponent = React.createClass({displayName: "BarsComponent",
       activeValue: this.props.activeValue,
       onInitDone: this.props.onInitDone
     });
+    if (resize_flag.resize === true) {
+      return bars.resize();
+    }
     if (this.props.isDefault === true && this.props.updateRelBars === true) {
       return bars.init();
     } else {
@@ -6997,7 +7265,9 @@ BarsComponent = React.createClass({displayName: "BarsComponent",
   },
   componentDidUpdate: function() {
     if (this.props.updateRelBars === true) {
-      return this.reactDrawBars();
+      return this.reactDrawBars({
+        resize: false
+      });
     }
   },
   render: function() {
@@ -7035,7 +7305,7 @@ module.exports = BarsComponent;
 
 
 
-},{"../../partials/chart-ons-attribution.js":3,"../chart-controls-new.js":54,"./d3/bar-chart.js":56,"./data/pyramid-chart-controls.js":60}],66:[function(require,module,exports){
+},{"../../partials/chart-ons-attribution.js":3,"../chart-controls-new.js":55,"./d3/bar-chart.js":57,"./data/pyramid-chart-controls.js":61}],67:[function(require,module,exports){
 // Generated by CoffeeScript 1.10.0
 var EthnicSection;
 
@@ -7083,7 +7353,7 @@ module.exports = EthnicSection;
 
 
 
-},{}],67:[function(require,module,exports){
+},{}],68:[function(require,module,exports){
 // Generated by CoffeeScript 1.10.0
 var PopulationPyramid;
 
@@ -7133,7 +7403,7 @@ module.exports = PopulationPyramid;
 
 
 
-},{}],68:[function(require,module,exports){
+},{}],69:[function(require,module,exports){
 // Generated by CoffeeScript 1.10.0
 var ReligiousSection;
 
@@ -7181,7 +7451,7 @@ module.exports = ReligiousSection;
 
 
 
-},{}],69:[function(require,module,exports){
+},{}],70:[function(require,module,exports){
 // Generated by CoffeeScript 1.10.0
 var drawGenHealthChart;
 
@@ -7334,14 +7604,13 @@ drawGenHealthChart = function(options) {
     return attachHoverHandlers();
   };
   my.update = function() {
-    var circles, groups, labels, main_group_lines, point_labels, svg, x_axis_group, y_axis_group;
+    var circles, groups, labels, main_group_lines, point_labels, svg, y_axis_group;
     svg = d3.select('.gen-health-svg');
     groups = svg.selectAll('.ethnicity');
     main_group_lines = svg.selectAll('.main-group path');
     labels = svg.selectAll('.label');
     circles = groups.selectAll('.circle');
     point_labels = groups.selectAll('.point-label');
-    x_axis_group = svg.select('.x.axis');
     y_axis_group = svg.select('.y.axis');
     groups.data(d3_array);
     main_group_lines.data(d3_array).transition().duration(1000).delay(500).attr('d', function(d) {
@@ -7373,6 +7642,42 @@ drawGenHealthChart = function(options) {
     });
     y_axis_group.transition().duration(1000).delay(500).call(yAxis);
     return attachHoverHandlers();
+  };
+  my.resize = function() {
+    var circles, groups, labels, main_group_lines, point_labels, svg, title_group, x_axis_group, y_axis_group;
+    svg = d3.select('.gen-health-svg');
+    groups = svg.selectAll('.ethnicity');
+    main_group_lines = svg.selectAll('.main-group path');
+    labels = svg.selectAll('.label');
+    circles = groups.selectAll('.circle');
+    point_labels = groups.selectAll('.point-label');
+    y_axis_group = svg.select('.y.axis');
+    x_axis_group = svg.select('.x.axis');
+    title_group = svg.select('.title-group');
+    title_group.attr('transform', "translate(" + (chart_width / 3 - margin.left) + ", 0)");
+    main_group_lines.attr('d', function(d) {
+      return line(d.values);
+    });
+    labels.attr({
+      transform: function(d) {
+        return "translate(" + (x(d.values[d.values.length - 1].key)) + ", " + (y(d.values[d.values.length - 1].values.bad)) + ")";
+      }
+    });
+    circles.attr({
+      cx: function(d) {
+        return x(d.key);
+      },
+      cy: function(d) {
+        return y(d.values.bad);
+      }
+    });
+    point_labels.attr({
+      transform: function(d) {
+        return "translate(" + (x(d.key)) + ", " + (y(d.values.bad)) + ")";
+      }
+    });
+    y_axis_group.call(yAxis);
+    return x_axis_group.call(xAxis);
   };
   my.highlightDetail = function() {
     var groups, labels, lines, points, selected_lines, svg;
@@ -7460,7 +7765,7 @@ module.exports = drawGenHealthChart;
 
 
 
-},{}],70:[function(require,module,exports){
+},{}],71:[function(require,module,exports){
 // Generated by CoffeeScript 1.10.0
 var drawDisabilityChart;
 
@@ -7634,20 +7939,21 @@ drawDisabilityChart = function(options) {
       opacity: 0,
       'font-size': '12px'
     }).style("text-anchor", "middle").text('Long-term illness / disability by ethinicity and age group').transition().duration(1500).attr('opacity', 1);
-    ticks = svg.selectAll('.x .tick text');
+    ticks = svg.selectAll('.x .tick');
     ticks.each(function(d, i) {
+      var $this;
       if (i % 2 === 0) {
-        return d3.select(this).attr('y', '20');
+        $this = d3.select(this);
+        $this.select('text').attr('y', margin.p);
+        return $this.select('line').attr('y2', 15);
       }
     });
     return attachHoverHandlers();
   };
   my.update = function() {
-    var groups, svg, x_axis_group, y_axis_group;
+    var groups, svg;
     svg = d3.select('.disability-svg');
     groups = svg.selectAll('.ethnicity');
-    x_axis_group = svg.select('.x.axis');
-    y_axis_group = svg.select('.y.axis');
     groups.data(d3_array);
     groups.selectAll('rect').data(function(d) {
       return d.values;
@@ -7660,6 +7966,49 @@ drawDisabilityChart = function(options) {
       }
     });
     return attachHoverHandlers();
+  };
+  my.resize = function() {
+    var groups, legend_group, svg, ticks, title_group, tooltip_groups, x_axis_group, y_axis_group;
+    svg = d3.select('.disability-svg');
+    groups = svg.selectAll('.ethnicity');
+    x_axis_group = svg.select('.x.axis');
+    y_axis_group = svg.select('.y.axis');
+    title_group = svg.select('.title-group');
+    legend_group = svg.select('.legend-group');
+    ticks = svg.selectAll('.x .tick');
+    title_group.attr('transform', "translate(" + (chart_width / 2 + margin.left) + ", 0)");
+    legend_group.attr('transform', "translate(" + (chart_width - margin.p) + ", " + margin.top + ")");
+    groups.attr({
+      transform: function(d) {
+        return "translate(" + (x0(d.key)) + ", 0)";
+      }
+    });
+    groups.selectAll('rect').attr({
+      width: x1.rangeBand(),
+      x: function(d) {
+        return x1(d.key);
+      }
+    });
+    x_axis_group.call(xAxis);
+    y_axis_group.call(yAxis);
+    ticks.each(function(d, i) {
+      var $this;
+      if (i % 2 === 0) {
+        $this = d3.select(this);
+        $this.select('text').attr('y', margin.p);
+        return $this.select('line').attr('y2', 15);
+      }
+    });
+    tooltip_groups = groups.select('.tooltip-group');
+    tooltip_groups.select('rect').attr({
+      width: x0.rangeBand() + margin.p + 5,
+      y: y(0.3)
+    });
+    return tooltip_groups.selectAll('text').attr({
+      transform: function(d) {
+        return "translate(" + (x0.rangeBand() / 2) + ", " + (y(0.3)) + ")";
+      }
+    });
   };
   attachHoverHandlers = function() {
     var rects, svg;
@@ -7716,7 +8065,7 @@ module.exports = drawDisabilityChart;
 
 
 
-},{}],71:[function(require,module,exports){
+},{}],72:[function(require,module,exports){
 // Generated by CoffeeScript 1.10.0
 var ControlsNew, GenHealthChart, OnsAttr, category_options, data, genHealthChart, value_options;
 
@@ -7742,10 +8091,33 @@ GenHealthChart = React.createClass({displayName: "GenHealthChart",
   componentWillMount: function() {
     return this.props.fetchGenHealthData(null);
   },
+  componentDidMount: function() {
+    return $(window).resize((function(_this) {
+      return function() {
+        return _this.onResize();
+      };
+    })(this));
+  },
+  onResize: function() {
+    var draw;
+    draw = genHealthChart({
+      resize: true,
+      container: this.refs.genHealthSvg,
+      isDefault: this.props.isDefault,
+      data: this.props.data,
+      activeCategory: this.props.activeCategory,
+      activeValue: this.props.activeValue,
+      onMouseOver: this.props.onMouseOver,
+      highlights: this.props._highlights,
+      updateHighlights: this.props.updateHighlights
+    });
+    return draw.resize();
+  },
   componentDidUpdate: function() {
     var draw;
     if (this.props.updateGenHealth === true) {
       draw = genHealthChart({
+        resize: false,
         container: this.refs.genHealthSvg,
         isDefault: this.props.isDefault,
         data: this.props.data,
@@ -7805,7 +8177,7 @@ module.exports = GenHealthChart;
 
 
 
-},{"../../partials/chart-ons-attribution.js":3,"../chart-controls-new.js":54,"../demographics/data/pyramid-chart-controls.js":60,"./d3/gen-health-chart.js":69}],72:[function(require,module,exports){
+},{"../../partials/chart-ons-attribution.js":3,"../chart-controls-new.js":55,"../demographics/data/pyramid-chart-controls.js":61,"./d3/gen-health-chart.js":70}],73:[function(require,module,exports){
 // Generated by CoffeeScript 1.10.0
 var GenHealthDetailComponent, format, percFormat;
 
@@ -7968,7 +8340,7 @@ module.exports = GenHealthDetailComponent;
 
 
 
-},{}],73:[function(require,module,exports){
+},{}],74:[function(require,module,exports){
 // Generated by CoffeeScript 1.10.0
 var ControlsNew, DisabilityChart, OnsAttr, category_options, data, disabilityChart, value_options;
 
@@ -7997,10 +8369,31 @@ DisabilityChart = React.createClass({displayName: "DisabilityChart",
       return this.props.onInitDone();
     }
   },
+  componentDidMount: function() {
+    return $(window).resize((function(_this) {
+      return function() {
+        return _this.onResize();
+      };
+    })(this));
+  },
+  onResize: function() {
+    var draw;
+    draw = disabilityChart({
+      resize: true,
+      container: this.refs.disabilitySvg,
+      isDefault: this.props.isDefault,
+      data: this.props.data,
+      activeCategory: this.props.activeCategory,
+      activeValue: this.props.activeValue,
+      onMouseOver: this.props.onMouseOver
+    });
+    return draw.resize();
+  },
   componentDidUpdate: function() {
     var draw;
     if (this.props.updateDisability === true) {
       draw = disabilityChart({
+        resize: false,
         container: this.refs.disabilitySvg,
         isDefault: this.props.isDefault,
         data: this.props.data,
@@ -8052,7 +8445,7 @@ module.exports = DisabilityChart;
 
 
 
-},{"../../partials/chart-ons-attribution.js":3,"../chart-controls-new.js":54,"../demographics/data/pyramid-chart-controls.js":60,"./d3/health-disability-chart.js":70}],74:[function(require,module,exports){
+},{"../../partials/chart-ons-attribution.js":3,"../chart-controls-new.js":55,"../demographics/data/pyramid-chart-controls.js":61,"./d3/health-disability-chart.js":71}],75:[function(require,module,exports){
 // Generated by CoffeeScript 1.10.0
 var GeneralHealthSection;
 
@@ -8100,7 +8493,7 @@ module.exports = GeneralHealthSection;
 
 
 
-},{}],75:[function(require,module,exports){
+},{}],76:[function(require,module,exports){
 // Generated by CoffeeScript 1.10.0
 var DisabilitySection;
 
@@ -8148,7 +8541,7 @@ module.exports = DisabilitySection;
 
 
 
-},{}],76:[function(require,module,exports){
+},{}],77:[function(require,module,exports){
 // Generated by CoffeeScript 1.10.0
 var drawEconByCountryChart;
 
@@ -8289,18 +8682,6 @@ drawEconByCountryChart = function(options) {
     bottom_countries = main_bottom_group.selectAll('.country-g').data(d3_array, key).enter().append('g').attr('transform', function(d) {
       return "translate(" + (x(d.country)) + ", 0)";
     }).attr('class', 'country-g');
-    top_countries.append('text').text(function(d) {
-      return trimCountryString(d.country);
-    }).attr({
-      transform: function(d) {
-        return "translate(" + (0.5 * x.rangeBand()) + ", " + (y(d.in_work.sum_perc) - 5) + ")";
-      },
-      'font-size': '80%',
-      'font-weight': 'bold',
-      'text-anchor': 'middle',
-      "class": 'country-label',
-      opacity: 0
-    }).transition().duration(1500).attr('opacity', 1);
     top_countries.selectAll('rect').data(function(d) {
       return d.in_work_categories;
     }).enter().append('rect').attr({
@@ -8337,6 +8718,18 @@ drawEconByCountryChart = function(options) {
         return (y0(d.y1)) - (y0(d.y0));
       }
     });
+    top_countries.append('text').text(function(d) {
+      return trimCountryString(d.country);
+    }).attr({
+      transform: function(d) {
+        return "translate(" + (0.5 * x.rangeBand()) + ", " + (y(d.in_work.sum_perc) - 5) + ")";
+      },
+      'font-size': '100%',
+      'font-weight': 'bold',
+      'text-anchor': 'middle',
+      "class": 'country-label',
+      opacity: 0
+    }).transition().duration(1500).attr('opacity', 1);
     tooltip_group_top = main_top_group.append('g').attr('class', 'tooltip-group top').attr('opacity', 0);
     tooltip_group_bottom = main_bottom_group.append('g').attr('class', 'tooltip-group bottom').attr('transform', "translate(0, " + (chart_width * 0.5) + ")").attr('opacity', 0);
     tooltip_group_top.append('rect').attr({
@@ -8452,6 +8845,53 @@ drawEconByCountryChart = function(options) {
     });
     return attachHoverHandlers();
   };
+  my.resize = function() {
+    var bottom_countries, bottom_rect_group, main_bottom_group, main_top_group, svg, top_countries, top_rect_group, x_axis_divider_group, y_axis_bottom_group, y_axis_top_group;
+    svg = d3.select('.econ-country-svg');
+    main_top_group = svg.select('.main-group-top');
+    main_bottom_group = svg.select('.main-group-bottom');
+    top_rect_group = svg.select('.top-group-rect');
+    bottom_rect_group = svg.select('.bottom-group-rect');
+    top_countries = main_top_group.selectAll('.country-g');
+    bottom_countries = main_bottom_group.selectAll('.country-g');
+    y_axis_top_group = svg.select('.y.y-top.axis');
+    y_axis_bottom_group = svg.select('.y.y-bottom.axis');
+    x_axis_divider_group = svg.select('.x-axis-divider');
+    top_rect_group.select('rect').attr({
+      width: chart_width
+    });
+    main_top_group.select('text').attr({
+      x: chart_width * 0.5
+    });
+    bottom_rect_group.select('rect').attr({
+      width: chart_width
+    });
+    main_bottom_group.select('text').attr({
+      x: chart_width * 0.5,
+      y: chart_height * 0.5 - margin.label
+    });
+    top_countries.selectAll('rect').attr({
+      width: x.rangeBand()
+    });
+    top_countries.selectAll('.country-label').attr('transform', function(d) {
+      return "translate(" + (0.5 * x.rangeBand()) + ", " + (y(d.in_work.sum_perc) - 5) + ")";
+    });
+    top_countries.attr('transform', function(d) {
+      return "translate(" + (x(d.country)) + ", 0)";
+    });
+    bottom_countries.attr('transform', function(d) {
+      return "translate(" + (x(d.country)) + ", 0)";
+    });
+    bottom_countries.selectAll('rect').attr({
+      width: x.rangeBand()
+    });
+    y_axis_top_group.call(yAxisTop);
+    y_axis_bottom_group.call(yAxisBottom);
+    x_axis_divider_group.select('line').attr({
+      x2: chart_width
+    });
+    return attachHoverHandlers();
+  };
   attachHoverHandlers = function() {
     var bottom_rects, hover_colour, main_bottom_group, main_top_group, rect_opacity, svg, top_rects;
     hover_colour = '#ddd';
@@ -8519,7 +8959,7 @@ module.exports = drawEconByCountryChart;
 
 
 
-},{}],77:[function(require,module,exports){
+},{}],78:[function(require,module,exports){
 // Generated by CoffeeScript 1.10.0
 var ControlsNew, EconByCountry, OnsAttr, category_options, data, econByCountryChart, value_options;
 
@@ -8545,10 +8985,31 @@ EconByCountry = React.createClass({displayName: "EconByCountry",
   componentWillMount: function() {
     return this.props.fetchEconCountryData(null);
   },
+  componentDidMount: function() {
+    return $(window).resize((function(_this) {
+      return function() {
+        return _this.onResize();
+      };
+    })(this));
+  },
+  onResize: function() {
+    var draw;
+    draw = econByCountryChart({
+      resize: true,
+      container: this.refs.econCountrySvg,
+      isDefault: this.props.isDefault,
+      data: this.props.data,
+      activeCategory: this.props.activeCategory,
+      activeValue: this.props.activeValue,
+      onMouseOver: this.props.onMouseOver
+    });
+    return draw.resize();
+  },
   componentDidUpdate: function() {
     var draw;
     if (this.props.updateMainChart === true) {
       draw = econByCountryChart({
+        resize: false,
         container: this.refs.econCountrySvg,
         isDefault: this.props.isDefault,
         data: this.props.data,
@@ -8608,7 +9069,7 @@ module.exports = EconByCountry;
 
 
 
-},{"../../partials/chart-ons-attribution.js":3,"../chart-controls-new.js":54,"../demographics/data/pyramid-chart-controls.js":60,"./d3/econ-activity-country-chart.js":76}],78:[function(require,module,exports){
+},{"../../partials/chart-ons-attribution.js":3,"../chart-controls-new.js":55,"../demographics/data/pyramid-chart-controls.js":61,"./d3/econ-activity-country-chart.js":77}],79:[function(require,module,exports){
 // Generated by CoffeeScript 1.10.0
 var EconByCountryDetailComponent;
 
@@ -8651,7 +9112,7 @@ module.exports = EconByCountryDetailComponent;
 
 
 
-},{}],79:[function(require,module,exports){
+},{}],80:[function(require,module,exports){
 // Generated by CoffeeScript 1.10.0
 var EconActivityByCountry;
 
@@ -8699,10 +9160,10 @@ module.exports = EconActivityByCountry;
 
 
 
-},{}],80:[function(require,module,exports){
+},{}],81:[function(require,module,exports){
 module.exports=// Array of objects with 'display' and 'value' properties for the display name and API code respectively.
 module.exports = [{"value":1946157057,"label":"Darlington"},{"value":1946157058,"label":"County Durham"},{"value":1946157059,"label":"Hartlepool"},{"value":1946157060,"label":"Middlesbrough"},{"value":1946157061,"label":"Northumberland"},{"value":1946157062,"label":"Redcar and Cleveland"},{"value":1946157063,"label":"Stockton-on-Tees"},{"value":1946157064,"label":"Gateshead"},{"value":1946157065,"label":"Newcastle upon Tyne"},{"value":1946157066,"label":"North Tyneside"},{"value":1946157067,"label":"South Tyneside"},{"value":1946157068,"label":"Sunderland"},{"value":1946157069,"label":"Blackburn with Darwen"},{"value":1946157070,"label":"Blackpool"},{"value":1946157071,"label":"Cheshire East"},{"value":1946157072,"label":"Cheshire West and Chester"},{"value":1946157073,"label":"Halton"},{"value":1946157074,"label":"Warrington"},{"value":1946157075,"label":"Allerdale"},{"value":1946157076,"label":"Barrow-in-Furness"},{"value":1946157077,"label":"Carlisle"},{"value":1946157078,"label":"Copeland"},{"value":1946157079,"label":"Eden"},{"value":1946157080,"label":"South Lakeland"},{"value":1946157081,"label":"Bolton"},{"value":1946157082,"label":"Bury"},{"value":1946157083,"label":"Manchester"},{"value":1946157084,"label":"Oldham"},{"value":1946157085,"label":"Rochdale"},{"value":1946157086,"label":"Salford"},{"value":1946157087,"label":"Stockport"},{"value":1946157088,"label":"Tameside"},{"value":1946157089,"label":"Trafford"},{"value":1946157090,"label":"Wigan"},{"value":1946157091,"label":"Burnley"},{"value":1946157092,"label":"Chorley"},{"value":1946157093,"label":"Fylde"},{"value":1946157094,"label":"Hyndburn"},{"value":1946157095,"label":"Lancaster"},{"value":1946157096,"label":"Pendle"},{"value":1946157097,"label":"Preston"},{"value":1946157098,"label":"Ribble Valley"},{"value":1946157099,"label":"Rossendale"},{"value":1946157100,"label":"South Ribble"},{"value":1946157101,"label":"West Lancashire"},{"value":1946157102,"label":"Wyre"},{"value":1946157103,"label":"Knowsley"},{"value":1946157104,"label":"Liverpool"},{"value":1946157105,"label":"Sefton"},{"value":1946157106,"label":"St. Helens"},{"value":1946157107,"label":"Wirral"},{"value":1946157108,"label":"East Riding of Yorkshire"},{"value":1946157109,"label":"Kingston upon Hull, City of"},{"value":1946157110,"label":"North East Lincolnshire"},{"value":1946157111,"label":"North Lincolnshire"},{"value":1946157112,"label":"York"},{"value":1946157113,"label":"Craven"},{"value":1946157114,"label":"Hambleton"},{"value":1946157115,"label":"Harrogate"},{"value":1946157116,"label":"Richmondshire"},{"value":1946157117,"label":"Ryedale"},{"value":1946157118,"label":"Scarborough"},{"value":1946157119,"label":"Selby"},{"value":1946157120,"label":"Barnsley"},{"value":1946157121,"label":"Doncaster"},{"value":1946157122,"label":"Rotherham"},{"value":1946157123,"label":"Sheffield"},{"value":1946157124,"label":"Bradford"},{"value":1946157125,"label":"Calderdale"},{"value":1946157126,"label":"Kirklees"},{"value":1946157127,"label":"Leeds"},{"value":1946157128,"label":"Wakefield"},{"value":1946157129,"label":"Derby"},{"value":1946157130,"label":"Leicester"},{"value":1946157131,"label":"Nottingham"},{"value":1946157132,"label":"Rutland"},{"value":1946157133,"label":"Amber Valley"},{"value":1946157134,"label":"Bolsover"},{"value":1946157135,"label":"Chesterfield"},{"value":1946157136,"label":"Derbyshire Dales"},{"value":1946157137,"label":"Erewash"},{"value":1946157138,"label":"High Peak"},{"value":1946157139,"label":"North East Derbyshire"},{"value":1946157140,"label":"South Derbyshire"},{"value":1946157141,"label":"Blaby"},{"value":1946157142,"label":"Charnwood"},{"value":1946157143,"label":"Harborough"},{"value":1946157144,"label":"Hinckley and Bosworth"},{"value":1946157145,"label":"Melton"},{"value":1946157146,"label":"North West Leicestershire"},{"value":1946157147,"label":"Oadby and Wigston"},{"value":1946157148,"label":"Boston"},{"value":1946157149,"label":"East Lindsey"},{"value":1946157150,"label":"Lincoln"},{"value":1946157151,"label":"North Kesteven"},{"value":1946157152,"label":"South Holland"},{"value":1946157153,"label":"South Kesteven"},{"value":1946157154,"label":"West Lindsey"},{"value":1946157155,"label":"Corby"},{"value":1946157156,"label":"Daventry"},{"value":1946157157,"label":"East Northamptonshire"},{"value":1946157158,"label":"Kettering"},{"value":1946157159,"label":"Northampton"},{"value":1946157160,"label":"South Northamptonshire"},{"value":1946157161,"label":"Wellingborough"},{"value":1946157162,"label":"Ashfield"},{"value":1946157163,"label":"Bassetlaw"},{"value":1946157164,"label":"Broxtowe"},{"value":1946157165,"label":"Gedling"},{"value":1946157166,"label":"Mansfield"},{"value":1946157167,"label":"Newark and Sherwood"},{"value":1946157168,"label":"Rushcliffe"},{"value":1946157169,"label":"Herefordshire, County of"},{"value":1946157170,"label":"Shropshire"},{"value":1946157171,"label":"Stoke-on-Trent"},{"value":1946157172,"label":"Telford and Wrekin"},{"value":1946157173,"label":"Cannock Chase"},{"value":1946157174,"label":"East Staffordshire"},{"value":1946157175,"label":"Lichfield"},{"value":1946157176,"label":"Newcastle-under-Lyme"},{"value":1946157177,"label":"South Staffordshire"},{"value":1946157178,"label":"Stafford"},{"value":1946157179,"label":"Staffordshire Moorlands"},{"value":1946157180,"label":"Tamworth"},{"value":1946157181,"label":"North Warwickshire"},{"value":1946157182,"label":"Nuneaton and Bedworth"},{"value":1946157183,"label":"Rugby"},{"value":1946157184,"label":"Stratford-on-Avon"},{"value":1946157185,"label":"Warwick"},{"value":1946157186,"label":"Birmingham"},{"value":1946157187,"label":"Coventry"},{"value":1946157188,"label":"Dudley"},{"value":1946157189,"label":"Sandwell"},{"value":1946157190,"label":"Solihull"},{"value":1946157191,"label":"Walsall"},{"value":1946157192,"label":"Wolverhampton"},{"value":1946157193,"label":"Bromsgrove"},{"value":1946157194,"label":"Malvern Hills"},{"value":1946157195,"label":"Redditch"},{"value":1946157196,"label":"Worcester"},{"value":1946157197,"label":"Wychavon"},{"value":1946157198,"label":"Wyre Forest"},{"value":1946157199,"label":"Bedford"},{"value":1946157200,"label":"Central Bedfordshire"},{"value":1946157201,"label":"Luton"},{"value":1946157202,"label":"Peterborough"},{"value":1946157203,"label":"Southend-on-Sea"},{"value":1946157204,"label":"Thurrock"},{"value":1946157205,"label":"Cambridge"},{"value":1946157206,"label":"East Cambridgeshire"},{"value":1946157207,"label":"Fenland"},{"value":1946157208,"label":"Huntingdonshire"},{"value":1946157209,"label":"South Cambridgeshire"},{"value":1946157210,"label":"Basildon"},{"value":1946157211,"label":"Braintree"},{"value":1946157212,"label":"Brentwood"},{"value":1946157213,"label":"Castle Point"},{"value":1946157214,"label":"Chelmsford"},{"value":1946157215,"label":"Colchester"},{"value":1946157216,"label":"Epping Forest"},{"value":1946157217,"label":"Harlow"},{"value":1946157218,"label":"Maldon"},{"value":1946157219,"label":"Rochford"},{"value":1946157220,"label":"Tendring"},{"value":1946157221,"label":"Uttlesford"},{"value":1946157222,"label":"Broxbourne"},{"value":1946157223,"label":"Dacorum"},{"value":1946157224,"label":"East Hertfordshire"},{"value":1946157225,"label":"Hertsmere"},{"value":1946157226,"label":"North Hertfordshire"},{"value":1946157227,"label":"St Albans"},{"value":1946157228,"label":"Stevenage"},{"value":1946157229,"label":"Three Rivers"},{"value":1946157230,"label":"Watford"},{"value":1946157231,"label":"Welwyn Hatfield"},{"value":1946157232,"label":"Breckland"},{"value":1946157233,"label":"Broadland"},{"value":1946157234,"label":"Great Yarmouth"},{"value":1946157235,"label":"King`s Lynn and West Norfolk"},{"value":1946157236,"label":"North Norfolk"},{"value":1946157237,"label":"Norwich"},{"value":1946157238,"label":"South Norfolk"},{"value":1946157239,"label":"Babergh"},{"value":1946157240,"label":"Forest Heath"},{"value":1946157241,"label":"Ipswich"},{"value":1946157242,"label":"Mid Suffolk"},{"value":1946157243,"label":"St Edmundsbury"},{"value":1946157244,"label":"Suffolk Coastal"},{"value":1946157245,"label":"Waveney"},{"value":1946157246,"label":"Camden"},{"value":1946157247,"label":"City of London"},{"value":1946157248,"label":"Hackney"},{"value":1946157249,"label":"Hammersmith and Fulham"},{"value":1946157250,"label":"Haringey"},{"value":1946157251,"label":"Islington"},{"value":1946157252,"label":"Kensington and Chelsea"},{"value":1946157253,"label":"Lambeth"},{"value":1946157254,"label":"Lewisham"},{"value":1946157255,"label":"Newham"},{"value":1946157256,"label":"Southwark"},{"value":1946157257,"label":"Tower Hamlets"},{"value":1946157258,"label":"Wandsworth"},{"value":1946157259,"label":"Westminster"},{"value":1946157260,"label":"Barking and Dagenham"},{"value":1946157261,"label":"Barnet"},{"value":1946157262,"label":"Bexley"},{"value":1946157263,"label":"Brent"},{"value":1946157264,"label":"Bromley"},{"value":1946157265,"label":"Croydon"},{"value":1946157266,"label":"Ealing"},{"value":1946157267,"label":"Enfield"},{"value":1946157268,"label":"Greenwich"},{"value":1946157269,"label":"Harrow"},{"value":1946157270,"label":"Havering"},{"value":1946157271,"label":"Hillingdon"},{"value":1946157272,"label":"Hounslow"},{"value":1946157273,"label":"Kingston upon Thames"},{"value":1946157274,"label":"Merton"},{"value":1946157275,"label":"Redbridge"},{"value":1946157276,"label":"Richmond upon Thames"},{"value":1946157277,"label":"Sutton"},{"value":1946157278,"label":"Waltham Forest"},{"value":1946157279,"label":"Bracknell Forest"},{"value":1946157280,"label":"Brighton and Hove"},{"value":1946157281,"label":"Isle of Wight"},{"value":1946157282,"label":"Medway"},{"value":1946157283,"label":"Milton Keynes"},{"value":1946157284,"label":"Portsmouth"},{"value":1946157285,"label":"Reading"},{"value":1946157286,"label":"Slough"},{"value":1946157287,"label":"Southampton"},{"value":1946157288,"label":"West Berkshire"},{"value":1946157289,"label":"Windsor and Maidenhead"},{"value":1946157290,"label":"Wokingham"},{"value":1946157291,"label":"Aylesbury Vale"},{"value":1946157292,"label":"Chiltern"},{"value":1946157293,"label":"South Bucks"},{"value":1946157294,"label":"Wycombe"},{"value":1946157295,"label":"Eastbourne"},{"value":1946157296,"label":"Hastings"},{"value":1946157297,"label":"Lewes"},{"value":1946157298,"label":"Rother"},{"value":1946157299,"label":"Wealden"},{"value":1946157300,"label":"Basingstoke and Deane"},{"value":1946157301,"label":"East Hampshire"},{"value":1946157302,"label":"Eastleigh"},{"value":1946157303,"label":"Fareham"},{"value":1946157304,"label":"Gosport"},{"value":1946157305,"label":"Hart"},{"value":1946157306,"label":"Havant"},{"value":1946157307,"label":"New Forest"},{"value":1946157308,"label":"Rushmoor"},{"value":1946157309,"label":"Test Valley"},{"value":1946157310,"label":"Winchester"},{"value":1946157311,"label":"Ashford"},{"value":1946157312,"label":"Canterbury"},{"value":1946157313,"label":"Dartford"},{"value":1946157314,"label":"Dover"},{"value":1946157315,"label":"Gravesham"},{"value":1946157316,"label":"Maidstone"},{"value":1946157317,"label":"Sevenoaks"},{"value":1946157318,"label":"Shepway"},{"value":1946157319,"label":"Swale"},{"value":1946157320,"label":"Thanet"},{"value":1946157321,"label":"Tonbridge and Malling"},{"value":1946157322,"label":"Tunbridge Wells"},{"value":1946157323,"label":"Cherwell"},{"value":1946157324,"label":"Oxford"},{"value":1946157325,"label":"South Oxfordshire"},{"value":1946157326,"label":"Vale of White Horse"},{"value":1946157327,"label":"West Oxfordshire"},{"value":1946157328,"label":"Elmbridge"},{"value":1946157329,"label":"Epsom and Ewell"},{"value":1946157330,"label":"Guildford"},{"value":1946157331,"label":"Mole Valley"},{"value":1946157332,"label":"Reigate and Banstead"},{"value":1946157333,"label":"Runnymede"},{"value":1946157334,"label":"Spelthorne"},{"value":1946157335,"label":"Surrey Heath"},{"value":1946157336,"label":"Tandridge"},{"value":1946157337,"label":"Waverley"},{"value":1946157338,"label":"Woking"},{"value":1946157339,"label":"Adur"},{"value":1946157340,"label":"Arun"},{"value":1946157341,"label":"Chichester"},{"value":1946157342,"label":"Crawley"},{"value":1946157343,"label":"Horsham"},{"value":1946157344,"label":"Mid Sussex"},{"value":1946157345,"label":"Worthing"},{"value":1946157346,"label":"Bath and North East Somerset"},{"value":1946157347,"label":"Bournemouth"},{"value":1946157348,"label":"Bristol, City of"},{"value":1946157349,"label":"Cornwall"},{"value":1946157350,"label":"Isles of Scilly"},{"value":1946157351,"label":"North Somerset"},{"value":1946157352,"label":"Plymouth"},{"value":1946157353,"label":"Poole"},{"value":1946157354,"label":"South Gloucestershire"},{"value":1946157355,"label":"Swindon"},{"value":1946157356,"label":"Torbay"},{"value":1946157357,"label":"Wiltshire"},{"value":1946157358,"label":"East Devon"},{"value":1946157359,"label":"Exeter"},{"value":1946157360,"label":"Mid Devon"},{"value":1946157361,"label":"North Devon"},{"value":1946157362,"label":"South Hams"},{"value":1946157363,"label":"Teignbridge"},{"value":1946157364,"label":"Torridge"},{"value":1946157365,"label":"West Devon"},{"value":1946157366,"label":"Christchurch"},{"value":1946157367,"label":"East Dorset"},{"value":1946157368,"label":"North Dorset"},{"value":1946157369,"label":"Purbeck"},{"value":1946157370,"label":"West Dorset"},{"value":1946157371,"label":"Weymouth and Portland"},{"value":1946157372,"label":"Cheltenham"},{"value":1946157373,"label":"Cotswold"},{"value":1946157374,"label":"Forest of Dean"},{"value":1946157375,"label":"Gloucester"},{"value":1946157376,"label":"Stroud"},{"value":1946157377,"label":"Tewkesbury"},{"value":1946157378,"label":"Mendip"},{"value":1946157379,"label":"Sedgemoor"},{"value":1946157380,"label":"South Somerset"},{"value":1946157381,"label":"Taunton Deane"},{"value":1946157382,"label":"West Somerset"},{"value":1946157383,"label":"Anglesey"},{"value":1946157384,"label":"Gwynedd"},{"value":1946157385,"label":"Conwy"},{"value":1946157386,"label":"Denbighshire"},{"value":1946157387,"label":"Flintshire"},{"value":1946157388,"label":"Wrexham"},{"value":1946157389,"label":"Powys"},{"value":1946157390,"label":"Ceredigion"},{"value":1946157391,"label":"Pembrokeshire"},{"value":1946157392,"label":"Carmarthenshire"},{"value":1946157393,"label":"Swansea"},{"value":1946157394,"label":"Neath Port Talbot"},{"value":1946157395,"label":"Bridgend"},{"value":1946157396,"label":"The Vale of Glamorgan"},{"value":1946157397,"label":"Cardiff"},{"value":1946157398,"label":"Rhondda, Cynon, Taff"},{"value":1946157399,"label":"Merthyr Tydfil"},{"value":1946157400,"label":"Caerphilly"},{"value":1946157401,"label":"Blaenau Gwent"},{"value":1946157402,"label":"Torfaen"},{"value":1946157403,"label":"Monmouthshire"},{"value":1946157404,"label":"Newport"}]
-},{}],81:[function(require,module,exports){
+},{}],82:[function(require,module,exports){
 // shim for using process in browser
 
 var process = module.exports = {};
@@ -8795,7 +9256,7 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],82:[function(require,module,exports){
+},{}],83:[function(require,module,exports){
 !function() {
   var d3 = {
     version: "3.5.16"
@@ -18350,7 +18811,7 @@ process.umask = function() { return 0; };
   });
   if (typeof define === "function" && define.amd) this.d3 = d3, define(d3); else if (typeof module === "object" && module.exports) module.exports = d3; else this.d3 = d3;
 }();
-},{}],83:[function(require,module,exports){
+},{}],84:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v2.2.3
  * http://jquery.com/
@@ -28194,7 +28655,7 @@ if ( !noGlobal ) {
 return jQuery;
 }));
 
-},{}],84:[function(require,module,exports){
+},{}],85:[function(require,module,exports){
 /* eslint-disable no-unused-vars */
 'use strict';
 var hasOwnProperty = Object.prototype.hasOwnProperty;
@@ -28235,12 +28696,12 @@ module.exports = Object.assign || function (target, source) {
 	return to;
 };
 
-},{}],85:[function(require,module,exports){
+},{}],86:[function(require,module,exports){
 'use strict';
 
 module.exports = require('react/lib/ReactDOM');
 
-},{"react/lib/ReactDOM":133}],86:[function(require,module,exports){
+},{"react/lib/ReactDOM":134}],87:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -28321,7 +28782,7 @@ Provider.childContextTypes = {
   store: _storeShape2["default"].isRequired
 };
 }).call(this,require('_process'))
-},{"../utils/storeShape":90,"../utils/warning":91,"_process":81,"react":254}],87:[function(require,module,exports){
+},{"../utils/storeShape":91,"../utils/warning":92,"_process":82,"react":255}],88:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -28717,7 +29178,7 @@ function connect(mapStateToProps, mapDispatchToProps, mergeProps) {
   };
 }
 }).call(this,require('_process'))
-},{"../utils/shallowEqual":89,"../utils/storeShape":90,"../utils/warning":91,"../utils/wrapActionCreators":92,"_process":81,"hoist-non-react-statics":93,"invariant":94,"lodash/isPlainObject":98,"react":254}],88:[function(require,module,exports){
+},{"../utils/shallowEqual":90,"../utils/storeShape":91,"../utils/warning":92,"../utils/wrapActionCreators":93,"_process":82,"hoist-non-react-statics":94,"invariant":95,"lodash/isPlainObject":99,"react":255}],89:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -28735,7 +29196,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "d
 
 exports.Provider = _Provider2["default"];
 exports.connect = _connect2["default"];
-},{"./components/Provider":86,"./components/connect":87}],89:[function(require,module,exports){
+},{"./components/Provider":87,"./components/connect":88}],90:[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
@@ -28762,7 +29223,7 @@ function shallowEqual(objA, objB) {
 
   return true;
 }
-},{}],90:[function(require,module,exports){
+},{}],91:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -28774,7 +29235,7 @@ exports["default"] = _react.PropTypes.shape({
   dispatch: _react.PropTypes.func.isRequired,
   getState: _react.PropTypes.func.isRequired
 });
-},{"react":254}],91:[function(require,module,exports){
+},{"react":255}],92:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -28799,7 +29260,7 @@ function warning(message) {
   } catch (e) {}
   /* eslint-enable no-empty */
 }
-},{}],92:[function(require,module,exports){
+},{}],93:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -28812,7 +29273,7 @@ function wrapActionCreators(actionCreators) {
     return (0, _redux.bindActionCreators)(actionCreators, dispatch);
   };
 }
-},{"redux":261}],93:[function(require,module,exports){
+},{"redux":262}],94:[function(require,module,exports){
 /**
  * Copyright 2015, Yahoo! Inc.
  * Copyrights licensed under the New BSD License. See the accompanying LICENSE file for terms.
@@ -28854,7 +29315,7 @@ module.exports = function hoistNonReactStatics(targetComponent, sourceComponent)
     return targetComponent;
 };
 
-},{}],94:[function(require,module,exports){
+},{}],95:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -28909,7 +29370,7 @@ var invariant = function(condition, format, a, b, c, d, e, f) {
 module.exports = invariant;
 
 }).call(this,require('_process'))
-},{"_process":81}],95:[function(require,module,exports){
+},{"_process":82}],96:[function(require,module,exports){
 /* Built-in method references for those with the same name as other `lodash` methods. */
 var nativeGetPrototype = Object.getPrototypeOf;
 
@@ -28926,7 +29387,7 @@ function getPrototype(value) {
 
 module.exports = getPrototype;
 
-},{}],96:[function(require,module,exports){
+},{}],97:[function(require,module,exports){
 /**
  * Checks if `value` is a host object in IE < 9.
  *
@@ -28948,7 +29409,7 @@ function isHostObject(value) {
 
 module.exports = isHostObject;
 
-},{}],97:[function(require,module,exports){
+},{}],98:[function(require,module,exports){
 /**
  * Checks if `value` is object-like. A value is object-like if it's not `null`
  * and has a `typeof` result of "object".
@@ -28979,7 +29440,7 @@ function isObjectLike(value) {
 
 module.exports = isObjectLike;
 
-},{}],98:[function(require,module,exports){
+},{}],99:[function(require,module,exports){
 var getPrototype = require('./_getPrototype'),
     isHostObject = require('./_isHostObject'),
     isObjectLike = require('./isObjectLike');
@@ -29051,7 +29512,7 @@ function isPlainObject(value) {
 
 module.exports = isPlainObject;
 
-},{"./_getPrototype":95,"./_isHostObject":96,"./isObjectLike":97}],99:[function(require,module,exports){
+},{"./_getPrototype":96,"./_isHostObject":97,"./isObjectLike":98}],100:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -29088,7 +29549,7 @@ var AutoFocusUtils = {
 };
 
 module.exports = AutoFocusUtils;
-},{"./ReactMount":163,"./findDOMNode":206,"fbjs/lib/focusNode":236}],100:[function(require,module,exports){
+},{"./ReactMount":164,"./findDOMNode":207,"fbjs/lib/focusNode":237}],101:[function(require,module,exports){
 /**
  * Copyright 2013-2015 Facebook, Inc.
  * All rights reserved.
@@ -29494,7 +29955,7 @@ var BeforeInputEventPlugin = {
 };
 
 module.exports = BeforeInputEventPlugin;
-},{"./EventConstants":112,"./EventPropagators":116,"./FallbackCompositionState":117,"./SyntheticCompositionEvent":188,"./SyntheticInputEvent":192,"fbjs/lib/ExecutionEnvironment":228,"fbjs/lib/keyOf":246}],101:[function(require,module,exports){
+},{"./EventConstants":113,"./EventPropagators":117,"./FallbackCompositionState":118,"./SyntheticCompositionEvent":189,"./SyntheticInputEvent":193,"fbjs/lib/ExecutionEnvironment":229,"fbjs/lib/keyOf":247}],102:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -29634,7 +30095,7 @@ var CSSProperty = {
 };
 
 module.exports = CSSProperty;
-},{}],102:[function(require,module,exports){
+},{}],103:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -29812,7 +30273,7 @@ ReactPerf.measureMethods(CSSPropertyOperations, 'CSSPropertyOperations', {
 
 module.exports = CSSPropertyOperations;
 }).call(this,require('_process'))
-},{"./CSSProperty":101,"./ReactPerf":169,"./dangerousStyleValue":203,"_process":81,"fbjs/lib/ExecutionEnvironment":228,"fbjs/lib/camelizeStyleName":230,"fbjs/lib/hyphenateStyleName":241,"fbjs/lib/memoizeStringOnly":248,"fbjs/lib/warning":253}],103:[function(require,module,exports){
+},{"./CSSProperty":102,"./ReactPerf":170,"./dangerousStyleValue":204,"_process":82,"fbjs/lib/ExecutionEnvironment":229,"fbjs/lib/camelizeStyleName":231,"fbjs/lib/hyphenateStyleName":242,"fbjs/lib/memoizeStringOnly":249,"fbjs/lib/warning":254}],104:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -29908,7 +30369,7 @@ PooledClass.addPoolingTo(CallbackQueue);
 
 module.exports = CallbackQueue;
 }).call(this,require('_process'))
-},{"./Object.assign":120,"./PooledClass":121,"_process":81,"fbjs/lib/invariant":242}],104:[function(require,module,exports){
+},{"./Object.assign":121,"./PooledClass":122,"_process":82,"fbjs/lib/invariant":243}],105:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -30230,7 +30691,7 @@ var ChangeEventPlugin = {
 };
 
 module.exports = ChangeEventPlugin;
-},{"./EventConstants":112,"./EventPluginHub":113,"./EventPropagators":116,"./ReactUpdates":181,"./SyntheticEvent":190,"./getEventTarget":212,"./isEventSupported":217,"./isTextInputElement":218,"fbjs/lib/ExecutionEnvironment":228,"fbjs/lib/keyOf":246}],105:[function(require,module,exports){
+},{"./EventConstants":113,"./EventPluginHub":114,"./EventPropagators":117,"./ReactUpdates":182,"./SyntheticEvent":191,"./getEventTarget":213,"./isEventSupported":218,"./isTextInputElement":219,"fbjs/lib/ExecutionEnvironment":229,"fbjs/lib/keyOf":247}],106:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -30254,7 +30715,7 @@ var ClientReactRootIndex = {
 };
 
 module.exports = ClientReactRootIndex;
-},{}],106:[function(require,module,exports){
+},{}],107:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -30386,7 +30847,7 @@ ReactPerf.measureMethods(DOMChildrenOperations, 'DOMChildrenOperations', {
 
 module.exports = DOMChildrenOperations;
 }).call(this,require('_process'))
-},{"./Danger":109,"./ReactMultiChildUpdateTypes":165,"./ReactPerf":169,"./setInnerHTML":222,"./setTextContent":223,"_process":81,"fbjs/lib/invariant":242}],107:[function(require,module,exports){
+},{"./Danger":110,"./ReactMultiChildUpdateTypes":166,"./ReactPerf":170,"./setInnerHTML":223,"./setTextContent":224,"_process":82,"fbjs/lib/invariant":243}],108:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -30623,7 +31084,7 @@ var DOMProperty = {
 
 module.exports = DOMProperty;
 }).call(this,require('_process'))
-},{"_process":81,"fbjs/lib/invariant":242}],108:[function(require,module,exports){
+},{"_process":82,"fbjs/lib/invariant":243}],109:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -30851,7 +31312,7 @@ ReactPerf.measureMethods(DOMPropertyOperations, 'DOMPropertyOperations', {
 
 module.exports = DOMPropertyOperations;
 }).call(this,require('_process'))
-},{"./DOMProperty":107,"./ReactPerf":169,"./quoteAttributeValueForBrowser":220,"_process":81,"fbjs/lib/warning":253}],109:[function(require,module,exports){
+},{"./DOMProperty":108,"./ReactPerf":170,"./quoteAttributeValueForBrowser":221,"_process":82,"fbjs/lib/warning":254}],110:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -30999,7 +31460,7 @@ var Danger = {
 
 module.exports = Danger;
 }).call(this,require('_process'))
-},{"_process":81,"fbjs/lib/ExecutionEnvironment":228,"fbjs/lib/createNodesFromMarkup":233,"fbjs/lib/emptyFunction":234,"fbjs/lib/getMarkupWrap":238,"fbjs/lib/invariant":242}],110:[function(require,module,exports){
+},{"_process":82,"fbjs/lib/ExecutionEnvironment":229,"fbjs/lib/createNodesFromMarkup":234,"fbjs/lib/emptyFunction":235,"fbjs/lib/getMarkupWrap":239,"fbjs/lib/invariant":243}],111:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -31027,7 +31488,7 @@ var keyOf = require('fbjs/lib/keyOf');
 var DefaultEventPluginOrder = [keyOf({ ResponderEventPlugin: null }), keyOf({ SimpleEventPlugin: null }), keyOf({ TapEventPlugin: null }), keyOf({ EnterLeaveEventPlugin: null }), keyOf({ ChangeEventPlugin: null }), keyOf({ SelectEventPlugin: null }), keyOf({ BeforeInputEventPlugin: null })];
 
 module.exports = DefaultEventPluginOrder;
-},{"fbjs/lib/keyOf":246}],111:[function(require,module,exports){
+},{"fbjs/lib/keyOf":247}],112:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -31152,7 +31613,7 @@ var EnterLeaveEventPlugin = {
 };
 
 module.exports = EnterLeaveEventPlugin;
-},{"./EventConstants":112,"./EventPropagators":116,"./ReactMount":163,"./SyntheticMouseEvent":194,"fbjs/lib/keyOf":246}],112:[function(require,module,exports){
+},{"./EventConstants":113,"./EventPropagators":117,"./ReactMount":164,"./SyntheticMouseEvent":195,"fbjs/lib/keyOf":247}],113:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -31245,7 +31706,7 @@ var EventConstants = {
 };
 
 module.exports = EventConstants;
-},{"fbjs/lib/keyMirror":245}],113:[function(require,module,exports){
+},{"fbjs/lib/keyMirror":246}],114:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -31527,7 +31988,7 @@ var EventPluginHub = {
 
 module.exports = EventPluginHub;
 }).call(this,require('_process'))
-},{"./EventPluginRegistry":114,"./EventPluginUtils":115,"./ReactErrorUtils":154,"./accumulateInto":200,"./forEachAccumulated":208,"_process":81,"fbjs/lib/invariant":242,"fbjs/lib/warning":253}],114:[function(require,module,exports){
+},{"./EventPluginRegistry":115,"./EventPluginUtils":116,"./ReactErrorUtils":155,"./accumulateInto":201,"./forEachAccumulated":209,"_process":82,"fbjs/lib/invariant":243,"fbjs/lib/warning":254}],115:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -31750,7 +32211,7 @@ var EventPluginRegistry = {
 
 module.exports = EventPluginRegistry;
 }).call(this,require('_process'))
-},{"_process":81,"fbjs/lib/invariant":242}],115:[function(require,module,exports){
+},{"_process":82,"fbjs/lib/invariant":243}],116:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -31955,7 +32416,7 @@ var EventPluginUtils = {
 
 module.exports = EventPluginUtils;
 }).call(this,require('_process'))
-},{"./EventConstants":112,"./ReactErrorUtils":154,"_process":81,"fbjs/lib/invariant":242,"fbjs/lib/warning":253}],116:[function(require,module,exports){
+},{"./EventConstants":113,"./ReactErrorUtils":155,"_process":82,"fbjs/lib/invariant":243,"fbjs/lib/warning":254}],117:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -32093,7 +32554,7 @@ var EventPropagators = {
 
 module.exports = EventPropagators;
 }).call(this,require('_process'))
-},{"./EventConstants":112,"./EventPluginHub":113,"./accumulateInto":200,"./forEachAccumulated":208,"_process":81,"fbjs/lib/warning":253}],117:[function(require,module,exports){
+},{"./EventConstants":113,"./EventPluginHub":114,"./accumulateInto":201,"./forEachAccumulated":209,"_process":82,"fbjs/lib/warning":254}],118:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -32189,7 +32650,7 @@ assign(FallbackCompositionState.prototype, {
 PooledClass.addPoolingTo(FallbackCompositionState);
 
 module.exports = FallbackCompositionState;
-},{"./Object.assign":120,"./PooledClass":121,"./getTextContentAccessor":215}],118:[function(require,module,exports){
+},{"./Object.assign":121,"./PooledClass":122,"./getTextContentAccessor":216}],119:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -32420,7 +32881,7 @@ var HTMLDOMPropertyConfig = {
 };
 
 module.exports = HTMLDOMPropertyConfig;
-},{"./DOMProperty":107,"fbjs/lib/ExecutionEnvironment":228}],119:[function(require,module,exports){
+},{"./DOMProperty":108,"fbjs/lib/ExecutionEnvironment":229}],120:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -32557,7 +33018,7 @@ var LinkedValueUtils = {
 
 module.exports = LinkedValueUtils;
 }).call(this,require('_process'))
-},{"./ReactPropTypeLocations":171,"./ReactPropTypes":172,"_process":81,"fbjs/lib/invariant":242,"fbjs/lib/warning":253}],120:[function(require,module,exports){
+},{"./ReactPropTypeLocations":172,"./ReactPropTypes":173,"_process":82,"fbjs/lib/invariant":243,"fbjs/lib/warning":254}],121:[function(require,module,exports){
 /**
  * Copyright 2014-2015, Facebook, Inc.
  * All rights reserved.
@@ -32605,7 +33066,7 @@ function assign(target, sources) {
 }
 
 module.exports = assign;
-},{}],121:[function(require,module,exports){
+},{}],122:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -32727,7 +33188,7 @@ var PooledClass = {
 
 module.exports = PooledClass;
 }).call(this,require('_process'))
-},{"_process":81,"fbjs/lib/invariant":242}],122:[function(require,module,exports){
+},{"_process":82,"fbjs/lib/invariant":243}],123:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -32768,7 +33229,7 @@ React.__SECRET_DOM_DO_NOT_USE_OR_YOU_WILL_BE_FIRED = ReactDOM;
 React.__SECRET_DOM_SERVER_DO_NOT_USE_OR_YOU_WILL_BE_FIRED = ReactDOMServer;
 
 module.exports = React;
-},{"./Object.assign":120,"./ReactDOM":133,"./ReactDOMServer":143,"./ReactIsomorphic":161,"./deprecated":204}],123:[function(require,module,exports){
+},{"./Object.assign":121,"./ReactDOM":134,"./ReactDOMServer":144,"./ReactIsomorphic":162,"./deprecated":205}],124:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -32807,7 +33268,7 @@ var ReactBrowserComponentMixin = {
 
 module.exports = ReactBrowserComponentMixin;
 }).call(this,require('_process'))
-},{"./ReactInstanceMap":160,"./findDOMNode":206,"_process":81,"fbjs/lib/warning":253}],124:[function(require,module,exports){
+},{"./ReactInstanceMap":161,"./findDOMNode":207,"_process":82,"fbjs/lib/warning":254}],125:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -33132,7 +33593,7 @@ ReactPerf.measureMethods(ReactBrowserEventEmitter, 'ReactBrowserEventEmitter', {
 });
 
 module.exports = ReactBrowserEventEmitter;
-},{"./EventConstants":112,"./EventPluginHub":113,"./EventPluginRegistry":114,"./Object.assign":120,"./ReactEventEmitterMixin":155,"./ReactPerf":169,"./ViewportMetrics":199,"./isEventSupported":217}],125:[function(require,module,exports){
+},{"./EventConstants":113,"./EventPluginHub":114,"./EventPluginRegistry":115,"./Object.assign":121,"./ReactEventEmitterMixin":156,"./ReactPerf":170,"./ViewportMetrics":200,"./isEventSupported":218}],126:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2014-2015, Facebook, Inc.
@@ -33257,7 +33718,7 @@ var ReactChildReconciler = {
 
 module.exports = ReactChildReconciler;
 }).call(this,require('_process'))
-},{"./ReactReconciler":174,"./instantiateReactComponent":216,"./shouldUpdateReactComponent":224,"./traverseAllChildren":225,"_process":81,"fbjs/lib/warning":253}],126:[function(require,module,exports){
+},{"./ReactReconciler":175,"./instantiateReactComponent":217,"./shouldUpdateReactComponent":225,"./traverseAllChildren":226,"_process":82,"fbjs/lib/warning":254}],127:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -33440,7 +33901,7 @@ var ReactChildren = {
 };
 
 module.exports = ReactChildren;
-},{"./PooledClass":121,"./ReactElement":150,"./traverseAllChildren":225,"fbjs/lib/emptyFunction":234}],127:[function(require,module,exports){
+},{"./PooledClass":122,"./ReactElement":151,"./traverseAllChildren":226,"fbjs/lib/emptyFunction":235}],128:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -34214,7 +34675,7 @@ var ReactClass = {
 
 module.exports = ReactClass;
 }).call(this,require('_process'))
-},{"./Object.assign":120,"./ReactComponent":128,"./ReactElement":150,"./ReactNoopUpdateQueue":167,"./ReactPropTypeLocationNames":170,"./ReactPropTypeLocations":171,"_process":81,"fbjs/lib/emptyObject":235,"fbjs/lib/invariant":242,"fbjs/lib/keyMirror":245,"fbjs/lib/keyOf":246,"fbjs/lib/warning":253}],128:[function(require,module,exports){
+},{"./Object.assign":121,"./ReactComponent":129,"./ReactElement":151,"./ReactNoopUpdateQueue":168,"./ReactPropTypeLocationNames":171,"./ReactPropTypeLocations":172,"_process":82,"fbjs/lib/emptyObject":236,"fbjs/lib/invariant":243,"fbjs/lib/keyMirror":246,"fbjs/lib/keyOf":247,"fbjs/lib/warning":254}],129:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -34339,7 +34800,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 module.exports = ReactComponent;
 }).call(this,require('_process'))
-},{"./ReactNoopUpdateQueue":167,"./canDefineProperty":202,"_process":81,"fbjs/lib/emptyObject":235,"fbjs/lib/invariant":242,"fbjs/lib/warning":253}],129:[function(require,module,exports){
+},{"./ReactNoopUpdateQueue":168,"./canDefineProperty":203,"_process":82,"fbjs/lib/emptyObject":236,"fbjs/lib/invariant":243,"fbjs/lib/warning":254}],130:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -34381,7 +34842,7 @@ var ReactComponentBrowserEnvironment = {
 };
 
 module.exports = ReactComponentBrowserEnvironment;
-},{"./ReactDOMIDOperations":138,"./ReactMount":163}],130:[function(require,module,exports){
+},{"./ReactDOMIDOperations":139,"./ReactMount":164}],131:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2014-2015, Facebook, Inc.
@@ -34435,7 +34896,7 @@ var ReactComponentEnvironment = {
 
 module.exports = ReactComponentEnvironment;
 }).call(this,require('_process'))
-},{"_process":81,"fbjs/lib/invariant":242}],131:[function(require,module,exports){
+},{"_process":82,"fbjs/lib/invariant":243}],132:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -35132,7 +35593,7 @@ var ReactCompositeComponent = {
 
 module.exports = ReactCompositeComponent;
 }).call(this,require('_process'))
-},{"./Object.assign":120,"./ReactComponentEnvironment":130,"./ReactCurrentOwner":132,"./ReactElement":150,"./ReactInstanceMap":160,"./ReactPerf":169,"./ReactPropTypeLocationNames":170,"./ReactPropTypeLocations":171,"./ReactReconciler":174,"./ReactUpdateQueue":180,"./shouldUpdateReactComponent":224,"_process":81,"fbjs/lib/emptyObject":235,"fbjs/lib/invariant":242,"fbjs/lib/warning":253}],132:[function(require,module,exports){
+},{"./Object.assign":121,"./ReactComponentEnvironment":131,"./ReactCurrentOwner":133,"./ReactElement":151,"./ReactInstanceMap":161,"./ReactPerf":170,"./ReactPropTypeLocationNames":171,"./ReactPropTypeLocations":172,"./ReactReconciler":175,"./ReactUpdateQueue":181,"./shouldUpdateReactComponent":225,"_process":82,"fbjs/lib/emptyObject":236,"fbjs/lib/invariant":243,"fbjs/lib/warning":254}],133:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -35163,7 +35624,7 @@ var ReactCurrentOwner = {
 };
 
 module.exports = ReactCurrentOwner;
-},{}],133:[function(require,module,exports){
+},{}],134:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -35258,7 +35719,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 module.exports = React;
 }).call(this,require('_process'))
-},{"./ReactCurrentOwner":132,"./ReactDOMTextComponent":144,"./ReactDefaultInjection":147,"./ReactInstanceHandles":159,"./ReactMount":163,"./ReactPerf":169,"./ReactReconciler":174,"./ReactUpdates":181,"./ReactVersion":182,"./findDOMNode":206,"./renderSubtreeIntoContainer":221,"_process":81,"fbjs/lib/ExecutionEnvironment":228,"fbjs/lib/warning":253}],134:[function(require,module,exports){
+},{"./ReactCurrentOwner":133,"./ReactDOMTextComponent":145,"./ReactDefaultInjection":148,"./ReactInstanceHandles":160,"./ReactMount":164,"./ReactPerf":170,"./ReactReconciler":175,"./ReactUpdates":182,"./ReactVersion":183,"./findDOMNode":207,"./renderSubtreeIntoContainer":222,"_process":82,"fbjs/lib/ExecutionEnvironment":229,"fbjs/lib/warning":254}],135:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -35309,7 +35770,7 @@ var ReactDOMButton = {
 };
 
 module.exports = ReactDOMButton;
-},{}],135:[function(require,module,exports){
+},{}],136:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -36274,7 +36735,7 @@ assign(ReactDOMComponent.prototype, ReactDOMComponent.Mixin, ReactMultiChild.Mix
 
 module.exports = ReactDOMComponent;
 }).call(this,require('_process'))
-},{"./AutoFocusUtils":99,"./CSSPropertyOperations":102,"./DOMProperty":107,"./DOMPropertyOperations":108,"./EventConstants":112,"./Object.assign":120,"./ReactBrowserEventEmitter":124,"./ReactComponentBrowserEnvironment":129,"./ReactDOMButton":134,"./ReactDOMInput":139,"./ReactDOMOption":140,"./ReactDOMSelect":141,"./ReactDOMTextarea":145,"./ReactMount":163,"./ReactMultiChild":164,"./ReactPerf":169,"./ReactUpdateQueue":180,"./canDefineProperty":202,"./escapeTextContentForBrowser":205,"./isEventSupported":217,"./setInnerHTML":222,"./setTextContent":223,"./validateDOMNesting":226,"_process":81,"fbjs/lib/invariant":242,"fbjs/lib/keyOf":246,"fbjs/lib/shallowEqual":251,"fbjs/lib/warning":253}],136:[function(require,module,exports){
+},{"./AutoFocusUtils":100,"./CSSPropertyOperations":103,"./DOMProperty":108,"./DOMPropertyOperations":109,"./EventConstants":113,"./Object.assign":121,"./ReactBrowserEventEmitter":125,"./ReactComponentBrowserEnvironment":130,"./ReactDOMButton":135,"./ReactDOMInput":140,"./ReactDOMOption":141,"./ReactDOMSelect":142,"./ReactDOMTextarea":146,"./ReactMount":164,"./ReactMultiChild":165,"./ReactPerf":170,"./ReactUpdateQueue":181,"./canDefineProperty":203,"./escapeTextContentForBrowser":206,"./isEventSupported":218,"./setInnerHTML":223,"./setTextContent":224,"./validateDOMNesting":227,"_process":82,"fbjs/lib/invariant":243,"fbjs/lib/keyOf":247,"fbjs/lib/shallowEqual":252,"fbjs/lib/warning":254}],137:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -36454,7 +36915,7 @@ var ReactDOMFactories = mapObject({
 
 module.exports = ReactDOMFactories;
 }).call(this,require('_process'))
-},{"./ReactElement":150,"./ReactElementValidator":151,"_process":81,"fbjs/lib/mapObject":247}],137:[function(require,module,exports){
+},{"./ReactElement":151,"./ReactElementValidator":152,"_process":82,"fbjs/lib/mapObject":248}],138:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -36473,7 +36934,7 @@ var ReactDOMFeatureFlags = {
 };
 
 module.exports = ReactDOMFeatureFlags;
-},{}],138:[function(require,module,exports){
+},{}],139:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -36570,7 +37031,7 @@ ReactPerf.measureMethods(ReactDOMIDOperations, 'ReactDOMIDOperations', {
 
 module.exports = ReactDOMIDOperations;
 }).call(this,require('_process'))
-},{"./DOMChildrenOperations":106,"./DOMPropertyOperations":108,"./ReactMount":163,"./ReactPerf":169,"_process":81,"fbjs/lib/invariant":242}],139:[function(require,module,exports){
+},{"./DOMChildrenOperations":107,"./DOMPropertyOperations":109,"./ReactMount":164,"./ReactPerf":170,"_process":82,"fbjs/lib/invariant":243}],140:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -36726,7 +37187,7 @@ function _handleChange(event) {
 
 module.exports = ReactDOMInput;
 }).call(this,require('_process'))
-},{"./LinkedValueUtils":119,"./Object.assign":120,"./ReactDOMIDOperations":138,"./ReactMount":163,"./ReactUpdates":181,"_process":81,"fbjs/lib/invariant":242}],140:[function(require,module,exports){
+},{"./LinkedValueUtils":120,"./Object.assign":121,"./ReactDOMIDOperations":139,"./ReactMount":164,"./ReactUpdates":182,"_process":82,"fbjs/lib/invariant":243}],141:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -36818,7 +37279,7 @@ var ReactDOMOption = {
 
 module.exports = ReactDOMOption;
 }).call(this,require('_process'))
-},{"./Object.assign":120,"./ReactChildren":126,"./ReactDOMSelect":141,"_process":81,"fbjs/lib/warning":253}],141:[function(require,module,exports){
+},{"./Object.assign":121,"./ReactChildren":127,"./ReactDOMSelect":142,"_process":82,"fbjs/lib/warning":254}],142:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -37009,7 +37470,7 @@ function _handleChange(event) {
 
 module.exports = ReactDOMSelect;
 }).call(this,require('_process'))
-},{"./LinkedValueUtils":119,"./Object.assign":120,"./ReactMount":163,"./ReactUpdates":181,"_process":81,"fbjs/lib/warning":253}],142:[function(require,module,exports){
+},{"./LinkedValueUtils":120,"./Object.assign":121,"./ReactMount":164,"./ReactUpdates":182,"_process":82,"fbjs/lib/warning":254}],143:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -37222,7 +37683,7 @@ var ReactDOMSelection = {
 };
 
 module.exports = ReactDOMSelection;
-},{"./getNodeForCharacterOffset":214,"./getTextContentAccessor":215,"fbjs/lib/ExecutionEnvironment":228}],143:[function(require,module,exports){
+},{"./getNodeForCharacterOffset":215,"./getTextContentAccessor":216,"fbjs/lib/ExecutionEnvironment":229}],144:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -37249,7 +37710,7 @@ var ReactDOMServer = {
 };
 
 module.exports = ReactDOMServer;
-},{"./ReactDefaultInjection":147,"./ReactServerRendering":178,"./ReactVersion":182}],144:[function(require,module,exports){
+},{"./ReactDefaultInjection":148,"./ReactServerRendering":179,"./ReactVersion":183}],145:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -37379,7 +37840,7 @@ assign(ReactDOMTextComponent.prototype, {
 
 module.exports = ReactDOMTextComponent;
 }).call(this,require('_process'))
-},{"./DOMChildrenOperations":106,"./DOMPropertyOperations":108,"./Object.assign":120,"./ReactComponentBrowserEnvironment":129,"./ReactMount":163,"./escapeTextContentForBrowser":205,"./setTextContent":223,"./validateDOMNesting":226,"_process":81}],145:[function(require,module,exports){
+},{"./DOMChildrenOperations":107,"./DOMPropertyOperations":109,"./Object.assign":121,"./ReactComponentBrowserEnvironment":130,"./ReactMount":164,"./escapeTextContentForBrowser":206,"./setTextContent":224,"./validateDOMNesting":227,"_process":82}],146:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -37495,7 +37956,7 @@ function _handleChange(event) {
 
 module.exports = ReactDOMTextarea;
 }).call(this,require('_process'))
-},{"./LinkedValueUtils":119,"./Object.assign":120,"./ReactDOMIDOperations":138,"./ReactUpdates":181,"_process":81,"fbjs/lib/invariant":242,"fbjs/lib/warning":253}],146:[function(require,module,exports){
+},{"./LinkedValueUtils":120,"./Object.assign":121,"./ReactDOMIDOperations":139,"./ReactUpdates":182,"_process":82,"fbjs/lib/invariant":243,"fbjs/lib/warning":254}],147:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -37563,7 +38024,7 @@ var ReactDefaultBatchingStrategy = {
 };
 
 module.exports = ReactDefaultBatchingStrategy;
-},{"./Object.assign":120,"./ReactUpdates":181,"./Transaction":198,"fbjs/lib/emptyFunction":234}],147:[function(require,module,exports){
+},{"./Object.assign":121,"./ReactUpdates":182,"./Transaction":199,"fbjs/lib/emptyFunction":235}],148:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -37663,7 +38124,7 @@ module.exports = {
   inject: inject
 };
 }).call(this,require('_process'))
-},{"./BeforeInputEventPlugin":100,"./ChangeEventPlugin":104,"./ClientReactRootIndex":105,"./DefaultEventPluginOrder":110,"./EnterLeaveEventPlugin":111,"./HTMLDOMPropertyConfig":118,"./ReactBrowserComponentMixin":123,"./ReactComponentBrowserEnvironment":129,"./ReactDOMComponent":135,"./ReactDOMTextComponent":144,"./ReactDefaultBatchingStrategy":146,"./ReactDefaultPerf":148,"./ReactEventListener":156,"./ReactInjection":157,"./ReactInstanceHandles":159,"./ReactMount":163,"./ReactReconcileTransaction":173,"./SVGDOMPropertyConfig":183,"./SelectEventPlugin":184,"./ServerReactRootIndex":185,"./SimpleEventPlugin":186,"_process":81,"fbjs/lib/ExecutionEnvironment":228}],148:[function(require,module,exports){
+},{"./BeforeInputEventPlugin":101,"./ChangeEventPlugin":105,"./ClientReactRootIndex":106,"./DefaultEventPluginOrder":111,"./EnterLeaveEventPlugin":112,"./HTMLDOMPropertyConfig":119,"./ReactBrowserComponentMixin":124,"./ReactComponentBrowserEnvironment":130,"./ReactDOMComponent":136,"./ReactDOMTextComponent":145,"./ReactDefaultBatchingStrategy":147,"./ReactDefaultPerf":149,"./ReactEventListener":157,"./ReactInjection":158,"./ReactInstanceHandles":160,"./ReactMount":164,"./ReactReconcileTransaction":174,"./SVGDOMPropertyConfig":184,"./SelectEventPlugin":185,"./ServerReactRootIndex":186,"./SimpleEventPlugin":187,"_process":82,"fbjs/lib/ExecutionEnvironment":229}],149:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -37901,7 +38362,7 @@ var ReactDefaultPerf = {
 };
 
 module.exports = ReactDefaultPerf;
-},{"./DOMProperty":107,"./ReactDefaultPerfAnalysis":149,"./ReactMount":163,"./ReactPerf":169,"fbjs/lib/performanceNow":250}],149:[function(require,module,exports){
+},{"./DOMProperty":108,"./ReactDefaultPerfAnalysis":150,"./ReactMount":164,"./ReactPerf":170,"fbjs/lib/performanceNow":251}],150:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -38103,7 +38564,7 @@ var ReactDefaultPerfAnalysis = {
 };
 
 module.exports = ReactDefaultPerfAnalysis;
-},{"./Object.assign":120}],150:[function(require,module,exports){
+},{"./Object.assign":121}],151:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2014-2015, Facebook, Inc.
@@ -38353,7 +38814,7 @@ ReactElement.isValidElement = function (object) {
 
 module.exports = ReactElement;
 }).call(this,require('_process'))
-},{"./Object.assign":120,"./ReactCurrentOwner":132,"./canDefineProperty":202,"_process":81}],151:[function(require,module,exports){
+},{"./Object.assign":121,"./ReactCurrentOwner":133,"./canDefineProperty":203,"_process":82}],152:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2014-2015, Facebook, Inc.
@@ -38637,7 +39098,7 @@ var ReactElementValidator = {
 
 module.exports = ReactElementValidator;
 }).call(this,require('_process'))
-},{"./ReactCurrentOwner":132,"./ReactElement":150,"./ReactPropTypeLocationNames":170,"./ReactPropTypeLocations":171,"./canDefineProperty":202,"./getIteratorFn":213,"_process":81,"fbjs/lib/invariant":242,"fbjs/lib/warning":253}],152:[function(require,module,exports){
+},{"./ReactCurrentOwner":133,"./ReactElement":151,"./ReactPropTypeLocationNames":171,"./ReactPropTypeLocations":172,"./canDefineProperty":203,"./getIteratorFn":214,"_process":82,"fbjs/lib/invariant":243,"fbjs/lib/warning":254}],153:[function(require,module,exports){
 /**
  * Copyright 2014-2015, Facebook, Inc.
  * All rights reserved.
@@ -38693,7 +39154,7 @@ assign(ReactEmptyComponent.prototype, {
 ReactEmptyComponent.injection = ReactEmptyComponentInjection;
 
 module.exports = ReactEmptyComponent;
-},{"./Object.assign":120,"./ReactElement":150,"./ReactEmptyComponentRegistry":153,"./ReactReconciler":174}],153:[function(require,module,exports){
+},{"./Object.assign":121,"./ReactElement":151,"./ReactEmptyComponentRegistry":154,"./ReactReconciler":175}],154:[function(require,module,exports){
 /**
  * Copyright 2014-2015, Facebook, Inc.
  * All rights reserved.
@@ -38742,7 +39203,7 @@ var ReactEmptyComponentRegistry = {
 };
 
 module.exports = ReactEmptyComponentRegistry;
-},{}],154:[function(require,module,exports){
+},{}],155:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -38822,7 +39283,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 module.exports = ReactErrorUtils;
 }).call(this,require('_process'))
-},{"_process":81}],155:[function(require,module,exports){
+},{"_process":82}],156:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -38861,7 +39322,7 @@ var ReactEventEmitterMixin = {
 };
 
 module.exports = ReactEventEmitterMixin;
-},{"./EventPluginHub":113}],156:[function(require,module,exports){
+},{"./EventPluginHub":114}],157:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -39073,7 +39534,7 @@ var ReactEventListener = {
 };
 
 module.exports = ReactEventListener;
-},{"./Object.assign":120,"./PooledClass":121,"./ReactInstanceHandles":159,"./ReactMount":163,"./ReactUpdates":181,"./getEventTarget":212,"fbjs/lib/EventListener":227,"fbjs/lib/ExecutionEnvironment":228,"fbjs/lib/getUnboundedScrollPosition":239}],157:[function(require,module,exports){
+},{"./Object.assign":121,"./PooledClass":122,"./ReactInstanceHandles":160,"./ReactMount":164,"./ReactUpdates":182,"./getEventTarget":213,"fbjs/lib/EventListener":228,"fbjs/lib/ExecutionEnvironment":229,"fbjs/lib/getUnboundedScrollPosition":240}],158:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -39112,7 +39573,7 @@ var ReactInjection = {
 };
 
 module.exports = ReactInjection;
-},{"./DOMProperty":107,"./EventPluginHub":113,"./ReactBrowserEventEmitter":124,"./ReactClass":127,"./ReactComponentEnvironment":130,"./ReactEmptyComponent":152,"./ReactNativeComponent":166,"./ReactPerf":169,"./ReactRootIndex":176,"./ReactUpdates":181}],158:[function(require,module,exports){
+},{"./DOMProperty":108,"./EventPluginHub":114,"./ReactBrowserEventEmitter":125,"./ReactClass":128,"./ReactComponentEnvironment":131,"./ReactEmptyComponent":153,"./ReactNativeComponent":167,"./ReactPerf":170,"./ReactRootIndex":177,"./ReactUpdates":182}],159:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -39237,7 +39698,7 @@ var ReactInputSelection = {
 };
 
 module.exports = ReactInputSelection;
-},{"./ReactDOMSelection":142,"fbjs/lib/containsNode":231,"fbjs/lib/focusNode":236,"fbjs/lib/getActiveElement":237}],159:[function(require,module,exports){
+},{"./ReactDOMSelection":143,"fbjs/lib/containsNode":232,"fbjs/lib/focusNode":237,"fbjs/lib/getActiveElement":238}],160:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -39542,7 +40003,7 @@ var ReactInstanceHandles = {
 
 module.exports = ReactInstanceHandles;
 }).call(this,require('_process'))
-},{"./ReactRootIndex":176,"_process":81,"fbjs/lib/invariant":242}],160:[function(require,module,exports){
+},{"./ReactRootIndex":177,"_process":82,"fbjs/lib/invariant":243}],161:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -39590,7 +40051,7 @@ var ReactInstanceMap = {
 };
 
 module.exports = ReactInstanceMap;
-},{}],161:[function(require,module,exports){
+},{}],162:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -39667,7 +40128,7 @@ var React = {
 
 module.exports = React;
 }).call(this,require('_process'))
-},{"./Object.assign":120,"./ReactChildren":126,"./ReactClass":127,"./ReactComponent":128,"./ReactDOMFactories":136,"./ReactElement":150,"./ReactElementValidator":151,"./ReactPropTypes":172,"./ReactVersion":182,"./onlyChild":219,"_process":81}],162:[function(require,module,exports){
+},{"./Object.assign":121,"./ReactChildren":127,"./ReactClass":128,"./ReactComponent":129,"./ReactDOMFactories":137,"./ReactElement":151,"./ReactElementValidator":152,"./ReactPropTypes":173,"./ReactVersion":183,"./onlyChild":220,"_process":82}],163:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -39713,7 +40174,7 @@ var ReactMarkupChecksum = {
 };
 
 module.exports = ReactMarkupChecksum;
-},{"./adler32":201}],163:[function(require,module,exports){
+},{"./adler32":202}],164:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -40566,7 +41027,7 @@ ReactPerf.measureMethods(ReactMount, 'ReactMount', {
 
 module.exports = ReactMount;
 }).call(this,require('_process'))
-},{"./DOMProperty":107,"./Object.assign":120,"./ReactBrowserEventEmitter":124,"./ReactCurrentOwner":132,"./ReactDOMFeatureFlags":137,"./ReactElement":150,"./ReactEmptyComponentRegistry":153,"./ReactInstanceHandles":159,"./ReactInstanceMap":160,"./ReactMarkupChecksum":162,"./ReactPerf":169,"./ReactReconciler":174,"./ReactUpdateQueue":180,"./ReactUpdates":181,"./instantiateReactComponent":216,"./setInnerHTML":222,"./shouldUpdateReactComponent":224,"./validateDOMNesting":226,"_process":81,"fbjs/lib/containsNode":231,"fbjs/lib/emptyObject":235,"fbjs/lib/invariant":242,"fbjs/lib/warning":253}],164:[function(require,module,exports){
+},{"./DOMProperty":108,"./Object.assign":121,"./ReactBrowserEventEmitter":125,"./ReactCurrentOwner":133,"./ReactDOMFeatureFlags":138,"./ReactElement":151,"./ReactEmptyComponentRegistry":154,"./ReactInstanceHandles":160,"./ReactInstanceMap":161,"./ReactMarkupChecksum":163,"./ReactPerf":170,"./ReactReconciler":175,"./ReactUpdateQueue":181,"./ReactUpdates":182,"./instantiateReactComponent":217,"./setInnerHTML":223,"./shouldUpdateReactComponent":225,"./validateDOMNesting":227,"_process":82,"fbjs/lib/containsNode":232,"fbjs/lib/emptyObject":236,"fbjs/lib/invariant":243,"fbjs/lib/warning":254}],165:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -41065,7 +41526,7 @@ var ReactMultiChild = {
 
 module.exports = ReactMultiChild;
 }).call(this,require('_process'))
-},{"./ReactChildReconciler":125,"./ReactComponentEnvironment":130,"./ReactCurrentOwner":132,"./ReactMultiChildUpdateTypes":165,"./ReactReconciler":174,"./flattenChildren":207,"_process":81}],165:[function(require,module,exports){
+},{"./ReactChildReconciler":126,"./ReactComponentEnvironment":131,"./ReactCurrentOwner":133,"./ReactMultiChildUpdateTypes":166,"./ReactReconciler":175,"./flattenChildren":208,"_process":82}],166:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -41098,7 +41559,7 @@ var ReactMultiChildUpdateTypes = keyMirror({
 });
 
 module.exports = ReactMultiChildUpdateTypes;
-},{"fbjs/lib/keyMirror":245}],166:[function(require,module,exports){
+},{"fbjs/lib/keyMirror":246}],167:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2014-2015, Facebook, Inc.
@@ -41195,7 +41656,7 @@ var ReactNativeComponent = {
 
 module.exports = ReactNativeComponent;
 }).call(this,require('_process'))
-},{"./Object.assign":120,"_process":81,"fbjs/lib/invariant":242}],167:[function(require,module,exports){
+},{"./Object.assign":121,"_process":82,"fbjs/lib/invariant":243}],168:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2015, Facebook, Inc.
@@ -41316,7 +41777,7 @@ var ReactNoopUpdateQueue = {
 
 module.exports = ReactNoopUpdateQueue;
 }).call(this,require('_process'))
-},{"_process":81,"fbjs/lib/warning":253}],168:[function(require,module,exports){
+},{"_process":82,"fbjs/lib/warning":254}],169:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -41410,7 +41871,7 @@ var ReactOwner = {
 
 module.exports = ReactOwner;
 }).call(this,require('_process'))
-},{"_process":81,"fbjs/lib/invariant":242}],169:[function(require,module,exports){
+},{"_process":82,"fbjs/lib/invariant":243}],170:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -41509,7 +41970,7 @@ function _noMeasure(objName, fnName, func) {
 
 module.exports = ReactPerf;
 }).call(this,require('_process'))
-},{"_process":81}],170:[function(require,module,exports){
+},{"_process":82}],171:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -41536,7 +41997,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 module.exports = ReactPropTypeLocationNames;
 }).call(this,require('_process'))
-},{"_process":81}],171:[function(require,module,exports){
+},{"_process":82}],172:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -41559,7 +42020,7 @@ var ReactPropTypeLocations = keyMirror({
 });
 
 module.exports = ReactPropTypeLocations;
-},{"fbjs/lib/keyMirror":245}],172:[function(require,module,exports){
+},{"fbjs/lib/keyMirror":246}],173:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -41916,7 +42377,7 @@ function getClassName(propValue) {
 }
 
 module.exports = ReactPropTypes;
-},{"./ReactElement":150,"./ReactPropTypeLocationNames":170,"./getIteratorFn":213,"fbjs/lib/emptyFunction":234}],173:[function(require,module,exports){
+},{"./ReactElement":151,"./ReactPropTypeLocationNames":171,"./getIteratorFn":214,"fbjs/lib/emptyFunction":235}],174:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -42068,7 +42529,7 @@ assign(ReactReconcileTransaction.prototype, Transaction.Mixin, Mixin);
 PooledClass.addPoolingTo(ReactReconcileTransaction);
 
 module.exports = ReactReconcileTransaction;
-},{"./CallbackQueue":103,"./Object.assign":120,"./PooledClass":121,"./ReactBrowserEventEmitter":124,"./ReactDOMFeatureFlags":137,"./ReactInputSelection":158,"./Transaction":198}],174:[function(require,module,exports){
+},{"./CallbackQueue":104,"./Object.assign":121,"./PooledClass":122,"./ReactBrowserEventEmitter":125,"./ReactDOMFeatureFlags":138,"./ReactInputSelection":159,"./Transaction":199}],175:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -42176,7 +42637,7 @@ var ReactReconciler = {
 };
 
 module.exports = ReactReconciler;
-},{"./ReactRef":175}],175:[function(require,module,exports){
+},{"./ReactRef":176}],176:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -42255,7 +42716,7 @@ ReactRef.detachRefs = function (instance, element) {
 };
 
 module.exports = ReactRef;
-},{"./ReactOwner":168}],176:[function(require,module,exports){
+},{"./ReactOwner":169}],177:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -42285,7 +42746,7 @@ var ReactRootIndex = {
 };
 
 module.exports = ReactRootIndex;
-},{}],177:[function(require,module,exports){
+},{}],178:[function(require,module,exports){
 /**
  * Copyright 2014-2015, Facebook, Inc.
  * All rights reserved.
@@ -42309,7 +42770,7 @@ var ReactServerBatchingStrategy = {
 };
 
 module.exports = ReactServerBatchingStrategy;
-},{}],178:[function(require,module,exports){
+},{}],179:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -42395,7 +42856,7 @@ module.exports = {
   renderToStaticMarkup: renderToStaticMarkup
 };
 }).call(this,require('_process'))
-},{"./ReactDefaultBatchingStrategy":146,"./ReactElement":150,"./ReactInstanceHandles":159,"./ReactMarkupChecksum":162,"./ReactServerBatchingStrategy":177,"./ReactServerRenderingTransaction":179,"./ReactUpdates":181,"./instantiateReactComponent":216,"_process":81,"fbjs/lib/emptyObject":235,"fbjs/lib/invariant":242}],179:[function(require,module,exports){
+},{"./ReactDefaultBatchingStrategy":147,"./ReactElement":151,"./ReactInstanceHandles":160,"./ReactMarkupChecksum":163,"./ReactServerBatchingStrategy":178,"./ReactServerRenderingTransaction":180,"./ReactUpdates":182,"./instantiateReactComponent":217,"_process":82,"fbjs/lib/emptyObject":236,"fbjs/lib/invariant":243}],180:[function(require,module,exports){
 /**
  * Copyright 2014-2015, Facebook, Inc.
  * All rights reserved.
@@ -42483,7 +42944,7 @@ assign(ReactServerRenderingTransaction.prototype, Transaction.Mixin, Mixin);
 PooledClass.addPoolingTo(ReactServerRenderingTransaction);
 
 module.exports = ReactServerRenderingTransaction;
-},{"./CallbackQueue":103,"./Object.assign":120,"./PooledClass":121,"./Transaction":198,"fbjs/lib/emptyFunction":234}],180:[function(require,module,exports){
+},{"./CallbackQueue":104,"./Object.assign":121,"./PooledClass":122,"./Transaction":199,"fbjs/lib/emptyFunction":235}],181:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2015, Facebook, Inc.
@@ -42743,7 +43204,7 @@ var ReactUpdateQueue = {
 
 module.exports = ReactUpdateQueue;
 }).call(this,require('_process'))
-},{"./Object.assign":120,"./ReactCurrentOwner":132,"./ReactElement":150,"./ReactInstanceMap":160,"./ReactUpdates":181,"_process":81,"fbjs/lib/invariant":242,"fbjs/lib/warning":253}],181:[function(require,module,exports){
+},{"./Object.assign":121,"./ReactCurrentOwner":133,"./ReactElement":151,"./ReactInstanceMap":161,"./ReactUpdates":182,"_process":82,"fbjs/lib/invariant":243,"fbjs/lib/warning":254}],182:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -42969,7 +43430,7 @@ var ReactUpdates = {
 
 module.exports = ReactUpdates;
 }).call(this,require('_process'))
-},{"./CallbackQueue":103,"./Object.assign":120,"./PooledClass":121,"./ReactPerf":169,"./ReactReconciler":174,"./Transaction":198,"_process":81,"fbjs/lib/invariant":242}],182:[function(require,module,exports){
+},{"./CallbackQueue":104,"./Object.assign":121,"./PooledClass":122,"./ReactPerf":170,"./ReactReconciler":175,"./Transaction":199,"_process":82,"fbjs/lib/invariant":243}],183:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -42984,7 +43445,7 @@ module.exports = ReactUpdates;
 'use strict';
 
 module.exports = '0.14.8';
-},{}],183:[function(require,module,exports){
+},{}],184:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -43112,7 +43573,7 @@ var SVGDOMPropertyConfig = {
 };
 
 module.exports = SVGDOMPropertyConfig;
-},{"./DOMProperty":107}],184:[function(require,module,exports){
+},{"./DOMProperty":108}],185:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -43314,7 +43775,7 @@ var SelectEventPlugin = {
 };
 
 module.exports = SelectEventPlugin;
-},{"./EventConstants":112,"./EventPropagators":116,"./ReactInputSelection":158,"./SyntheticEvent":190,"./isTextInputElement":218,"fbjs/lib/ExecutionEnvironment":228,"fbjs/lib/getActiveElement":237,"fbjs/lib/keyOf":246,"fbjs/lib/shallowEqual":251}],185:[function(require,module,exports){
+},{"./EventConstants":113,"./EventPropagators":117,"./ReactInputSelection":159,"./SyntheticEvent":191,"./isTextInputElement":219,"fbjs/lib/ExecutionEnvironment":229,"fbjs/lib/getActiveElement":238,"fbjs/lib/keyOf":247,"fbjs/lib/shallowEqual":252}],186:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -43344,7 +43805,7 @@ var ServerReactRootIndex = {
 };
 
 module.exports = ServerReactRootIndex;
-},{}],186:[function(require,module,exports){
+},{}],187:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -43934,7 +44395,7 @@ var SimpleEventPlugin = {
 
 module.exports = SimpleEventPlugin;
 }).call(this,require('_process'))
-},{"./EventConstants":112,"./EventPropagators":116,"./ReactMount":163,"./SyntheticClipboardEvent":187,"./SyntheticDragEvent":189,"./SyntheticEvent":190,"./SyntheticFocusEvent":191,"./SyntheticKeyboardEvent":193,"./SyntheticMouseEvent":194,"./SyntheticTouchEvent":195,"./SyntheticUIEvent":196,"./SyntheticWheelEvent":197,"./getEventCharCode":209,"_process":81,"fbjs/lib/EventListener":227,"fbjs/lib/emptyFunction":234,"fbjs/lib/invariant":242,"fbjs/lib/keyOf":246}],187:[function(require,module,exports){
+},{"./EventConstants":113,"./EventPropagators":117,"./ReactMount":164,"./SyntheticClipboardEvent":188,"./SyntheticDragEvent":190,"./SyntheticEvent":191,"./SyntheticFocusEvent":192,"./SyntheticKeyboardEvent":194,"./SyntheticMouseEvent":195,"./SyntheticTouchEvent":196,"./SyntheticUIEvent":197,"./SyntheticWheelEvent":198,"./getEventCharCode":210,"_process":82,"fbjs/lib/EventListener":228,"fbjs/lib/emptyFunction":235,"fbjs/lib/invariant":243,"fbjs/lib/keyOf":247}],188:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -43974,7 +44435,7 @@ function SyntheticClipboardEvent(dispatchConfig, dispatchMarker, nativeEvent, na
 SyntheticEvent.augmentClass(SyntheticClipboardEvent, ClipboardEventInterface);
 
 module.exports = SyntheticClipboardEvent;
-},{"./SyntheticEvent":190}],188:[function(require,module,exports){
+},{"./SyntheticEvent":191}],189:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -44012,7 +44473,7 @@ function SyntheticCompositionEvent(dispatchConfig, dispatchMarker, nativeEvent, 
 SyntheticEvent.augmentClass(SyntheticCompositionEvent, CompositionEventInterface);
 
 module.exports = SyntheticCompositionEvent;
-},{"./SyntheticEvent":190}],189:[function(require,module,exports){
+},{"./SyntheticEvent":191}],190:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -44050,7 +44511,7 @@ function SyntheticDragEvent(dispatchConfig, dispatchMarker, nativeEvent, nativeE
 SyntheticMouseEvent.augmentClass(SyntheticDragEvent, DragEventInterface);
 
 module.exports = SyntheticDragEvent;
-},{"./SyntheticMouseEvent":194}],190:[function(require,module,exports){
+},{"./SyntheticMouseEvent":195}],191:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -44233,7 +44694,7 @@ PooledClass.addPoolingTo(SyntheticEvent, PooledClass.fourArgumentPooler);
 
 module.exports = SyntheticEvent;
 }).call(this,require('_process'))
-},{"./Object.assign":120,"./PooledClass":121,"_process":81,"fbjs/lib/emptyFunction":234,"fbjs/lib/warning":253}],191:[function(require,module,exports){
+},{"./Object.assign":121,"./PooledClass":122,"_process":82,"fbjs/lib/emptyFunction":235,"fbjs/lib/warning":254}],192:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -44271,7 +44732,7 @@ function SyntheticFocusEvent(dispatchConfig, dispatchMarker, nativeEvent, native
 SyntheticUIEvent.augmentClass(SyntheticFocusEvent, FocusEventInterface);
 
 module.exports = SyntheticFocusEvent;
-},{"./SyntheticUIEvent":196}],192:[function(require,module,exports){
+},{"./SyntheticUIEvent":197}],193:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -44310,7 +44771,7 @@ function SyntheticInputEvent(dispatchConfig, dispatchMarker, nativeEvent, native
 SyntheticEvent.augmentClass(SyntheticInputEvent, InputEventInterface);
 
 module.exports = SyntheticInputEvent;
-},{"./SyntheticEvent":190}],193:[function(require,module,exports){
+},{"./SyntheticEvent":191}],194:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -44396,7 +44857,7 @@ function SyntheticKeyboardEvent(dispatchConfig, dispatchMarker, nativeEvent, nat
 SyntheticUIEvent.augmentClass(SyntheticKeyboardEvent, KeyboardEventInterface);
 
 module.exports = SyntheticKeyboardEvent;
-},{"./SyntheticUIEvent":196,"./getEventCharCode":209,"./getEventKey":210,"./getEventModifierState":211}],194:[function(require,module,exports){
+},{"./SyntheticUIEvent":197,"./getEventCharCode":210,"./getEventKey":211,"./getEventModifierState":212}],195:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -44470,7 +44931,7 @@ function SyntheticMouseEvent(dispatchConfig, dispatchMarker, nativeEvent, native
 SyntheticUIEvent.augmentClass(SyntheticMouseEvent, MouseEventInterface);
 
 module.exports = SyntheticMouseEvent;
-},{"./SyntheticUIEvent":196,"./ViewportMetrics":199,"./getEventModifierState":211}],195:[function(require,module,exports){
+},{"./SyntheticUIEvent":197,"./ViewportMetrics":200,"./getEventModifierState":212}],196:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -44517,7 +44978,7 @@ function SyntheticTouchEvent(dispatchConfig, dispatchMarker, nativeEvent, native
 SyntheticUIEvent.augmentClass(SyntheticTouchEvent, TouchEventInterface);
 
 module.exports = SyntheticTouchEvent;
-},{"./SyntheticUIEvent":196,"./getEventModifierState":211}],196:[function(require,module,exports){
+},{"./SyntheticUIEvent":197,"./getEventModifierState":212}],197:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -44578,7 +45039,7 @@ function SyntheticUIEvent(dispatchConfig, dispatchMarker, nativeEvent, nativeEve
 SyntheticEvent.augmentClass(SyntheticUIEvent, UIEventInterface);
 
 module.exports = SyntheticUIEvent;
-},{"./SyntheticEvent":190,"./getEventTarget":212}],197:[function(require,module,exports){
+},{"./SyntheticEvent":191,"./getEventTarget":213}],198:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -44634,7 +45095,7 @@ function SyntheticWheelEvent(dispatchConfig, dispatchMarker, nativeEvent, native
 SyntheticMouseEvent.augmentClass(SyntheticWheelEvent, WheelEventInterface);
 
 module.exports = SyntheticWheelEvent;
-},{"./SyntheticMouseEvent":194}],198:[function(require,module,exports){
+},{"./SyntheticMouseEvent":195}],199:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -44868,7 +45329,7 @@ var Transaction = {
 
 module.exports = Transaction;
 }).call(this,require('_process'))
-},{"_process":81,"fbjs/lib/invariant":242}],199:[function(require,module,exports){
+},{"_process":82,"fbjs/lib/invariant":243}],200:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -44896,7 +45357,7 @@ var ViewportMetrics = {
 };
 
 module.exports = ViewportMetrics;
-},{}],200:[function(require,module,exports){
+},{}],201:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2014-2015, Facebook, Inc.
@@ -44958,7 +45419,7 @@ function accumulateInto(current, next) {
 
 module.exports = accumulateInto;
 }).call(this,require('_process'))
-},{"_process":81,"fbjs/lib/invariant":242}],201:[function(require,module,exports){
+},{"_process":82,"fbjs/lib/invariant":243}],202:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -45001,7 +45462,7 @@ function adler32(data) {
 }
 
 module.exports = adler32;
-},{}],202:[function(require,module,exports){
+},{}],203:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -45028,7 +45489,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 module.exports = canDefineProperty;
 }).call(this,require('_process'))
-},{"_process":81}],203:[function(require,module,exports){
+},{"_process":82}],204:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -45084,7 +45545,7 @@ function dangerousStyleValue(name, value) {
 }
 
 module.exports = dangerousStyleValue;
-},{"./CSSProperty":101}],204:[function(require,module,exports){
+},{"./CSSProperty":102}],205:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -45135,7 +45596,7 @@ function deprecated(fnName, newModule, newPackage, ctx, fn) {
 
 module.exports = deprecated;
 }).call(this,require('_process'))
-},{"./Object.assign":120,"_process":81,"fbjs/lib/warning":253}],205:[function(require,module,exports){
+},{"./Object.assign":121,"_process":82,"fbjs/lib/warning":254}],206:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -45174,7 +45635,7 @@ function escapeTextContentForBrowser(text) {
 }
 
 module.exports = escapeTextContentForBrowser;
-},{}],206:[function(require,module,exports){
+},{}],207:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -45226,7 +45687,7 @@ function findDOMNode(componentOrElement) {
 
 module.exports = findDOMNode;
 }).call(this,require('_process'))
-},{"./ReactCurrentOwner":132,"./ReactInstanceMap":160,"./ReactMount":163,"_process":81,"fbjs/lib/invariant":242,"fbjs/lib/warning":253}],207:[function(require,module,exports){
+},{"./ReactCurrentOwner":133,"./ReactInstanceMap":161,"./ReactMount":164,"_process":82,"fbjs/lib/invariant":243,"fbjs/lib/warning":254}],208:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -45277,7 +45738,7 @@ function flattenChildren(children) {
 
 module.exports = flattenChildren;
 }).call(this,require('_process'))
-},{"./traverseAllChildren":225,"_process":81,"fbjs/lib/warning":253}],208:[function(require,module,exports){
+},{"./traverseAllChildren":226,"_process":82,"fbjs/lib/warning":254}],209:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -45307,7 +45768,7 @@ var forEachAccumulated = function (arr, cb, scope) {
 };
 
 module.exports = forEachAccumulated;
-},{}],209:[function(require,module,exports){
+},{}],210:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -45358,7 +45819,7 @@ function getEventCharCode(nativeEvent) {
 }
 
 module.exports = getEventCharCode;
-},{}],210:[function(require,module,exports){
+},{}],211:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -45462,7 +45923,7 @@ function getEventKey(nativeEvent) {
 }
 
 module.exports = getEventKey;
-},{"./getEventCharCode":209}],211:[function(require,module,exports){
+},{"./getEventCharCode":210}],212:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -45507,7 +45968,7 @@ function getEventModifierState(nativeEvent) {
 }
 
 module.exports = getEventModifierState;
-},{}],212:[function(require,module,exports){
+},{}],213:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -45537,7 +45998,7 @@ function getEventTarget(nativeEvent) {
 }
 
 module.exports = getEventTarget;
-},{}],213:[function(require,module,exports){
+},{}],214:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -45578,7 +46039,7 @@ function getIteratorFn(maybeIterable) {
 }
 
 module.exports = getIteratorFn;
-},{}],214:[function(require,module,exports){
+},{}],215:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -45652,7 +46113,7 @@ function getNodeForCharacterOffset(root, offset) {
 }
 
 module.exports = getNodeForCharacterOffset;
-},{}],215:[function(require,module,exports){
+},{}],216:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -45686,7 +46147,7 @@ function getTextContentAccessor() {
 }
 
 module.exports = getTextContentAccessor;
-},{"fbjs/lib/ExecutionEnvironment":228}],216:[function(require,module,exports){
+},{"fbjs/lib/ExecutionEnvironment":229}],217:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -45801,7 +46262,7 @@ function instantiateReactComponent(node) {
 
 module.exports = instantiateReactComponent;
 }).call(this,require('_process'))
-},{"./Object.assign":120,"./ReactCompositeComponent":131,"./ReactEmptyComponent":152,"./ReactNativeComponent":166,"_process":81,"fbjs/lib/invariant":242,"fbjs/lib/warning":253}],217:[function(require,module,exports){
+},{"./Object.assign":121,"./ReactCompositeComponent":132,"./ReactEmptyComponent":153,"./ReactNativeComponent":167,"_process":82,"fbjs/lib/invariant":243,"fbjs/lib/warning":254}],218:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -45862,7 +46323,7 @@ function isEventSupported(eventNameSuffix, capture) {
 }
 
 module.exports = isEventSupported;
-},{"fbjs/lib/ExecutionEnvironment":228}],218:[function(require,module,exports){
+},{"fbjs/lib/ExecutionEnvironment":229}],219:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -45903,7 +46364,7 @@ function isTextInputElement(elem) {
 }
 
 module.exports = isTextInputElement;
-},{}],219:[function(require,module,exports){
+},{}],220:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -45939,7 +46400,7 @@ function onlyChild(children) {
 
 module.exports = onlyChild;
 }).call(this,require('_process'))
-},{"./ReactElement":150,"_process":81,"fbjs/lib/invariant":242}],220:[function(require,module,exports){
+},{"./ReactElement":151,"_process":82,"fbjs/lib/invariant":243}],221:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -45966,7 +46427,7 @@ function quoteAttributeValueForBrowser(value) {
 }
 
 module.exports = quoteAttributeValueForBrowser;
-},{"./escapeTextContentForBrowser":205}],221:[function(require,module,exports){
+},{"./escapeTextContentForBrowser":206}],222:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -45983,7 +46444,7 @@ module.exports = quoteAttributeValueForBrowser;
 var ReactMount = require('./ReactMount');
 
 module.exports = ReactMount.renderSubtreeIntoContainer;
-},{"./ReactMount":163}],222:[function(require,module,exports){
+},{"./ReactMount":164}],223:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -46074,7 +46535,7 @@ if (ExecutionEnvironment.canUseDOM) {
 }
 
 module.exports = setInnerHTML;
-},{"fbjs/lib/ExecutionEnvironment":228}],223:[function(require,module,exports){
+},{"fbjs/lib/ExecutionEnvironment":229}],224:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -46115,7 +46576,7 @@ if (ExecutionEnvironment.canUseDOM) {
 }
 
 module.exports = setTextContent;
-},{"./escapeTextContentForBrowser":205,"./setInnerHTML":222,"fbjs/lib/ExecutionEnvironment":228}],224:[function(require,module,exports){
+},{"./escapeTextContentForBrowser":206,"./setInnerHTML":223,"fbjs/lib/ExecutionEnvironment":229}],225:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -46159,7 +46620,7 @@ function shouldUpdateReactComponent(prevElement, nextElement) {
 }
 
 module.exports = shouldUpdateReactComponent;
-},{}],225:[function(require,module,exports){
+},{}],226:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -46351,7 +46812,7 @@ function traverseAllChildren(children, callback, traverseContext) {
 
 module.exports = traverseAllChildren;
 }).call(this,require('_process'))
-},{"./ReactCurrentOwner":132,"./ReactElement":150,"./ReactInstanceHandles":159,"./getIteratorFn":213,"_process":81,"fbjs/lib/invariant":242,"fbjs/lib/warning":253}],226:[function(require,module,exports){
+},{"./ReactCurrentOwner":133,"./ReactElement":151,"./ReactInstanceHandles":160,"./getIteratorFn":214,"_process":82,"fbjs/lib/invariant":243,"fbjs/lib/warning":254}],227:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2015, Facebook, Inc.
@@ -46717,7 +47178,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 module.exports = validateDOMNesting;
 }).call(this,require('_process'))
-},{"./Object.assign":120,"_process":81,"fbjs/lib/emptyFunction":234,"fbjs/lib/warning":253}],227:[function(require,module,exports){
+},{"./Object.assign":121,"_process":82,"fbjs/lib/emptyFunction":235,"fbjs/lib/warning":254}],228:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -46804,7 +47265,7 @@ var EventListener = {
 
 module.exports = EventListener;
 }).call(this,require('_process'))
-},{"./emptyFunction":234,"_process":81}],228:[function(require,module,exports){
+},{"./emptyFunction":235,"_process":82}],229:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -46841,7 +47302,7 @@ var ExecutionEnvironment = {
 };
 
 module.exports = ExecutionEnvironment;
-},{}],229:[function(require,module,exports){
+},{}],230:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -46874,7 +47335,7 @@ function camelize(string) {
 }
 
 module.exports = camelize;
-},{}],230:[function(require,module,exports){
+},{}],231:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -46915,7 +47376,7 @@ function camelizeStyleName(string) {
 }
 
 module.exports = camelizeStyleName;
-},{"./camelize":229}],231:[function(require,module,exports){
+},{"./camelize":230}],232:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -46971,7 +47432,7 @@ function containsNode(_x, _x2) {
 }
 
 module.exports = containsNode;
-},{"./isTextNode":244}],232:[function(require,module,exports){
+},{"./isTextNode":245}],233:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -47057,7 +47518,7 @@ function createArrayFromMixed(obj) {
 }
 
 module.exports = createArrayFromMixed;
-},{"./toArray":252}],233:[function(require,module,exports){
+},{"./toArray":253}],234:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -47144,7 +47605,7 @@ function createNodesFromMarkup(markup, handleScript) {
 
 module.exports = createNodesFromMarkup;
 }).call(this,require('_process'))
-},{"./ExecutionEnvironment":228,"./createArrayFromMixed":232,"./getMarkupWrap":238,"./invariant":242,"_process":81}],234:[function(require,module,exports){
+},{"./ExecutionEnvironment":229,"./createArrayFromMixed":233,"./getMarkupWrap":239,"./invariant":243,"_process":82}],235:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -47183,7 +47644,7 @@ emptyFunction.thatReturnsArgument = function (arg) {
 };
 
 module.exports = emptyFunction;
-},{}],235:[function(require,module,exports){
+},{}],236:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -47206,7 +47667,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 module.exports = emptyObject;
 }).call(this,require('_process'))
-},{"_process":81}],236:[function(require,module,exports){
+},{"_process":82}],237:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -47233,7 +47694,7 @@ function focusNode(node) {
 }
 
 module.exports = focusNode;
-},{}],237:[function(require,module,exports){
+},{}],238:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -47269,7 +47730,7 @@ function getActiveElement() /*?DOMElement*/{
 }
 
 module.exports = getActiveElement;
-},{}],238:[function(require,module,exports){
+},{}],239:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -47367,7 +47828,7 @@ function getMarkupWrap(nodeName) {
 
 module.exports = getMarkupWrap;
 }).call(this,require('_process'))
-},{"./ExecutionEnvironment":228,"./invariant":242,"_process":81}],239:[function(require,module,exports){
+},{"./ExecutionEnvironment":229,"./invariant":243,"_process":82}],240:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -47406,7 +47867,7 @@ function getUnboundedScrollPosition(scrollable) {
 }
 
 module.exports = getUnboundedScrollPosition;
-},{}],240:[function(require,module,exports){
+},{}],241:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -47440,7 +47901,7 @@ function hyphenate(string) {
 }
 
 module.exports = hyphenate;
-},{}],241:[function(require,module,exports){
+},{}],242:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -47480,7 +47941,7 @@ function hyphenateStyleName(string) {
 }
 
 module.exports = hyphenateStyleName;
-},{"./hyphenate":240}],242:[function(require,module,exports){
+},{"./hyphenate":241}],243:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -47533,7 +47994,7 @@ function invariant(condition, format, a, b, c, d, e, f) {
 
 module.exports = invariant;
 }).call(this,require('_process'))
-},{"_process":81}],243:[function(require,module,exports){
+},{"_process":82}],244:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -47557,7 +48018,7 @@ function isNode(object) {
 }
 
 module.exports = isNode;
-},{}],244:[function(require,module,exports){
+},{}],245:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -47583,7 +48044,7 @@ function isTextNode(object) {
 }
 
 module.exports = isTextNode;
-},{"./isNode":243}],245:[function(require,module,exports){
+},{"./isNode":244}],246:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -47634,7 +48095,7 @@ var keyMirror = function (obj) {
 
 module.exports = keyMirror;
 }).call(this,require('_process'))
-},{"./invariant":242,"_process":81}],246:[function(require,module,exports){
+},{"./invariant":243,"_process":82}],247:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -47670,7 +48131,7 @@ var keyOf = function (oneKeyObj) {
 };
 
 module.exports = keyOf;
-},{}],247:[function(require,module,exports){
+},{}],248:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -47722,7 +48183,7 @@ function mapObject(object, callback, context) {
 }
 
 module.exports = mapObject;
-},{}],248:[function(require,module,exports){
+},{}],249:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -47754,7 +48215,7 @@ function memoizeStringOnly(callback) {
 }
 
 module.exports = memoizeStringOnly;
-},{}],249:[function(require,module,exports){
+},{}],250:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -47778,7 +48239,7 @@ if (ExecutionEnvironment.canUseDOM) {
 }
 
 module.exports = performance || {};
-},{"./ExecutionEnvironment":228}],250:[function(require,module,exports){
+},{"./ExecutionEnvironment":229}],251:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -47813,7 +48274,7 @@ if (performance.now) {
 }
 
 module.exports = performanceNow;
-},{"./performance":249}],251:[function(require,module,exports){
+},{"./performance":250}],252:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -47864,7 +48325,7 @@ function shallowEqual(objA, objB) {
 }
 
 module.exports = shallowEqual;
-},{}],252:[function(require,module,exports){
+},{}],253:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -47924,7 +48385,7 @@ function toArray(obj) {
 
 module.exports = toArray;
 }).call(this,require('_process'))
-},{"./invariant":242,"_process":81}],253:[function(require,module,exports){
+},{"./invariant":243,"_process":82}],254:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2014-2015, Facebook, Inc.
@@ -47984,12 +48445,12 @@ if (process.env.NODE_ENV !== 'production') {
 
 module.exports = warning;
 }).call(this,require('_process'))
-},{"./emptyFunction":234,"_process":81}],254:[function(require,module,exports){
+},{"./emptyFunction":235,"_process":82}],255:[function(require,module,exports){
 'use strict';
 
 module.exports = require('./lib/React');
 
-},{"./lib/React":122}],255:[function(require,module,exports){
+},{"./lib/React":123}],256:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -48008,7 +48469,7 @@ function thunkMiddleware(_ref) {
     };
   };
 }
-},{}],256:[function(require,module,exports){
+},{}],257:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -48067,7 +48528,7 @@ function applyMiddleware() {
     };
   };
 }
-},{"./compose":259}],257:[function(require,module,exports){
+},{"./compose":260}],258:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -48119,7 +48580,7 @@ function bindActionCreators(actionCreators, dispatch) {
   }
   return boundActionCreators;
 }
-},{}],258:[function(require,module,exports){
+},{}],259:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -48249,7 +48710,7 @@ function combineReducers(reducers) {
   };
 }
 }).call(this,require('_process'))
-},{"./createStore":260,"./utils/warning":262,"_process":81,"lodash/isPlainObject":266}],259:[function(require,module,exports){
+},{"./createStore":261,"./utils/warning":263,"_process":82,"lodash/isPlainObject":267}],260:[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
@@ -48283,7 +48744,7 @@ function compose() {
     }, last.apply(undefined, arguments));
   };
 }
-},{}],260:[function(require,module,exports){
+},{}],261:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -48500,7 +48961,7 @@ function createStore(reducer, initialState, enhancer) {
     replaceReducer: replaceReducer
   };
 }
-},{"lodash/isPlainObject":266}],261:[function(require,module,exports){
+},{"lodash/isPlainObject":267}],262:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -48549,17 +49010,17 @@ exports.bindActionCreators = _bindActionCreators2["default"];
 exports.applyMiddleware = _applyMiddleware2["default"];
 exports.compose = _compose2["default"];
 }).call(this,require('_process'))
-},{"./applyMiddleware":256,"./bindActionCreators":257,"./combineReducers":258,"./compose":259,"./createStore":260,"./utils/warning":262,"_process":81}],262:[function(require,module,exports){
-arguments[4][91][0].apply(exports,arguments)
-},{"dup":91}],263:[function(require,module,exports){
-arguments[4][95][0].apply(exports,arguments)
-},{"dup":95}],264:[function(require,module,exports){
+},{"./applyMiddleware":257,"./bindActionCreators":258,"./combineReducers":259,"./compose":260,"./createStore":261,"./utils/warning":263,"_process":82}],263:[function(require,module,exports){
+arguments[4][92][0].apply(exports,arguments)
+},{"dup":92}],264:[function(require,module,exports){
 arguments[4][96][0].apply(exports,arguments)
 },{"dup":96}],265:[function(require,module,exports){
 arguments[4][97][0].apply(exports,arguments)
 },{"dup":97}],266:[function(require,module,exports){
 arguments[4][98][0].apply(exports,arguments)
-},{"./_getPrototype":263,"./_isHostObject":264,"./isObjectLike":265,"dup":98}],267:[function(require,module,exports){
+},{"dup":98}],267:[function(require,module,exports){
+arguments[4][99][0].apply(exports,arguments)
+},{"./_getPrototype":264,"./_isHostObject":265,"./isObjectLike":266,"dup":99}],268:[function(require,module,exports){
 //     Underscore.js 1.8.3
 //     http://underscorejs.org
 //     (c) 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
@@ -50109,4 +50570,4 @@ arguments[4][98][0].apply(exports,arguments)
   }
 }.call(this));
 
-},{}]},{},[53]);
+},{}]},{},[54]);

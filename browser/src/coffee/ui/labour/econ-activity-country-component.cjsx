@@ -19,12 +19,32 @@ EconByCountry = React.createClass
 
     @props.fetchEconCountryData null
 
+  componentDidMount: ->
+
+    $(window).resize () =>
+      @onResize()
+
+  onResize: ->
+
+    draw = econByCountryChart {
+      resize: yes
+      container: @refs.econCountrySvg
+      isDefault: @props.isDefault
+      data: @props.data
+      activeCategory: @props.activeCategory
+      activeValue: @props.activeValue
+      onMouseOver: @props.onMouseOver
+    }
+
+    draw.resize()
+
   componentDidUpdate: ->
 
     # Update chart
     if @props.updateMainChart is yes
       
       draw = econByCountryChart {
+        resize: no
         container: @refs.econCountrySvg
         isDefault: @props.isDefault
         data: @props.data

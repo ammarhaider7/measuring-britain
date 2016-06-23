@@ -1,5 +1,3 @@
-# d3 = require 'd3'
-
 drawBarChart = (options) ->
 
 	{ container, data, isDefault, onMouseOver, activeCategory, activeValue, onInitDone } = options
@@ -62,7 +60,7 @@ drawBarChart = (options) ->
 		main_group.attr 'transform', "translate(#{ margin.left }, #{ margin.top })"
 		labels_group.attr 'transform', "translate(#{ margin.left - 10 }, #{ margin.top + 22 })"
 		x_axis_group.attr 'transform', "translate(#{ margin.left }, #{ margin.top })"
-		detail_group.attr 'transform', "translate(#{ (chart_width / 3) * 2 }, #{ (chart_height / 2) + margin.top })"
+		detail_group.attr 'transform', "translate(#{ chart_width*0.8 }, #{ (chart_height / 2) + margin.top })"
 
 		bar = main_group.selectAll 'rect'
 			.data d3_array, key
@@ -104,7 +102,7 @@ drawBarChart = (options) ->
 			.duration 1500
 			.call xAxis
 
-		detail_width = chart_width - ((chart_width / 3) * 2)
+		detail_width = chart_width - (chart_width*0.7)
 		detail_height = (chart_height / 2) - margin.top
 
 		detail_group.append 'rect'
@@ -188,6 +186,40 @@ drawBarChart = (options) ->
 
 		# Add mouse over handler
 		attachHoverHandlers()
+
+	my.resize = ->
+
+		# update the chart here
+		svg = d3.select '.bars-svg'
+		main_group_bars = svg.selectAll '.main-group .bar'
+		x_axis_group = svg.select '.x.axis'
+		detail_group = svg.select '.detail-group'
+
+		# Update the position and size of the detail box in bottom right
+		detail_group.attr 'transform', "translate(#{ chart_width*0.8 }, #{ (chart_height / 2) + margin.top })"
+
+		detail_width = chart_width - (chart_width*0.7)
+		detail_height = (chart_height / 2) - margin.top
+
+		detail_group.select 'rect'
+			.attr {
+				width: detail_width
+				height: detail_height
+			}
+
+		# re-position the text within the detail rect
+		detail_group.selectAll 'text'
+			.attr 'x', (detail_width / 2)
+
+		# Update the bars
+		main_group_bars
+			.attr 'width', (d) ->
+				return x d.value
+			.attr 'y', (d, i) ->
+				return y d.name
+
+		# Update the axis
+		x_axis_group.call xAxis		
 
 	attachHoverHandlers = ->
 

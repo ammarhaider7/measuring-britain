@@ -241,10 +241,12 @@ drawDisabilityChart = (options) ->
 			.attr 'opacity', 1
 
 		# Fix x ticks
-		ticks = svg.selectAll '.x .tick text'
+		ticks = svg.selectAll '.x .tick'
 		ticks.each (d, i) ->
 			if i % 2 is 0
-				d3.select(this).attr 'y', '20'
+				$this = d3.select this
+				$this.select('text').attr 'y', margin.p
+				$this.select('line').attr 'y2', 15
 
 		# Add mouse over handler
 		attachHoverHandlers()
@@ -254,8 +256,6 @@ drawDisabilityChart = (options) ->
 		# update the chart here
 		svg = d3.select '.disability-svg'
 		groups = svg.selectAll '.ethnicity'
-		x_axis_group = svg.select '.x.axis'
-		y_axis_group = svg.select '.y.axis'
 
 		groups.data d3_array
 
@@ -274,6 +274,62 @@ drawDisabilityChart = (options) ->
 
 		# Add mouse over handler
 		attachHoverHandlers() 
+
+	my.resize = ->
+
+		# update the chart here
+		svg = d3.select '.disability-svg'
+		groups = svg.selectAll '.ethnicity'
+		x_axis_group = svg.select '.x.axis'
+		y_axis_group = svg.select '.y.axis'
+		title_group = svg.select '.title-group'
+		legend_group = svg.select '.legend-group'
+		ticks = svg.selectAll '.x .tick'
+
+		# Transforms
+		title_group.attr 'transform', "translate(#{ chart_width / 2 + margin.left }, 0)"
+		legend_group.attr 'transform', "translate(#{ chart_width - margin.p }, #{ margin.top })"
+
+		# Re-position ethnicity groups 
+		groups.attr {
+	  		transform: (d) ->
+	  			return "translate(#{ x0 d.key }, 0)"
+	  	}
+
+	  	# Re-scale and position rects
+		groups.selectAll 'rect'
+		  	.attr {
+		  		width: x1.rangeBand()
+		  		x: (d) ->
+		  			return x1 d.key
+ 		  	}
+
+		x_axis_group.call xAxis
+		y_axis_group.call yAxis
+
+		# Fix x ticks
+		ticks.each (d, i) ->
+			if i % 2 is 0
+				$this = d3.select this
+				$this.select('text').attr 'y', margin.p
+				$this.select('line').attr 'y2', 15
+
+		# Re-position tooltips
+		tooltip_groups = groups.select '.tooltip-group'
+
+ 		# tooltip backgrounds
+		tooltip_groups.select 'rect'
+			.attr {
+				width: x0.rangeBand() + margin.p + 5
+				y: y 0.3
+			}
+
+		# toolip percentage labels
+		tooltip_groups.selectAll 'text'
+			.attr {
+				transform: (d) ->
+					return "translate(#{ x0.rangeBand() / 2 }, #{ y 0.3 })"
+			}
 
 	attachHoverHandlers = ->
 

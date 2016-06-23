@@ -150,14 +150,13 @@ drawGenHealthChart = function(options) {
     return attachHoverHandlers();
   };
   my.update = function() {
-    var circles, groups, labels, main_group_lines, point_labels, svg, x_axis_group, y_axis_group;
+    var circles, groups, labels, main_group_lines, point_labels, svg, y_axis_group;
     svg = d3.select('.gen-health-svg');
     groups = svg.selectAll('.ethnicity');
     main_group_lines = svg.selectAll('.main-group path');
     labels = svg.selectAll('.label');
     circles = groups.selectAll('.circle');
     point_labels = groups.selectAll('.point-label');
-    x_axis_group = svg.select('.x.axis');
     y_axis_group = svg.select('.y.axis');
     groups.data(d3_array);
     main_group_lines.data(d3_array).transition().duration(1000).delay(500).attr('d', function(d) {
@@ -189,6 +188,42 @@ drawGenHealthChart = function(options) {
     });
     y_axis_group.transition().duration(1000).delay(500).call(yAxis);
     return attachHoverHandlers();
+  };
+  my.resize = function() {
+    var circles, groups, labels, main_group_lines, point_labels, svg, title_group, x_axis_group, y_axis_group;
+    svg = d3.select('.gen-health-svg');
+    groups = svg.selectAll('.ethnicity');
+    main_group_lines = svg.selectAll('.main-group path');
+    labels = svg.selectAll('.label');
+    circles = groups.selectAll('.circle');
+    point_labels = groups.selectAll('.point-label');
+    y_axis_group = svg.select('.y.axis');
+    x_axis_group = svg.select('.x.axis');
+    title_group = svg.select('.title-group');
+    title_group.attr('transform', "translate(" + (chart_width / 3 - margin.left) + ", 0)");
+    main_group_lines.attr('d', function(d) {
+      return line(d.values);
+    });
+    labels.attr({
+      transform: function(d) {
+        return "translate(" + (x(d.values[d.values.length - 1].key)) + ", " + (y(d.values[d.values.length - 1].values.bad)) + ")";
+      }
+    });
+    circles.attr({
+      cx: function(d) {
+        return x(d.key);
+      },
+      cy: function(d) {
+        return y(d.values.bad);
+      }
+    });
+    point_labels.attr({
+      transform: function(d) {
+        return "translate(" + (x(d.key)) + ", " + (y(d.values.bad)) + ")";
+      }
+    });
+    y_axis_group.call(yAxis);
+    return x_axis_group.call(xAxis);
   };
   my.highlightDetail = function() {
     var groups, labels, lines, points, selected_lines, svg;

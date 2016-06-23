@@ -2,8 +2,8 @@
 var drawPyramid;
 
 drawPyramid = function(options) {
-  var activeLineCategory, activeLineValue, ages, bar_females, bar_females_perc, bar_females_perc_format, bar_females_sum, bar_males, bar_males_perc, bar_males_perc_format, bar_males_sum, container, drawOutline, femaleKeyGroup, g, height, init, isDefault, isFirstLine, isOutline, keyGroup, leftGroup, maleKeyGroup, margin, my, onFirstLineDrawn, onMouseOver, outlineFilter, outline_females, outline_females_perc, outline_females_perc_format, outline_females_sum, outline_males, outline_males_perc, outline_males_perc_format, outline_males_sum, overlayGroup, overlay_data, ref, ref1, rightGroup, svg, ticksGroup, titleGroup, update, updateOutline, updatePyramid, width, x, xAxis, xAxisGroupLeft, xAxisGroupRight, xAxisLeft, xLeft, y;
-  container = options.container, ages = options.ages, bar_males = options.bar_males, bar_males_perc = options.bar_males_perc, bar_males_perc_format = options.bar_males_perc_format, bar_males_sum = options.bar_males_sum, bar_females = options.bar_females, bar_females_perc = options.bar_females_perc, bar_females_perc_format = options.bar_females_perc_format, bar_females_sum = options.bar_females_sum, outline_males = options.outline_males, outline_females = options.outline_females, outline_males_perc = options.outline_males_perc, outline_males_perc_format = options.outline_males_perc_format, outline_males_sum = options.outline_males_sum, outline_females_perc = options.outline_females_perc, outline_females_perc_format = options.outline_females_perc_format, outline_females_sum = options.outline_females_sum, overlay_data = options.overlay_data, onMouseOver = options.onMouseOver, onFirstLineDrawn = options.onFirstLineDrawn, isDefault = options.isDefault, outlineFilter = options.outlineFilter, updatePyramid = options.updatePyramid, updateOutline = options.updateOutline, activeLineValue = options.activeLineValue, activeLineCategory = options.activeLineCategory, isFirstLine = options.isFirstLine;
+  var activeLineCategory, activeLineValue, ages, bar_females, bar_females_perc, bar_females_perc_format, bar_females_sum, bar_males, bar_males_perc, bar_males_perc_format, bar_males_sum, container, drawOutline, femaleKeyGroup, g, height, init, isDefault, isFirstLine, isOutline, keyGroup, leftGroup, maleKeyGroup, margin, my, onFirstLineDrawn, onMouseOver, outlineFilter, outline_females, outline_females_perc, outline_females_perc_format, outline_females_sum, outline_males, outline_males_perc, outline_males_perc_format, outline_males_sum, overlayGroup, overlay_data, ref, ref1, resize, resizePyramid, rightGroup, svg, ticksGroup, titleGroup, update, updateOutline, updatePyramid, width, x, xAxis, xAxisGroupLeft, xAxisGroupRight, xAxisLeft, xLeft, y;
+  container = options.container, ages = options.ages, bar_males = options.bar_males, bar_males_perc = options.bar_males_perc, bar_males_perc_format = options.bar_males_perc_format, bar_males_sum = options.bar_males_sum, bar_females = options.bar_females, bar_females_perc = options.bar_females_perc, bar_females_perc_format = options.bar_females_perc_format, bar_females_sum = options.bar_females_sum, outline_males = options.outline_males, outline_females = options.outline_females, outline_males_perc = options.outline_males_perc, outline_males_perc_format = options.outline_males_perc_format, outline_males_sum = options.outline_males_sum, outline_females_perc = options.outline_females_perc, outline_females_perc_format = options.outline_females_perc_format, outline_females_sum = options.outline_females_sum, overlay_data = options.overlay_data, onMouseOver = options.onMouseOver, onFirstLineDrawn = options.onFirstLineDrawn, isDefault = options.isDefault, outlineFilter = options.outlineFilter, updatePyramid = options.updatePyramid, updateOutline = options.updateOutline, activeLineValue = options.activeLineValue, activeLineCategory = options.activeLineCategory, isFirstLine = options.isFirstLine, resize = options.resize;
   width = (ref = $(container).width()) != null ? ref : 750;
   height = (ref1 = $(container).height()) != null ? ref1 : 550;
   isOutline = outlineFilter;
@@ -51,16 +51,19 @@ drawPyramid = function(options) {
   femaleKeyGroup = keyGroup.select('.female-key-group');
   my = function() {
     var outlineDataReceived;
+    if (resize === true) {
+      return resizePyramid();
+    }
     if (isDefault === true) {
       init();
       if (isOutline === true && updateOutline === true) {
-        return drawOutline();
+        drawOutline();
       }
     } else if (isDefault === false) {
       update();
       outlineDataReceived = outline_males_perc != null;
       if (isOutline === true && outlineDataReceived === true) {
-        return drawOutline();
+        drawOutline();
       }
     }
   };
@@ -263,6 +266,47 @@ drawPyramid = function(options) {
       });
       onFirstLineDrawn();
     }
+  };
+  resizePyramid = function() {
+    var leftBars, overlayBars, rightBars;
+    svg = d3.select('.pyramid-svg');
+    leftBars = svg.selectAll('.pyramid-bar.left');
+    rightBars = svg.selectAll('.pyramid-bar.right');
+    overlayBars = svg.selectAll('.overlay-rect');
+    xAxisGroupLeft = svg.select('.x.axis.left');
+    xAxisGroupRight = svg.select('.x.axis.right');
+    g.attr("transform", "translate(0, " + margin.top + ")");
+    overlayGroup.attr("transform", "translate(0, " + margin.top + ")");
+    leftGroup.attr("transform", "translate(0, " + margin.top + ")");
+    rightGroup.attr("transform", "translate(" + ((width / 2) + margin.middle) + ", " + margin.top + ")");
+    ticksGroup.attr("transform", "translate(" + (width / 2) + ", " + (margin.bottom - 5) + ")");
+    xAxisGroupLeft.attr("transform", "translate(" + (-(width / 2)) + ", " + (height - (margin.bottom + 15)) + ")");
+    xAxisGroupRight.attr("transform", "translate(" + margin.middle + ", " + (height - (margin.bottom + 15)) + ")");
+    titleGroup.attr("transform", "translate(" + (0.25 * width) + ", " + (margin.top - 10) + ")");
+    keyGroup.attr("transform", "translate(" + (width - margin.right * 3) + ", " + margin.top + ")");
+    maleKeyGroup.attr("transform", "translate(70, 0)");
+    svg = d3.select('.pyramid-svg');
+    leftBars = svg.selectAll('.pyramid-bar.left');
+    rightBars = svg.selectAll('.pyramid-bar.right');
+    overlayBars = svg.selectAll('.overlay-rect');
+    xAxisGroupLeft = svg.select('.x.axis.left');
+    xAxisGroupRight = svg.select('.x.axis.right');
+    leftBars.data(bar_females_perc).attr({
+      width: function(d) {
+        return x(bar_females_perc)(d);
+      },
+      x: function(d) {
+        return xLeft(bar_females_perc)(d);
+      }
+    });
+    rightBars.data(bar_males_perc).attr({
+      width: function(d) {
+        return x(bar_males_perc)(d);
+      }
+    });
+    overlayBars.data(overlay_data);
+    xAxisGroupLeft.call(xAxisLeft(bar_females_perc_format));
+    return xAxisGroupRight.call(xAxis(bar_males_perc_format));
   };
   my.width = function(value) {
     if (!arguments.length) {

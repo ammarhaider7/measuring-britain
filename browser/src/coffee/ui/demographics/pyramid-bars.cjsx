@@ -11,11 +11,32 @@ pyBarsComponent = React.createClass
 		else
 			return $(window).height() - 320
 
+	componentDidMount: ->
+
+		$(window).resize () =>
+			@onResize()
+
+	onResize: ->
+
+		resizeChart = drawPyrBars {
+			resize: yes
+			container: @refs.pyramidBarsSvg
+			age: @props._mouseOverData.age
+			females: @props._mouseOverData.females
+			males: @props._mouseOverData.males
+			initial: @props._mouseOverData.initial
+			isDefault: @props.isDefault
+			activeBarsValue: @props.activeBarsValue
+		}
+
+		resizeChart()
+
 	componentDidUpdate: ->
 
 		if @props.updateBars is yes
 			
 			pyrBars = drawPyrBars {
+				resize: no
 				container: @refs.pyramidBarsSvg
 				age: @props._mouseOverData.age
 				females: @props._mouseOverData.females

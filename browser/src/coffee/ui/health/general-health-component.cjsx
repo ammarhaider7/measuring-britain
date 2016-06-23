@@ -19,12 +19,34 @@ GenHealthChart = React.createClass
 
     @props.fetchGenHealthData null
 
+  componentDidMount: ->
+
+    $(window).resize () =>
+      @onResize()
+
+  onResize: ->
+
+    draw = genHealthChart {
+      resize: yes
+      container: @refs.genHealthSvg
+      isDefault: @props.isDefault
+      data: @props.data
+      activeCategory: @props.activeCategory
+      activeValue: @props.activeValue
+      onMouseOver: @props.onMouseOver
+      highlights: @props._highlights
+      updateHighlights: @props.updateHighlights
+    }
+
+    draw.resize()
+
   componentDidUpdate: ->
 
     # Update chart
     if @props.updateGenHealth is yes
 
       draw = genHealthChart {
+        resize: no
         container: @refs.genHealthSvg
         isDefault: @props.isDefault
         data: @props.data

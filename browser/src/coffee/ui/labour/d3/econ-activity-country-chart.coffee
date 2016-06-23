@@ -221,23 +221,6 @@ drawEconByCountryChart = (options) ->
 				return "translate(#{ x d.country }, 0)"
 			.attr 'class', 'country-g'
 
-		# Add country labels
-		top_countries.append 'text'
-			.text (d) ->
-				return trimCountryString d.country
-			.attr {
-				transform: (d) ->
-					return "translate(#{ 0.5 * x.rangeBand() }, #{ y(d.in_work.sum_perc) - 5 })"
-				'font-size': '80%'
-				'font-weight': 'bold'
-				'text-anchor': 'middle'
-				class: 'country-label'
-				opacity: 0
-			}
-			.transition()
-			.duration 1500
-			.attr 'opacity', 1
-
 		# Add stacked bars
 		top_countries.selectAll 'rect'
 			.data (d) ->
@@ -285,6 +268,23 @@ drawEconByCountryChart = (options) ->
 					# d.y1 is the actual % value of the data point
 					return (y0 d.y1) - (y0 d.y0) 
 			}
+
+		# Add country labels
+		top_countries.append 'text'
+			.text (d) ->
+				return trimCountryString d.country
+			.attr {
+				transform: (d) ->
+					return "translate(#{ 0.5 * x.rangeBand() }, #{ y(d.in_work.sum_perc) - 5 })"
+				'font-size': '100%'
+				'font-weight': 'bold'
+				'text-anchor': 'middle'
+				class: 'country-label'
+				opacity: 0
+			}
+			.transition()
+			.duration 1500
+			.attr 'opacity', 1
 		
  		# create tooltip groups
 		tooltip_group_top = main_top_group.append 'g'
@@ -466,6 +466,85 @@ drawEconByCountryChart = (options) ->
 
 		# Add mouse over handler
 		attachHoverHandlers() 
+
+	my.resize = ->
+
+		# update the chart here
+		svg = d3.select '.econ-country-svg'
+		main_top_group = svg.select '.main-group-top'
+		main_bottom_group = svg.select '.main-group-bottom'
+		top_rect_group = svg.select '.top-group-rect'
+		bottom_rect_group = svg.select '.bottom-group-rect'
+		top_countries = main_top_group.selectAll '.country-g'
+		bottom_countries = main_bottom_group.selectAll '.country-g'
+		y_axis_top_group = svg.select '.y.y-top.axis'
+		y_axis_bottom_group = svg.select '.y.y-bottom.axis'
+		x_axis_divider_group = svg.select '.x-axis-divider'
+
+		# rect background
+		top_rect_group.select 'rect'
+			.attr {
+				width: chart_width
+			}
+
+		# top text label
+		main_top_group.select 'text'
+			.attr {
+				x: chart_width * 0.5
+			}
+
+		# rect background
+		bottom_rect_group.select 'rect'
+			.attr {
+				width: chart_width
+			}
+
+		# bottom text label
+		main_bottom_group.select 'text'
+			.attr {
+				x: chart_width * 0.5
+				y: chart_height * 0.5 - margin.label
+			}
+
+		# Add stacked bars
+		top_countries.selectAll 'rect'
+			.attr {
+				width: x.rangeBand()
+			}
+
+		# country labels
+		top_countries.selectAll '.country-label'
+			.attr 'transform', (d) ->
+				return "translate(#{ 0.5 * x.rangeBand() }, #{ y(d.in_work.sum_perc) - 5 })"
+
+		# move country to new position
+		top_countries
+			.attr 'transform', (d) ->
+				return "translate(#{ x d.country }, 0)"
+		
+		# move country to new position
+		bottom_countries
+			.attr 'transform', (d) ->
+				return "translate(#{ x d.country }, 0)"
+
+		# Add stacked bars
+		bottom_countries.selectAll 'rect'
+			.attr {
+				width: x.rangeBand()
+			}
+
+		y_axis_top_group.call yAxisTop
+		y_axis_bottom_group.call yAxisBottom
+
+		# Draw line to divide both sets of bars
+		x_axis_divider_group.select 'line'
+			.attr {
+				x2: chart_width
+
+			}
+
+		# Add mouse over handler
+		attachHoverHandlers()
 
 	attachHoverHandlers = ->
 

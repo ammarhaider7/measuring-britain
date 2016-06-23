@@ -16,27 +16,24 @@ category_options = data.category_options
 
 BarsComponent = React.createClass
 
-  componentDidMount: ->
+  componentWillMount: ->
 
     if @props.isDefault is yes and @props.init_done is no
 
       @props.fetchReligionData null
 
-      # $(window).on 'scroll', () =>
+  componentDidMount: ->
 
-      #   docScrollTop = $(document).scrollTop()
-      #   relBarsOffsetTop = ($('.rel-bars').offset().top - 650)
-      #   docHeight = $(document).height()
+    $(window).resize () =>
+      @reactDrawBars {
+        resize: yes
+      }
 
-      #   if (docHeight - docScrollTop) < relBarsOffsetTop
-      #     console.log 'scroll reach relbars'
-      #     $(window).off 'scroll'
-      #     @props.fetchReligionData null
-
-  reactDrawBars: ->
+  reactDrawBars: (resize_flag) ->
 
     bars = drawRelBars {
 
+      resize: resize_flag.resize
       container: @refs.barsSvg
       data: @props.data
       isDefault: @props.isDefault
@@ -47,19 +44,25 @@ BarsComponent = React.createClass
 
     }
 
+    if resize_flag.resize is yes
+
+      return bars.resize()
+
     if @props.isDefault is yes and @props.updateRelBars is yes
 
-      bars.init()
+      return bars.init()
 
     else
       
-      bars.update()
+      return bars.update()
 
   componentDidUpdate: ->
 
     if @props.updateRelBars is yes
 
-      @reactDrawBars()
+      @reactDrawBars {
+        resize: no
+      }
 
   render: ->
 
