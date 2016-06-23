@@ -65,7 +65,7 @@ Nav = React.createClass
 								<li><a href="/census/employment-status-by-country-of-birth">Employment Status by Country of Birth</a></li>
 							</ul>
 						</li>
-						<li className="about"><a className={if @props.alt_bg is 'yes' then 'mb-white-text'} href="/about">About</a></li>
+						<li className={ if @props.active is "about" then 'active' else ''}}><a className={if @props.alt_bg is 'yes' then 'mb-white-text'} href="/about">About</a></li>
 					</ul>
 					<ul className="nav navbar-nav navbar-right">
 						<li>

@@ -20,7 +20,7 @@ $(".#{ path }").addClass 'active'
 # Is the user on mobile portrait?
 isMobilePortrait = do ->
 	window_width = $(window).width()
-	return yes if window_width < 420
+	return yes if window_width < 740
 
 # render functions
 renderDemographics = ->

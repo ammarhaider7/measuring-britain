@@ -11,6 +11,7 @@ var landing = require('./routes/landing');
 var demographics = require('./routes/demographics');
 var health = require('./routes/health');
 var census = require('./routes/census');
+var about = require('./routes/about');
 
 var app = express();
 
@@ -43,6 +44,7 @@ app.use('/landing', landing);
 app.use('/demographics', demographics);
 app.use('/health', health);
 app.use('/census', census);
+app.use('/about', about);
 
 // catch 404 and forward to error handler
 // Ammar's note: Acts as a catch-all for 'unrouted' pages because the above routes will execute first

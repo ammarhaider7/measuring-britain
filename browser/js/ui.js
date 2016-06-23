@@ -36,7 +36,7 @@ $("." + path).addClass('active');
 isMobilePortrait = (function() {
   var window_width;
   window_width = $(window).width();
-  if (window_width < 420) {
+  if (window_width < 740) {
     return true;
   }
 })();

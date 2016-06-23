@@ -719,7 +719,8 @@ Nav = React.createClass({displayName: "Nav",
     }, "Census"), React.createElement("li", null, React.createElement("a", {
       "href": "/census/employment-status-by-country-of-birth"
     }, "Employment Status by Country of Birth")))), React.createElement("li", {
-      "className": "about"
+      "className": (this.props.active === "about" ? 'active' : ''),
+      "a": true
     }, React.createElement("a", {
       "className": (this.props.alt_bg === 'yes' ? 'mb-white-text' : void 0),
       "href": "/about"
@@ -5007,7 +5008,7 @@ $("." + path).addClass('active');
 isMobilePortrait = (function() {
   var window_width;
   window_width = $(window).width();
-  if (window_width < 420) {
+  if (window_width < 740) {
     return true;
   }
 })();
