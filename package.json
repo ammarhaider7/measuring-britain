@@ -1,0 +1,70 @@
+{
+  "name": "measuring-britain",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start": "npm run build-css && npm run js-hint && npm run build-js && node ./bin/www",
+    "js-hint": "jshint ./browser/js",
+    "live-reload": "browser-sync start --files \"./public/css/styles.css, ./public/js/bundle.js, ./views/*.handlebars\"",
+    "compile-js": "coffee -cb -o ./browser/js/ ./browser/src/coffee && cjsx -cb -o ./browser/js/ ./browser/src/coffee",
+    "compile-js-dev": "coffee -cb -mo ./browser/js/ ./browser/src/coffee && cjsx -cb -mo ./browser/js/ ./browser/src/coffee",
+    "build-js": "npm run compile-js && npm run bundle-js && npm run bundle-js-ui && npm run bundle-js-home && npm run bundle-js-index",
+    "build-js-dev": "npm run compile-js-dev && npm run bundle-js-dev && npm run bundle-js-ui-dev && npm run bundle-js-home-dev && npm run bundle-js-index-dev",
+    "bundle-js": "browserify ./browser/js/main.js -t loose-envify | uglifyjs -mc > ./public/js/bundle.js",
+    "bundle-js-dev": "browserify ./browser/js/main.js > ./public/js/bundle.js",
+    "bundle-js-ui": "browserify ./browser/js/ui.js -t loose-envify | uglifyjs -mc -t loose-envify > ./public/js/ui-bundle.js",
+    "bundle-js-home": "browserify ./browser/js/home.js -t loose-envify | uglifyjs -mc -t loose-envify > ./public/js/home-bundle.js",
+    "bundle-js-index": "browserify ./browser/js/index.js -t loose-envify | uglifyjs -mc -t loose-envify > ./public/js/index-bundle.js",
+    "bundle-js-home-dev": "browserify ./browser/js/home.js > ./public/js/home-bundle.js",
+    "bundle-js-index-dev": "browserify ./browser/js/index.js > ./public/js/index-bundle.js",
+    "bundle-js-ui-dev": "browserify ./browser/js/ui.js > ./public/js/ui-bundle.js",
+    "watch": "concurrent \"npm run watch-js\" \"npm run watch-sass\" \"node ./bin/www\"",
+    "watch-js": "nodemon -e coffee,cjsx -x \"npm run build-js-dev\"",
+    "watch-sass": "nodemon -e scss -x \"npm run build-css\"",
+    "compile-css": "node-sass ./browser/src/scss -o ./browser/css",
+    "concat-clean-css": "cat ./browser/css/*.css | cleancss -o ./public/css/styles.css",
+    "build-css": "npm run compile-css && npm run concat-clean-css",
+    "api-doc": "apidoc -i browser/ -o apidoc/"
+  },
+  "engines": {
+    "node": "4.2.3"
+  },
+  "dependencies": {
+    "body-parser": "~1.13.2",
+    "compression": "^1.6.1",
+    "cookie-parser": "~1.3.5",
+    "d3": "^3.5.14",
+    "debug": "~2.2.0",
+    "express": "~4.13.1",
+    "express-handlebars": "^3.0.0",
+    "jquery": "^2.2.0",
+    "jshint": "^2.9.1",
+    "morgan": "~1.6.1",
+    "object-assign": "^4.0.1",
+    "react": "^0.14.8",
+    "react-dom": "^0.14.8",
+    "react-redux": "^4.4.5 ",
+    "react-select": "^0.9.1",
+    "react-addons-css-transition-group": "^0.14.7",
+    "redux": "^3.3.1",
+    "redux-thunk": "^2.0.1",
+    "serve-favicon": "~2.3.0",
+    "underscore": "^1.8.3"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.11.1",
+    "coffee-script": "^1.10.0",
+    "node-sass": "^3.4.2",
+    "clean-css": "^3.4.9",
+    "uglify-js": "^2.6.1",
+    "browserify": "^13.0.0",
+    "coffee-react": "^4.1.0",
+    "concurrently": "^1.0.0",
+    "loose-envify": "^1.1.0",
+    "nodemon": "^1.8.1"
+  },
+  "jshintConfig": {
+    "eqnull": "false",
+    "expr": "false"
+  }
+}

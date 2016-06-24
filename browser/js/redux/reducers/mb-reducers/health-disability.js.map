@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "file": "health-disability.js",
+  "sourceRoot": "..\\..\\..\\..\\..",
+  "sources": [
+    "browser\\src\\coffee\\redux\\reducers\\mb-reducers\\health-disability.coffee"
+  ],
+  "names": [],
+  "mappings": ";AAAA,IAAA;;AAAE,kBAAoB,OAAA,CAAQ,OAAR,EAApB;;AACF,eAAA,GAAkB,OAAA,CAAQ,yCAAR;;AAElB,SAAA,GAAY,eAAA,CAAgB;EAC3B,iBAAA,eAD2B;CAAhB;;AAIZ,MAAM,CAAC,OAAP,GAAiB"
+}

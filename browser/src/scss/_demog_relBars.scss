@@ -1,0 +1,54 @@
+.bars-svg {
+	
+	.bar {
+	  fill: #1F77B4;
+	}	
+	.axis {
+	  shape-rendering: crispEdges;
+	  text {
+	  	font-size: 11px;
+	  }
+	}
+
+	.axis path {
+	  fill: none;
+	  stroke: none;
+	}
+
+	.x.axis line {
+	  stroke: #fff;
+	  stroke-opacity: .8;
+	}
+	.rel-label {
+		font-size: 12px;
+	}
+
+	// detail content css
+	.detail-text-religion {
+		text-anchor: middle;
+		font-size: 20px;
+		@include bp(md) {
+			font-size: 30px;
+		}
+	}
+	.detail-text-value {
+		text-anchor: middle;
+		font-size: 28px;
+		@include bp(md) {
+			font-size: 45px;
+		}
+	}
+	.detail-text-percent {
+		text-anchor: middle;
+		font-size: 14px;
+		@include bp(md) {
+			font-size: 20px;
+		}
+	}
+
+}
+
+.rel-bars .mb-spinner {
+    margin: 150px auto 0;
+    display: block;
+}

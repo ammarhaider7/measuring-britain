@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "file": "reducers.js",
+  "sourceRoot": "..\\..\\..\\..",
+  "sources": [
+    "browser\\src\\coffee\\redux\\reducers\\reducers.coffee"
+  ],
+  "names": [],
+  "mappings": ";AAAA,IAAA;;AAAE,kBAAoB,OAAA,CAAQ,OAAR,EAApB;;AACF,YAAA,GAAe,OAAA,CAAQ,eAAR;;AACf,YAAA,GAAe,OAAA,CAAQ,oCAAR;;AACf,cAAA,GAAiB,OAAA,CAAQ,4CAAR;;AACjB,WAAA,GAAc,OAAA,CAAQ,0CAAR;;AAEd,SAAA,GAAY,eAAA,CAAgB;EAC3B,cAAA,YAD2B;EAE3B,gBAAA,cAF2B;EAG3B,aAAA,WAH2B;CAAhB;;AAMZ,MAAM,CAAC,OAAP,GAAiB"
+}

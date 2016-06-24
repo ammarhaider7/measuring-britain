@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "file": "man.js",
+  "sourceRoot": "..\\..\\..\\..\\..",
+  "sources": [
+    "browser\\src\\coffee\\ui\\demographics\\icons\\man.coffee"
+  ],
+  "names": [],
+  "mappings": ";AAAA,MAAM,CAAC,OAAP,GAAiB"
+}

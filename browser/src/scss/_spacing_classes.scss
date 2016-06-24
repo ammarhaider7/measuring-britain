@@ -1,0 +1,94 @@
+//Spacing classes
+.mt-60-percent {
+	margin-top: 60%;
+}
+.mb-absolute {
+	position: absolute;
+}
+.mb-full-width {
+	width: 100%;
+    padding-left: 5%;
+    padding-right: 5%;
+}
+.mt-zero {
+	margin-top: $zero;
+}
+.mb-zero {
+	margin-bottom: $zero;
+}
+.mt-large {
+	margin-top: $margin-large;
+}
+.mt-xlarge {
+	margin-top: $margin-x-large;
+}
+.mt-medium {
+	margin-top: $margin-medium;
+}
+.mt-small {
+	margin-top: $margin-small * 2;
+}
+.mt-xsmall {
+	margin-top: $margin-xsmall;
+}
+.mb-medium {
+	margin-bottom: $margin-medium;
+}
+.ml-large {
+	margin-left: $margin-large;
+}
+.ml-xlarge {
+	margin-left: $margin-x-large;
+}
+.ml-medium {
+	margin-left: $margin-medium;
+}
+.ml-small {
+	margin-left: $margin-small * 2;
+}
+.pt-large {
+    padding-top: $padding-large;
+}
+.pb-large {
+	padding-bottom: $padding-large;
+}
+.pt-medium {
+    padding-top: $padding-medium;
+}
+.pb-medium {
+	padding-bottom: $padding-medium;
+}
+.pt-small {
+    padding-top: $padding-small;
+}
+.pb-small {
+	padding-bottom: $padding-small;
+}
+.pl-large {
+    padding-left: $padding-large;
+}
+.pr-large {
+	padding-right: $padding-large;
+}
+.pl-medium {
+    padding-left: $padding-medium;
+}
+.pr-medium {
+	padding-right: $padding-medium;
+}
+.pl-small {
+    padding-left: $padding-small;
+}
+.pr-small {
+	padding-right: $padding-small;
+}
+.mb-nomargin {
+	margin: 0;
+}
+.mb-no-padding {
+	padding: 0;
+}
+.mb-no-hpadding {
+	padding-left: 0;
+	padding-right: 0;
+}

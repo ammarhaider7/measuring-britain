@@ -1,0 +1,28 @@
+//d3 vononoi splash css
+.cell-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 700px;
+  z-index: 0;
+	path {
+	  stroke: #245584;
+	  stroke-width: 1px;
+	}
+
+	path:first-child {
+	  fill: #1B548A !important;
+	}
+
+	.q0-9 { fill: #295F92; }
+	.q1-9 { fill: #285C8E; }
+	.q2-9 { fill: #296298; }
+
+}
+.mb-no-pointer-events {
+	pointer-events: none;
+}
+.mb-all-pointer-events {
+	pointer-events: all;
+}
