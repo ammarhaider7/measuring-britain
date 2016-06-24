@@ -409,7 +409,8 @@ var NewsletterSignup;
 
 NewsletterSignup = function() {
   return React.createElement("div", {
-    "id": "mc_embed_signup"
+    "id": "mc_embed_signup",
+    "className": "mb-hidden-mp"
   }, React.createElement("div", {
     "className": "container col-sm-6 col-sm-offset-3"
   }, React.createElement("form", {
@@ -424,7 +425,7 @@ NewsletterSignup = function() {
     "id": "mc_embed_signup_scroll"
   }, React.createElement("label", {
     "htmlFor": "mce-EMAIL",
-    "className": "mb-roboto-strong"
+    "className": "mb-oxygen"
   }, "Get notified when new charts are added!"), React.createElement("input", {
     "type": "email",
     "value": "",
