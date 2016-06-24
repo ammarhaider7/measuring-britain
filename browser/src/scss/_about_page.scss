@@ -1,0 +1,18 @@
+.mb-signup-bg {
+	background-color: #ddd;
+}
+#mc_embed_signup {
+	padding: 20px 0px 20px 0px;
+	input {
+		@extend .mb-center;
+	}
+	label {
+		@extend .text-center;
+	}
+	.clear {
+		input.button {
+			@extend .mb-center;
+			margin: 15px auto;
+		}
+	}
+}
