@@ -8,7 +8,7 @@ Jumbotron = function() {
     "className": "container"
   }, React.createElement("h1", {
     "className": "mb-bold"
-  }, "MB App"), React.createElement("p", null, "A series of interactive data visualisations showcasing British population statistics."), React.createElement("p", null, React.createElement("a", {
+  }, "Measuring Britain"), React.createElement("p", null, "A series of interactive data visualisations showcasing British population statistics."), React.createElement("p", null, React.createElement("a", {
     "className": "btn btn-default mb-btn-primary btn-lg mb-all-pointer-events",
     "href": "/census",
     "role": "button"

@@ -11,7 +11,7 @@ Nav = React.createClass
 						<span className="icon-bar"></span>
 						<span className="icon-bar"></span>
 					</button>
-					<a className={if @props.alt_bg is 'yes' then "mb-nav-brand-font navbar-brand mb-white-text" else "mb-nav-brand-font navbar-brand"} href="/">MB App</a>
+					<a className={if @props.alt_bg is 'yes' then "mb-nav-brand-font navbar-brand mb-white-text" else "mb-nav-brand-font navbar-brand"} href="/">Measuring Britain</a>
 				</div>
 				<div id="navbar" className="navbar-collapse collapse" aria-expanded="false" style={{height: '1px'}}>
 					<ul className="nav navbar-nav">

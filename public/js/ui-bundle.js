@@ -543,7 +543,7 @@ var Footer;
 Footer = function() {
   return React.createElement("div", {
     "className": "footer container mb-hidden-mp"
-  }, React.createElement("hr", null), React.createElement("footer", null, React.createElement("p", null, "© 2016 MB")));
+  }, React.createElement("hr", null), React.createElement("footer", null, React.createElement("p", null, "© 2016 Measuring Britain")));
 };
 
 module.exports = Footer;
@@ -603,7 +603,7 @@ Nav = React.createClass({displayName: "Nav",
     })), React.createElement("a", {
       "className": (this.props.alt_bg === 'yes' ? "mb-nav-brand-font navbar-brand mb-white-text" : "mb-nav-brand-font navbar-brand"),
       "href": "/"
-    }, "MB App")), React.createElement("div", {
+    }, "Measuring Britain")), React.createElement("div", {
       "id": "navbar",
       "className": "navbar-collapse collapse",
       "aria-expanded": "false",
@@ -5112,7 +5112,6 @@ renderPopulationPyramid = function() {
   }), document.getElementById('mb_page_header'));
   ReactDOM.render(React.createElement(PopulationPyramid, null), document.getElementById('react_container'));
   ReactDOM.render(React.createElement(Footer, null), document.getElementById('mb_footer'));
-  ReactDOM.render(React.createElement(NewsletterSignup, null), document.getElementById('mb_mc_signupform'));
   return render();
 };
 
@@ -5134,7 +5133,6 @@ renderEthnicDiversity = function() {
   }), document.getElementById('mb_page_header'));
   ReactDOM.render(React.createElement(EthnicDiversity, null), document.getElementById('react_container'));
   ReactDOM.render(React.createElement(Footer, null), document.getElementById('mb_footer'));
-  ReactDOM.render(React.createElement(NewsletterSignup, null), document.getElementById('mb_mc_signupform'));
   return render();
 };
 
@@ -5156,7 +5154,6 @@ renderReligiousDiversity = function() {
   }), document.getElementById('mb_page_header'));
   ReactDOM.render(React.createElement(ReligiousDiversity, null), document.getElementById('react_container'));
   ReactDOM.render(React.createElement(Footer, null), document.getElementById('mb_footer'));
-  ReactDOM.render(React.createElement(NewsletterSignup, null), document.getElementById('mb_mc_signupform'));
   return render();
 };
 
@@ -5178,7 +5175,6 @@ renderEthnicGenHealth = function() {
   }), document.getElementById('mb_page_header'));
   ReactDOM.render(React.createElement(EthnicGenHealth, null), document.getElementById('react_container'));
   ReactDOM.render(React.createElement(Footer, null), document.getElementById('mb_footer'));
-  ReactDOM.render(React.createElement(NewsletterSignup, null), document.getElementById('mb_mc_signupform'));
   return render();
 };
 
@@ -5200,7 +5196,6 @@ renderHealthDisability = function() {
   }), document.getElementById('mb_page_header'));
   ReactDOM.render(React.createElement(HealthDisability, null), document.getElementById('react_container'));
   ReactDOM.render(React.createElement(Footer, null), document.getElementById('mb_footer'));
-  ReactDOM.render(React.createElement(NewsletterSignup, null), document.getElementById('mb_mc_signupform'));
   return render();
 };
 
@@ -5222,7 +5217,6 @@ renderEmploymentStatusByCountry = function() {
   }), document.getElementById('mb_page_header'));
   ReactDOM.render(React.createElement(EconByCountry, null), document.getElementById('react_container'));
   ReactDOM.render(React.createElement(Footer, null), document.getElementById('mb_footer'));
-  ReactDOM.render(React.createElement(NewsletterSignup, null), document.getElementById('mb_mc_signupform'));
   return render();
 };
 
@@ -5256,7 +5250,8 @@ switch (raw_path) {
 }
 
 $(function() {
-  return $('[data-toggle="tooltip"]').tooltip();
+  $('[data-toggle="tooltip"]').tooltip();
+  return $('#mb_mc_signupform').css('visibility', 'visible');
 });
 
 

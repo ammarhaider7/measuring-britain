@@ -31,8 +31,12 @@ renderAbout = ->
 	ReactDOM.render <PageHeader page_header="About Us"/>, document.getElementById 'mb_page_header'
 	ReactDOM.render <About/>, document.getElementById 'about-container'
 	ReactDOM.render <Footer/>, document.getElementById 'mb_footer'
-	ReactDOM.render <NewsletterSignup/>, document.getElementById 'mb_mc_signupform'
+	# ReactDOM.render <NewsletterSignup/>, document.getElementById 'mb_mc_signupform'
 
 switch path
 	when 'census' then renderCensusHome()
 	when 'about' then renderAbout()
+
+$ ->
+	# Unhide newsletter signup
+	$('#mb_mc_signupform').css 'visibility', 'visible'

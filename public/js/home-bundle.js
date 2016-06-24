@@ -92,8 +92,7 @@ renderAbout = function() {
     "page_header": "About Us"
   }), document.getElementById('mb_page_header'));
   ReactDOM.render(React.createElement(About, null), document.getElementById('about-container'));
-  ReactDOM.render(React.createElement(Footer, null), document.getElementById('mb_footer'));
-  return ReactDOM.render(React.createElement(NewsletterSignup, null), document.getElementById('mb_mc_signupform'));
+  return ReactDOM.render(React.createElement(Footer, null), document.getElementById('mb_footer'));
 };
 
 switch (path) {
@@ -103,6 +102,10 @@ switch (path) {
   case 'about':
     renderAbout();
 }
+
+$(function() {
+  return $('#mb_mc_signupform').css('visibility', 'visible');
+});
 
 
 
@@ -218,7 +221,7 @@ var Footer;
 Footer = function() {
   return React.createElement("div", {
     "className": "footer container mb-hidden-mp"
-  }, React.createElement("hr", null), React.createElement("footer", null, React.createElement("p", null, "© 2016 MB")));
+  }, React.createElement("hr", null), React.createElement("footer", null, React.createElement("p", null, "© 2016 Measuring Britain")));
 };
 
 module.exports = Footer;
@@ -255,7 +258,7 @@ Nav = React.createClass({displayName: "Nav",
     })), React.createElement("a", {
       "className": (this.props.alt_bg === 'yes' ? "mb-nav-brand-font navbar-brand mb-white-text" : "mb-nav-brand-font navbar-brand"),
       "href": "/"
-    }, "MB App")), React.createElement("div", {
+    }, "Measuring Britain")), React.createElement("div", {
       "id": "navbar",
       "className": "navbar-collapse collapse",
       "aria-expanded": "false",

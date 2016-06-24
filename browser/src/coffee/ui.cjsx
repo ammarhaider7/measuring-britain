@@ -64,7 +64,7 @@ renderPopulationPyramid = ->
 	ReactDOM.render <PageHeader page_header={ 'Population Pyramid - Census' }/>, document.getElementById 'mb_page_header'
 	ReactDOM.render <PopulationPyramid/>, document.getElementById 'react_container'
 	ReactDOM.render <Footer/>, document.getElementById 'mb_footer'
-	ReactDOM.render <NewsletterSignup/>, document.getElementById 'mb_mc_signupform'
+	# ReactDOM.render <NewsletterSignup/>, document.getElementById 'mb_mc_signupform'
 	# Render container components via redux
 	render()
 
@@ -81,7 +81,7 @@ renderEthnicDiversity = ->
 	ReactDOM.render <PageHeader page_header='Ethnic Diversity - Census'/>, document.getElementById 'mb_page_header'
 	ReactDOM.render <EthnicDiversity/>, document.getElementById 'react_container'
 	ReactDOM.render <Footer/>, document.getElementById 'mb_footer'
-	ReactDOM.render <NewsletterSignup/>, document.getElementById 'mb_mc_signupform'
+	# ReactDOM.render <NewsletterSignup/>, document.getElementById 'mb_mc_signupform'
 	# Render container components via redux
 	render()
 
@@ -98,7 +98,7 @@ renderReligiousDiversity = ->
 	ReactDOM.render <PageHeader page_header='Religious Diversity - Census'/>, document.getElementById 'mb_page_header'
 	ReactDOM.render <ReligiousDiversity/>, document.getElementById 'react_container'
 	ReactDOM.render <Footer/>, document.getElementById 'mb_footer'
-	ReactDOM.render <NewsletterSignup/>, document.getElementById 'mb_mc_signupform'
+	# ReactDOM.render <NewsletterSignup/>, document.getElementById 'mb_mc_signupform'
 	# Render container components via redux
 	render()
 
@@ -115,7 +115,7 @@ renderEthnicGenHealth = ->
 	ReactDOM.render <PageHeader page_header="Ethnic Disparities in General Health - Census"/>, document.getElementById 'mb_page_header'
 	ReactDOM.render <EthnicGenHealth/>, document.getElementById 'react_container'
 	ReactDOM.render <Footer/>, document.getElementById 'mb_footer'
-	ReactDOM.render <NewsletterSignup/>, document.getElementById 'mb_mc_signupform'
+	# ReactDOM.render <NewsletterSignup/>, document.getElementById 'mb_mc_signupform'
 	# Render container components via redux
 	render()
 
@@ -132,7 +132,7 @@ renderHealthDisability = ->
 	ReactDOM.render <PageHeader page_header="Long-term illness/disability by ethnicity - Census"/>, document.getElementById 'mb_page_header'
 	ReactDOM.render <HealthDisability/>, document.getElementById 'react_container'
 	ReactDOM.render <Footer/>, document.getElementById 'mb_footer'
-	ReactDOM.render <NewsletterSignup/>, document.getElementById 'mb_mc_signupform'
+	# ReactDOM.render <NewsletterSignup/>, document.getElementById 'mb_mc_signupform'
 	# Render container components via redux
 	render()
 
@@ -149,7 +149,7 @@ renderEmploymentStatusByCountry = ->
 	ReactDOM.render <PageHeader page_header="Employment status by country of birth - Census"/>, document.getElementById 'mb_page_header'
 	ReactDOM.render <EconByCountry/>, document.getElementById 'react_container'
 	ReactDOM.render <Footer/>, document.getElementById 'mb_footer'
-	ReactDOM.render <NewsletterSignup/>, document.getElementById 'mb_mc_signupform'
+	# ReactDOM.render <NewsletterSignup/>, document.getElementById 'mb_mc_signupform'
 	# Render container components via redux
 	render()
 
@@ -168,3 +168,6 @@ switch raw_path
 # Opt-in tooltip functionality
 $ ->
 	$('[data-toggle="tooltip"]').tooltip()
+	# Unhide newsletter signup
+	$('#mb_mc_signupform').css 'visibility', 'visible'
+

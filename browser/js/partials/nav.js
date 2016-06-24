@@ -27,7 +27,7 @@ Nav = React.createClass({displayName: "Nav",
     })), React.createElement("a", {
       "className": (this.props.alt_bg === 'yes' ? "mb-nav-brand-font navbar-brand mb-white-text" : "mb-nav-brand-font navbar-brand"),
       "href": "/"
-    }, "MB App")), React.createElement("div", {
+    }, "Measuring Britain")), React.createElement("div", {
       "id": "navbar",
       "className": "navbar-collapse collapse",
       "aria-expanded": "false",
