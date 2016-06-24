@@ -59,7 +59,7 @@ Jumbotron = function() {
     "className": "container"
   }, React.createElement("h1", {
     "className": "mb-bold"
-  }, "MB App"), React.createElement("p", null, "A series of interactive data visualisations showcasing British population statistics."), React.createElement("p", null, React.createElement("a", {
+  }, "Measuring Britain"), React.createElement("p", null, "A series of interactive data visualisations showcasing British population statistics."), React.createElement("p", null, React.createElement("a", {
     "className": "btn btn-default mb-btn-primary btn-lg mb-all-pointer-events",
     "href": "/census",
     "role": "button"
@@ -149,7 +149,7 @@ Nav = React.createClass({displayName: "Nav",
     })), React.createElement("a", {
       "className": (this.props.alt_bg === 'yes' ? "mb-nav-brand-font navbar-brand mb-white-text" : "mb-nav-brand-font navbar-brand"),
       "href": "/"
-    }, "MB App")), React.createElement("div", {
+    }, "Measuring Britain")), React.createElement("div", {
       "id": "navbar",
       "className": "navbar-collapse collapse",
       "aria-expanded": "false",

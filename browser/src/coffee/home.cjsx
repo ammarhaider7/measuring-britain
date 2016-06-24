@@ -10,6 +10,7 @@ PageHeader = require './partials/page-header.js'
 Footer = require './partials/footer.js'
 { demographics, health, labour } = require './page-data/census-home/thumbnails.js'
 About = require './about/about.js'
+NewsletterSignup = require './partials/newsletter-signup.js'
 
 # Establish what page this is
 path = location.pathname.split('/')[1]
@@ -30,7 +31,12 @@ renderAbout = ->
 	ReactDOM.render <PageHeader page_header="About Us"/>, document.getElementById 'mb_page_header'
 	ReactDOM.render <About/>, document.getElementById 'about-container'
 	ReactDOM.render <Footer/>, document.getElementById 'mb_footer'
+	# ReactDOM.render <NewsletterSignup/>, document.getElementById 'mb_mc_signupform'
 
 switch path
 	when 'census' then renderCensusHome()
 	when 'about' then renderAbout()
+
+$ ->
+	# Unhide newsletter signup
+	$('#mb_mc_signupform').css 'visibility', 'visible'
