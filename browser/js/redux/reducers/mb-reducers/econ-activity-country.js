@@ -10,5 +10,3 @@ mbReducer = combineReducers({
 });
 
 module.exports = mbReducer;
-
-//# sourceMappingURL=econ-activity-country.map

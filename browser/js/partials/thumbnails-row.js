@@ -64,5 +64,3 @@ ThumbnailsRowComponent = React.createClass({displayName: "ThumbnailsRowComponent
 });
 
 module.exports = ThumbnailsRowComponent;
-
-//# sourceMappingURL=thumbnails-row.map

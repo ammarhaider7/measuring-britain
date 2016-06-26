@@ -382,6 +382,8 @@ drawSunburst = (options) ->
 			.data partition.nodes nested_data
 		  	.attr 'd', arc
 
+		return
+
 	my.width = (value) ->
 		unless arguments.length then return width
 		width = value

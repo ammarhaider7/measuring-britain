@@ -190,7 +190,7 @@ drawPyrBars = (options) ->
 		  	.attr {
 		  		x: (d) ->
 		  			x d.sex
-		  		height: bars_height - y 0
+		  		# height: bars_height - y 0
 		  		ry: 3
 		  		width: x.rangeBand()
 		  		y: (d) ->

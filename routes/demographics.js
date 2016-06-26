@@ -6,7 +6,7 @@ router.get('/', function(req, res, next) {
   res.render('demographics', { 
   	layout: 'ui',
   	data: data,
-  	title: 'MB App | Demographics',
+  	title: 'Measuring Britain | Demographics',
   	page_header: 'Demographics'
   });
 });

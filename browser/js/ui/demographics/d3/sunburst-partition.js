@@ -244,7 +244,7 @@ drawSunburst = function(options) {
     center_total_value_group.attr('transform', "translate(" + (width / 2) + ", " + (half_height + (margin.text * 3) - margin.top * 2) + ")");
     key_group.attr('transform', "translate(" + ((width * 0.9) + 20) + ", " + margin.top + ")");
     key_text_group.attr('transform', "translate(" + (width * 0.9) + ", " + (margin.top + 17) + ")");
-    return paths = main_group.selectAll('path').data(partition.nodes(nested_data)).attr('d', arc);
+    paths = main_group.selectAll('path').data(partition.nodes(nested_data)).attr('d', arc);
   };
   my.width = function(value) {
     if (!arguments.length) {
@@ -264,5 +264,3 @@ drawSunburst = function(options) {
 };
 
 module.exports = drawSunburst;
-
-//# sourceMappingURL=sunburst-partition.map

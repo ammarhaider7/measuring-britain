@@ -5,7 +5,7 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
   res.render('census', { 
   	layout: 'home',
-  	title: 'MB App | Census',
+  	title: 'Measuring Britain | Census',
   	page_header: 'Census'
   });
 });
@@ -14,7 +14,7 @@ router.get('/', function(req, res, next) {
 router.get('/population-pyramid', function(req, res, next) {
   res.render('react-container', { 
   	layout: 'ui2',
-  	title: 'MB App | Census | Population Pyramid',
+  	title: 'Measuring Britain | Census | Population Pyramid',
   	page_header: 'Population Pyramid - Census'
   });
 });
@@ -23,7 +23,7 @@ router.get('/population-pyramid', function(req, res, next) {
 router.get('/ethnic-diversity', function(req, res, next) {
   res.render('react-container', { 
   	layout: 'ui2',
-  	title: 'MB App | Census | Ethnic Diversity',
+  	title: 'Measuring Britain | Census | Ethnic Diversity',
   	page_header: 'Ethnic Diversity - Census'
   });
 });
@@ -32,7 +32,7 @@ router.get('/ethnic-diversity', function(req, res, next) {
 router.get('/religious-diversity', function(req, res, next) {
   res.render('react-container', { 
   	layout: 'ui2',
-  	title: 'MB App | Census | Religious Diversity',
+  	title: 'Measuring Britain | Census | Religious Diversity',
   	page_header: 'Religious Diversity - Census'
   });
 });
@@ -41,7 +41,7 @@ router.get('/religious-diversity', function(req, res, next) {
 router.get('/ethnic-disparities-general-health', function(req, res, next) {
   res.render('react-container', { 
     layout: 'ui2',
-    title: 'MB App | Census | Ethnic Disparities in General Health',
+    title: 'Measuring Britain | Census | Ethnic Disparities in General Health',
     page_header: 'Ethnic Disparities in General Health - Census'
   });
 });
@@ -50,7 +50,7 @@ router.get('/ethnic-disparities-general-health', function(req, res, next) {
 router.get('/longterm-illness-disability-by-ethnicity', function(req, res, next) {
   res.render('react-container', { 
     layout: 'ui2',
-    title: 'MB App | Census | Long-term illness or disability by ethnicity',
+    title: 'Measuring Britain | Census | Long-term illness or disability by ethnicity',
     page_header: 'Long-term illness or disability by ethnicity'
   });
 });
@@ -59,7 +59,7 @@ router.get('/longterm-illness-disability-by-ethnicity', function(req, res, next)
 router.get('/employment-status-by-country-of-birth', function(req, res, next) {
   res.render('react-container', { 
     layout: 'ui2',
-    title: 'MB App | Census | Employment Status by country of birth',
+    title: 'Measuring Britain | Census | Employment Status by country of birth',
     page_header: 'Employment Status by country of birth'
   });
 });

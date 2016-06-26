@@ -82,5 +82,3 @@ Filter = React.createClass({displayName: "Filter",
 });
 
 module.exports = Filter;
-
-//# sourceMappingURL=chart-controls-filter.map
