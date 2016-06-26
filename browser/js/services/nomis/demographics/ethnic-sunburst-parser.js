@@ -64,3 +64,5 @@ parse = function(dataArray) {
 };
 
 module.exports = parse;
+
+//# sourceMappingURL=ethnic-sunburst-parser.map

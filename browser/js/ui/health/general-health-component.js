@@ -106,3 +106,5 @@ GenHealthChart = React.createClass({displayName: "GenHealthChart",
 });
 
 module.exports = GenHealthChart;
+
+//# sourceMappingURL=general-health-component.map
