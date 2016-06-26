@@ -125,7 +125,6 @@ drawPyrBars = function(options) {
       x: function(d) {
         return x(d.sex);
       },
-      height: bars_height - y(0),
       ry: 3,
       width: x.rangeBand(),
       y: function(d) {
@@ -155,5 +154,3 @@ drawPyrBars = function(options) {
 };
 
 module.exports = drawPyrBars;
-
-//# sourceMappingURL=pyramidBars.map

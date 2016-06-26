@@ -17,5 +17,3 @@ MobileRotate = function() {
 };
 
 module.exports = MobileRotate;
-
-//# sourceMappingURL=mobile-portrait-rotate.map

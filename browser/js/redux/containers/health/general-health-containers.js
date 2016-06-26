@@ -109,5 +109,3 @@ module.exports = {
   GenHealthChart: GenHealthChart,
   GenHealthChartDetail: GenHealthChartDetail
 };
-
-//# sourceMappingURL=general-health-containers.map

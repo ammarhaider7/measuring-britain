@@ -5,7 +5,7 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
   res.render('health', { 
   	layout: 'ui',
-  	title: 'MB App | Health',
+  	title: 'Measuring Britain | Health',
   	page_header: 'Health'
   });
 });

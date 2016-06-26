@@ -5,7 +5,7 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
   res.render('about', { 
   	layout: 'home',
-  	title: 'MB App | About' 
+  	title: 'Measuring Britain | About' 
   });
 });
 
