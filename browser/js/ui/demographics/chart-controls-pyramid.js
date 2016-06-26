@@ -294,3 +294,5 @@ PyramidControls = React.createClass({displayName: "PyramidControls",
 });
 
 module.exports = PyramidControls;
+
+//# sourceMappingURL=chart-controls-pyramid.map

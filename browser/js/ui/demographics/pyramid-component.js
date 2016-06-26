@@ -154,3 +154,5 @@ PyramidComponent = React.createClass({displayName: "PyramidComponent",
 });
 
 module.exports = PyramidComponent;
+
+//# sourceMappingURL=pyramid-component.map

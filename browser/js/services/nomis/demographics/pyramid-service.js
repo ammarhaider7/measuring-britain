@@ -114,3 +114,5 @@ makePyramidRequest = function(options) {
 };
 
 module.exports = makePyramidRequest;
+
+//# sourceMappingURL=pyramid-service.map
