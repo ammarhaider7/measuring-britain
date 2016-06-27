@@ -164,7 +164,8 @@ Nav = React.createClass({displayName: "Nav",
     }, React.createElement("i", {
       "className": "fa fa-github fa-lg fa-fw"
     }))), React.createElement("li", null, React.createElement("a", {
-      "href": "#"
+      "href": "https://trello.com/invite/b/fRxEBrql/3009cc5b6753037620f94dbc914b8827/measuring-britain-roadmap",
+      "target": "_blank"
     }, React.createElement("i", {
       "className": "fa fa-trello fa-lg fa-fw"
     })))))));

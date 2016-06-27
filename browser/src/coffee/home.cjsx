@@ -28,10 +28,9 @@ renderCensusHome = ->
 
 renderAbout = ->
 	ReactDOM.render <Nav active={ path } border="yes"/>, document.getElementById 'react_nav_container'
-	ReactDOM.render <PageHeader page_header="About Us"/>, document.getElementById 'mb_page_header'
+	ReactDOM.render <PageHeader page_header="About"/>, document.getElementById 'mb_page_header'
 	ReactDOM.render <About/>, document.getElementById 'about-container'
 	ReactDOM.render <Footer/>, document.getElementById 'mb_footer'
-	# ReactDOM.render <NewsletterSignup/>, document.getElementById 'mb_mc_signupform'
 
 switch path
 	when 'census' then renderCensusHome()
