@@ -84,3 +84,5 @@ parse = function(dataArray) {
 };
 
 module.exports = parse;
+
+//# sourceMappingURL=pyramid-parser.map

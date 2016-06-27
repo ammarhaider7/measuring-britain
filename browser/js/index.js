@@ -35,3 +35,5 @@ ReactDOM.render(React.createElement(Row, null), document.getElementById('mb_row'
 ReactDOM.render(React.createElement(NomisAttr, null), document.getElementById('mb_footer'));
 
 voronoi();
+
+//# sourceMappingURL=index.map

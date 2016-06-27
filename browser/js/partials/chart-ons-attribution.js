@@ -8,3 +8,5 @@ onsAttr = function() {
 };
 
 module.exports = onsAttr;
+
+//# sourceMappingURL=chart-ons-attribution.map

@@ -71,7 +71,8 @@ parse = function(dataArray) {
         employee: in_work_employee / sum,
         self_employed: in_work_self_employed / sum,
         sum_perc: sum_in_work / sum,
-        sum: sum_in_work
+        sum: sum_in_work,
+        total_sum: sum
       },
       out_of_work: {
         unemployed: out_of_work_unemployed / sum,
@@ -81,7 +82,8 @@ parse = function(dataArray) {
         long_term_sick_disabled: out_of_work_longterm_sick_disabled / sum,
         other: out_of_work_other / sum,
         sum_perc: sum_out_of_work / sum,
-        sum: sum_out_of_work
+        sum: sum_out_of_work,
+        total_sum: sum
       }
     };
   });
@@ -97,7 +99,7 @@ parse = function(dataArray) {
         country: d.country,
         sum_perc: d.in_work.sum_perc,
         name: category,
-        sum: d.in_work.sum,
+        sum: d.in_work.total_sum,
         value: d.in_work[category],
         y0: y0,
         y1: y0 += d.in_work[category]
@@ -111,7 +113,7 @@ parse = function(dataArray) {
       return {
         country: d.country,
         sum_perc: d.out_of_work.sum_perc,
-        sum: d.out_of_work.sum,
+        sum: d.out_of_work.total_sum,
         name: category,
         value: d.out_of_work[category],
         y0: y0,
@@ -140,3 +142,5 @@ parse = function(dataArray) {
 };
 
 module.exports = parse;
+
+//# sourceMappingURL=econ-activity-country-parser.map
