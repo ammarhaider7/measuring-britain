@@ -32,6 +32,18 @@
   }
 }
 
+.mb-pyramid-states {
+  display: block;
+  margin: 0 auto;
+  .mb-double-img {
+    width: 40%;
+  }
+  .mb-single-img {
+    width: 80%;
+  }
+}
+
+
 // Pyramid Bars CSS
 .mb-grey-box {
   background-color: #F3F3F3;

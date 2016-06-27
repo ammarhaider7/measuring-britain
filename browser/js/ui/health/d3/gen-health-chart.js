@@ -146,7 +146,7 @@ drawGenHealthChart = function(options) {
       y: margin.p,
       opacity: 0,
       'font-size': '12px'
-    }).text('Self-proclaimed bad or very bad health by ethnicity and age group').transition().duration(1500).attr('opacity', 1);
+    }).text('Self-assessed bad or very bad health by ethnicity and age group').transition().duration(1500).attr('opacity', 1);
     return attachHoverHandlers();
   };
   my.update = function() {

@@ -19,43 +19,43 @@ drawSunburst = (options) ->
 	ethnic_group_arr = [
 		{
 			name: 'White'
-			colour: '#FFCFA2'
+			colour: '#2C81BF'
 		}
 		{
 			name: 'Black'
-			colour: '#695D5D'
+			colour: '#7569B3'
 		}
 		{
 			name: 'Asian'
-			colour: '#C55039'
+			colour: '#29A450'
 		}
 		{
 			name: 'Mixed'
-			colour: '#ff7f0e'
+			colour: '#E85400'
 		}
 		{
 			name: 'Other'
-			colour: '#DADADA'
+			colour: '#636363'
 		}
 	]
 
 	getColour = (name) ->
 
 		switch name
-			when 'White' then '#FFCFA2'
-			when 'Black' then '#695D5D'
-			when 'Asian' then '#C55039'
-			when 'Mixed' then '#ff7f0e'
-			when 'Other' then '#DADADA'
+			when 'White' then '#2C81BF' # blue
+			when 'Black' then '#7569B3' # purple
+			when 'Asian' then '#29A450' # green
+			when 'Mixed' then '#E85400' # orange
+			when 'Other' then '#636363' # grey
 
 	getSubColour = (name) ->
 
 		switch name
-			when 'White' then '#FFDBB9'
-			when 'Black' then '#887A7A'
-			when 'Asian' then '#E2735D'
-			when 'Mixed' then '#FFA352'
-			when 'Other' then '#DADADA'
+			when 'White' then '#68ADD8'
+			when 'Black' then '#9E99CA'
+			when 'Asian' then '#71C573'
+			when 'Mixed' then '#FF8D2E'
+			when 'Other' then '#969696'
 
 	width = $(container).width() ? 1140
 	height = $(container).height() ? 500

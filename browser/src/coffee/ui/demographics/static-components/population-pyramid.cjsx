@@ -12,8 +12,13 @@ PopulationPyramid = ->
 				<div className="collapse mb-quicksand" id="pyrCollapse">
 					<div className="alert alert-block alert-info mb-section-text">
 						<button type="button" className="close" data-toggle="collapse" data-target="#pyrCollapse" aria-expanded="false" aria-controls="pyrCollapse">×</button>
-						<p><strong>Population Pyramid</strong></p>
-						<p>A <strong>constrictive</strong> pyramid has fewer people in the younger age categories, perhaps as baby boom populations shift to more conservative birth rates. An <strong>expansive</strong> pyramid represents greater numbers of people in the younger age categories and is typical of where birth rates are high and life expectancy is short. A <strong>stationary</strong> pyramid shows roughly equal numbers of people in all age categories, with a tapering towards the older age categories.</p>
+						<p><strong>Types of Population Pyramids</strong></p>
+						<p>A <strong>contracting</strong> pyramid has fewer people in the younger age categories, perhaps as baby boom populations shift to more conservative birth rates.</p>
+						<img src="/images/DTM_Pyramids1_contracting.png" className="mb-pyramid-states mb-single-img"></img>
+						<p>An <strong>expanding</strong> pyramid represents greater numbers of people in the younger age categories and is typical of where birth rates are high and life expectancy is short.</p>
+						<img src="/images/DTM_Pyramids1_expanding.png" className="mb-pyramid-states mb-double-img"></img>
+						<p>A <strong>stationary</strong> pyramid shows roughly equal numbers of people in all age categories, with a tapering towards the older age categories.</p>
+						<img src="/images/DTM_Pyramids1_stationary.png" className="mb-pyramid-states mb-single-img"></img>
 					</div>
 				</div>   
 			</div>	        

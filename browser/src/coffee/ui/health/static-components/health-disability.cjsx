@@ -12,8 +12,10 @@ DisabilitySection = ->
 				<div className="collapse mb-quicksand" id="disabilityCollapse">
 					<div className="alert alert-block alert-info mb-section-text">
 						<button type="button" className="close" data-toggle="collapse" data-target="#disabilityCollapse" aria-expanded="false" aria-controls="disabilityCollapse">×</button>
-						<p><strong>Long-term illness or disability by ethnic group and gender</strong></p>
-						<p>A <strong>constrictive</strong> pyramid has fewer people in the younger age categories, perhaps as baby boom populations shift to more conservative birth rates. An <strong>expansive</strong> pyramid represents greater numbers of people in the younger age categories and is typical of where birth rates are high and life expectancy is short. A <strong>stationary</strong> pyramid shows roughly equal numbers of people in all age categories, with a tapering towards the older age categories.</p>
+						<p><strong>Overview</strong></p>
+						<p>A look at the health of the population of England and Wales in respect to activity limiting health problems or disabilities. This chart shows the proportion of each age group (across 18 different ethnicites) who have indicated that their day-to-day activities are 'limited a lot' by their illness/disability.</p>
+						<p><strong>Usage</strong></p>
+						<p>Hover over the bars to reveal a tooltip that tells you the % of people with a long-term health problem/disability.</p>
 					</div>
 				</div>   
 			</div>	        

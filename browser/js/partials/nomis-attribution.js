@@ -11,7 +11,9 @@ nomisAttr = function() {
     "target": "_blank"
   }, React.createElement("p", {
     "className": "nomis-attr"
-  }, "Powered by NOMIS"))));
+  }, "Powered by ", React.createElement("span", {
+    "className": "nomis-font"
+  }, "nomis")))));
 };
 
 module.exports = nomisAttr;

@@ -58,11 +58,11 @@ drawEconByCountryChart = function(options) {
   };
   trimCountryString = function(str) {
     if (str.indexOf('Antarctica') > -1) {
-      return 'Oceania';
+      return 'Oceanian';
     } else if (str.indexOf('EU countries') > -1) {
       return 'EU';
     } else if (str.indexOf('Africa') > -1) {
-      return 'Africa';
+      return 'African';
     } else if (str.indexOf('Rest of Europe') > -1) {
       return 'Non-EU';
     } else if (str.indexOf('United Kingdom') > -1) {
@@ -70,7 +70,7 @@ drawEconByCountryChart = function(options) {
     } else if (str.indexOf('Americas') > -1) {
       return 'Americas';
     } else if (str.indexOf('Middle') > -1) {
-      return 'Asia';
+      return 'Asian';
     }
   };
   x = d3.scale.ordinal().domain(countries).rangeRoundBands([0, chart_width], 0.3);

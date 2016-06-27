@@ -13,4 +13,14 @@
 	color: grey;
 	font-size: 100%;
 	text-decoration: none;
+	&:hover {
+		text-decoration: none;
+	}
+}
+.nomis-font {
+	font-family: Verdana,sans-serif,Helvetica;
+    font-size: 3.5em;
+	&:hover {
+		text-decoration: none;
+	}
 }
