@@ -14,47 +14,47 @@ drawSunburst = function(options) {
   ethnic_group_arr = [
     {
       name: 'White',
-      colour: '#FFCFA2'
+      colour: '#2C81BF'
     }, {
       name: 'Black',
-      colour: '#695D5D'
+      colour: '#7569B3'
     }, {
       name: 'Asian',
-      colour: '#C55039'
+      colour: '#29A450'
     }, {
       name: 'Mixed',
-      colour: '#ff7f0e'
+      colour: '#E85400'
     }, {
       name: 'Other',
-      colour: '#DADADA'
+      colour: '#636363'
     }
   ];
   getColour = function(name) {
     switch (name) {
       case 'White':
-        return '#FFCFA2';
+        return '#2C81BF';
       case 'Black':
-        return '#695D5D';
+        return '#7569B3';
       case 'Asian':
-        return '#C55039';
+        return '#29A450';
       case 'Mixed':
-        return '#ff7f0e';
+        return '#E85400';
       case 'Other':
-        return '#DADADA';
+        return '#636363';
     }
   };
   getSubColour = function(name) {
     switch (name) {
       case 'White':
-        return '#FFDBB9';
+        return '#68ADD8';
       case 'Black':
-        return '#887A7A';
+        return '#9E99CA';
       case 'Asian':
-        return '#E2735D';
+        return '#71C573';
       case 'Mixed':
-        return '#FFA352';
+        return '#FF8D2E';
       case 'Other':
-        return '#DADADA';
+        return '#969696';
     }
   };
   width = (ref = $(container).width()) != null ? ref : 1140;

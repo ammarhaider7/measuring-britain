@@ -30,7 +30,7 @@ ReligiousSection = function() {
     "data-target": "#relCollapse",
     "aria-expanded": "false",
     "aria-controls": "relCollapse"
-  }, "×"), React.createElement("p", null, React.createElement("strong", null, "Religious Diversity bar chart")), React.createElement("p", null, "A ", React.createElement("strong", null, "constrictive"), " pyramid has fewer people in the younger age categories, perhaps as baby boom populations shift to more conservative birth rates. An ", React.createElement("strong", null, "expansive"), " pyramid represents greater numbers of people in the younger age categories and is typical of where birth rates are high and life expectancy is short. A ", React.createElement("strong", null, "stationary"), " pyramid shows roughly equal numbers of people in all age categories, with a tapering towards the older age categories.")))), React.createElement("div", {
+  }, "×"), React.createElement("p", null, React.createElement("strong", null, "Usage")), React.createElement("p", null, "Hover over or tap the bars to reveal % of people along with the total number of people with that religion.")))), React.createElement("div", {
     "className": "mb-oxygen mb-section-text"
   }, React.createElement("p", null, "The Religious Diversity chart shows the distribution of the population by religion."))), React.createElement("div", {
     "className": "col-sm-12"

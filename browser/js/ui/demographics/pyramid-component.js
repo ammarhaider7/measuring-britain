@@ -22,7 +22,7 @@ PyramidComponent = React.createClass({displayName: "PyramidComponent",
     var window_height;
     window_height = $(window).height();
     if (window_height > 550) {
-      return 600;
+      return 570;
     } else {
       return window_height * 1.3;
     }

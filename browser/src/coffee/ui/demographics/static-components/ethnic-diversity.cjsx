@@ -1,6 +1,3 @@
-# ReactDOM = require 'react-dom'
-# React = require 'react'
-
 EthnicSection = ->
 
 	<div className="row mb-quicksand">
@@ -15,13 +12,15 @@ EthnicSection = ->
 				<div className="collapse mb-quicksand" id="ethnicCollapse">
 					<div className="alert alert-block alert-info mb-section-text">
 						<button type="button" className="close" data-toggle="collapse" data-target="#ethnicCollapse" aria-expanded="false" aria-controls="ethnicCollapse">×</button>
-						<p><strong>Ethnic Diversity Sunburst</strong></p>
-						<p>A <strong>constrictive</strong> pyramid has fewer people in the younger age categories, perhaps as baby boom populations shift to more conservative birth rates. An <strong>expansive</strong> pyramid represents greater numbers of people in the younger age categories and is typical of where birth rates are high and life expectancy is short. A <strong>stationary</strong> pyramid shows roughly equal numbers of people in all age categories, with a tapering towards the older age categories.</p>
+						<p><strong>Overview</strong></p>
+						<p>There are two levels of details to the ethnic diversity chart. The inner ring indicates the broader ethnic group while the outer ring offers a more specific breakdown of ethnicity.</p>
+						<p><strong>Usage</strong></p>
+						<p>Hover over or tap the various segments to reveal % of people within that ethnicity along with the total number of people.</p>
 					</div>
 				</div>   
 			</div>	        
 			<div className="mb-oxygen mb-section-text">
-				<p>The Ethnic Diversity chart shows the distribution of the population by age group and gender.</p>    
+				<p>The Ethnic Diversity chart shows the distribution of the population by ethnic group (broad) and ethnicity (specific).</p>    
 			</div>
 		</div>
 		<div className="col-sm-12">

@@ -15,8 +15,8 @@ ReligiousSection = ->
 				<div className="collapse mb-quicksand" id="relCollapse">
 					<div className="alert alert-block alert-info mb-section-text">
 						<button type="button" className="close" data-toggle="collapse" data-target="#relCollapse" aria-expanded="false" aria-controls="relCollapse">×</button>
-						<p><strong>Religious Diversity bar chart</strong></p>
-						<p>A <strong>constrictive</strong> pyramid has fewer people in the younger age categories, perhaps as baby boom populations shift to more conservative birth rates. An <strong>expansive</strong> pyramid represents greater numbers of people in the younger age categories and is typical of where birth rates are high and life expectancy is short. A <strong>stationary</strong> pyramid shows roughly equal numbers of people in all age categories, with a tapering towards the older age categories.</p>
+						<p><strong>Usage</strong></p>
+						<p>Hover over or tap the bars to reveal % of people along with the total number of people with that religion.</p>
 					</div>
 				</div>   
 			</div>	        

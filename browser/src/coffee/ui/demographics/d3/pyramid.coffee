@@ -32,7 +32,7 @@ drawPyramid = (options) ->
 	 } = options
 
 	width = $(container).width() ? 750
-	height = $(container).height() ? 550
+	height = $(container).height() ? 570
 
 	# Check if we need to draw an outline
 	isOutline = outlineFilter

@@ -8330,6 +8330,14 @@ button.close {
 .pyramid-svg .overlay-rect:hover {
   fill: rgba(0, 0, 0, 0.15); }
 
+.mb-pyramid-states {
+  display: block;
+  margin: 0 auto; }
+  .mb-pyramid-states .mb-double-img {
+    width: 40%; }
+  .mb-pyramid-states .mb-single-img {
+    width: 80%; }
+
 .mb-grey-box {
   background-color: #F3F3F3;
   border-radius: 5px;
@@ -8715,6 +8723,14 @@ nav.mb-nav-border {
   color: grey;
   font-size: 100%;
   text-decoration: none; }
+  .nomis-attr:hover {
+    text-decoration: none; }
+
+.nomis-font {
+  font-family: Verdana,sans-serif,Helvetica;
+  font-size: 3.5em; }
+  .nomis-font:hover {
+    text-decoration: none; }
 
 .mb-mobile-rotate {
   position: absolute;

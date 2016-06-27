@@ -30,9 +30,9 @@ EthnicSection = function() {
     "data-target": "#ethnicCollapse",
     "aria-expanded": "false",
     "aria-controls": "ethnicCollapse"
-  }, "×"), React.createElement("p", null, React.createElement("strong", null, "Ethnic Diversity Sunburst")), React.createElement("p", null, "A ", React.createElement("strong", null, "constrictive"), " pyramid has fewer people in the younger age categories, perhaps as baby boom populations shift to more conservative birth rates. An ", React.createElement("strong", null, "expansive"), " pyramid represents greater numbers of people in the younger age categories and is typical of where birth rates are high and life expectancy is short. A ", React.createElement("strong", null, "stationary"), " pyramid shows roughly equal numbers of people in all age categories, with a tapering towards the older age categories.")))), React.createElement("div", {
+  }, "×"), React.createElement("p", null, React.createElement("strong", null, "Overview")), React.createElement("p", null, "There are two levels of details to the ethnic diversity chart. The inner ring indicates the broader ethnic group while the outer ring offers a more specific breakdown of ethnicity."), React.createElement("p", null, React.createElement("strong", null, "Usage")), React.createElement("p", null, "Hover over or tap the various segments to reveal % of people within that ethnicity along with the total number of people.")))), React.createElement("div", {
     "className": "mb-oxygen mb-section-text"
-  }, React.createElement("p", null, "The Ethnic Diversity chart shows the distribution of the population by age group and gender."))), React.createElement("div", {
+  }, React.createElement("p", null, "The Ethnic Diversity chart shows the distribution of the population by ethnic group (broad) and ethnicity (specific)."))), React.createElement("div", {
     "className": "col-sm-12"
   }, React.createElement("div", {
     "id": "sunburst-controls"

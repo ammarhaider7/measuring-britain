@@ -6,8 +6,8 @@ About = function() {
     "className": "container col-md-6 col-md-offset-3"
   }, React.createElement("div", {
     "className": "row"
-  }, React.createElement("h1", {
-    "className": "text-center mb-roboto-strong"
+  }, React.createElement("h3", {
+    "className": "mb-roboto-strong"
   }, "About Measuring Britain"), React.createElement("p", null, "Measuring Britain is a project aimed at making official statistics more accessible, interesting and fun through hand-crafted interactive charts and visualisations. We tackle three main areas of social life: Demographics, Health \& the Labour Market."), React.createElement("p", null, "The first phase of the project takes a fresh look at data from the 2011 census for England \& Wales. We\'ll be adding more visualisations regularly, focusing on more recent data. Subscribe to our newlsetter to be notified when new ones are added.")), React.createElement("div", {
     "className": "row"
   }, React.createElement("div", {
