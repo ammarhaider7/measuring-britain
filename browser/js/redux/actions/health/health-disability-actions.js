@@ -176,5 +176,3 @@ module.exports = {
   controlsOpened: controlsOpened,
   controlsClosed: controlsClosed
 };
-
-//# sourceMappingURL=health-disability-actions.map
