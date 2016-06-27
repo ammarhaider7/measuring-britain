@@ -4,13 +4,45 @@ var About;
 About = function() {
   return React.createElement("div", null, React.createElement("div", {
     "className": "container col-md-6 col-md-offset-3"
+  }, React.createElement("div", {
+    "className": "row"
   }, React.createElement("h1", {
-    "className": "mb-white text-center mb-roboto-strong"
-  }, "About Measuring Britain"), React.createElement("p", {
-    "className": "mb-white"
-  }, "Measuring Britain is a project aimed at making official statistics more accessible, interesting and fun through hand-crafted interactive charts and visualisations. We tackle three main areas of social life: Demographics, Health \& the Labour Market."), React.createElement("p", {
-    "className": "mb-white"
-  }, "The first phase of the project takes a fresh look at data from the 2011 census for England \& Wales. We\'ll be adding more visualisations regularly, focusing on more recent data. Sign up in order to be notified when new ones are added.")));
+    "className": "text-center mb-roboto-strong"
+  }, "About Measuring Britain"), React.createElement("p", null, "Measuring Britain is a project aimed at making official statistics more accessible, interesting and fun through hand-crafted interactive charts and visualisations. We tackle three main areas of social life: Demographics, Health \& the Labour Market."), React.createElement("p", null, "The first phase of the project takes a fresh look at data from the 2011 census for England \& Wales. We\'ll be adding more visualisations regularly, focusing on more recent data. Subscribe to our newlsetter to be notified when new ones are added.")), React.createElement("div", {
+    "className": "row"
+  }, React.createElement("div", {
+    "className": "col-sm-8 mb-no-padding"
+  }, React.createElement("h3", {
+    "className": "mb-roboto-strong"
+  }, "The data"), React.createElement("p", null, "All data is from the ", React.createElement("a", {
+    "href": "https://www.ons.gov.uk/",
+    "target": "_blank"
+  }, "Office for National statistics"), " and is extracted from ", React.createElement("a", {
+    "href": "https://www.nomisweb.co.uk/",
+    "target": "_blank"
+  }, "NOMIS"), ", a web-based database of official national statistics. Where \"Census\" is mentioned in the title of the chart, the data is from the 2011 Census for England \& Wales.")), React.createElement("div", {
+    "className": "col-sm-4 mb-no-padding"
+  }, React.createElement("img", {
+    "src": "/images/nomis.png"
+  }), React.createElement("img", {
+    "src": "/images/census-logo.png"
+  }))), React.createElement("div", {
+    "className": "row"
+  }, React.createElement("h3", {
+    "className": "mb-roboto-strong"
+  }, "The Census"), React.createElement("p", null, "The census is a unique source of detailed socio-demographic statistics that underpins national policymaking with population estimates and projections to help allocate funding and plan investment and services. It is conducted every 10 years and is the richest source of social data we have. ", React.createElement("a", {
+    "href": "https://www.ons.gov.uk/census/2011census",
+    "target": "_blank"
+  }, "More info"))), React.createElement("div", {
+    "className": "row"
+  }, React.createElement("h3", {
+    "className": "mb-roboto-strong"
+  }, "Get in touch"), React.createElement("p", null, "For feedback\x2Fcomments\x2Fquestions please get in touch via ", React.createElement("a", {
+    "href": "mailto:contact@measuringbritain.co.uk",
+    "target": "_blank"
+  }, "contact@measuringbritain.co.uk")))));
 };
 
 module.exports = About;
+
+//# sourceMappingURL=about.map

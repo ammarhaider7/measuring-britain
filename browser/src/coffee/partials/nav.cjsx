@@ -78,7 +78,7 @@ Nav = React.createClass
 							<a href="https://github.com/ammarhaider7/measuring-britain" target="_blank"><i className="fa fa-github fa-lg fa-fw"></i></a>
 						</li>	
 						<li>
-							<a href="#"><i className="fa fa-trello fa-lg fa-fw"></i></a>
+							<a href="https://trello.com/invite/b/fRxEBrql/3009cc5b6753037620f94dbc914b8827/measuring-britain-roadmap" target="_blank"><i className="fa fa-trello fa-lg fa-fw"></i></a>
 						</li>	
 					</ul>
 				</div>

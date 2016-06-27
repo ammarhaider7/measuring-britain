@@ -51,3 +51,5 @@ NewsletterSignup = function() {
 };
 
 module.exports = NewsletterSignup;
+
+//# sourceMappingURL=newsletter-signup.map

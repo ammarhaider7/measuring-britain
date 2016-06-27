@@ -59,7 +59,7 @@ renderAbout = function() {
     "border": "yes"
   }), document.getElementById('react_nav_container'));
   ReactDOM.render(React.createElement(PageHeader, {
-    "page_header": "About Us"
+    "page_header": "About"
   }), document.getElementById('mb_page_header'));
   ReactDOM.render(React.createElement(About, null), document.getElementById('about-container'));
   return ReactDOM.render(React.createElement(Footer, null), document.getElementById('mb_footer'));
@@ -76,3 +76,5 @@ switch (path) {
 $(function() {
   return $('#mb_mc_signupform').css('visibility', 'visible');
 });
+
+//# sourceMappingURL=home.map

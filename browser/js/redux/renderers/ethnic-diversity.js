@@ -29,3 +29,5 @@ render = function() {
 };
 
 module.exports = render;
+
+//# sourceMappingURL=ethnic-diversity.map

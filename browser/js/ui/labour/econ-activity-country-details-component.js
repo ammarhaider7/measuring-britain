@@ -37,3 +37,5 @@ EconByCountryDetailComponent = React.createClass({displayName: "EconByCountryDet
 });
 
 module.exports = EconByCountryDetailComponent;
+
+//# sourceMappingURL=econ-activity-country-details-component.map

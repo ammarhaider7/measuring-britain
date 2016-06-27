@@ -44,3 +44,5 @@ PopulationPyramid = function() {
 };
 
 module.exports = PopulationPyramid;
+
+//# sourceMappingURL=population-pyramid.map
