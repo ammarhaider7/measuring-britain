@@ -118,5 +118,3 @@ barChart = function(state, action) {
 };
 
 module.exports = barChart;
-
-//# sourceMappingURL=religion-bars-reducers.map

@@ -75,5 +75,3 @@ makeEconCountryRequest = function(options) {
 };
 
 module.exports = makeEconCountryRequest;
-
-//# sourceMappingURL=econ-activity-country-service.map

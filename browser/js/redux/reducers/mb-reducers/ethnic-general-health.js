@@ -10,5 +10,3 @@ mbReducer = combineReducers({
 });
 
 module.exports = mbReducer;
-
-//# sourceMappingURL=ethnic-general-health.map

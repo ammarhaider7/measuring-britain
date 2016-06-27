@@ -16,5 +16,3 @@ Row = function() {
 };
 
 module.exports = Row;
-
-//# sourceMappingURL=row.map

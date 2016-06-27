@@ -170,5 +170,3 @@ parse = function(dataArray) {
 };
 
 module.exports = parse;
-
-//# sourceMappingURL=general-health-parser.map
