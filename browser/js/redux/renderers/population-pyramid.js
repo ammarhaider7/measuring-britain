@@ -35,5 +35,3 @@ render = function() {
 };
 
 module.exports = render;
-
-//# sourceMappingURL=population-pyramid.map

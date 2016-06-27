@@ -32,5 +32,3 @@ render = function() {
 };
 
 module.exports = render;
-
-//# sourceMappingURL=ethnic-general-health.map

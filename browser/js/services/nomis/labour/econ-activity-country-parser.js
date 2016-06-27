@@ -142,5 +142,3 @@ parse = function(dataArray) {
 };
 
 module.exports = parse;
-
-//# sourceMappingURL=econ-activity-country-parser.map

@@ -21,5 +21,3 @@ data = [
 ];
 
 module.exports = data;
-
-//# sourceMappingURL=featured-thumbnails.map

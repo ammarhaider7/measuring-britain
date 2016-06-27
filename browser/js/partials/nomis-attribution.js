@@ -17,5 +17,3 @@ nomisAttr = function() {
 };
 
 module.exports = nomisAttr;
-
-//# sourceMappingURL=nomis-attribution.map

@@ -44,5 +44,3 @@ About = function() {
 };
 
 module.exports = About;
-
-//# sourceMappingURL=about.map

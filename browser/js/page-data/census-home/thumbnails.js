@@ -44,5 +44,3 @@ data = {
 };
 
 module.exports = data;
-
-//# sourceMappingURL=thumbnails.map

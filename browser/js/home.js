@@ -76,5 +76,3 @@ switch (path) {
 $(function() {
   return $('#mb_mc_signupform').css('visibility', 'visible');
 });
-
-//# sourceMappingURL=home.map

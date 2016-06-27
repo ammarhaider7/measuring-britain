@@ -42,5 +42,3 @@ EconActivityByCountry = function() {
 };
 
 module.exports = EconActivityByCountry;
-
-//# sourceMappingURL=econ-activity-country.map

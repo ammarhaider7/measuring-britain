@@ -76,5 +76,3 @@ pyBarsComponent = React.createClass({displayName: "pyBarsComponent",
 });
 
 module.exports = pyBarsComponent;
-
-//# sourceMappingURL=pyramid-bars.map
