@@ -55,6 +55,7 @@ app.use(function (req, res, next) {
 });
 
 // error handlers
+// console.log('NODE_ENV = ' + app.get('env'));
 
 // development error handler
 // will print stacktrace
