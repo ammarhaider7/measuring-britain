@@ -15,7 +15,7 @@ data = [
 	}
 
 	{
-		href: '/census/religious-diversity'
+		href: '/census/employment-status-by-country-of-birth'
 		img: '/images/econ-by-country.PNG'
 		chart_name: 'Employment status by country of birth'
 		description: '% of people in work and out of work broken down by country of birth.'

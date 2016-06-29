@@ -1,6 +1,6 @@
 #Measuring Britain
 
-<a href="https://measuringbritain.co.uk"><img src="https://www.measuringbritain.co.uk/images/mb-logo-big.png" align="left" hspace="10" vspace="6"></a>
+<a href="https://www.measuringbritain.co.uk"><img src="https://www.measuringbritain.co.uk/images/mb-logo-big.png" align="left" hspace="10" vspace="6"></a>
 
 Measuring Britain is a project aimed at making official statistics more accessible, interesting and fun through hand-crafted interactive charts and visualisations. We tackle three main areas of social life: Demographics, Health & the Labour Market.
 
