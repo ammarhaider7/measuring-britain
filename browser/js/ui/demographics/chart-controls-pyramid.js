@@ -33,6 +33,7 @@ PyramidControls = React.createClass({displayName: "PyramidControls",
         label: valLabel
       });
     } else if (filteringOption === 'line') {
+      this.props.onAddOutline();
       this.props.onOutlineValueChange({
         value: valVal,
         label: valLabel
@@ -94,9 +95,6 @@ PyramidControls = React.createClass({displayName: "PyramidControls",
     activeCat = el.getAttribute('data-active-cat');
     activeVal = el.getAttribute('data-active-val');
     option = el.getAttribute('data-option');
-    if (option === 'line') {
-      this.props.onAddOutline();
-    }
     return this.props.onFilterOptionToggle({
       option: option,
       cat: cat,
