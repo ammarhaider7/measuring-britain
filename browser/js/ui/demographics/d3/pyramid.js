@@ -62,7 +62,7 @@ drawPyramid = function(options) {
     } else if (isDefault === false) {
       update();
       outlineDataReceived = outline_males_perc != null;
-      if (isOutline === true && outlineDataReceived === true) {
+      if (isOutline === true && updateOutline === true && outlineDataReceived === true) {
         drawOutline();
       }
     }
@@ -193,7 +193,23 @@ drawPyramid = function(options) {
     });
   };
   update = function() {
-    var leftBars, overlayBars, rightBars;
+    var leftBars, left_scale_axis_data, left_scale_bars_data, max_female_bars_perc, max_female_outline_perc, max_male_bars_perc, max_male_outline_perc, outlineDataReceived, overlayBars, rightBars, right_scale_axis_data, right_scale_bars_data;
+    outlineDataReceived = outline_males_perc != null;
+    if (outlineDataReceived === true) {
+      max_female_outline_perc = d3.max(outline_females_perc);
+      max_female_bars_perc = d3.max(bar_females_perc);
+      max_male_outline_perc = d3.max(outline_males_perc);
+      max_male_bars_perc = d3.max(bar_males_perc);
+      left_scale_bars_data = max_female_outline_perc > max_female_bars_perc ? outline_females_perc : bar_females_perc;
+      right_scale_bars_data = max_male_outline_perc > max_male_bars_perc ? outline_males_perc : bar_males_perc;
+      left_scale_axis_data = max_female_outline_perc > max_female_bars_perc ? outline_females_perc_format : bar_females_perc_format;
+      right_scale_axis_data = max_male_outline_perc > max_male_bars_perc ? outline_males_perc_format : bar_males_perc_format;
+    } else {
+      left_scale_axis_data = bar_females_perc_format;
+      right_scale_axis_data = bar_males_perc_format;
+      left_scale_bars_data = bar_females_perc;
+      right_scale_bars_data = bar_males_perc;
+    }
     svg = d3.select('.pyramid-svg');
     leftBars = svg.selectAll('.pyramid-bar.left');
     rightBars = svg.selectAll('.pyramid-bar.right');
@@ -202,20 +218,20 @@ drawPyramid = function(options) {
     xAxisGroupRight = svg.select('.x.axis.right');
     leftBars.data(bar_females_perc).transition().duration(1000).delay(500).attr({
       width: function(d) {
-        return x(bar_females_perc)(d);
+        return x(left_scale_bars_data)(d);
       },
       x: function(d) {
-        return xLeft(bar_females_perc)(d);
+        return xLeft(left_scale_bars_data)(d);
       }
     });
     rightBars.data(bar_males_perc).transition().duration(1000).delay(500).attr({
       width: function(d) {
-        return x(bar_males_perc)(d);
+        return x(right_scale_bars_data)(d);
       }
     });
     overlayBars.data(overlay_data);
-    xAxisGroupLeft.transition().duration(1000).delay(500).call(xAxisLeft(bar_females_perc_format));
-    xAxisGroupRight.transition().duration(1000).delay(500).call(xAxis(bar_males_perc_format));
+    xAxisGroupLeft.transition().duration(1000).delay(500).call(xAxisLeft(left_scale_axis_data));
+    xAxisGroupRight.transition().duration(1000).delay(500).call(xAxis(right_scale_axis_data));
     return onMouseOver({
       age: 'All Ages',
       females: bar_females_sum,
@@ -224,23 +240,29 @@ drawPyramid = function(options) {
     });
   };
   drawOutline = function() {
-    var femalesChartLine, femalesLine, malesChartLine, malesLine;
+    var femalesChartLine, femalesLine, left_scale_bars_data, malesChartLine, malesLine, max_female_bars_perc, max_female_outline_perc, max_male_bars_perc, max_male_outline_perc, right_scale_bars_data;
+    max_female_outline_perc = d3.max(outline_females_perc);
+    max_female_bars_perc = d3.max(bar_females_perc);
+    max_male_outline_perc = d3.max(outline_males_perc);
+    max_male_bars_perc = d3.max(bar_males_perc);
+    left_scale_bars_data = max_female_outline_perc > max_female_bars_perc ? outline_females_perc : bar_females_perc;
+    right_scale_bars_data = max_male_outline_perc > max_male_bars_perc ? outline_males_perc : bar_males_perc;
     malesLine = d3.svg.line().interpolate('step-before').x(function(d) {
-      return x(bar_males_perc)(d);
+      return x(right_scale_bars_data)(d);
     }).y(function(d, i) {
-      if (i === bar_males_perc.length) {
-        return y(bar_males_perc).rangeExtent()[1];
+      if (i === right_scale_bars_data.length) {
+        return y(right_scale_bars_data).rangeExtent()[1];
       } else {
-        return y(bar_males_perc)(i);
+        return y(right_scale_bars_data)(i);
       }
     });
     femalesLine = d3.svg.line().interpolate('step-before').x(function(d) {
-      return xLeft(bar_females_perc)(d);
+      return xLeft(left_scale_bars_data)(d);
     }).y(function(d, i) {
-      if (i === bar_females_perc.length) {
-        return y(bar_females_perc).rangeExtent()[1];
+      if (i === left_scale_bars_data.length) {
+        return y(left_scale_bars_data).rangeExtent()[1];
       } else {
-        return y(bar_females_perc)(i);
+        return y(left_scale_bars_data)(i);
       }
     });
     if (isFirstLine === false) {

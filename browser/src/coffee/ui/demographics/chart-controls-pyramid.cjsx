@@ -41,6 +41,9 @@ PyramidControls = React.createClass
 
     else if filteringOption is 'line'
 
+      # Set the outline flag to true
+      @props.onAddOutline()
+
       @props.onOutlineValueChange {
         value: valVal
         label: valLabel
@@ -104,9 +107,9 @@ PyramidControls = React.createClass
     activeVal = el.getAttribute 'data-active-val'
     option = el.getAttribute 'data-option'
 
-    if option is 'line'
+    # if option is 'line'
 
-      @props.onAddOutline()
+    #   @props.onAddOutline()
 
     @props.onFilterOptionToggle {
       option

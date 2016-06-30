@@ -116,7 +116,7 @@ drawPyramid = (options) ->
 			outlineDataReceived = outline_males_perc?
 
 			# if isOutline is yes and updateOutline is yes then drawOutline()
-			if isOutline is yes and outlineDataReceived is yes then drawOutline()
+			if isOutline is yes and updateOutline is yes and outlineDataReceived is yes then drawOutline()
 
 			return
 
@@ -306,7 +306,24 @@ drawPyramid = (options) ->
 
 	update = ->
 
-		# removeOutline()	
+		# Check if outline is needed
+		outlineDataReceived = outline_males_perc?
+
+		# Calculate max value for scales if there is outline data
+		if outlineDataReceived is yes
+			max_female_outline_perc = d3.max outline_females_perc
+			max_female_bars_perc = d3.max bar_females_perc
+			max_male_outline_perc = d3.max outline_males_perc
+			max_male_bars_perc = d3.max bar_males_perc
+			left_scale_bars_data = if max_female_outline_perc > max_female_bars_perc then outline_females_perc else bar_females_perc
+			right_scale_bars_data = if max_male_outline_perc > max_male_bars_perc then outline_males_perc else bar_males_perc
+			left_scale_axis_data = if max_female_outline_perc > max_female_bars_perc then outline_females_perc_format else bar_females_perc_format
+			right_scale_axis_data = if max_male_outline_perc > max_male_bars_perc then outline_males_perc_format else bar_males_perc_format
+		else
+			left_scale_axis_data = bar_females_perc_format
+			right_scale_axis_data = bar_males_perc_format
+			left_scale_bars_data = bar_females_perc
+			right_scale_bars_data = bar_males_perc
 
 		svg = d3.select '.pyramid-svg'
 		leftBars = svg.selectAll '.pyramid-bar.left'
@@ -322,9 +339,9 @@ drawPyramid = (options) ->
 			.delay 500
 		  	.attr {
 				width: (d) ->
-					return x(bar_females_perc)(d)
+					return x(left_scale_bars_data)(d)
 				x: (d) ->
-					return xLeft(bar_females_perc)(d)
+					return xLeft(left_scale_bars_data)(d)
 		  	}
 
 		rightBars.data bar_males_perc
@@ -333,7 +350,7 @@ drawPyramid = (options) ->
 			.delay 500
 			.attr {
 				width: (d) ->
-					return x(bar_males_perc)(d)
+					return x(right_scale_bars_data)(d)
 			}
 
 		# Update data associated with overlay rects
@@ -343,12 +360,12 @@ drawPyramid = (options) ->
 		xAxisGroupLeft.transition()
 			.duration 1000
 			.delay 500
-			.call xAxisLeft bar_females_perc_format
+			.call xAxisLeft left_scale_axis_data
 
 		xAxisGroupRight.transition()
 			.duration 1000
 			.delay 500
-			.call xAxis(bar_males_perc_format)			
+			.call xAxis right_scale_axis_data	
 
 		# Dispatch the initial values for the bars
 		onMouseOver {
@@ -360,25 +377,33 @@ drawPyramid = (options) ->
 
 	drawOutline = ->
 
+		# Calculate max value for scales
+		max_female_outline_perc = d3.max outline_females_perc
+		max_female_bars_perc = d3.max bar_females_perc
+		max_male_outline_perc = d3.max outline_males_perc
+		max_male_bars_perc = d3.max bar_males_perc
+		left_scale_bars_data = if max_female_outline_perc > max_female_bars_perc then outline_females_perc else bar_females_perc
+		right_scale_bars_data = if max_male_outline_perc > max_male_bars_perc then outline_males_perc else bar_males_perc
+
 		malesLine = d3.svg.line()
 			.interpolate 'step-before'
 			.x (d) ->
-				return x(bar_males_perc)(d)
+				return x(right_scale_bars_data)(d)
 			.y (d, i) ->
-				if i is bar_males_perc.length
-					return y(bar_males_perc).rangeExtent()[1]
+				if i is right_scale_bars_data.length
+					return y(right_scale_bars_data).rangeExtent()[1]
 				else
-					return y(bar_males_perc)(i)
+					return y(right_scale_bars_data)(i)
 
 		femalesLine = d3.svg.line()
 			.interpolate 'step-before'
 			.x (d) ->
-				return xLeft(bar_females_perc)(d)
+				return xLeft(left_scale_bars_data)(d)
 			.y (d, i) ->
-				if i is bar_females_perc.length
-					return y(bar_females_perc).rangeExtent()[1]
+				if i is left_scale_bars_data.length
+					return y(left_scale_bars_data).rangeExtent()[1]
 				else
-					return y(bar_females_perc)(i)
+					return y(left_scale_bars_data)(i)
 
 		if isFirstLine is no
 
