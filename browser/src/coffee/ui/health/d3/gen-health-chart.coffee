@@ -1,3 +1,5 @@
+wrap = require '../../d3-helpers/text-wrap.js'
+
 drawGenHealthChart = (options) ->
 
 	{ container, data, isDefault, onMouseOver, activeCategory, activeValue, onInitDone, highlights, updateHighlights } = options
@@ -174,6 +176,9 @@ drawGenHealthChart = (options) ->
 			.transition()
 			.duration 1750
 			.attr 'opacity', 0.1
+
+		# Split texts into tspans using wrap fn
+		wrap labels, margin.right, 5
 
 		# transition lines by using a white rect and shrinking to the right, then removing
 		main_group.append 'rect'

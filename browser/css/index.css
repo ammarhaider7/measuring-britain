@@ -8332,7 +8332,8 @@ button.close {
 
 .mb-pyramid-states {
   display: block;
-  margin: 0 auto; }
+  margin: 0 auto;
+  height: 130px; }
   .mb-pyramid-states .mb-double-img {
     width: 40%; }
   .mb-pyramid-states .mb-single-img {
