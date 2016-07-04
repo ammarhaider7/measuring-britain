@@ -1,3 +1,6 @@
+d3 = require 'd3'
+$ = require 'jquery'
+
 drawBarChart = (options) ->
 
 	{ container, data, isDefault, onMouseOver, activeCategory, activeValue, onInitDone } = options

@@ -1,5 +1,6 @@
-# React = require 'react'
+React = require 'react'
 drawPyrBars = require './d3/pyramidBars.js'
+$ = require 'jquery'
 
 pyBarsComponent = React.createClass
 

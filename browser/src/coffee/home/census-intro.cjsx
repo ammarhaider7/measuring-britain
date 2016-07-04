@@ -1,3 +1,5 @@
+ReactDOM = require 'react-dom'
+
 CensusIntro = ->
 
 	<div className="row col-sm-12">

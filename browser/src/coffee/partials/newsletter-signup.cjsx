@@ -1,3 +1,5 @@
+React = require 'react'
+
 NewsletterSignup = ->
 
 	<div id="mc_embed_signup" className="mb-hidden-mp">

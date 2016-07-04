@@ -1,3 +1,5 @@
+React = require 'react'
+
 PageHeader = React.createClass 
 
 	capitalizeFirstLetter: (str) ->

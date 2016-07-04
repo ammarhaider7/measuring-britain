@@ -1,3 +1,5 @@
+d3 = require 'd3'
+
 # Wrap function
 module.exports = (texts, width, x_margin = 0) ->
 	texts.each ->

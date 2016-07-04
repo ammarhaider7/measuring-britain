@@ -1,3 +1,5 @@
+React = require 'react'
+
 ThumbnailsRowComponent = React.createClass 
 
 	render: ->

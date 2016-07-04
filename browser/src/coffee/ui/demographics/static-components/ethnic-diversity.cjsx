@@ -1,3 +1,5 @@
+React = require 'react'
+
 EthnicSection = ->
 
 	<div className="row mb-quicksand">

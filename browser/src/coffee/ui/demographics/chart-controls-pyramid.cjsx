@@ -1,5 +1,6 @@
-# React = require 'react'
-# d3 = require 'd3'
+React = require 'react'
+d3 = require 'd3'
+$ = require 'jquery'
 
 PyramidControls = React.createClass
 

@@ -1,3 +1,5 @@
+d3 = require 'd3'
+
 parse = (dataArray) ->
 
 	sumHealth = (arr, health_value) ->

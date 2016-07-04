@@ -1,4 +1,5 @@
-# React = require 'react'
+React = require 'react'
+$ = require 'jquery'
 ControlsNew = require '../chart-controls-new.js'
 data = require './data/pyramid-chart-controls.js'
 drawSunburst = require './d3/sunburst-partition.js'

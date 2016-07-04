@@ -1,3 +1,5 @@
+d3 = require 'd3'
+$ = require 'jquery'
 wrap = require '../../d3-helpers/text-wrap.js'
 
 drawGenHealthChart = (options) ->

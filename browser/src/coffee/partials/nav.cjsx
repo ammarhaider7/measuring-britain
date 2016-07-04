@@ -1,3 +1,5 @@
+React = require 'react'
+
 Nav = React.createClass 
 
 	render: ->

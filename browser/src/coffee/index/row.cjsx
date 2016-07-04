@@ -1,5 +1,6 @@
 ThumbnailsRowComponent = require '../partials/thumbnails-row.js'
 thumbnailsData = require '../page-data/index/featured-thumbnails.js'
+React = require 'react'
 
 Row = ->
 

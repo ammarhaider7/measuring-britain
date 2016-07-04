@@ -1,3 +1,5 @@
+React = require 'react'
+
 EconActivityByCountry = ->
 
 	<div className="row mb-quicksand">

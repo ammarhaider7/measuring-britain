@@ -2,7 +2,7 @@ d3 = undefined
 dims = undefined
 splash = undefined
 $ = undefined
-$ = require('jQuery')
+$ = require('jquery')
 d3 = require('d3')
 dims =
   width: window.innerWidth
