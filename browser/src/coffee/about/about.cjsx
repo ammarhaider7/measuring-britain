@@ -1,3 +1,5 @@
+ReactDOM = require 'react-dom'
+
 About = ->
 
 	<div>

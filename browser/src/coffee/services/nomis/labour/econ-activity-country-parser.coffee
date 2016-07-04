@@ -1,3 +1,5 @@
+d3 = require 'd3'
+
 parse = (dataArray) ->
 
 	# Economic activity categories

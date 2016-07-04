@@ -1,3 +1,6 @@
+d3 = require 'd3'
+$ = require 'jquery'
+
 drawPyramid = (options) ->
 
 	{ container

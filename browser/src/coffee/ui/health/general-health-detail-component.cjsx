@@ -1,5 +1,8 @@
+d3 = require 'd3'
 format = d3.format '.3s'
 percFormat = d3.format ',.2%'
+$ = require 'jquery'
+React = require 'react'
 
 GenHealthDetailComponent = React.createClass 
 

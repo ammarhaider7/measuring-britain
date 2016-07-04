@@ -1,5 +1,6 @@
 nomisEndPoint = "https://www.nomisweb.co.uk/api/v01/dataset/"
 dataSet = "NM_659_1.data.json" # DC2201EW - Ethnic Group by Religion
+$ = require 'jquery'
 
 defaultOptions = {
 	isDefault: yes

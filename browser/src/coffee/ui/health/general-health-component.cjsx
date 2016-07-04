@@ -2,6 +2,8 @@ ControlsNew = require '../chart-controls-new.js'
 data = require '../demographics/data/pyramid-chart-controls.js'
 genHealthChart = require './d3/gen-health-chart.js'
 OnsAttr = require '../../partials/chart-ons-attribution.js'
+$ = require 'jquery'
+React = require 'react'
 
 value_options = {
   districts: data.districts

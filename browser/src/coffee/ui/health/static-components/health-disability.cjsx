@@ -1,3 +1,5 @@
+React = require 'react'
+
 DisabilitySection = ->
 
 	<div className="row mb-quicksand">

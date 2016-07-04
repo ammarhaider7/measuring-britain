@@ -1,3 +1,5 @@
+React = require 'react'
+
 Footer = ->
 
 	<div className="footer container mb-hidden-mp">

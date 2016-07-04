@@ -2,6 +2,8 @@ ControlsNew = require '../chart-controls-new.js'
 data = require '../demographics/data/pyramid-chart-controls.js'
 econByCountryChart = require './d3/econ-activity-country-chart.js'
 OnsAttr = require '../../partials/chart-ons-attribution.js'
+$ = require 'jquery'
+React = require 'react'
 
 value_options = {
   districts: data.districts

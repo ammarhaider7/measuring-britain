@@ -1,3 +1,5 @@
+React = require 'react'
+
 Jumbotron = ->
 
 	<div className="jumbotron mb-white-text text-center mb-roboto col-sm-8 col-sm-offset-2 mb-zero mb-no-pointer-events">

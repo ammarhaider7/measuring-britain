@@ -1,6 +1,6 @@
 nomisEndPoint = "https://www.nomisweb.co.uk/api/v01/dataset/"
 dataSet = "NM_679_1.data.json" #  DC6203EW - Economic activity by country of birth by sex by age
-
+$ = require 'jquery'
 # https://www.nomisweb.co.uk/api/v01/dataset/NM_679_1.data.json?date=latest&geography=2092957703&c_sex=0&c_age=0&c_ecopuk11=3,6,11,14...18&c_cob=2,11,14,15,20,26,29,30&measures=20100
 
 defaultOptions = {

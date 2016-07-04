@@ -1,3 +1,6 @@
+d3 = require 'd3'
+$ = require 'jquery'
+
 drawPyrBars = (options) ->
 
 	{ container, age, females, males, initial, isDefault, activeBarsValue, resize } = options

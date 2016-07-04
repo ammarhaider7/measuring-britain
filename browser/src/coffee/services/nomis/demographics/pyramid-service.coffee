@@ -1,6 +1,7 @@
 nomisEndPoint = "https://www.nomisweb.co.uk/api/v01/dataset/"
 relDataSet = "NM_657_1.data.json" # DC2107EW - Religion by sex by age
 ethDataSet = "NM_651_1.data.json" # DC2101EW - Ethnic group by sex by age
+$ = require 'jquery'
 
 defaultOptions = {
     outlineRequested: no

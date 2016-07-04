@@ -1,3 +1,5 @@
+React = require 'react'
+
 PopulationPyramid = ->
 
 	<div className="row mb-quicksand">

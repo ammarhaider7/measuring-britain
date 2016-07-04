@@ -1,6 +1,6 @@
 nomisEndPoint = "https://www.nomisweb.co.uk/api/v01/dataset/"
 dataSet = "NM_740_1.data.json" # Long-term health problem or disability by ethnic group by sex by age (regional)
-
+$ = require 'jquery'
 # ?date=latest&geography=2092957703&c_sex=0&c_age=1...6&c_disability=1...3&c_ethpuk11=1...23&measures=20100
 
 defaultOptions = {
