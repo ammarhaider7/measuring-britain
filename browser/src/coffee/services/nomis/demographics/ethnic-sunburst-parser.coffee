@@ -1,3 +1,5 @@
+d3 = require 'd3'
+
 parse = (dataArray) ->
 
 	# Need to remove totals from children

@@ -1,3 +1,5 @@
+ReactDOM = require 'react-dom'
+React = require 'react'
 { createStore, applyMiddleware } = require 'redux'
 { Provider } = require 'react-redux'
 ReduxThunk = require('redux-thunk').default

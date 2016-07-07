@@ -1,3 +1,5 @@
+ReactDOM = require 'react-dom'
+React = require 'react'
 { createStore, applyMiddleware } = require 'redux'
 # { requestPyramidData, fetchPyramidData, mouseOver } = require './actions/demographics/pyramid-actions.js'
 { Provider } = require 'react-redux'

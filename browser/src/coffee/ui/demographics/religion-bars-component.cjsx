@@ -1,4 +1,5 @@
-# React = require 'react'
+React = require 'react'
+$ = require 'jquery'
 ControlsNew = require '../chart-controls-new.js'
 data = require './data/pyramid-chart-controls.js'
 drawRelBars = require './d3/bar-chart.js'

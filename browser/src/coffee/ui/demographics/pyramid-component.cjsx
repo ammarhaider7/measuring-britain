@@ -2,6 +2,8 @@ PyramidControls = require './chart-controls-pyramid.js'
 data = require './data/pyramid-chart-controls.js'
 drawPyramid = require './d3/pyramid.js'
 OnsAttr = require '../../partials/chart-ons-attribution.js'
+React = require 'react'
+$ = require 'jquery'
 
 value_options = {
 	districts: data.districts

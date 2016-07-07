@@ -1,3 +1,5 @@
+React = require 'react'
+
 MobileRotate = ->
 
 	<div className="mb-mobile-rotate" style={{ width: '100%', height: $(window).height() }}>

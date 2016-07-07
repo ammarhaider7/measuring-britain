@@ -9,7 +9,7 @@ splash = void 0;
 
 $ = void 0;
 
-$ = require('jQuery');
+$ = require('jquery');
 
 d3 = require('d3');
 

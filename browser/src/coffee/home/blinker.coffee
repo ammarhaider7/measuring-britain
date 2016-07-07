@@ -1,4 +1,4 @@
-$ = require 'jQuery'
+$ = require 'jquery'
 
 # code gets installed at the end of the body (after all other HTML)
 module.exports = do ->

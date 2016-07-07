@@ -1,5 +1,6 @@
-# React = require 'react'
-# d3 = require 'd3'
+d3 = require 'd3'
+$ = require 'jquery'
+React = require 'react'
 
 ControlsNew = React.createClass
   

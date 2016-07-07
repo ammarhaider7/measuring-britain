@@ -1,3 +1,5 @@
+React = require 'react'
+
 nomisAttr = ->
 	<div className="col-xs-10 col-xs-offset-1">
 		<div className="mb-right">

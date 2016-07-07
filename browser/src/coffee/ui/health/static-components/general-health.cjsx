@@ -1,3 +1,5 @@
+React = require 'react'
+
 GeneralHealthSection = ->
 
 	<div className="row mb-quicksand">

@@ -1,4 +1,6 @@
-# drawDonut = require './d3/econ-activity-country-donut.js'
+$ = require 'jquery'
+React = require 'react'
+d3 = require 'd3'
 
 EconByCountryDetailComponent = React.createClass
 
