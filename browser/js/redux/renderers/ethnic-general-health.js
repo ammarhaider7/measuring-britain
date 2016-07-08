@@ -15,7 +15,7 @@ ref1 = require('../containers/health/general-health-containers.js'), GenHealthCh
 
 mbReducer = require('../reducers/mb-reducers/ethnic-general-health.js');
 
-store = createStore(mbReducer, compose(applyMiddleware(ReduxThunk), window.devToolsExtension ? window.devToolsExtension() : void 0));
+store = createStore(mbReducer, compose(applyMiddleware(ReduxThunk), window.devToolsExtension != null ? window.devToolsExtension() : void 0));
 
 unsubscribe = store.subscribe(function() {});
 

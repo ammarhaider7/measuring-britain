@@ -10,7 +10,7 @@ mbReducer = require '../reducers/mb-reducers/religious-diversity.js'
 # creating the store, associating the root reducer and thunk middleware
 store = createStore(mbReducer, compose(
 	applyMiddleware(ReduxThunk), 
-	if window.devToolsExtension then window.devToolsExtension() else undefined
+	if window.devToolsExtension? then window.devToolsExtension() else undefined
 ))
 
 # log state
