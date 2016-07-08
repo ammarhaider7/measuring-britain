@@ -1,6 +1,6 @@
 ReactDOM = require 'react-dom'
 React = require 'react'
-{ createStore, applyMiddleware } = require 'redux'
+{ createStore, applyMiddleware, compose } = require 'redux'
 # { requestPyramidData, fetchPyramidData, mouseOver } = require './actions/demographics/pyramid-actions.js'
 { Provider } = require 'react-redux'
 ReduxThunk = require('redux-thunk').default
@@ -8,17 +8,20 @@ ReduxThunk = require('redux-thunk').default
 mbReducer = require '../reducers/mb-reducers/religious-diversity.js'
 
 # creating the store, associating the root reducer and thunk middleware
-store = createStore mbReducer, applyMiddleware ReduxThunk
+store = createStore(mbReducer, compose(
+	applyMiddleware(ReduxThunk), 
+	if window.devToolsExtension then window.devToolsExtension() else undefined
+))
 
 # log state
-console.log 'getState 1'
-console.log store.getState()
+# console.log 'getState 1'
+# console.log store.getState()
 	
 # Every time the state changes, log it
 # Note that subscribe() returns a function for unregistering the listener
 unsubscribe = store.subscribe ->
-	console.log 'getState 2'
-	console.log store.getState()
+	# console.log 'getState 2'
+	# console.log store.getState()
 
 render = ->
 	ReactDOM.render <Provider store={store}><ReligionBars/></Provider>, document.getElementById 'rel-bar-chart-component'	
