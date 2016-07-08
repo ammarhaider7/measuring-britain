@@ -15,7 +15,7 @@ ref1 = require('../containers/labour/econ-activity-country-containers.js'), Econ
 
 mbReducer = require('../reducers/mb-reducers/econ-activity-country.js');
 
-store = createStore(mbReducer, compose(applyMiddleware(ReduxThunk), window.devToolsExtension != null ? window.devToolsExtension() : void 0));
+store = createStore(mbReducer, compose(applyMiddleware(ReduxThunk)));
 
 unsubscribe = store.subscribe(function() {});
 

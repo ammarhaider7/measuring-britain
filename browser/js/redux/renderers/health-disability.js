@@ -15,7 +15,7 @@ mbReducer = require('../reducers/health-reducers.js');
 
 DisabilityChart = require('../containers/health/health-disability-containers.js').DisabilityChart;
 
-store = createStore(mbReducer, compose(applyMiddleware(ReduxThunk), window.devToolsExtension != null ? window.devToolsExtension() : void 0));
+store = createStore(mbReducer, compose(applyMiddleware(ReduxThunk)));
 
 unsubscribe = store.subscribe(function() {});
 

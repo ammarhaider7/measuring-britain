@@ -15,7 +15,7 @@ ref1 = require('../containers/demographics/pyramid-containers.js'), Pyramid = re
 
 mbReducer = require('../reducers/mb-reducers/population-pyramid.js');
 
-store = createStore(mbReducer, compose(applyMiddleware(ReduxThunk), window.devToolsExtension != null ? window.devToolsExtension() : void 0));
+store = createStore(mbReducer, compose(applyMiddleware(ReduxThunk)));
 
 unsubscribe = store.subscribe(function() {});
 

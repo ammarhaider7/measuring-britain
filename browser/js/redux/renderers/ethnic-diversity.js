@@ -15,7 +15,7 @@ ref1 = require('../containers/demographics/ethnic-sunburst-containers.js'), Sunb
 
 mbReducer = require('../reducers/mb-reducers/ethnic-diversity.js');
 
-store = createStore(mbReducer, compose(applyMiddleware(ReduxThunk), window.devToolsExtension != null ? window.devToolsExtension() : void 0));
+store = createStore(mbReducer, compose(applyMiddleware(ReduxThunk)));
 
 unsubscribe = store.subscribe(function() {});
 
