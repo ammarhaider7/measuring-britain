@@ -15,7 +15,7 @@ ReligionBars = require('../containers/demographics/religion-bars-containers.js')
 
 mbReducer = require('../reducers/mb-reducers/religious-diversity.js');
 
-store = createStore(mbReducer, compose(applyMiddleware(ReduxThunk), window.devToolsExtension ? window.devToolsExtension() : void 0));
+store = createStore(mbReducer, compose(applyMiddleware(ReduxThunk)));
 
 unsubscribe = store.subscribe(function() {});
 

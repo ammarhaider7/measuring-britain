@@ -9,8 +9,7 @@ mbReducer = require '../reducers/mb-reducers/population-pyramid.js'
 
 # creating the store, associating the root reducer and thunk middleware
 store = createStore(mbReducer, compose(
-	applyMiddleware(ReduxThunk), 
-	if window.devToolsExtension then window.devToolsExtension() else undefined
+	applyMiddleware(ReduxThunk)
 ))
 
 # log state
