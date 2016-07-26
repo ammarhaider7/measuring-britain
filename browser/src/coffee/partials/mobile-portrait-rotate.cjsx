@@ -1,4 +1,5 @@
 React = require 'react'
+$ = require 'jquery'
 
 MobileRotate = ->
 
