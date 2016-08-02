@@ -8036,6 +8036,9 @@ button.close {
   width: 100%;
   padding-left: 5%;
   padding-right: 5%; }
+  @media (min-width: 1500px) {
+    .mb-full-width {
+      width: 80%; } }
 
 .mt-zero {
   margin-top: 0px; }

@@ -20,4 +20,7 @@
    @else if $size == lg {
      @media (min-width: 1200px)  { @content ; }
   }
+   @else if $size == xlg {
+     @media (min-width: 1500px)  { @content ; }
+  }
 }
