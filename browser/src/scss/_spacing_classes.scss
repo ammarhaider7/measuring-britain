@@ -15,6 +15,9 @@
 	width: 100%;
     padding-left: 5%;
     padding-right: 5%;
+    @include bp(xlg) {
+    	width: 80%;
+    }
 }
 .mt-zero {
 	margin-top: $zero;
