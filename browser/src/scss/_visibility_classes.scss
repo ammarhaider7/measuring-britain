@@ -1,8 +1,0 @@
-.mb-hide {
-	display: none;
-}
-.mb-hidden-mp {
-	@include bp(mp) {
-		display: none;
-	}
-}

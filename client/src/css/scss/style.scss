@@ -1,0 +1,9 @@
+@import '../../../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/_variables.scss';
+@import '../../../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_labels.scss';
+@import '../../../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/_labels.scss';
+
+body {
+	div.commentBox {
+		font-size: 20px;
+	}
+}
