@@ -1,0 +1,16 @@
+{
+  "name": "measuring-britain",
+  "scripts": {},
+  "env": {
+    "NPM_CONFIG_LOGLEVEL": {
+      "required": true
+    }
+  },
+  "formation": {},
+  "addons": [],
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    }
+  ]
+}
