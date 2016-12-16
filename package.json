@@ -1,7 +1,6 @@
 {
-  "name": "webpack-app",
-  "version": "0.0.0",
-  "private": true,
+  "name": "measuring-britain",
+  "version": "1.0.0",
   "scripts": {
     "start": "npm run lint && npm run build && node ./server/bin/www",
     "launch": "npm run build && node ./server/bin/www",
@@ -11,6 +10,9 @@
     "start-wds": "node ./server/wds.js",
     "start-express": "nodemon -e jsx --watch server/views --watch server/routes ./server/bin/dev",
     "lint": "eslint src && eslint server"
+  },
+  "engines": {
+    "node": "4.2.3"
   },
   "dependencies": {
     "babel-register": "^6.9.0",
