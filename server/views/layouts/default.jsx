@@ -7,17 +7,10 @@ const DefaultLayout = React.createClass({
     title: React.PropTypes.string,
     commonCss: React.PropTypes.string,
     cssFile: React.PropTypes.string,
-    children: React.PropTypes.object
+    children: React.PropTypes.array
   },
 
   renderHead() {
-    const ieComments = `
-      <!--[if lte IE 9]><script src="/public/media.match.js"></script><![endif]-->
-      <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
-      <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
-      <!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
-      <!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
-    `;
     return (
       <head>
         <meta charSet="utf-8" />
@@ -29,9 +22,6 @@ const DefaultLayout = React.createClass({
         <title>{this.props.title}</title>
         <link rel="stylesheet" type="text/css" href={ `${this.props.commonCss}` } />
         <link rel="stylesheet" type="text/css" href={ `${this.props.cssFile}` } />
-        <meta name="react-comment-hack" 
-            dangerouslySetInnerHTML={{__html: ieComments}}>
-        </meta>
       </head>
     );
   },
@@ -52,7 +42,7 @@ const DefaultLayout = React.createClass({
       <html lang='en'>
         { this.renderHead() }
         <body>
-          <meta name="browser-upgrade-cc" dangerouslySetInnerHTML={{__html: ieComment}}></meta>
+          <div name="browser-upgrade-cc" dangerouslySetInnerHTML={{__html: ieComment}}></div>
           {this.props.children}
           { reloadJs }
         </body>

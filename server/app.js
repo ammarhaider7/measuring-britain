@@ -15,9 +15,9 @@ var app = express();
 app.locals.am_env = 'prod';
 
 // view engine setup
-// view engine setup
 var options = {
-  transformViews: false
+  transformViews: false,
+  beautify: true
 }
 app.engine('jsx', require('express-react-views').createEngine(options));
 app.set('views', __dirname + '/views');

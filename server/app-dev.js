@@ -20,7 +20,8 @@ app.locals.am_env = 'dev';
 
 // view engine setup
 var options = {
-  transformViews: false
+  transformViews: false,
+  beautify: true
 }
 app.engine('jsx', require('express-react-views').createEngine(options));
 app.set('views', __dirname + '/views');
