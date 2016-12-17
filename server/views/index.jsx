@@ -12,8 +12,7 @@ var HelloMessage = React.createClass({
 
 		return (
 			<DefaultLayout {...this.props}>
-				<div id="content"></div>
-				<div id="container"></div>
+				<div id="body"></div>
 				<script src={ `${this.props.commonJs}` }></script>
 				<script src={ `${this.props.jsFile}` }></script>
 			</DefaultLayout>

@@ -1,5 +1,5 @@
 module.exports = {
 
-  bundle: './js/main.jsx'
+  indexBundle: './js/main.jsx'
   
 };

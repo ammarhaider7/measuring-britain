@@ -9,8 +9,8 @@ router.get('/', (req, res) => {
 	res.render('index', { 
 		title: 'Measuring Britain | Home',
 		env: req.app.locals.am_env,
-		jsFile: assets.bundle.js,
-		cssFile: assets.bundle.css,
+		jsFile: assets.indexBundle.js,
+		cssFile: assets.indexBundle.css,
 		commonJs,
 		commonCss
 	});
@@ -19,8 +19,8 @@ router.get('/', (req, res) => {
 router.get('/about', (req, res) => {
   res.render('about', { 
 	title: 'Measuring Britain | About',
-	jsFile: assets.xBundle.js,
-	cssFile: assets.xBundle.css,
+	jsFile: assets.aboutBundle.js,
+	cssFile: assets.aboutBundle.css,
 	commonJs,
 	commonCss
   });
