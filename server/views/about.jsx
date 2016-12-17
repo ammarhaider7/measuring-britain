@@ -1,12 +1,11 @@
 const React = require('react');	
 const DefaultLayout = require('./layouts/default');
 
-const xHelloMessage = React.createClass({
+const About = React.createClass({
 
   render() {
     return (
 		<DefaultLayout {...this.props}>
-			<div>Hello, {this.props.name}</div>
 			<div id="content"></div>
 			<script src={ `${this.props.commonJs}` }></script>
 			<script src={ `${this.props.jsFile}` }></script>
@@ -16,4 +15,4 @@ const xHelloMessage = React.createClass({
   
 });
 
-module.exports = xHelloMessage;
+module.exports = About;
