@@ -30,8 +30,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use('/', express.static('client/dist'));
-// finally, set the custom view
-// app.set('view', require('react-engine/lib/expressView'));
 
 app.use('/', routes);
 
