@@ -2,6 +2,14 @@ const React = require('react');
 
 const DefaultLayout = React.createClass({
 
+  propTypes: {
+    env: React.PropTypes.string,
+    title: React.PropTypes.string,
+    commonCss: React.PropTypes.string,
+    cssFile: React.PropTypes.string,
+    children: React.PropTypes.object
+  },
+
   render() {
 
     // server change reload
@@ -12,8 +20,8 @@ const DefaultLayout = React.createClass({
     return (
       <html>
         <head>
-          <meta charset="utf-8" />
-          <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+          <meta charSet="utf-8" />
+          <meta httpEquiv="X-UA-Compatible" content="IE=edge,chrome=1" />
           <meta name="description" content="" />
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <link rel="apple-touch-icon" href="apple-touch-icon.png" />
@@ -23,7 +31,7 @@ const DefaultLayout = React.createClass({
           <link rel="stylesheet" type="text/css" href={ `${this.props.cssFile}` } />
         </head>
         <body>
-        	{this.props.children}
+          {this.props.children}
           { reloadJs }
         </body>
       </html>
