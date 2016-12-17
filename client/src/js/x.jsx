@@ -4,6 +4,7 @@ import RxComponent from './rxComponent.js'
 import coffeeFn from './coffee/b.coffee'
 import { CjsxComponentX } from './coffee/c.cjsx'
 import '../css/global.scss';
+import '../css/scss/style.scss';
 import '../css/xstyles.css';
 
 coffeeFn();

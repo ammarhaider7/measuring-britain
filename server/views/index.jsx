@@ -14,7 +14,7 @@ var HelloMessage = React.createClass({
 				<script src={ `${this.props.jsFile}` }></script>
 			</DefaultLayout>
 		);
-  	}
+	}
 
 });
 
