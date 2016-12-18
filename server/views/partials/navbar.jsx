@@ -1,12 +1,11 @@
 const React = require('react');	
 
-const About = React.createClass({
+const Nav = React.createClass({
 
   render() {
     return (
 		<nav className="navbar navbar-light bg-faded">
 			<button className="navbar-toggler hidden-sm-up" type="button" data-toggle="collapse" data-target="#nav-content">
-				☰
 			</button>
 			<div className="collapse navbar-toggleable-xs" id="nav-content">
 				<a className="navbar-brand" href="#">Logo</a>
@@ -28,4 +27,4 @@ const About = React.createClass({
   
 });
 
-module.exports = About;
+module.exports = Nav;

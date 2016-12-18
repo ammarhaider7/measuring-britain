@@ -6,7 +6,7 @@ const About = React.createClass({
   render() {
     return (
 		<DefaultLayout {...this.props}>
-			<div id="content"></div>
+			<div id="body"></div>
 			<script src={ `${this.props.commonJs}` }></script>
 			<script src={ `${this.props.jsFile}` }></script>
 		</DefaultLayout>

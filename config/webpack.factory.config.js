@@ -28,6 +28,10 @@ module.exports = (options) => {
             filename: 'webpack.assets.json',
             prettyPrint: true,
             update: true
+        }),
+        new webpack.ProvidePlugin({
+            $: 'jquery',
+            jQuery: 'jquery'
         })
     ].concat(options.plugins);
 

@@ -1,4 +1,5 @@
 const React = require('react');
+import Nav from '../partials/navbar';
 
 const DefaultLayout = React.createClass({
 
@@ -42,6 +43,7 @@ const DefaultLayout = React.createClass({
       <html lang='en'>
         { this.renderHead() }
         <body>
+          <Nav />
           <div name="browser-upgrade-cc" dangerouslySetInnerHTML={{__html: ieComment}}></div>
           {this.props.children}
           { reloadJs }
