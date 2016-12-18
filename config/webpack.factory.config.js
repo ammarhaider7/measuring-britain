@@ -30,7 +30,7 @@ module.exports = (options) => {
             update: true
         }),
         new webpack.ProvidePlugin({
-            $: 'jquery',
+            'window.Tether': 'tether',
             jQuery: 'jquery'
         })
     ].concat(options.plugins);
