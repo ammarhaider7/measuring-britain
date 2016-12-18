@@ -1,0 +1,49 @@
+#health-disability-component {
+	.mb-spinner {
+	    margin: 150px auto 0;
+	    display: block;
+	}
+	.disability-svg {
+		.axis {
+		  text {
+		  	font-size: 9px;
+		  	@include bp(sm) {
+		  		font-size: 11px;		
+		  	}
+		  }
+	  		path, line {
+			  fill: none;
+			  stroke: #333;
+			  shape-rendering: crispEdges;
+			}
+		}
+		.legend-text {
+			font-size: 12px;
+		}
+		.x .tick:nth-child(1) line {
+			stroke: #999;
+			stroke-dasharray: none;
+		}
+		.x.axis path {
+		  fill: none;
+		  stroke: none;
+		}
+		.x.axis text {
+		    font-weight: bold;
+		}
+		.x.axis line {
+		  stroke: #999;
+		  stroke-opacity: .8;
+		}
+		.y .tick:nth-child(1) line {
+			display: none;
+		}
+		.y .tick line {
+			stroke-dasharray: 3, 3;
+	    	stroke: #EEE;
+		}
+		path.domain {
+			display: none;
+		}
+	}
+}

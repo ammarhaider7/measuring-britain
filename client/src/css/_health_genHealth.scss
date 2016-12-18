@@ -1,0 +1,100 @@
+#general-health-component{
+	.mb-spinner {
+	    margin: 150px auto 0;
+	    display: block;
+	}
+}
+.gen-health-svg {
+	.axis {
+	  text {
+	  	font-size: 11px;
+	  }
+  		path, line {
+		  fill: none;
+		  stroke: #333;
+		  shape-rendering: crispEdges;
+		}
+	}
+
+	.x.axis path {
+	  fill: none;
+	  stroke: none;
+	}
+
+	.x.axis line {
+	  stroke: #333;
+	  stroke-opacity: .8;
+	}
+	.line {
+	  fill: none;
+	  stroke: steelblue;
+	  stroke-width: 1.75px;
+	}
+	.means.line {
+		stroke-width: 2px;
+   	 	stroke-dasharray: 8,8;
+	}
+	path.domain {
+		display: none;
+	}
+	.x .tick:nth-child(1) line {
+		stroke: #999;
+		stroke-dasharray: none;
+	}
+	.x .tick line {
+		stroke-dasharray: 3, 3;
+    	stroke: #EEE;
+	}
+	.y .tick:nth-child(1) line {
+		display: none;
+	}
+	.y .tick line {
+		stroke-dasharray: 3, 3;
+    	stroke: #EEE;
+	}
+	.point-label {
+		font-size: 75%;
+	}
+}
+#general-health-details {
+	.mb-gender-toggles-label {
+		font-weight: bold;
+  		line-height: 30px;
+	}
+	label {
+		font-size: 12px;
+	}
+	.ethnic-checkboxes-column:nth-child(3) {
+		margin-top: 30px;
+	    border-left: 1px solid #E6E6E6;
+	    border-right: 1px solid #E6E6E6;
+	}
+	.ethnic_title {
+		margin: 0;
+		text-decoration: underline;
+	}
+	.mb-spinner {
+		display: block;
+  		margin: 120px auto;
+	}
+	.checkbox.ethnicity {
+		width: 110%;
+	}
+	.checkbox-zone:hover {
+		background-color: #DA4A70;
+	    font-weight: 700;
+	    color: white;
+	}
+	.checkbox-zone {
+	    background-color: #eee;
+	    border: 1px solid #E6E6E6;
+	    padding: 2px 40px 2px 25px;
+	    border-radius: 5px;
+	    width: 100%;
+	}
+	.highlight {
+		background-color: #DA4A70;
+	    font-weight: 700;
+	    color: white;
+	}
+}

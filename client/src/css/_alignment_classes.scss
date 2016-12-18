@@ -1,0 +1,18 @@
+//Align classes
+.mb-vertical-center {
+  min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+  min-height: 100vh; /* These two lines are counted as one :-)       */
+  display: flex;
+  align-items: center;
+  margin: 0;
+}
+.mb-right {
+	float: right;
+}
+.mb-left {
+	float: left;
+}
+.mb-center {
+	display: block;
+    margin: 0 auto;
+}

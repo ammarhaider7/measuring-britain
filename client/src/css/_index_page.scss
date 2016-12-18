@@ -1,0 +1,26 @@
+#mb_row {
+	.thumbnail img {
+		height: 170px;
+	}
+	.thumbnail:hover {
+		// Box shadow
+		-webkit-box-shadow: 0px 0px 18px 16px rgba(0,0,0,0.34);
+		-moz-box-shadow: 0px 0px 18px 16px rgba(0,0,0,0.34);
+		box-shadow: 0px 0px 18px 16px rgba(0,0,0,0.34);
+	}
+}
+.nomis-attr {
+	color: grey;
+	font-size: 100%;
+	text-decoration: none;
+	&:hover {
+		text-decoration: none;
+	}
+}
+.nomis-font {
+	font-family: Verdana,sans-serif,Helvetica;
+    font-size: 3.5em;
+	&:hover {
+		text-decoration: none;
+	}
+}

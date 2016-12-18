@@ -1,0 +1,97 @@
+.controls-container {
+	// border-top: 2px solid #E6E6E6;
+    border-bottom: 1px solid #333;
+    // Background transition
+    // -webkit-transition: background 0.5s linear;
+    // -moz-transition: background 0.5s linear;
+    // -ms-transition: background 0.5s linear;
+    // -o-transition: background 0.5s linear;
+    // transition: background 0.5s linear;
+    .mb-controls-tabs {
+    	border-bottom: 1px solid #B3B3B3;
+    	.active {
+    		a {
+    			background-color: #EEEEEE;
+    			border: 1px solid #B3B3B3;
+    			border-bottom-color: transparent;
+    		}
+    		a:hover, a:focus {
+    			background-color: #EEEEEE;
+    			border: 1px solid #B3B3B3;
+    			border-bottom-color: transparent;
+    		}
+    	}
+    	a:hover {
+		    border-color: #eee #eee #B3B3B3;
+    		background-color: #D2D2D2;
+    	}
+    }
+    .glyphicon {
+		margin-top: 10px;
+	    margin-bottom: 10px;
+    }
+	.mb-controls-border-bottom {
+		border-bottom: 1px solid #333;
+	}
+	.mb-control-value {
+		margin-top: 10px;
+	    margin-bottom: 10px;
+		font-weight: 500;
+	    line-height: 1.1;
+	    font-size: 18px;
+	    color: #333;
+	    &:hover {
+	    	text-decoration: underline;
+	    }
+	}
+	.mb-collapse {	
+    	border-top: 1px solid #333;
+    	background-color: rgb(238, 238, 238);
+	}
+	// Pills
+	.mb-pill {
+		color: #296298;
+		&:hover {
+			background-color: #D8D8D8;
+		}
+	}
+	.mb-pill.active {
+		color: #FFF;
+		background-color: #296298;
+	}
+	.mb-glyphicon-input-addon {
+		top: 0px;
+	}
+	.mb-lad-link-div {
+		margin-top: $margin-small;
+	}
+	ul.nav-pills {
+		// background-color: white;
+	    // border: 1px solid white;
+	    // border-radius: 6px;
+	    li {
+	    	font-size: 12px;
+		    background-color: #FFFFFF;
+		    border: 1px solid #D6D6D6;
+		    border-radius: 6px;
+		    margin-bottom: 5px;
+	    }
+	}
+	// .mb-btn-primary {
+	// 	color: #FFF;
+ //    	background-color: #DA4A70;
+ //    	font-weight: bold;
+ //    	&:hover {
+ //    		background-color: #C11844;
+ //    	}
+	// }
+	.mb-btn-fetching {
+		&:hover, &:active, &:focus {
+			background-color: #EA87A1;
+		}
+		background-color: #EA87A1;
+	}
+}
+// .controls-container.open { 
+// 	background-color: #E4E4E4;
+// }

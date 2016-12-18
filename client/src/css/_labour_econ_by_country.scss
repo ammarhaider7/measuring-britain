@@ -1,0 +1,58 @@
+#econ-country-component {
+	.mb-spinner {
+	    margin: 150px auto 0;
+	    display: block;
+	}
+	.econ-country-svg {
+		.axis {
+		  text {
+		  	font-size: 11px;
+		  }
+	  		path, line {
+			  fill: none;
+			  stroke: #333;
+			  shape-rendering: crispEdges;
+			}
+		}
+		.legend-text {
+			font-size: 12px;
+		}
+		.x .tick:nth-child(1) line {
+			stroke: #333;
+			stroke-dasharray: none;
+		}
+		.x.axis path {
+		  fill: none;
+		  stroke: none;
+		}
+		.x.axis text {
+		    font-weight: bold;
+		    visibility: hidden;
+		}
+		.x.axis line {
+		  // stroke: #333;
+		  // stroke-opacity: .8;
+		  display: none;
+		}
+		.y .tick:nth-child(1) line {
+			display: none;
+		}
+		.y .tick line {
+			stroke-dasharray: 3, 3;
+	    	stroke: #DDD;
+		}
+		path.domain {
+			display: none;
+		}
+		.in-work-label, .out-of-work-label {
+			text-anchor: middle;
+			font-size: 30px;
+		}
+		.in-work-label {
+			fill: #3C763D;
+		}
+		.out-of-work-label {
+			fill: #D6616B;
+		}
+	}
+}
