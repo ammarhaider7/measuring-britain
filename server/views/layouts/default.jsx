@@ -42,7 +42,7 @@ const DefaultLayout = React.createClass({
     return (
       <html lang='en'>
         { this.renderHead() }
-        <body>
+        <body className="fade in">
           <Nav />
           <div name="browser-upgrade-cc" dangerouslySetInnerHTML={{__html: ieComment}}></div>
           {this.props.children}
