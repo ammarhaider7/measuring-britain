@@ -10,6 +10,15 @@ const Nav = React.createClass({
 				<span></span>
 				<span></span>
 			</div>
+			<div className="off-canvas bg-white">
+				<ul>
+					<li>Item</li>
+					<li>Item</li>
+					<li>Item</li>
+					<li>Item</li>
+					<li>Item</li>
+				</ul>
+			</div>
 		</nav>
     );
   }

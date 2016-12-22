@@ -5,7 +5,7 @@
 
 	// navbar burger icon
 	.navbar-icon {
-		z-index: 106;
+		z-index: 101;
 		position: fixed;
 		top: 0;
 		right: 15px;
@@ -59,6 +59,22 @@
 	        -webkit-transform: rotate(-45deg);
 	        transform: rotate(-45deg);
 	        top: 20px;
+	    }
+	}
+	.off-canvas {
+		position: fixed;
+		top: 0;
+		height: 100vh;
+		width: 20%;
+		right: -20%;
+	    -webkit-transition: all 0.25s;
+	    transition: all 0.25s;
+	    z-index: 100;
+		-webkit-box-shadow: -2px 0px 5px 0px rgba(0,0,0,0.25);
+		-moz-box-shadow: -2px 0px 5px 0px rgba(0,0,0,0.25);
+		box-shadow: -2px 0px 5px 0px rgba(0,0,0,0.25);
+	    &.open {
+	    	right: 0;
 	    }
 	}
 }
