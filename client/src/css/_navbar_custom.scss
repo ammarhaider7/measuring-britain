@@ -1,26 +1,5 @@
-nav.mb-nav-border {
-	border-bottom: 1px solid #265787;
-	.navbar-toggle {
-	    height: 33px;
-	}
-	li > a {
-		font-size: 14px;
-		@include bp(sm) {
-			font-size: 9.7px;
-		}
-		@include bp(md) {
-			font-size: 14px;
-		}
-	}
-}
-.mb-alt-bg {
-	background-image: url(/images/voronoi-bg-wide-nav.PNG);
-}
-
-// font-awesome icons
-.navbar-right .fa {
-	color: #DA4A70;
-	&:hover {
-		color: #C11844;
-	}
+.mb-navbar {
+	-webkit-box-shadow: 0 0px 8px rgba(0,0,0,0.25);
+	-moz-box-shadow:    0 0px 8px rgba(0,0,0,0.25);
+	box-shadow:         0 0px 8px rgba(0,0,0,0.25);
 }
