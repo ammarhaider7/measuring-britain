@@ -22,14 +22,14 @@ const NavbarDynamicContent = React.createClass({
 		return (
 			<div>
 				<div 
-					className={`navbar-icon hidden-sm-up ${this.navOpen ? 'icon-open' : ''}`} 
+					className={`navbar-icon hidden-sm-up ${this.state.navOpen ? 'icon-open' : ''}`} 
 					onClick={this.toggleNav}
 				>
 					<span></span>
 					<span></span>
 					<span></span>
 				</div>
-				<div className="off-canvas bg-white">
+				<div className={`off-canvas bg-white ${this.state.navOpen ? 'open' : ''}`}>
 					<ul className="v-flex-container">
 						<li className="v-flex-item">Item</li>
 						<li className="v-flex-item">Item</li>
