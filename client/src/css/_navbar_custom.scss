@@ -70,9 +70,6 @@
 	    -webkit-transition: all 0.25s;
 	    transition: all 0.25s;
 	    z-index: 100;
-		-webkit-box-shadow: -2px 0px 5px 0px rgba(0,0,0,0.25);
-		-moz-box-shadow: -2px 0px 5px 0px rgba(0,0,0,0.25);
-		box-shadow: -2px 0px 5px 0px rgba(0,0,0,0.25);
 		ul {
 			padding: 60px 5px 0 5px;
 			list-style: none;
@@ -87,6 +84,9 @@
 		}
 	    &.open {
 	    	right: 0;
+			-webkit-box-shadow: -2px 0px 5px 0px rgba(0,0,0,0.25);
+			-moz-box-shadow: -2px 0px 5px 0px rgba(0,0,0,0.25);
+			box-shadow: -2px 0px 5px 0px rgba(0,0,0,0.25);
 	    }
 		.v-flex-container {
 			display: flex;
