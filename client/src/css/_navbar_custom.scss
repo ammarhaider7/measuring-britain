@@ -2,4 +2,63 @@
 	-webkit-box-shadow: 0 0px 8px rgba(0,0,0,0.25);
 	-moz-box-shadow:    0 0px 8px rgba(0,0,0,0.25);
 	box-shadow:         0 0px 8px rgba(0,0,0,0.25);
+
+	// navbar burger icon
+	.navbar-icon {
+		z-index: 106;
+		position: fixed;
+		top: 0;
+		right: 15px;
+	    width: 30px;
+	    height: 37.5px;
+	    -webkit-transform: rotate(0deg);
+	    transform: rotate(0deg);
+	    -webkit-transition: .2s ease-in-out;
+	    transition: .2s ease-in-out;
+	    cursor: pointer;
+	    margin-top: 18.5px;
+	    span {
+	        display: block;
+	        position: absolute;
+	        height: 3px;
+	        width: 100%;
+	        background: #333;
+	        border-radius: 3px;
+	        opacity: 1;
+	        right: 0;
+	        -webkit-transform: rotate(0deg);
+	        transform: rotate(0deg);
+	        -webkit-transition: .2s ease-in-out;
+	        transition: .2s ease-in-out;
+	    }
+	    span:nth-child(1) {
+	        top: 0px;
+	        -webkit-transform-origin: left center;
+	        transform-origin: left center;
+	    }
+	    span:nth-child(2) {
+	        top: 9px;
+	        -webkit-transform-origin: left center;
+	        transform-origin: left center;
+	    }
+	    span:nth-child(3) {
+	        top: 18px;
+	        -webkit-transform-origin: left center;
+	        transform-origin: left center;
+	    }
+	    &.icon-open span:nth-child(1) {
+	        -webkit-transform: rotate(45deg);
+	        transform: rotate(45deg);
+	        top: -1px;
+	    }
+	    &.icon-open span:nth-child(2) {
+	        width: 0%;
+	        opacity: 0;
+	    }
+	    &.icon-open span:nth-child(3) {
+	        -webkit-transform: rotate(-45deg);
+	        transform: rotate(-45deg);
+	        top: 20px;
+	    }
+	}
 }
