@@ -30,12 +30,12 @@ const NavbarDynamicContent = React.createClass({
 					<span></span>
 				</div>
 				<div className={`off-canvas bg-white ${this.state.navOpen ? 'open' : ''}`}>
-					<ul className="v-flex-container">
-						<li className="v-flex-item">Item</li>
-						<li className="v-flex-item">Item</li>
-						<li className="v-flex-item">Item</li>
-						<li className="v-flex-item">Item</li>
-						<li className="v-flex-item">Item</li>
+					<ul>
+						<li>Item</li>
+						<li>Item</li>
+						<li>Item</li>
+						<li>Item</li>
+						<li>Item</li>
 					</ul>
 				</div>
 			</div>
