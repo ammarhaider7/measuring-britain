@@ -2,7 +2,7 @@
 import '../css/index.scss';
 
 import React, { Component } from 'react'
-import ReactDOM from 'react-dom';
+import { render } from 'react-dom';
 
 class About extends Component {
 
@@ -16,4 +16,4 @@ class About extends Component {
 
 }
 
-ReactDOM.render(<About />,  document.getElementById('body'));
+render(<About />,  document.getElementById('body'));

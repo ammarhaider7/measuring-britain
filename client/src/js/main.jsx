@@ -2,7 +2,7 @@
 import '../css/index.scss';
 
 import React, { Component } from 'react'
-import ReactDOM from 'react-dom';
+import { render } from 'react-dom';
 
 class Home extends Component {
 
@@ -22,4 +22,4 @@ class Home extends Component {
 
 }
 
-ReactDOM.render(<Home />,  document.getElementById('body'));
+render(<Home />,  document.getElementById('body'));
