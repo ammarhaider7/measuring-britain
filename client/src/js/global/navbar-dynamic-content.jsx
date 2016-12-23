@@ -45,4 +45,6 @@ const NavbarDynamicContent = React.createClass({
 
 });
 
-render(<NavbarDynamicContent />,  document.getElementById('NavContent'));
+export default const NavbarDynamicContent;
+
+// render(<NavbarDynamicContent />,  document.getElementById('NavContent'));

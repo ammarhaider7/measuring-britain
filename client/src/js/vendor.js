@@ -1,4 +1,4 @@
-import './global/navbar-dynamic-content.jsx'
+import './global/navbar-dynamic.jsx'
 import 'jquery';
 import 'tether';
 import 'bootstrap';
