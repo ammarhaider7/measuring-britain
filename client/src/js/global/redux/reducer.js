@@ -1,13 +1,13 @@
-const defaultState = {
-	navOpen: false
+import { NavVisibility } from './actions'
+
+const initialState = {
+	navVisibility: NavVisibility.OPEN
 }
 
-export default (state = defaultState, action) => {
+export default (state = initialState, action) => {
   switch (action.type) {
-    case 'NAV_OPEN':
-      return { ...state, navOpen: true }
-    case 'NAV_CLOSE':
-      return { ...state, navOpen: false }
+    case 'TOGGLE_NAV':
+      return { ...state, navVisibility: action.visibility }
     default:
       return state
   }
