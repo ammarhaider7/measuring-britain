@@ -12,3 +12,11 @@ export default (state = initialState, action) => {
       return state
   }
 }
+
+// export default function createReducer(asyncReducers) {
+//   return combineReducers({
+//     users,
+//     posts,
+//     ...asyncReducers
+//   });
+// }
