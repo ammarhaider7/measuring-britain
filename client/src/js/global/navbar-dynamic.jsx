@@ -1,7 +1,6 @@
 import React from 'react'
-import { render } from 'react-dom';
 
-const NavbarDynamicContent = React.createClass({
+const NavbarDynamicComponent = React.createClass({
 
 	getInitialState() {
 		return {
@@ -45,6 +44,6 @@ const NavbarDynamicContent = React.createClass({
 
 });
 
-export default const NavbarDynamicContent;
+export default NavbarDynamicComponent;
 
 // render(<NavbarDynamicContent />,  document.getElementById('NavContent'));

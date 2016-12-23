@@ -4,7 +4,7 @@ export const TOGGLE_NAV = 'TOGGLE_NAV'
 
 // other constants
 
-export const NavVisiblity = {
+export const NavVisibility = {
   OPEN: 'OPEN',
   CLOSED: 'CLOSED',
 }
@@ -12,5 +12,5 @@ export const NavVisiblity = {
 // action creators
 
 export function toggleNav(visibility) {
-  return { type: NavVisiblity, visibility }
+  return { type: NavVisibility, visibility }
 }
