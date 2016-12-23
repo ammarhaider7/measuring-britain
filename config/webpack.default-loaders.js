@@ -1,9 +1,7 @@
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const path = require('path');
-const boostrapDir = path.resolve('node_modules/bootstrap-sass/assets');
-const pureCssDir = path.resolve('node_modules/purecss');
 const srcDir = path.resolve('client/src');
-const includeDirs = [srcDir, pureCssDir, boostrapDir];
+const includeDirs = [srcDir];
 
 module.exports = [{
 	// SASS
