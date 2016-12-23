@@ -12,5 +12,8 @@ export const NavVisibility = {
 // action creators
 
 export function toggleNav(visibility) {
-  return { type: NavVisibility, visibility }
+  return { 
+	type: TOGGLE_NAV, 
+	visibility
+  }
 }

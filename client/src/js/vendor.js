@@ -1,4 +1,4 @@
-import './global/navbar-dynamic.jsx'
+import './global/redux'
 import 'jquery';
 import 'tether';
 import 'bootstrap';

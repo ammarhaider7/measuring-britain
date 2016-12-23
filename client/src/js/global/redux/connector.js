@@ -10,7 +10,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onTodoClick: (visibility) => {
+    onToggleNav: (visibility) => {
       dispatch(toggleNav(visibility))
     }
   }

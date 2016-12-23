@@ -1,7 +1,7 @@
 import { NavVisibility } from './actions'
 
 const initialState = {
-	navVisibility: NavVisibility.OPEN
+	navVisibility: NavVisibility.CLOSED
 }
 
 export default (state = initialState, action) => {
