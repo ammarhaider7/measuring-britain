@@ -4,7 +4,7 @@ import '../css/index.scss';
 import React, { Component } from 'react'
 import { render } from 'react-dom';
 
-class Home extends Component {
+class Main extends Component {
 
 	render() {
 		return (
@@ -22,4 +22,4 @@ class Home extends Component {
 
 }
 
-render(<Home />,  document.getElementById('body'));
+render(<Main />,  document.getElementById('body'));

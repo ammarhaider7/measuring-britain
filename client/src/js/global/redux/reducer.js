@@ -1,4 +1,4 @@
-import { NavVisibility } from './actions'
+import { NavVisibility, TOGGLE_NAV } from './actions'
 
 const initialState = {
 	navVisibility: NavVisibility.CLOSED
@@ -6,7 +6,7 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case 'TOGGLE_NAV':
+    case TOGGLE_NAV:
       return { ...state, navVisibility: action.visibility }
     default:
       return state
