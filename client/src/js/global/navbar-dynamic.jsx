@@ -22,7 +22,7 @@ class NavbarDynamicComponent extends Component {
 	}
 
 	expandInnerNav = () => {
-		this.setState((state) => state.expandInnerNav = true);
+		this.setState((state) => state.expandInnerNav = !state.expandInnerNav);
 	}
 
 	render() {
@@ -39,8 +39,10 @@ class NavbarDynamicComponent extends Component {
 				</div>
 				<div className={`off-canvas bg-white ${this.props.navVisibility === 'OPEN' ? 'open' : ''}`}>
 					<div className="v-nav-list">
-						<div className="v-nav-list-item" onClick={this.expandInnerNav}>
-							<span>Item</span>
+						<div>
+							<div className="v-nav-list-item" onClick={this.expandInnerNav}>
+								<span>Item</span>
+							</div>
 							<div className={`inner-nav-list ${this.state.expandInnerNav ? 'open' : ''}`}>
 								<span>Item</span>
 								<span>Item</span>
