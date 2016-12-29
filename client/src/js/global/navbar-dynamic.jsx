@@ -1,17 +1,17 @@
-import React from 'react'
+import React, { Component } from 'react'
 
-const NavbarDynamicComponent = React.createClass({
+class NavbarDynamicComponent extends Component {
 
-	propTypes: {
-		onToggleNav: React.PropTypes.func.isRequired,
-		navVisibility: React.PropTypes.string.isRequired
-	},
+	constructor(props) {
+		super(props);
+		this.toggleNav = this.toggleNav.bind(this);
+	}
 
 	toggleNav() {
 		const { onToggleNav, navVisibility } = this.props;
 		let navState = navVisibility === 'OPEN' ? 'ClOSED' : 'OPEN';
 		onToggleNav(navState);
-	},
+	}
 
 	render() {
 
@@ -39,6 +39,11 @@ const NavbarDynamicComponent = React.createClass({
 
 	}
 
-});
+}
+
+NavbarDynamicComponent.propTypes = {
+	onToggleNav: React.PropTypes.func.isRequired,
+	navVisibility: React.PropTypes.string.isRequired
+};
 
 export default NavbarDynamicComponent;
