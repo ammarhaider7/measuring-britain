@@ -4,10 +4,14 @@ class NavbarDynamicComponent extends Component {
 
 	constructor(props) {
 		super(props);
-		this.toggleNav = this.toggleNav.bind(this);
 	}
 
-	toggleNav() {
+	static propTypes = {
+		onToggleNav: React.PropTypes.func.isRequired,
+		navVisibility: React.PropTypes.string.isRequired
+	}
+
+	toggleNav = () => {
 		const { onToggleNav, navVisibility } = this.props;
 		let navState = navVisibility === 'OPEN' ? 'ClOSED' : 'OPEN';
 		onToggleNav(navState);
@@ -40,10 +44,5 @@ class NavbarDynamicComponent extends Component {
 	}
 
 }
-
-NavbarDynamicComponent.propTypes = {
-	onToggleNav: React.PropTypes.func.isRequired,
-	navVisibility: React.PropTypes.string.isRequired
-};
 
 export default NavbarDynamicComponent;
