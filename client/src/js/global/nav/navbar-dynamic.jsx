@@ -10,9 +10,83 @@ class NavbarDynamicComponent extends Component {
 		expandInnerNav: false
 	}
 
+	static vNavItems = [
+		{
+			label: 'Census',
+			innerNavItems: [{
+				label: 'Census Inner nav item 1',
+				img: '/dist/img/radiohead.jpg'
+			}, {
+				label: 'Census Inner nav item 2',
+				img: '/dist/img/radiohead.jpg'
+			}, {
+				label: 'Census Inner nav item 3',
+				img: '/dist/img/radiohead.jpg'
+			}]
+		}, {
+			label: 'About',
+			innerNavItems: [{
+				label: 'About Inner nav item 1',
+				img: '/dist/img/radiohead.jpg'
+			}, {
+				label: 'About Inner nav item 2',
+				img: '/dist/img/radiohead.jpg'
+			}, {
+				label: 'About Inner nav item 3',
+				img: '/dist/img/radiohead.jpg'
+			}, {
+				label: 'About Inner nav item 4',
+				img: '/dist/img/radiohead.jpg'
+			}, {
+				label: 'About Inner nav item 5',
+				img: '/dist/img/radiohead.jpg'
+			}]
+		}, {
+			label: 'Demographics',
+			innerNavItems: [{
+				label: 'Demographics Inner nav item 1',
+				img: '/dist/img/radiohead.jpg'
+			}]
+		}, {
+			label: 'Health',
+			innerNavItems: [{
+				label: 'Health Inner nav item 1',
+				img: '/dist/img/radiohead.jpg'
+			}, {
+				label: 'Health Inner nav item 2',
+				img: '/dist/img/radiohead.jpg'
+			}]
+		}
+	]
+
 	static propTypes = {
 		onToggleNav: React.PropTypes.func.isRequired,
 		navVisibility: React.PropTypes.string.isRequired
+	}
+
+	renderVNavItems = () => {
+		return this.vNavItems.map((item, index) => {
+			return (
+				<div key={index}>
+					<div className="v-nav-list-item" onClick={this.expandInnerNav}>
+						<span>{item}</span>
+					</div>
+					<div className={`inner-nav-list ${this.state.expandInnerNav ? 'open' : ''}`}>
+						{}
+					</div>
+				</div>
+			);
+		})
+	}
+
+	renderInnerNavItems = (item) => {
+		return this.vNavItems[item].innerNavItems.map((item, index) => {
+			return (
+				<div key={index} className={`inner-nav-list ${this.state.expandInnerNav ? 'open' : ''}`}>
+					<span>{item}</span>
+				</div>
+			)
+		})
 	}
 
 	toggleNav = () => {
