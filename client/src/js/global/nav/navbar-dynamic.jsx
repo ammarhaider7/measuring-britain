@@ -81,11 +81,7 @@ class NavbarDynamicComponent extends Component {
 
 	renderInnerNavItems = (itemLabel) => {
 		let innerNavItems = this.vNavItems.filter(item => item.label === itemLabel)[0].innerNavItems;
-		return innerNavItems.map((item, index) => {
-			return (
-				<span key={index}>{item.label}</span>
-			)
-		})
+		return innerNavItems.map((item, index) => <span key={index}>{item.label}</span>)
 	}
 
 	toggleNav = () => {
