@@ -12,10 +12,16 @@ export default class NavbarCarousel extends Component {
 	}
 
 	componentDidMount() {
-		new Swiper('.swiper-container'), {
+		new Swiper('.swiper-container', {
 			slidesPerView: 5,
-			spaceBetween: 10
-		}
+			spaceBetween: 10,
+      breakpoints: {
+				// when window width is <= 1025px
+        767: {
+          slidesPerView: 3
+        },
+      }
+		});
 	}
 
 	render() {
