@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import NavbarCarousel from './innerNavCarousel.jsx';
 
 class NavbarDynamicComponent extends Component {
 
@@ -75,9 +76,10 @@ class NavbarDynamicComponent extends Component {
 	}
 
 	getSwiperAsync() {
-		require.ensure([], () => {
-			const swiper = require('swiper');
-		});
+		// console.log('getSwiperAsync');
+		// require.ensure([], () => {
+		// 	window.Swiper = require('swiper');
+		// });
 	}
 
 	expandInnerNav = (itemLabel) => {
@@ -104,8 +106,9 @@ class NavbarDynamicComponent extends Component {
 	}
 
 	renderInnerNavItems = (itemLabel) => {
-		let innerNavItems = this.vNavItems.filter(item => item.label === itemLabel)[0].innerNavItems;
-		return innerNavItems.map((item, index) => <span key={index}>{item.label}</span>)
+		// let innerNavItems = this.vNavItems.filter(item => item.label === itemLabel)[0].innerNavItems;
+		// return innerNavItems.map((item, index) => <span key={index}>{item.label}</span>)
+		return <NavbarCarousel />
 	}
 
 	render() {
