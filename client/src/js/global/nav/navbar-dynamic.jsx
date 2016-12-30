@@ -61,7 +61,8 @@ class NavbarDynamicComponent extends Component {
 	]
 
 	toggleNav = () => {
-		const { onToggleNav, navVisibility } = this.props;
+		const { onToggleNav, navVisibility, onExpandNavItem, expandedNavItem } = this.props;
+		if (navVisibility && expandedNavItem != null) onExpandNavItem(null);
 		onToggleNav(!navVisibility);
 	}
 
