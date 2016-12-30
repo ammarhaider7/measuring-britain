@@ -1,13 +1,16 @@
-import { NavVisibility, TOGGLE_NAV } from './actions'
+import * as Actions from './actions'
 
 const initialState = {
-	navVisibility: NavVisibility.CLOSED
+	navVisibility: Actions.NavVisibility.CLOSED,
+	expandedNavItem: null
 }
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case TOGGLE_NAV:
+    case Actions.TOGGLE_NAV:
       return { ...state, navVisibility: action.visibility }
+    case Actions.EXPAND_NAV_ITEM:
+    	return { ...state, expandedNavItem: action.item }
     default:
       return state
   }
