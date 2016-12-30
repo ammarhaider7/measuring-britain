@@ -62,13 +62,12 @@ class NavbarDynamicComponent extends Component {
 
 	toggleNav = () => {
 		const { onToggleNav, navVisibility } = this.props;
-		let navState = !navVisibility;
-		onToggleNav(navState);
+		onToggleNav(!navVisibility);
 	}
 
 	expandInnerNav = (itemLabel) => {
-
-		this.props.onExpandNavItem(itemLabel);
+		const { onExpandNavItem, expandedNavItem } = this.props;
+		itemLabel === expandedNavItem ? onExpandNavItem(null) : onExpandNavItem(itemLabel);
 	}
 
 	renderVNavItems = () => {
