@@ -30,7 +30,7 @@ class NavbarDynamicComponent extends Component {
 		return (
 			<div>
 				<div 
-					className={`navbar-icon hidden-sm-up ${this.props.navVisibility === 'OPEN' ? 'icon-open' : ''}`} 
+					className={`navbar-icon hidden-lg-up ${this.props.navVisibility === 'OPEN' ? 'icon-open' : ''}`} 
 					onClick={this.toggleNav}
 				>
 					<span></span>

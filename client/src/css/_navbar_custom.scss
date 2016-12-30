@@ -1,7 +1,4 @@
 .mb-navbar {
-	-webkit-box-shadow: 0 0px 8px rgba(0,0,0,0.25);
-	-moz-box-shadow:    0 0px 8px rgba(0,0,0,0.25);
-	box-shadow:         0 0px 8px rgba(0,0,0,0.25);
 
 	// navbar burger icon
 	.navbar-icon {
@@ -18,18 +15,18 @@
 	    cursor: pointer;
 	    margin-top: 18.5px;
 	    span {
-	        display: block;
-	        position: absolute;
-	        height: 3px;
-	        width: 100%;
-	        background: #333;
-	        border-radius: 3px;
-	        opacity: 1;
-	        right: 0;
-	        -webkit-transform: rotate(0deg);
-	        transform: rotate(0deg);
-	        -webkit-transition: .2s ease-in-out;
-	        transition: .2s ease-in-out;
+        display: block;
+        position: absolute;
+        height: 3px;
+        width: 100%;
+        background: #333;
+        border-radius: 3px;
+        opacity: 1;
+        right: 0;
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+        -webkit-transition: .2s ease-in-out;
+        transition: .2s ease-in-out;
 	    }
 	    span:nth-child(1) {
 	        top: 0px;
@@ -65,11 +62,11 @@
 		position: fixed;
 		top: 0;
 		height: 100vh;
-		width: 20%;
-		right: -20%;
-	    -webkit-transition: all 0.25s;
-	    transition: all 0.25s;
-	    z-index: 100;
+		width: 70px;
+		right: -70px;
+    -webkit-transition: all 0.25s;
+    transition: all 0.25s;
+    z-index: 100;
 		div.v-nav-list {
 			padding: 60px 0 0 0;
 			list-style: none;
@@ -92,6 +89,7 @@
 			box-shadow: -2px 0px 5px 0px rgba(0,0,0,0.5);
 			overflow: hidden;
 			transition: all 0.3s;
+    	-webkit-transition: all 0.3s;
 	  	height: 0px;
 	  	background-color: #fff;
 			padding-left: 0;
