@@ -70,13 +70,13 @@ class NavbarDynamicComponent extends Component {
 		if (expandedNavItem != null) onExpandNavItem(null);
 		// Get swiper aynchronously
 		if (!swiperRequested) this.getSwiperAsync();
-		// Toggle the nav alerting 
+		// Toggle the nav alerting
 		onToggleNav(!navVisibility, true);
 	}
 
 	getSwiperAsync() {
-		require.ensure([], () => {  
-			this.props.swiper = require('swiper');
+		require.ensure([], () => {
+			const swiper = require('swiper');
 		});
 	}
 
