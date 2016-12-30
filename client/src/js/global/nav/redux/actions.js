@@ -12,10 +12,11 @@ export const NavVisibility = {
 
 // action creators
 
-export const toggleNav = (visibility) => {
+export const toggleNav = (visibility, swiperRequested) => {
   return { 
 	type: TOGGLE_NAV, 
-	visibility
+	visibility,
+	swiperRequested
   }
 }
 

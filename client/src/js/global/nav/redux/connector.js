@@ -5,13 +5,14 @@ import NavbarDynamicComponent from '../navbar-dynamic.jsx'
 const mapStateToProps = (state) => {
   return {
     navVisibility: state.navVisibility,
-    expandedNavItem: state.expandedNavItem
+    expandedNavItem: state.expandedNavItem,
+    swiperRequested: state.swiperRequested
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-      onToggleNav: (visibility) => dispatch(toggleNav(visibility)),
+      onToggleNav: (visibility, swiperRequested) => dispatch(toggleNav(visibility, swiperRequested)),
       onExpandNavItem: (item) => dispatch(expandNavItem(item))
     }
 }

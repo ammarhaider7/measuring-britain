@@ -10,7 +10,9 @@ class NavbarDynamicComponent extends Component {
 		onToggleNav: React.PropTypes.func.isRequired,
 		navVisibility: React.PropTypes.bool.isRequired,
 		onExpandNavItem: React.PropTypes.func.isRequired,
-		expandedNavItem: React.PropTypes.string
+		expandedNavItem: React.PropTypes.string,
+		swiperRequested: React.PropTypes.bool.isRequired,
+		swiper: React.PropTypes.object
 	}
 
 	vNavItems = [
@@ -63,9 +65,19 @@ class NavbarDynamicComponent extends Component {
 	]
 
 	toggleNav = () => {
-		const { onToggleNav, navVisibility, onExpandNavItem, expandedNavItem } = this.props;
+		const { onToggleNav, navVisibility, onExpandNavItem, expandedNavItem, swiperRequested } = this.props;
+		// Close expanded inner nav items
 		if (expandedNavItem != null) onExpandNavItem(null);
-		onToggleNav(!navVisibility);
+		// Get swiper aynchronously
+		if (!swiperRequested) this.getSwiperAsync();
+		// Toggle the nav alerting 
+		onToggleNav(!navVisibility, true);
+	}
+
+	getSwiperAsync() {
+		require.ensure([], () => {  
+			this.props.swiper = require('swiper');
+		});
 	}
 
 	expandInnerNav = (itemLabel) => {
