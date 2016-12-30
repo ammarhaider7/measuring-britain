@@ -8,7 +8,9 @@ class NavbarDynamicComponent extends Component {
 
 	static propTypes = {
 		onToggleNav: React.PropTypes.func.isRequired,
-		navVisibility: React.PropTypes.bool.isRequired
+		navVisibility: React.PropTypes.bool.isRequired,
+		onExpandNavItem: React.PropTypes.func.isRequired,
+		expandedNavItem: React.PropTypes.string
 	}
 
 	vNavItems = [
@@ -62,7 +64,7 @@ class NavbarDynamicComponent extends Component {
 
 	toggleNav = () => {
 		const { onToggleNav, navVisibility, onExpandNavItem, expandedNavItem } = this.props;
-		if (navVisibility && expandedNavItem != null) onExpandNavItem(null);
+		if (expandedNavItem != null) onExpandNavItem(null);
 		onToggleNav(!navVisibility);
 	}
 
