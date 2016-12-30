@@ -6,8 +6,8 @@ export const EXPAND_NAV_ITEM = 'EXPAND_NAV_ITEM';
 // other constants
 
 export const NavVisibility = {
-  OPEN: 'OPEN',
-  CLOSED: 'CLOSED',
+  OPEN: true,
+  CLOSED: false,
 }
 
 // action creators

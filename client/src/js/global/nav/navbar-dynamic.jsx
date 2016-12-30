@@ -8,11 +8,7 @@ class NavbarDynamicComponent extends Component {
 
 	static propTypes = {
 		onToggleNav: React.PropTypes.func.isRequired,
-		navVisibility: React.PropTypes.string.isRequired
-	}
-
-	state = {
-		expandInnerNav: false
+		navVisibility: React.PropTypes.bool.isRequired
 	}
 
 	vNavItems = [
@@ -66,15 +62,17 @@ class NavbarDynamicComponent extends Component {
 
 	toggleNav = () => {
 		const { onToggleNav, navVisibility } = this.props;
-		let navState = navVisibility === 'OPEN' ? 'ClOSED' : 'OPEN';
+		let navState = !navVisibility;
 		onToggleNav(navState);
 	}
 
 	expandInnerNav = (itemLabel) => {
-		this.setState((state) => state.expandInnerNav = !state.expandInnerNav);
+
+		this.props.onExpandNavItem(itemLabel);
 	}
 
 	renderVNavItems = () => {
+
 		return this.vNavItems.map((item, index) => {
 
 			return (
@@ -82,12 +80,12 @@ class NavbarDynamicComponent extends Component {
 					<div className="v-nav-list-item" onClick={() => this.expandInnerNav(item.label)}>
 						<span>{item.label}</span>
 					</div>
-					<div className={`inner-nav-list ${this.state.expandInnerNav ? 'open' : ''}`}>
+					<div className={`inner-nav-list ${this.props.expandedNavItem === item.label ? 'open' : ''}`}>
 						{ this.renderInnerNavItems(item.label) }
 					</div>
 				</div>
 			);
-			
+
 		})
 	}
 
@@ -101,14 +99,14 @@ class NavbarDynamicComponent extends Component {
 		return (
 			<div>
 				<div 
-					className={`navbar-icon hidden-lg-up ${this.props.navVisibility === 'OPEN' ? 'icon-open' : ''}`} 
+					className={`navbar-icon hidden-lg-up ${this.props.navVisibility ? 'icon-open' : ''}`} 
 					onClick={this.toggleNav}
 				>
 					<span></span>
 					<span></span>
 					<span></span>
 				</div>
-				<div className={`off-canvas bg-white ${this.props.navVisibility === 'OPEN' ? 'open' : ''}`}>
+				<div className={`off-canvas bg-white ${this.props.navVisibility ? 'open' : ''}`}>
 					<div className="v-nav-list">
 						{ this.renderVNavItems() }
 					</div>
