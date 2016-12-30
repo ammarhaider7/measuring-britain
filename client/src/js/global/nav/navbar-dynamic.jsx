@@ -10,7 +10,7 @@ class NavbarDynamicComponent extends Component {
 		expandInnerNav: false
 	}
 
-	static vNavItems = [
+	vNavItems = [
 		{
 			label: 'Census',
 			innerNavItems: [{
@@ -69,22 +69,21 @@ class NavbarDynamicComponent extends Component {
 			return (
 				<div key={index}>
 					<div className="v-nav-list-item" onClick={this.expandInnerNav}>
-						<span>{item}</span>
+						<span>{item.label}</span>
 					</div>
 					<div className={`inner-nav-list ${this.state.expandInnerNav ? 'open' : ''}`}>
-						{}
+						{ this.renderInnerNavItems(item.label) }
 					</div>
 				</div>
 			);
 		})
 	}
 
-	renderInnerNavItems = (item) => {
-		return this.vNavItems[item].innerNavItems.map((item, index) => {
+	renderInnerNavItems = (itemLabel) => {
+		let innerNavItems = this.vNavItems.filter(item => item.label === itemLabel)[0].innerNavItems;
+		return innerNavItems.map((item, index) => {
 			return (
-				<div key={index} className={`inner-nav-list ${this.state.expandInnerNav ? 'open' : ''}`}>
-					<span>{item}</span>
-				</div>
+				<span key={index}>{item.label}</span>
 			)
 		})
 	}
@@ -113,23 +112,7 @@ class NavbarDynamicComponent extends Component {
 				</div>
 				<div className={`off-canvas bg-white ${this.props.navVisibility === 'OPEN' ? 'open' : ''}`}>
 					<div className="v-nav-list">
-						<div>
-							<div className="v-nav-list-item" onClick={this.expandInnerNav}>
-								<span>Item</span>
-							</div>
-							<div className={`inner-nav-list ${this.state.expandInnerNav ? 'open' : ''}`}>
-								<span className="inner-nav-list-item">Item 1</span>
-								<span className="inner-nav-list-item">Item 2</span>
-								<span className="inner-nav-list-item">Item 3</span>
-								<span className="inner-nav-list-item">Item 4</span>
-								<span className="inner-nav-list-item">Item 5</span>
-								<span className="inner-nav-list-item">Item 6</span>
-							</div>
-						</div>
-						<div className="v-nav-list-item">Item</div>
-						<div className="v-nav-list-item">Item</div>
-						<div className="v-nav-list-item">Item</div>
-						<div className="v-nav-list-item">Item</div>
+						{ this.renderVNavItems() }
 					</div>
 				</div>
 			</div>
