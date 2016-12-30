@@ -44,9 +44,12 @@ class NavbarDynamicComponent extends Component {
 								<span>Item</span>
 							</div>
 							<div className={`inner-nav-list ${this.state.expandInnerNav ? 'open' : ''}`}>
-								<span>Item</span>
-								<span>Item</span>
-								<span>Item</span>
+								<span className="inner-nav-list-item">Item 1</span>
+								<span className="inner-nav-list-item">Item 2</span>
+								<span className="inner-nav-list-item">Item 3</span>
+								<span className="inner-nav-list-item">Item 4</span>
+								<span className="inner-nav-list-item">Item 5</span>
+								<span className="inner-nav-list-item">Item 6</span>
 							</div>
 						</div>
 						<div className="v-nav-list-item">Item</div>

@@ -6,10 +6,10 @@
  @mixin bp($size) {
    // mobile portrait
    @if $size == mp {
-     @media (max-width: 414px) { @content ; }
+     @media (min-width: 360px) { @content ; }
   }
-   @if $size == xs {
-     @media (min-width: 415px) { @content ; }
+   @else if $size == xs {
+     @media (min-width: 414px) { @content ; }
   }
    @else if $size == sm {
      @media (min-width: 767px) { @content ; }
