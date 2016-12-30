@@ -71,35 +71,41 @@
 	    transition: all 0.25s;
 	    z-index: 100;
 		div.v-nav-list {
-			padding: 60px 5px 0 5px;
+			padding: 60px 0 0 0;
 			list-style: none;
 			text-align: center;
 			div.v-nav-list-item {
-				padding: 25px 0 25px 0;
+				padding: 25px 5px 25px 5px;
 				&:first-child {
 					border-top: solid 1px #efefef;
 				}
 				border-bottom: solid 1px #efefef;
 			}
 		}
-	    &.open {
-	    	right: 0;
-			-webkit-box-shadow: -2px 0px 5px 0px rgba(0,0,0,0.25);
-			-moz-box-shadow: -2px 0px 5px 0px rgba(0,0,0,0.25);
-			box-shadow: -2px 0px 5px 0px rgba(0,0,0,0.25);
-	    }
-	    div.inner-nav-list {
+    &.open {
+    	right: 0;
+    	@extend .nav-box-shadow;
+    }
+    div.inner-nav-list {
+			-webkit-box-shadow: -2px 0px 5px 0px rgba(0,0,0,0.5);
+			-moz-box-shadow: -2px 0px 5px 0px rgba(0,0,0,0.5);
+			box-shadow: -2px 0px 5px 0px rgba(0,0,0,0.5);
 			overflow: hidden;
 			transition: all 0.3s;
-	    	height: 0px;
-	    	background-color: #eee;
-				padding-left: 0;
-				margin-left: 0x;
-	    	&.open {
-					padding-left: 3000px;
-					margin-left: -3000px;
-	    		height: 70px;
-	    	}
-	    }
+	  	height: 0px;
+	  	background-color: #fff;
+			padding-left: 0;
+			margin-left: 0;
+    	&.open {
+				padding-left: 3000px;
+				margin-left: -3000px;
+    		height: 90px;
+    	}
+    }
+	}
+	.nav-box-shadow {
+		-webkit-box-shadow: -2px 0px 5px 0px rgba(0,0,0,0.25);
+		-moz-box-shadow: -2px 0px 5px 0px rgba(0,0,0,0.25);
+		box-shadow: -2px 0px 5px 0px rgba(0,0,0,0.25);
 	}
 }
