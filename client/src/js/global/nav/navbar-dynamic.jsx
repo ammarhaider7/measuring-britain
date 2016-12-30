@@ -6,6 +6,11 @@ class NavbarDynamicComponent extends Component {
 		super(props);
 	}
 
+	static propTypes = {
+		onToggleNav: React.PropTypes.func.isRequired,
+		navVisibility: React.PropTypes.string.isRequired
+	}
+
 	state = {
 		expandInnerNav: false
 	}
@@ -59,16 +64,22 @@ class NavbarDynamicComponent extends Component {
 		}
 	]
 
-	static propTypes = {
-		onToggleNav: React.PropTypes.func.isRequired,
-		navVisibility: React.PropTypes.string.isRequired
+	toggleNav = () => {
+		const { onToggleNav, navVisibility } = this.props;
+		let navState = navVisibility === 'OPEN' ? 'ClOSED' : 'OPEN';
+		onToggleNav(navState);
+	}
+
+	expandInnerNav = (itemLabel) => {
+		this.setState((state) => state.expandInnerNav = !state.expandInnerNav);
 	}
 
 	renderVNavItems = () => {
 		return this.vNavItems.map((item, index) => {
+
 			return (
 				<div key={index}>
-					<div className="v-nav-list-item" onClick={this.expandInnerNav}>
+					<div className="v-nav-list-item" onClick={() => this.expandInnerNav(item.label)}>
 						<span>{item.label}</span>
 					</div>
 					<div className={`inner-nav-list ${this.state.expandInnerNav ? 'open' : ''}`}>
@@ -76,22 +87,13 @@ class NavbarDynamicComponent extends Component {
 					</div>
 				</div>
 			);
+			
 		})
 	}
 
 	renderInnerNavItems = (itemLabel) => {
 		let innerNavItems = this.vNavItems.filter(item => item.label === itemLabel)[0].innerNavItems;
 		return innerNavItems.map((item, index) => <span key={index}>{item.label}</span>)
-	}
-
-	toggleNav = () => {
-		const { onToggleNav, navVisibility } = this.props;
-		let navState = navVisibility === 'OPEN' ? 'ClOSED' : 'OPEN';
-		onToggleNav(navState);
-	}
-
-	expandInnerNav = () => {
-		this.setState((state) => state.expandInnerNav = !state.expandInnerNav);
 	}
 
 	render() {
