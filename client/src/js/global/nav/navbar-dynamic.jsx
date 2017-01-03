@@ -65,7 +65,10 @@ class NavbarDynamicComponent extends Component {
 		}
 	]
 
+	swiper;
+
 	toggleNav = () => {
+
 		const { onToggleNav, navVisibility, onExpandNavItem, expandedNavItem, swiperRequested } = this.props;
 		// Close expanded inner nav items
 		if (expandedNavItem != null) onExpandNavItem(null);
@@ -73,13 +76,13 @@ class NavbarDynamicComponent extends Component {
 		if (!swiperRequested) this.getSwiperAsync();
 		// Toggle the nav alerting
 		onToggleNav(!navVisibility, true);
+
 	}
 
 	getSwiperAsync() {
-		// console.log('getSwiperAsync');
-		// require.ensure([], () => {
-		// 	window.Swiper = require('swiper');
-		// });
+		require.ensure([], () => {
+			this.swiper = require('swiper');
+		});
 	}
 
 	expandInnerNav = (itemLabel) => {
@@ -89,6 +92,8 @@ class NavbarDynamicComponent extends Component {
 
 	renderVNavItems = () => {
 
+		const { expandedNavItem } = this.props;
+
 		return this.vNavItems.map((item, index) => {
 
 			return (
@@ -96,8 +101,8 @@ class NavbarDynamicComponent extends Component {
 					<div className="v-nav-list-item" onClick={() => this.expandInnerNav(item.label)}>
 						<span>{item.label}</span>
 					</div>
-					<div className={`inner-nav-list ${this.props.expandedNavItem === item.label ? 'open' : ''}`}>
-						{ this.renderInnerNavItems(item.label) }
+					<div className={`inner-nav-list ${expandedNavItem === item.label ? 'open' : ''}`}>
+						{ this.swiper != null ? this.renderInnerNavItems(item.label, this.swiper) : null }
 					</div>
 				</div>
 			);
@@ -105,11 +110,7 @@ class NavbarDynamicComponent extends Component {
 		})
 	}
 
-	renderInnerNavItems = (itemLabel) => {
-		// let innerNavItems = this.vNavItems.filter(item => item.label === itemLabel)[0].innerNavItems;
-		// return innerNavItems.map((item, index) => <span key={index}>{item.label}</span>)
-		return <NavbarCarousel />
-	}
+	renderInnerNavItems = (itemLabel, Swiper) => <NavbarCarousel {...this.props} Swiper={Swiper} />
 
 	render() {
 

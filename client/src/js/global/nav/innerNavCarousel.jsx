@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import Swiper from 'swiper';
 
 export default class NavbarCarousel extends Component {
 
@@ -12,11 +11,14 @@ export default class NavbarCarousel extends Component {
 	}
 
 	componentDidMount() {
+
+		const { Swiper } = this.props;
+
 		new Swiper('.swiper-container', {
 			slidesPerView: 5,
 			spaceBetween: 10,
       breakpoints: {
-				// when window width is <= 1025px
+				// when window width is <= 767px
         767: {
           slidesPerView: 3
         },
