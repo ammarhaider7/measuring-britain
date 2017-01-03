@@ -101,7 +101,7 @@ class NavbarDynamicComponent extends Component {
 					<div className="v-nav-list-item" onClick={() => this.expandInnerNav(item.label)}>
 						<span>{item.label}</span>
 					</div>
-					<div className={`inner-nav-list ${expandedNavItem === item.label ? 'open' : ''}`}>
+					<div className={ `inner-nav-list ${ expandedNavItem === item.label ? 'open' : '' }` }>
 						{ this.swiper != null ? this.renderInnerNavItems(item.label, this.swiper) : null }
 					</div>
 				</div>
@@ -114,17 +114,19 @@ class NavbarDynamicComponent extends Component {
 
 	render() {
 
+		const { navVisibility } = this.props;
+
 		return (
 			<div>
 				<div 
-					className={`navbar-icon hidden-lg-up ${this.props.navVisibility ? 'icon-open' : ''}`} 
+					className={`navbar-icon hidden-lg-up ${navVisibility ? 'icon-open' : ''}`} 
 					onClick={this.toggleNav}
 				>
 					<span></span>
 					<span></span>
 					<span></span>
 				</div>
-				<div className={`off-canvas bg-white ${this.props.navVisibility ? 'open' : ''}`}>
+				<div className={`off-canvas bg-white ${navVisibility ? 'open' : ''}`}>
 					<div className="v-nav-list">
 						{ this.renderVNavItems() }
 					</div>
