@@ -129,13 +129,13 @@
     		padding: 25px 5px 25px 5px;
     	}
     	@include bp(mp) {
-    		padding-left: 2680px;
+    		padding-left: 2700px;
     	};
     	@include bp(xs) {
-    		padding-left: 2580px;
+    		padding-left: 2660px;
     	};
     	@include bp(sm) {
-    		padding-left: 1880px;
+    		padding-left: 2300px;
     	};
     }
 	}
