@@ -7,7 +7,7 @@ export default class NavbarCarousel extends Component {
 	}
 
 	static propTypes = {
-		Swiper: React.PropTypes.object.isRequired
+		Swiper: React.PropTypes.func.isRequired
 	}
 
 	componentDidMount() {

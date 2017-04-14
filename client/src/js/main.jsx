@@ -1,5 +1,5 @@
 // Styles
-import '../css/index.scss';
+// import '../css/index.scss';
 
 import React, { Component } from 'react'
 import { render } from 'react-dom';
