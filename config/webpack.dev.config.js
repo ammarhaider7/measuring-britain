@@ -12,37 +12,37 @@ wdsLocal = 'webpack-dev-server/client?http://localhost:8080';
 entries = {};
 
 for (key in raw_entries) {
-    value = raw_entries[key];
-    entries[key] = [value, wdsLocal];
+  value = raw_entries[key];
+  entries[key] = [value, wdsLocal];
 }
 
 module.exports = webpackFactory({
 
-    env: 'development',
-    entries: entries,
-    output: {
-        path: path.resolve('client/dist'),
-        filename: '[name].js',
-        publicPath: '/dist/'
-    },
-    devtool: 'eval-source-map',
-    extraProps: {
-        devServer: {
-            contentBase: path.resolve('./client/src'),
-            hot: true,
-            open: true
-        }
-    },
-    plugins: [
-        new webpack.HotModuleReplacementPlugin(),
-        new ExtractTextPlugin('[name].css'),
-        new webpack.LoaderOptionsPlugin({
-            debug: true
-        }),
-        new CopyWebpackPlugin([{
-            from: path.resolve('node_modules/reload/lib/reload-client.js'),
-            to: path.resolve('client/dist')
-        }]),
-    ]
+  env: 'development',
+  entries: entries,
+  output: {
+    path: path.resolve('client/dist'),
+    filename: '[name].js',
+    publicPath: '/dist/'
+  },
+  devtool: 'eval-source-map',
+  extraProps: {
+    devServer: {
+      contentBase: path.resolve('./client/src'),
+      hot: true,
+      open: true
+    }
+  },
+  plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+    new ExtractTextPlugin('[name].css'),
+    new webpack.LoaderOptionsPlugin({
+      debug: true
+    }),
+    new CopyWebpackPlugin([{
+      from: path.resolve('node_modules/reload/lib/reload-client.js'),
+      to: path.resolve('client/dist')
+    }]),
+  ]
 
 });

@@ -7,7 +7,7 @@ const vendorJs = assets.vendor.js;
 
 // Home
 router.get('/', (req, res) => {
-	res.render('index', { 
+	res.render('index', {
 		title: 'Measuring Britain | Home',
 		env: req.app.locals.am_env,
 		jsFile: assets.indexBundle.js,
@@ -20,14 +20,14 @@ router.get('/', (req, res) => {
 
 // About
 router.get('/about', (req, res) => {
-  res.render('about', { 
-	title: 'Measuring Britain | About',
-	jsFile: assets.aboutBundle.js,
-	cssFile: assets.aboutBundle.css,
-	vendorJs,
-	commonJs,
-	commonCss
-  });
+	res.render('about', {
+		title: 'Measuring Britain | About',
+		jsFile: assets.aboutBundle.js,
+		cssFile: assets.aboutBundle.css,
+		vendorJs,
+		commonJs,
+		commonCss
+	});
 });
 
 module.exports = router;
