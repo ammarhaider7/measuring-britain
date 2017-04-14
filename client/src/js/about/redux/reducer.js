@@ -1,8 +1,8 @@
-import { INCREMENT_COUNTER, DECREMENT_COUNTER } from './actions'
+import { INCREMENT_COUNTER, DECREMENT_COUNTER } from './actions';
 
 const initialState = {
 	count: 0
-}
+};
 
 export default (state = initialState, action) => {
   switch (action.type) {

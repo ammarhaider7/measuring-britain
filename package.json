@@ -9,7 +9,7 @@
     "build": "webpack --config ./config/webpack.prod.config.js --progress --profile --colors -p",
     "start-wds": "node ./server/wds.js",
     "start-express": "nodemon -e jsx --watch server ./server/bin/dev",
-    "lint": "eslint src && eslint server"
+    "lint": "eslint --ext .jsx --ext .js client/src/ && eslint --ext .jsx --ext .js server/"
   },
   "engines": {
     "node": "4.2.3"

@@ -1,5 +1,5 @@
 const React = require('react');
-import Nav from '../partials/navbar';
+import Nav from '../partials/navbar.jsx';
 
 const DefaultLayout = React.createClass({
 
